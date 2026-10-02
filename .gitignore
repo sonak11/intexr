@@ -1,0 +1,12 @@
+data/mimic/
+results/.cache/
+__pycache__/
+*.pyc
+.env
+data/iu_xray/
+pilot/data/pilot_v1_iu.json
+pilot/data/pilot_v1.json
+annotation/*_inputs.json
+results/
+annotation/sheet_v1_blank.csv
+.DS_Store
