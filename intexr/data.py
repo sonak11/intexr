@@ -27,7 +27,7 @@ def validate(ex):
     for k, g in gold["claims"].items():
         if g["label"] not in LABELS:
             errs.append(f"{k}: bad label {g['label']}")
-        if g["label"] in ("D", "P", "U") and "target_text" not in g:
+        if g["label"] in ("D", "P", "U") and "target_text" not in g and not gold.get("no_target_text"):
             errs.append(f"{k}: {g['label']} needs target_text (null = delete)")
         if g["label"] == "U" and g.get("target_text") is None:
             errs.append(f"{k}: U claims must be hedged, not deleted")

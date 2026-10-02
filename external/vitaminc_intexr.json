@@ -1,0 +1,3726 @@
+{
+  "version": "vitaminc_intexr_v0",
+  "source_license": "CC BY-SA 3.0",
+  "examples": [
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Tinker Tailor Soldier Spy -LRB-film-RRB- using Wikipedia.",
+      "original_response": "Tinker Tailor Soldier Spy´s score in Rotten Tomatoes is based on under 210 reviews. Tinker Tailor Soldier Spy´s character Smiley feels triumphant. In the film Tinker Tailor Soldier Spy, Collins calls Smiley´s house. In the film Tinker Tailor Soldier Spy, Prideaux survives after being shot.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Tinker Tailor Soldier Spy´s score in Rotten Tomatoes is based on under 210 reviews."
+        },
+        {
+          "id": "c2",
+          "text": "Tinker Tailor Soldier Spy´s character Smiley feels triumphant."
+        },
+        {
+          "id": "c3",
+          "text": "In the film Tinker Tailor Soldier Spy, Collins calls Smiley´s house."
+        },
+        {
+          "id": "c4",
+          "text": "In the film Tinker Tailor Soldier Spy, Prideaux survives after being shot."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Rotten Tomatoes sampled 208 reviewers and judged 83 % of the reviews to be positive.",
+          "provenance": "wikipedia:Tinker Tailor Soldier Spy -LRB-film-RRB-"
+        },
+        {
+          "id": "n2",
+          "text": "Smiley, in quiet triumph, returns to the Circus as its new chief.",
+          "provenance": "wikipedia:Tinker Tailor Soldier Spy -LRB-film-RRB-"
+        },
+        {
+          "id": "n3",
+          "text": "Westerby says that on that night he called Smiley 's house for instructions, but Ann, Smiley 's wife at the time, had answered.",
+          "provenance": "wikipedia:Tinker Tailor Soldier Spy -LRB-film-RRB-"
+        },
+        {
+          "id": "n4",
+          "text": "Prideaux is shot.",
+          "provenance": "wikipedia:Tinker Tailor Soldier Spy -LRB-film-RRB-"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Tinker Tailor Soldier Spy -LRB-film-RRB-",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-0-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"In the film Tinker Tailor Soldier Spy, Collins calls Smiley´s house.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": "It is unclear from the available sources whether in the film Tinker Tailor Soldier Spy, Prideaux survives after being shot."
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Tinker Tailor Soldier Spy -LRB-film-RRB- using Wikipedia.",
+      "original_response": "Tinker Tailor Soldier Spy´s score in Rotten Tomatoes is based on under 210 reviews. Tinker Tailor Soldier Spy´s character Smiley feels triumphant. In the film Tinker Tailor Soldier Spy, Collins calls Smiley´s house. In the film Tinker Tailor Soldier Spy, Prideaux survives after being shot.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Tinker Tailor Soldier Spy´s score in Rotten Tomatoes is based on under 210 reviews."
+        },
+        {
+          "id": "c2",
+          "text": "Tinker Tailor Soldier Spy´s character Smiley feels triumphant."
+        },
+        {
+          "id": "c3",
+          "text": "In the film Tinker Tailor Soldier Spy, Collins calls Smiley´s house."
+        },
+        {
+          "id": "c4",
+          "text": "In the film Tinker Tailor Soldier Spy, Prideaux survives after being shot."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Rotten Tomatoes sampled 208 reviewers and judged 83 % of the reviews to be positive.",
+          "provenance": "wikipedia:Tinker Tailor Soldier Spy -LRB-film-RRB-"
+        },
+        {
+          "id": "n2",
+          "text": "Smiley, in quiet triumph, returns to the Circus as its new chief.",
+          "provenance": "wikipedia:Tinker Tailor Soldier Spy -LRB-film-RRB-"
+        },
+        {
+          "id": "n3",
+          "text": "Westerby says that on that night he called Smiley 's house for instructions, but Ann, Smiley 's wife at the time, had answered.",
+          "provenance": "wikipedia:Tinker Tailor Soldier Spy -LRB-film-RRB-"
+        },
+        {
+          "id": "n4",
+          "text": "Prideaux is shot.",
+          "provenance": "wikipedia:Tinker Tailor Soldier Spy -LRB-film-RRB-"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Tinker Tailor Soldier Spy -LRB-film-RRB-",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-1-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Tinker Tailor Soldier Spy´s character Smiley feels triumphant.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": "It is unclear from the available sources whether in the film Tinker Tailor Soldier Spy, Prideaux survives after being shot."
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about 2020 coronavirus pandemic in Nevada using Wikipedia.",
+      "original_response": "According to the report from April 3, 2020, there have been more than 1,500 confirmed cases of coronavirus and over 40 deaths in Nevada. Before April 20, 2020, Nevada had under 3,800 positive coronavirus cases and less than 158 fatalities. After April 23, 2020, Nevada had 197 coronavirus fatalities. Before April 24, 2020, Nevada had 197 coronavirus fatalities.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "According to the report from April 3, 2020, there have been more than 1,500 confirmed cases of coronavirus and over 40 deaths in Nevada."
+        },
+        {
+          "id": "c2",
+          "text": "Before April 20, 2020, Nevada had under 3,800 positive coronavirus cases and less than 158 fatalities."
+        },
+        {
+          "id": "c3",
+          "text": "After April 23, 2020, Nevada had 197 coronavirus fatalities."
+        },
+        {
+          "id": "c4",
+          "text": "Before April 24, 2020, Nevada had 197 coronavirus fatalities."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "As of April 3, 2020, 1,514 positive cases and 43 deaths were reported in the state.",
+          "provenance": "wikipedia:2020 coronavirus pandemic in Nevada"
+        },
+        {
+          "id": "n2",
+          "text": "As of April 19, 2020, 3,728 positive cases and 157 deaths have been reported in the state.",
+          "provenance": "wikipedia:2020 coronavirus pandemic in Nevada"
+        },
+        {
+          "id": "n3",
+          "text": "As of April 24, 2020, 4,398 positive cases and 197 deaths have been reported in the state.",
+          "provenance": "wikipedia:2020 coronavirus pandemic in Nevada"
+        },
+        {
+          "id": "n4",
+          "text": "As of April 24, 2020, 4,398 positive cases and 197 deaths have been reported in the state.",
+          "provenance": "wikipedia:2020 coronavirus pandemic in Nevada"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "2020 coronavirus pandemic in Nevada",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-2-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Before April 24, 2020, Nevada had 197 coronavirus fatalities.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about 2020 coronavirus pandemic in Nevada using Wikipedia.",
+      "original_response": "According to the report from April 3, 2020, there have been more than 1,500 confirmed cases of coronavirus and over 40 deaths in Nevada. Before April 20, 2020, Nevada had under 3,800 positive coronavirus cases and less than 158 fatalities. After April 23, 2020, Nevada had 197 coronavirus fatalities. Before April 24, 2020, Nevada had 197 coronavirus fatalities.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "According to the report from April 3, 2020, there have been more than 1,500 confirmed cases of coronavirus and over 40 deaths in Nevada."
+        },
+        {
+          "id": "c2",
+          "text": "Before April 20, 2020, Nevada had under 3,800 positive coronavirus cases and less than 158 fatalities."
+        },
+        {
+          "id": "c3",
+          "text": "After April 23, 2020, Nevada had 197 coronavirus fatalities."
+        },
+        {
+          "id": "c4",
+          "text": "Before April 24, 2020, Nevada had 197 coronavirus fatalities."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "As of April 3, 2020, 1,514 positive cases and 43 deaths were reported in the state.",
+          "provenance": "wikipedia:2020 coronavirus pandemic in Nevada"
+        },
+        {
+          "id": "n2",
+          "text": "As of April 19, 2020, 3,728 positive cases and 157 deaths have been reported in the state.",
+          "provenance": "wikipedia:2020 coronavirus pandemic in Nevada"
+        },
+        {
+          "id": "n3",
+          "text": "As of April 24, 2020, 4,398 positive cases and 197 deaths have been reported in the state.",
+          "provenance": "wikipedia:2020 coronavirus pandemic in Nevada"
+        },
+        {
+          "id": "n4",
+          "text": "As of April 24, 2020, 4,398 positive cases and 197 deaths have been reported in the state.",
+          "provenance": "wikipedia:2020 coronavirus pandemic in Nevada"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "2020 coronavirus pandemic in Nevada",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-3-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Before April 20, 2020, Nevada had under 3,800 positive coronavirus cases and less than 158 fatalities.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about The Neon Demon using Wikipedia.",
+      "original_response": "Averaged over less than 57 reviews, The Neon Demon scored a rating of 5.5/10. In the film The Neon Demon, Sarah walks off into the sunset. The Neon Demon scored an approval rating of more than 48 %, based on over 105 reviews. On Rotten Tomatoes, The Neon Demon has over 110 reviews.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Averaged over less than 57 reviews, The Neon Demon scored a rating of 5.5/10."
+        },
+        {
+          "id": "c2",
+          "text": "In the film The Neon Demon, Sarah walks off into the sunset."
+        },
+        {
+          "id": "c3",
+          "text": "The Neon Demon scored an approval rating of more than 48 %, based on over 105 reviews."
+        },
+        {
+          "id": "c4",
+          "text": "On Rotten Tomatoes, The Neon Demon has over 110 reviews."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "It holds a 51 % approval rating on review aggregator website Rotten Tomatoes, based on 61 reviews, with an average rating of 5.6/10.",
+          "provenance": "wikipedia:The Neon Demon"
+        },
+        {
+          "id": "n2",
+          "text": "Sarah watches Gigi die, eats the regurgitated eyeball, and walks off into the sunset.",
+          "provenance": "wikipedia:The Neon Demon"
+        },
+        {
+          "id": "n3",
+          "text": "It holds a 49 % approval rating on review aggregator website Rotten Tomatoes, based on 107 reviews, with an average rating of 5.5/10.",
+          "provenance": "wikipedia:The Neon Demon"
+        },
+        {
+          "id": "n4",
+          "text": "It holds a 48 % approval rating on review aggregator website Rotten Tomatoes, based on 108 reviews, with an average rating of 5.5/10.",
+          "provenance": "wikipedia:The Neon Demon"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "The Neon Demon",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-4-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Averaged over less than 57 reviews, The Neon Demon scored a rating of 5.5/10.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about The Neon Demon using Wikipedia.",
+      "original_response": "Averaged over less than 57 reviews, The Neon Demon scored a rating of 5.5/10. In the film The Neon Demon, Sarah walks off into the sunset. The Neon Demon scored an approval rating of more than 48 %, based on over 105 reviews. On Rotten Tomatoes, The Neon Demon has over 110 reviews.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Averaged over less than 57 reviews, The Neon Demon scored a rating of 5.5/10."
+        },
+        {
+          "id": "c2",
+          "text": "In the film The Neon Demon, Sarah walks off into the sunset."
+        },
+        {
+          "id": "c3",
+          "text": "The Neon Demon scored an approval rating of more than 48 %, based on over 105 reviews."
+        },
+        {
+          "id": "c4",
+          "text": "On Rotten Tomatoes, The Neon Demon has over 110 reviews."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "It holds a 51 % approval rating on review aggregator website Rotten Tomatoes, based on 61 reviews, with an average rating of 5.6/10.",
+          "provenance": "wikipedia:The Neon Demon"
+        },
+        {
+          "id": "n2",
+          "text": "Sarah watches Gigi die, eats the regurgitated eyeball, and walks off into the sunset.",
+          "provenance": "wikipedia:The Neon Demon"
+        },
+        {
+          "id": "n3",
+          "text": "It holds a 49 % approval rating on review aggregator website Rotten Tomatoes, based on 107 reviews, with an average rating of 5.5/10.",
+          "provenance": "wikipedia:The Neon Demon"
+        },
+        {
+          "id": "n4",
+          "text": "It holds a 48 % approval rating on review aggregator website Rotten Tomatoes, based on 108 reviews, with an average rating of 5.5/10.",
+          "provenance": "wikipedia:The Neon Demon"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "The Neon Demon",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-5-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"The Neon Demon scored an approval rating of more than 48 %, based on over 105 reviews.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about The Nutcracker in 3D using Wikipedia.",
+      "original_response": "The Nutcracker in 3D managed a rating o less than 2.7/10 on Rotten Tomatoes. The film had over 16 reviews on Rotten Tomatoes. Elle Fanning, Nathan Lane, and John Turturro star in The Nutcracker in 3D. The Nutcracker had less than 16 reviews and a 3/10 rating.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "The Nutcracker in 3D managed a rating o less than 2.7/10 on Rotten Tomatoes."
+        },
+        {
+          "id": "c2",
+          "text": "The film had over 16 reviews on Rotten Tomatoes."
+        },
+        {
+          "id": "c3",
+          "text": "Elle Fanning, Nathan Lane, and John Turturro star in The Nutcracker in 3D."
+        },
+        {
+          "id": "c4",
+          "text": "The Nutcracker had less than 16 reviews and a 3/10 rating."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "`` It managed a 0 % `` '' rotten '' '', or 2.8/10 rating, on review aggregator Rotten Tomatoes, based on 31 critics ' reviews. ''",
+          "provenance": "wikipedia:The Nutcracker in 3D"
+        },
+        {
+          "id": "n2",
+          "text": "`` The film has managed a 0 % `` '' rotten '' '', or 3.1/10 rating, on review aggregator Rotten Tomatoes based on 16 reviews. ''",
+          "provenance": "wikipedia:The Nutcracker in 3D"
+        },
+        {
+          "id": "n3",
+          "text": "It stars the talents of Elle Fanning, Nathan Lane, and John Turturro with Shirley Henderson as the voice of the Nutcracker.",
+          "provenance": "wikipedia:The Nutcracker in 3D"
+        },
+        {
+          "id": "n4",
+          "text": "`` The film has managed a 0 % `` '' rotten '' '', or 3.1/10 rating, on review aggregator Rotten Tomatoes based on 16 reviews. ''",
+          "provenance": "wikipedia:The Nutcracker in 3D"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "The Nutcracker in 3D",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-6-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"The Nutcracker in 3D managed a rating o less than 2.7/10 on Rotten Tomatoes.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about The Nutcracker in 3D using Wikipedia.",
+      "original_response": "The Nutcracker in 3D managed a rating o less than 2.7/10 on Rotten Tomatoes. The film had over 16 reviews on Rotten Tomatoes. Elle Fanning, Nathan Lane, and John Turturro star in The Nutcracker in 3D. The Nutcracker had less than 16 reviews and a 3/10 rating.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "The Nutcracker in 3D managed a rating o less than 2.7/10 on Rotten Tomatoes."
+        },
+        {
+          "id": "c2",
+          "text": "The film had over 16 reviews on Rotten Tomatoes."
+        },
+        {
+          "id": "c3",
+          "text": "Elle Fanning, Nathan Lane, and John Turturro star in The Nutcracker in 3D."
+        },
+        {
+          "id": "c4",
+          "text": "The Nutcracker had less than 16 reviews and a 3/10 rating."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "`` It managed a 0 % `` '' rotten '' '', or 2.8/10 rating, on review aggregator Rotten Tomatoes, based on 31 critics ' reviews. ''",
+          "provenance": "wikipedia:The Nutcracker in 3D"
+        },
+        {
+          "id": "n2",
+          "text": "`` The film has managed a 0 % `` '' rotten '' '', or 3.1/10 rating, on review aggregator Rotten Tomatoes based on 16 reviews. ''",
+          "provenance": "wikipedia:The Nutcracker in 3D"
+        },
+        {
+          "id": "n3",
+          "text": "It stars the talents of Elle Fanning, Nathan Lane, and John Turturro with Shirley Henderson as the voice of the Nutcracker.",
+          "provenance": "wikipedia:The Nutcracker in 3D"
+        },
+        {
+          "id": "n4",
+          "text": "`` The film has managed a 0 % `` '' rotten '' '', or 3.1/10 rating, on review aggregator Rotten Tomatoes based on 16 reviews. ''",
+          "provenance": "wikipedia:The Nutcracker in 3D"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "The Nutcracker in 3D",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-7-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Elle Fanning, Nathan Lane, and John Turturro star in The Nutcracker in 3D.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about One57 using Wikipedia.",
+      "original_response": "The construction at 157 West 57th Street, for the One57, is currently ongoing. One57 is located in the Hell 's Kitchen neighborhood of Manhattan. One57 is located in the Midtown neighborhood of Manhattan. There is one residence in New York City that is more expensive than any of the residences in One57.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "The construction at 157 West 57th Street, for the One57, is currently ongoing."
+        },
+        {
+          "id": "c2",
+          "text": "One57 is located in the Hell 's Kitchen neighborhood of Manhattan."
+        },
+        {
+          "id": "c3",
+          "text": "One57 is located in the Midtown neighborhood of Manhattan."
+        },
+        {
+          "id": "c4",
+          "text": "There is one residence in New York City that is more expensive than any of the residences in One57."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "One57, formerly known as Carnegie 57, is a 75-story ( marketed as 90-story ) skyscraper which is expected to resume construction at 157 West 57th Street in the Midtown neighborhood of Manhattan, New York City.",
+          "provenance": "wikipedia:One57"
+        },
+        {
+          "id": "n2",
+          "text": "One57, also known as Carnegie 57, is a 75-story ( marketed as 90-story ) skyscraper currently under-construction at 157 West 57th Street in the Midtown neighborhood of Manhattan, New York City.",
+          "provenance": "wikipedia:One57"
+        },
+        {
+          "id": "n3",
+          "text": "One57, also known as Carnegie 57, is a 75-story ( marketed as 90-story ) skyscraper currently under-construction at 157 West 57th Street in the Hell 's Kitchen neighborhood of Manhattan, New York City.",
+          "provenance": "wikipedia:One57"
+        },
+        {
+          "id": "n4",
+          "text": "As of January 2015, it is home to the most expensive residence ever sold in New York City.",
+          "provenance": "wikipedia:One57"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "One57",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-8-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"The construction at 157 West 57th Street, for the One57, is currently ongoing.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Four Seasons Hotels and Resorts using Wikipedia.",
+      "original_response": "Four Seasons Hotels and Resorts has less than 19 hotels in Europe. More than 23 stars were awarded to more than 16 restaurants. Four Seasons Hotel Hong Kong has less than three restaurants. Four Seasons Hotel Hong Kong has more than two restaurants.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Four Seasons Hotels and Resorts has less than 19 hotels in Europe."
+        },
+        {
+          "id": "c2",
+          "text": "More than 23 stars were awarded to more than 16 restaurants."
+        },
+        {
+          "id": "c3",
+          "text": "Four Seasons Hotel Hong Kong has less than three restaurants."
+        },
+        {
+          "id": "c4",
+          "text": "Four Seasons Hotel Hong Kong has more than two restaurants."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Four Seasons has a total of 18 hotels in Europe.",
+          "provenance": "wikipedia:Four Seasons Hotels and Resorts"
+        },
+        {
+          "id": "n2",
+          "text": "The latter has awarded at total of 22 stars to 16 of the company 's restaurants, including Four Seasons Hotel Hong Kong ( two restaurants ), Macau, Paris ( three restaurants ) and Florence.",
+          "provenance": "wikipedia:Four Seasons Hotels and Resorts"
+        },
+        {
+          "id": "n3",
+          "text": "The latter has awarded at total of 25 stars to 17 of the company 's restaurants, including Four Seasons Hotel Hong Kong ( two restaurants ), Macau, Paris ( three restaurants ) and Florence.",
+          "provenance": "wikipedia:Four Seasons Hotels and Resorts"
+        },
+        {
+          "id": "n4",
+          "text": "The latter has awarded at total of 25 stars to 17 of the company 's restaurants, including Four Seasons Hotel Hong Kong ( two restaurants ), Macau, Paris ( three restaurants ) and Florence.",
+          "provenance": "wikipedia:Four Seasons Hotels and Resorts"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Four Seasons Hotels and Resorts",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-9-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"More than 23 stars were awarded to more than 16 restaurants.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Four Seasons Hotels and Resorts using Wikipedia.",
+      "original_response": "Four Seasons Hotels and Resorts has less than 19 hotels in Europe. More than 23 stars were awarded to more than 16 restaurants. Four Seasons Hotel Hong Kong has less than three restaurants. Four Seasons Hotel Hong Kong has more than two restaurants.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Four Seasons Hotels and Resorts has less than 19 hotels in Europe."
+        },
+        {
+          "id": "c2",
+          "text": "More than 23 stars were awarded to more than 16 restaurants."
+        },
+        {
+          "id": "c3",
+          "text": "Four Seasons Hotel Hong Kong has less than three restaurants."
+        },
+        {
+          "id": "c4",
+          "text": "Four Seasons Hotel Hong Kong has more than two restaurants."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Four Seasons has a total of 18 hotels in Europe.",
+          "provenance": "wikipedia:Four Seasons Hotels and Resorts"
+        },
+        {
+          "id": "n2",
+          "text": "The latter has awarded at total of 22 stars to 16 of the company 's restaurants, including Four Seasons Hotel Hong Kong ( two restaurants ), Macau, Paris ( three restaurants ) and Florence.",
+          "provenance": "wikipedia:Four Seasons Hotels and Resorts"
+        },
+        {
+          "id": "n3",
+          "text": "The latter has awarded at total of 25 stars to 17 of the company 's restaurants, including Four Seasons Hotel Hong Kong ( two restaurants ), Macau, Paris ( three restaurants ) and Florence.",
+          "provenance": "wikipedia:Four Seasons Hotels and Resorts"
+        },
+        {
+          "id": "n4",
+          "text": "The latter has awarded at total of 25 stars to 17 of the company 's restaurants, including Four Seasons Hotel Hong Kong ( two restaurants ), Macau, Paris ( three restaurants ) and Florence.",
+          "provenance": "wikipedia:Four Seasons Hotels and Resorts"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Four Seasons Hotels and Resorts",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-10-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Four Seasons Hotel Hong Kong has less than three restaurants.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Egg as food using Wikipedia.",
+      "original_response": "The world production of chicken eggs as food was over 65 million tonnes as of 2013. The world production of chicken eggs as food was over 80 million tonnes as of 2017. Egg white coagulates between 149 and 158°F. Egg white coagulates between 145 and 165°F.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "The world production of chicken eggs as food was over 65 million tonnes as of 2013."
+        },
+        {
+          "id": "c2",
+          "text": "The world production of chicken eggs as food was over 80 million tonnes as of 2017."
+        },
+        {
+          "id": "c3",
+          "text": "Egg white coagulates between 149 and 158°F."
+        },
+        {
+          "id": "c4",
+          "text": "Egg white coagulates between 145 and 165°F."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "In 2013, world production of chicken eggs was 68.3 million tonnes.",
+          "provenance": "wikipedia:Egg as food"
+        },
+        {
+          "id": "n2",
+          "text": "In 2017, world production of chicken eggs was 80.1 million tonnes.",
+          "provenance": "wikipedia:Egg as food"
+        },
+        {
+          "id": "n3",
+          "text": "Egg white coagulates at slightly higher temperatures, between 145 and 165°F ( 63 and 73°C ).  a boiled egg is overcooked, a greenish ring sometimes appears around egg yolk due to the iron and sulfur compounds in the egg.",
+          "provenance": "wikipedia:Egg as food"
+        },
+        {
+          "id": "n4",
+          "text": "Egg white coagulates at slightly higher temperatures, between 149 and 158°F ( 65 and 70°C ).If a boiled egg is overcooked, a greenish ring sometimes appears around egg yolk due to the iron and sulfur compounds in the egg.",
+          "provenance": "wikipedia:Egg as food"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Egg as food",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-11-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Egg white coagulates between 149 and 158°F.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Egg as food using Wikipedia.",
+      "original_response": "The world production of chicken eggs as food was over 65 million tonnes as of 2013. The world production of chicken eggs as food was over 80 million tonnes as of 2017. Egg white coagulates between 149 and 158°F. Egg white coagulates between 145 and 165°F.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "The world production of chicken eggs as food was over 65 million tonnes as of 2013."
+        },
+        {
+          "id": "c2",
+          "text": "The world production of chicken eggs as food was over 80 million tonnes as of 2017."
+        },
+        {
+          "id": "c3",
+          "text": "Egg white coagulates between 149 and 158°F."
+        },
+        {
+          "id": "c4",
+          "text": "Egg white coagulates between 145 and 165°F."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "In 2013, world production of chicken eggs was 68.3 million tonnes.",
+          "provenance": "wikipedia:Egg as food"
+        },
+        {
+          "id": "n2",
+          "text": "In 2017, world production of chicken eggs was 80.1 million tonnes.",
+          "provenance": "wikipedia:Egg as food"
+        },
+        {
+          "id": "n3",
+          "text": "Egg white coagulates at slightly higher temperatures, between 145 and 165°F ( 63 and 73°C ).  a boiled egg is overcooked, a greenish ring sometimes appears around egg yolk due to the iron and sulfur compounds in the egg.",
+          "provenance": "wikipedia:Egg as food"
+        },
+        {
+          "id": "n4",
+          "text": "Egg white coagulates at slightly higher temperatures, between 149 and 158°F ( 65 and 70°C ).If a boiled egg is overcooked, a greenish ring sometimes appears around egg yolk due to the iron and sulfur compounds in the egg.",
+          "provenance": "wikipedia:Egg as food"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Egg as food",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-12-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"The world production of chicken eggs as food was over 80 million tonnes as of 2017.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about The Sun Is Also a Star using Wikipedia.",
+      "original_response": "On Metacritic, the movie The Sun Is Also a Star has a score of more than 52 %. On Metacritic, the movie The Sun Is Also a Star has a score of less than 53 %. The movie The Sun Is Also a Star grossed less than $ 6 million. The movie The Sun Is Also a Star holds an approval rating of more than 55 % based on less than 32 reviews.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "On Metacritic, the movie The Sun Is Also a Star has a score of more than 52 %."
+        },
+        {
+          "id": "c2",
+          "text": "On Metacritic, the movie The Sun Is Also a Star has a score of less than 53 %."
+        },
+        {
+          "id": "c3",
+          "text": "The movie The Sun Is Also a Star grossed less than $ 6 million."
+        },
+        {
+          "id": "c4",
+          "text": "The movie The Sun Is Also a Star holds an approval rating of more than 55 % based on less than 32 reviews."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Metacritic, which uses a weighted average, assigned the film a score of 53 out of 100, based on 23 critics, indicating `` mixed or average reviews ''.",
+          "provenance": "wikipedia:The Sun Is Also a Star"
+        },
+        {
+          "id": "n2",
+          "text": "Metacritic, which uses a weighted average, assigned the film a score of 52 out of 100, based on 23 critics, indicating `` mixed or average reviews ''.",
+          "provenance": "wikipedia:The Sun Is Also a Star"
+        },
+        {
+          "id": "n3",
+          "text": "The film received mixed reviews from critics and was a box-office bomb, only grossing $ 6.3 million.",
+          "provenance": "wikipedia:The Sun Is Also a Star"
+        },
+        {
+          "id": "n4",
+          "text": "On review aggregator Rotten Tomatoes, the film holds an approval rating of 54 % based on 37 reviews and an average rating of 5.61/10.",
+          "provenance": "wikipedia:The Sun Is Also a Star"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "The Sun Is Also a Star",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-13-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"The movie The Sun Is Also a Star grossed less than $ 6 million.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about The Sun Is Also a Star using Wikipedia.",
+      "original_response": "On Metacritic, the movie The Sun Is Also a Star has a score of more than 52 %. On Metacritic, the movie The Sun Is Also a Star has a score of less than 53 %. The movie The Sun Is Also a Star grossed less than $ 6 million. The movie The Sun Is Also a Star holds an approval rating of more than 55 % based on less than 32 reviews.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "On Metacritic, the movie The Sun Is Also a Star has a score of more than 52 %."
+        },
+        {
+          "id": "c2",
+          "text": "On Metacritic, the movie The Sun Is Also a Star has a score of less than 53 %."
+        },
+        {
+          "id": "c3",
+          "text": "The movie The Sun Is Also a Star grossed less than $ 6 million."
+        },
+        {
+          "id": "c4",
+          "text": "The movie The Sun Is Also a Star holds an approval rating of more than 55 % based on less than 32 reviews."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Metacritic, which uses a weighted average, assigned the film a score of 53 out of 100, based on 23 critics, indicating `` mixed or average reviews ''.",
+          "provenance": "wikipedia:The Sun Is Also a Star"
+        },
+        {
+          "id": "n2",
+          "text": "Metacritic, which uses a weighted average, assigned the film a score of 52 out of 100, based on 23 critics, indicating `` mixed or average reviews ''.",
+          "provenance": "wikipedia:The Sun Is Also a Star"
+        },
+        {
+          "id": "n3",
+          "text": "The film received mixed reviews from critics and was a box-office bomb, only grossing $ 6.3 million.",
+          "provenance": "wikipedia:The Sun Is Also a Star"
+        },
+        {
+          "id": "n4",
+          "text": "On review aggregator Rotten Tomatoes, the film holds an approval rating of 54 % based on 37 reviews and an average rating of 5.61/10.",
+          "provenance": "wikipedia:The Sun Is Also a Star"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "The Sun Is Also a Star",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-14-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"On Metacritic, the movie The Sun Is Also a Star has a score of more than 52 %.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Live and Let Die -LRB-film-RRB- using Wikipedia.",
+      "original_response": "Burt Reynolds turned down the offer to play 007 in the film Live and Let Die. Clint Eastwood turned down the offer to play 007 in the film Live and Let Die. Linda McCartney wrote the song Live and Let Die, and is a member of the band Wings. Mr Big is a democrat.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Burt Reynolds turned down the offer to play 007 in the film Live and Let Die."
+        },
+        {
+          "id": "c2",
+          "text": "Clint Eastwood turned down the offer to play 007 in the film Live and Let Die."
+        },
+        {
+          "id": "c3",
+          "text": "Linda McCartney wrote the song Live and Let Die, and is a member of the band Wings."
+        },
+        {
+          "id": "c4",
+          "text": "Mr Big is a democrat."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "The two producers then approached Clint Eastwood, who was fresh from his success as Dirty Harry, also turned down the offer, stating that 007 should be played by an Englishman.",
+          "provenance": "wikipedia:Live and Let Die -LRB-film-RRB-"
+        },
+        {
+          "id": "n2",
+          "text": "The two producers then approached Burt Reynolds who also turned down the offer, stating that 007 should be played by an Englishman.",
+          "provenance": "wikipedia:Live and Let Die -LRB-film-RRB-"
+        },
+        {
+          "id": "n3",
+          "text": "It was also nominated for the Academy Award for Best Original Song for `` Live and Let Die '', written by Paul and Linda McCartney and performed by their band Wings.",
+          "provenance": "wikipedia:Live and Let Die -LRB-film-RRB-"
+        },
+        {
+          "id": "n4",
+          "text": "realism in Mr Big 's plot to take over the drug trade from the Mafia. ''",
+          "provenance": "wikipedia:Live and Let Die -LRB-film-RRB-"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Live and Let Die -LRB-film-RRB-",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-15-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Burt Reynolds turned down the offer to play 007 in the film Live and Let Die.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": "It is unclear from the available sources whether mr Big is a democrat."
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Live and Let Die -LRB-film-RRB- using Wikipedia.",
+      "original_response": "Burt Reynolds turned down the offer to play 007 in the film Live and Let Die. Clint Eastwood turned down the offer to play 007 in the film Live and Let Die. Linda McCartney wrote the song Live and Let Die, and is a member of the band Wings. Mr Big is a democrat.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Burt Reynolds turned down the offer to play 007 in the film Live and Let Die."
+        },
+        {
+          "id": "c2",
+          "text": "Clint Eastwood turned down the offer to play 007 in the film Live and Let Die."
+        },
+        {
+          "id": "c3",
+          "text": "Linda McCartney wrote the song Live and Let Die, and is a member of the band Wings."
+        },
+        {
+          "id": "c4",
+          "text": "Mr Big is a democrat."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "The two producers then approached Clint Eastwood, who was fresh from his success as Dirty Harry, also turned down the offer, stating that 007 should be played by an Englishman.",
+          "provenance": "wikipedia:Live and Let Die -LRB-film-RRB-"
+        },
+        {
+          "id": "n2",
+          "text": "The two producers then approached Burt Reynolds who also turned down the offer, stating that 007 should be played by an Englishman.",
+          "provenance": "wikipedia:Live and Let Die -LRB-film-RRB-"
+        },
+        {
+          "id": "n3",
+          "text": "It was also nominated for the Academy Award for Best Original Song for `` Live and Let Die '', written by Paul and Linda McCartney and performed by their band Wings.",
+          "provenance": "wikipedia:Live and Let Die -LRB-film-RRB-"
+        },
+        {
+          "id": "n4",
+          "text": "realism in Mr Big 's plot to take over the drug trade from the Mafia. ''",
+          "provenance": "wikipedia:Live and Let Die -LRB-film-RRB-"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Live and Let Die -LRB-film-RRB-",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-16-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Linda McCartney wrote the song Live and Let Die, and is a member of the band Wings.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": "It is unclear from the available sources whether mr Big is a democrat."
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Annette Badland using Wikipedia.",
+      "original_response": "Babe 's final appearance in EastEnders was in late 2016. Annette Badland has played Jack Woolley 's step-daughter, Hazel Woolley, since 2006. Annette Badland was part of the cast of the 1986 film `` A Little Princess ''. Annette Badland was part of the cast of the films `` The Grotesque '' and `` Beautiful People ''.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Babe 's final appearance in EastEnders was in late 2016."
+        },
+        {
+          "id": "c2",
+          "text": "Annette Badland has played Jack Woolley 's step-daughter, Hazel Woolley, since 2006."
+        },
+        {
+          "id": "c3",
+          "text": "Annette Badland was part of the cast of the 1986 film `` A Little Princess ''."
+        },
+        {
+          "id": "c4",
+          "text": "Annette Badland was part of the cast of the films `` The Grotesque '' and `` Beautiful People ''."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "On 18 September 2016, it was announced that both Badland and Babe had been axed from the serial by new executive producer, Sean O'Connor, with the character making her final appearance in early 2017.",
+          "provenance": "wikipedia:Annette Badland"
+        },
+        {
+          "id": "n2",
+          "text": "She is currently appearing in the long running radio soap opera The Archers.",
+          "provenance": "wikipedia:Annette Badland"
+        },
+        {
+          "id": "n3",
+          "text": "She has also appeared in many films including Jabberwocky ( 1977 ), A Little Princess ( 1986 ), Beyond Bedlam ( 1994 ), Little Voice ( 1998 ) and Charlie and the Chocolate Factory ( 2005 ), and played the farmer 's wife in the TV adaptation of Gulliver 's Travels ( 1996 ).",
+          "provenance": "wikipedia:Annette Badland"
+        },
+        {
+          "id": "n4",
+          "text": "She has also appeared in many films including Jabberwocky ( 1977 ), Beyond Bedlam ( 1994 ), Captives ( 1994 ), The Grotesque ( 1995 ), Little Voice ( 1998 ), Beautiful People ( 1999 ), and Charlie and the Chocolate Factory ( 2005 ), and played the farmer 's wife in the TV adaptation of Gulliver 's Travels ( 1996 ).",
+          "provenance": "wikipedia:Annette Badland"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Annette Badland",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-17-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Babe 's final appearance in EastEnders was in late 2016.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": "It is unclear from the available sources whether annette Badland has played Jack Woolley 's step-daughter, Hazel Woolley, since 2006."
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "K",
+            "support": "supported"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Annette Badland using Wikipedia.",
+      "original_response": "Babe 's final appearance in EastEnders was in late 2016. Annette Badland has played Jack Woolley 's step-daughter, Hazel Woolley, since 2006. Annette Badland was part of the cast of the 1986 film `` A Little Princess ''. Annette Badland was part of the cast of the films `` The Grotesque '' and `` Beautiful People ''.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Babe 's final appearance in EastEnders was in late 2016."
+        },
+        {
+          "id": "c2",
+          "text": "Annette Badland has played Jack Woolley 's step-daughter, Hazel Woolley, since 2006."
+        },
+        {
+          "id": "c3",
+          "text": "Annette Badland was part of the cast of the 1986 film `` A Little Princess ''."
+        },
+        {
+          "id": "c4",
+          "text": "Annette Badland was part of the cast of the films `` The Grotesque '' and `` Beautiful People ''."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "On 18 September 2016, it was announced that both Badland and Babe had been axed from the serial by new executive producer, Sean O'Connor, with the character making her final appearance in early 2017.",
+          "provenance": "wikipedia:Annette Badland"
+        },
+        {
+          "id": "n2",
+          "text": "She is currently appearing in the long running radio soap opera The Archers.",
+          "provenance": "wikipedia:Annette Badland"
+        },
+        {
+          "id": "n3",
+          "text": "She has also appeared in many films including Jabberwocky ( 1977 ), A Little Princess ( 1986 ), Beyond Bedlam ( 1994 ), Little Voice ( 1998 ) and Charlie and the Chocolate Factory ( 2005 ), and played the farmer 's wife in the TV adaptation of Gulliver 's Travels ( 1996 ).",
+          "provenance": "wikipedia:Annette Badland"
+        },
+        {
+          "id": "n4",
+          "text": "She has also appeared in many films including Jabberwocky ( 1977 ), Beyond Bedlam ( 1994 ), Captives ( 1994 ), The Grotesque ( 1995 ), Little Voice ( 1998 ), Beautiful People ( 1999 ), and Charlie and the Chocolate Factory ( 2005 ), and played the farmer 's wife in the TV adaptation of Gulliver 's Travels ( 1996 ).",
+          "provenance": "wikipedia:Annette Badland"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Annette Badland",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-18-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Annette Badland was part of the cast of the films `` The Grotesque '' and `` Beautiful People ''.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": "It is unclear from the available sources whether annette Badland has played Jack Woolley 's step-daughter, Hazel Woolley, since 2006."
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "K",
+            "support": "supported"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Justin Chatwin using Wikipedia.",
+      "original_response": "Justin Chatwin played Kevin Nealon 's son in Weeds. Shameless is an upcoming drama series. Justin Chatwin ( actor ) gained recognition after 2005. Justin Chatwin and Jenny Czinder appeared on social media.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Justin Chatwin played Kevin Nealon 's son in Weeds."
+        },
+        {
+          "id": "c2",
+          "text": "Shameless is an upcoming drama series."
+        },
+        {
+          "id": "c3",
+          "text": "Justin Chatwin ( actor ) gained recognition after 2005."
+        },
+        {
+          "id": "c4",
+          "text": "Justin Chatwin and Jenny Czinder appeared on social media."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "He played the son of Kevin Nealon 's character in the Showtime comedy series Weeds, appearing only in the pilot and series finale.",
+          "provenance": "wikipedia:Justin Chatwin"
+        },
+        {
+          "id": "n2",
+          "text": "He was also picked up to star in the upcoming Showtime drama series Shameless adapted from the original British hit show of the same name created by Channel 4.",
+          "provenance": "wikipedia:Justin Chatwin"
+        },
+        {
+          "id": "n3",
+          "text": "He gained recognition in 2004 for his role as Tyler McKay in the American miniseries Traffic.",
+          "provenance": "wikipedia:Justin Chatwin"
+        },
+        {
+          "id": "n4",
+          "text": "He dated Fallen actress Addison Timlin in 2010.",
+          "provenance": "wikipedia:Justin Chatwin"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Justin Chatwin",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-19-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Justin Chatwin ( actor ) gained recognition after 2005.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": "It is unclear from the available sources whether justin Chatwin and Jenny Czinder appeared on social media."
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Justin Chatwin using Wikipedia.",
+      "original_response": "Justin Chatwin played Kevin Nealon 's son in Weeds. Shameless is an upcoming drama series. Justin Chatwin ( actor ) gained recognition after 2005. Justin Chatwin and Jenny Czinder appeared on social media.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Justin Chatwin played Kevin Nealon 's son in Weeds."
+        },
+        {
+          "id": "c2",
+          "text": "Shameless is an upcoming drama series."
+        },
+        {
+          "id": "c3",
+          "text": "Justin Chatwin ( actor ) gained recognition after 2005."
+        },
+        {
+          "id": "c4",
+          "text": "Justin Chatwin and Jenny Czinder appeared on social media."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "He played the son of Kevin Nealon 's character in the Showtime comedy series Weeds, appearing only in the pilot and series finale.",
+          "provenance": "wikipedia:Justin Chatwin"
+        },
+        {
+          "id": "n2",
+          "text": "He was also picked up to star in the upcoming Showtime drama series Shameless adapted from the original British hit show of the same name created by Channel 4.",
+          "provenance": "wikipedia:Justin Chatwin"
+        },
+        {
+          "id": "n3",
+          "text": "He gained recognition in 2004 for his role as Tyler McKay in the American miniseries Traffic.",
+          "provenance": "wikipedia:Justin Chatwin"
+        },
+        {
+          "id": "n4",
+          "text": "He dated Fallen actress Addison Timlin in 2010.",
+          "provenance": "wikipedia:Justin Chatwin"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Justin Chatwin",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-20-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Shameless is an upcoming drama series.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": "It is unclear from the available sources whether justin Chatwin and Jenny Czinder appeared on social media."
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Treat Myself using Wikipedia.",
+      "original_response": "Five songs were released before the album Treat Myself. The single Let You Be Right, from the album Treat Myself, is a Nu-disco song. On May 24, 2019, the album Treat Myself was released by Epic Records. On June 20, 2018, the single All the Ways was released as the first promotional single of Treat Myself, and on February 11, 2019, it was released as the fourth on hot AC.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Five songs were released before the album Treat Myself."
+        },
+        {
+          "id": "c2",
+          "text": "The single Let You Be Right, from the album Treat Myself, is a Nu-disco song."
+        },
+        {
+          "id": "c3",
+          "text": "On May 24, 2019, the album Treat Myself was released by Epic Records."
+        },
+        {
+          "id": "c4",
+          "text": "On June 20, 2018, the single All the Ways was released as the first promotional single of Treat Myself, and on February 11, 2019, it was released as the fourth on hot AC."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Treat Myself was preceded by the release of six songs, including the five singles `` No Excuses '', `` Let You Be Right '', `` Ca n't Dance '', `` All the Ways '', and `` Wave ''.",
+          "provenance": "wikipedia:Treat Myself"
+        },
+        {
+          "id": "n2",
+          "text": "On May 10, 2018, `` Let You Be Right '' a Nu-disco song, was released as the second single from the album, followed by `` Ca n't Dance '' a day later.",
+          "provenance": "wikipedia:Treat Myself"
+        },
+        {
+          "id": "n3",
+          "text": "Treat Myself ( stylized in all caps ) is the upcoming third major-label studio album by American singer-songwriter Meghan Trainor to be released on May 24, 2019, by Epic Records.",
+          "provenance": "wikipedia:Treat Myself"
+        },
+        {
+          "id": "n4",
+          "text": "The album 's title track was released as the second promotional single on July 20, 2018.",
+          "provenance": "wikipedia:Treat Myself"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Treat Myself",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-21-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Five songs were released before the album Treat Myself.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": "It is unclear from the available sources whether on June 20, 2018, the single All the Ways was released as the first promotional single of Treat Myself, and on February 11, 2019, it was released as the fourth on hot AC."
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Treat Myself using Wikipedia.",
+      "original_response": "Five songs were released before the album Treat Myself. The single Let You Be Right, from the album Treat Myself, is a Nu-disco song. On May 24, 2019, the album Treat Myself was released by Epic Records. On June 20, 2018, the single All the Ways was released as the first promotional single of Treat Myself, and on February 11, 2019, it was released as the fourth on hot AC.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Five songs were released before the album Treat Myself."
+        },
+        {
+          "id": "c2",
+          "text": "The single Let You Be Right, from the album Treat Myself, is a Nu-disco song."
+        },
+        {
+          "id": "c3",
+          "text": "On May 24, 2019, the album Treat Myself was released by Epic Records."
+        },
+        {
+          "id": "c4",
+          "text": "On June 20, 2018, the single All the Ways was released as the first promotional single of Treat Myself, and on February 11, 2019, it was released as the fourth on hot AC."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Treat Myself was preceded by the release of six songs, including the five singles `` No Excuses '', `` Let You Be Right '', `` Ca n't Dance '', `` All the Ways '', and `` Wave ''.",
+          "provenance": "wikipedia:Treat Myself"
+        },
+        {
+          "id": "n2",
+          "text": "On May 10, 2018, `` Let You Be Right '' a Nu-disco song, was released as the second single from the album, followed by `` Ca n't Dance '' a day later.",
+          "provenance": "wikipedia:Treat Myself"
+        },
+        {
+          "id": "n3",
+          "text": "Treat Myself ( stylized in all caps ) is the upcoming third major-label studio album by American singer-songwriter Meghan Trainor to be released on May 24, 2019, by Epic Records.",
+          "provenance": "wikipedia:Treat Myself"
+        },
+        {
+          "id": "n4",
+          "text": "The album 's title track was released as the second promotional single on July 20, 2018.",
+          "provenance": "wikipedia:Treat Myself"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Treat Myself",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-22-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"The single Let You Be Right, from the album Treat Myself, is a Nu-disco song.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": "It is unclear from the available sources whether on June 20, 2018, the single All the Ways was released as the first promotional single of Treat Myself, and on February 11, 2019, it was released as the fourth on hot AC."
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Robin Schulz using Wikipedia.",
+      "original_response": "Robin Schulz 's remix was nominated in the 57th Grammy Awards. Robin Schulz 's remix was nominated in the 56th Grammy Awards. Robin Schulz 's second single came out on the 6th of June 2014. Robin Schulz draws his references in electronic music from Epic Sax Guy.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Robin Schulz 's remix was nominated in the 57th Grammy Awards."
+        },
+        {
+          "id": "c2",
+          "text": "Robin Schulz 's remix was nominated in the 56th Grammy Awards."
+        },
+        {
+          "id": "c3",
+          "text": "Robin Schulz 's second single came out on the 6th of June 2014."
+        },
+        {
+          "id": "c4",
+          "text": "Robin Schulz draws his references in electronic music from Epic Sax Guy."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "This remix did also later on received a nomination in the 56th Annual Grammy Awards  ? genre=30.",
+          "provenance": "wikipedia:Robin Schulz"
+        },
+        {
+          "id": "n2",
+          "text": "This remix did also later on received a nomination in the 57th Annual Grammy Awards  ? genre=30.",
+          "provenance": "wikipedia:Robin Schulz"
+        },
+        {
+          "id": "n3",
+          "text": "`` His second single was an international hit as well, a remix of the Lilly Wood & the Prick track `` '' Prayer in C '' '' from their 2010 album Invincible Friends. ''",
+          "provenance": "wikipedia:Robin Schulz"
+        },
+        {
+          "id": "n4",
+          "text": "His references in electronic music are Todd Terry, Armand Van Helden, Roger Sanchez, Tiesto and the Epic Sax Guy.",
+          "provenance": "wikipedia:Robin Schulz"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Robin Schulz",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-23-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Robin Schulz 's remix was nominated in the 57th Grammy Awards.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": "It is unclear from the available sources whether robin Schulz 's second single came out on the 6th of June 2014."
+          },
+          "c4": {
+            "label": "K",
+            "support": "supported"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Robin Schulz using Wikipedia.",
+      "original_response": "Robin Schulz 's remix was nominated in the 57th Grammy Awards. Robin Schulz 's remix was nominated in the 56th Grammy Awards. Robin Schulz 's second single came out on the 6th of June 2014. Robin Schulz draws his references in electronic music from Epic Sax Guy.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Robin Schulz 's remix was nominated in the 57th Grammy Awards."
+        },
+        {
+          "id": "c2",
+          "text": "Robin Schulz 's remix was nominated in the 56th Grammy Awards."
+        },
+        {
+          "id": "c3",
+          "text": "Robin Schulz 's second single came out on the 6th of June 2014."
+        },
+        {
+          "id": "c4",
+          "text": "Robin Schulz draws his references in electronic music from Epic Sax Guy."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "This remix did also later on received a nomination in the 56th Annual Grammy Awards  ? genre=30.",
+          "provenance": "wikipedia:Robin Schulz"
+        },
+        {
+          "id": "n2",
+          "text": "This remix did also later on received a nomination in the 57th Annual Grammy Awards  ? genre=30.",
+          "provenance": "wikipedia:Robin Schulz"
+        },
+        {
+          "id": "n3",
+          "text": "`` His second single was an international hit as well, a remix of the Lilly Wood & the Prick track `` '' Prayer in C '' '' from their 2010 album Invincible Friends. ''",
+          "provenance": "wikipedia:Robin Schulz"
+        },
+        {
+          "id": "n4",
+          "text": "His references in electronic music are Todd Terry, Armand Van Helden, Roger Sanchez, Tiesto and the Epic Sax Guy.",
+          "provenance": "wikipedia:Robin Schulz"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Robin Schulz",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-24-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Robin Schulz draws his references in electronic music from Epic Sax Guy.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": "It is unclear from the available sources whether robin Schulz 's second single came out on the 6th of June 2014."
+          },
+          "c4": {
+            "label": "K",
+            "support": "supported"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Concentration of media ownership using Wikipedia.",
+      "original_response": "21st Century Fox Inc will merge with Disney after February 2019. Fox Inc. is one of the largest media conglomerates worldwide. Concentration of media ownership can result in corporate censorship, affecting critical thought. 21st Century Fox was the third largest media conglomerate in the United States.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "21st Century Fox Inc will merge with Disney after February 2019."
+        },
+        {
+          "id": "c2",
+          "text": "Fox Inc. is one of the largest media conglomerates worldwide."
+        },
+        {
+          "id": "c3",
+          "text": "Concentration of media ownership can result in corporate censorship, affecting critical thought."
+        },
+        {
+          "id": "c4",
+          "text": "21st Century Fox was the third largest media conglomerate in the United States."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Globally, large media conglomerates include Bertelsmann ( BMG ), National Amusements ( Viacom Inc. and CBS Corporation ), 21st Century Fox Inc ( merging with Disney on the last week of January 2019 ), Sony Corporation, Comcast, The Walt Disney Company, AT & T Inc., News Corp, Fox Corporation, Hearst Communications, MGM Holdings Inc., Grupo Globo ( South America ) and Lagardère Group.",
+          "provenance": "wikipedia:Concentration of media ownership"
+        },
+        {
+          "id": "n2",
+          "text": "Globally, large media conglomerates include Bertelsmann ( BMG ), National Amusements ( Viacom Inc. and CBS Corporation ), 21st Century Fox Inc ( merging with Disney on the last week of January 2019 ), Sony Corporation, Comcast, The Walt Disney Company, AT & T Inc., News Corp, Fox Inc. Hearst Communications, MGM Holdings Inc., Grupo Globo ( South America ) and Lagardère Group.",
+          "provenance": "wikipedia:Concentration of media ownership"
+        },
+        {
+          "id": "n3",
+          "text": "Increased concentration of media ownership can lead to the censorship of a wide range of critical thought.",
+          "provenance": "wikipedia:Concentration of media ownership"
+        },
+        {
+          "id": "n4",
+          "text": "Comcast Corporation was the largest media conglomerate in the US, with The Walt Disney Company, 21st Century Fox and WarnerMedia ranking second, third and fourth respectively.",
+          "provenance": "wikipedia:Concentration of media ownership"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Concentration of media ownership",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-25-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"21st Century Fox Inc will merge with Disney after February 2019.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": "It is unclear from the available sources whether concentration of media ownership can result in corporate censorship, affecting critical thought."
+          },
+          "c4": {
+            "label": "K",
+            "support": "supported"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Concentration of media ownership using Wikipedia.",
+      "original_response": "21st Century Fox Inc will merge with Disney after February 2019. Fox Inc. is one of the largest media conglomerates worldwide. Concentration of media ownership can result in corporate censorship, affecting critical thought. 21st Century Fox was the third largest media conglomerate in the United States.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "21st Century Fox Inc will merge with Disney after February 2019."
+        },
+        {
+          "id": "c2",
+          "text": "Fox Inc. is one of the largest media conglomerates worldwide."
+        },
+        {
+          "id": "c3",
+          "text": "Concentration of media ownership can result in corporate censorship, affecting critical thought."
+        },
+        {
+          "id": "c4",
+          "text": "21st Century Fox was the third largest media conglomerate in the United States."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Globally, large media conglomerates include Bertelsmann ( BMG ), National Amusements ( Viacom Inc. and CBS Corporation ), 21st Century Fox Inc ( merging with Disney on the last week of January 2019 ), Sony Corporation, Comcast, The Walt Disney Company, AT & T Inc., News Corp, Fox Corporation, Hearst Communications, MGM Holdings Inc., Grupo Globo ( South America ) and Lagardère Group.",
+          "provenance": "wikipedia:Concentration of media ownership"
+        },
+        {
+          "id": "n2",
+          "text": "Globally, large media conglomerates include Bertelsmann ( BMG ), National Amusements ( Viacom Inc. and CBS Corporation ), 21st Century Fox Inc ( merging with Disney on the last week of January 2019 ), Sony Corporation, Comcast, The Walt Disney Company, AT & T Inc., News Corp, Fox Inc. Hearst Communications, MGM Holdings Inc., Grupo Globo ( South America ) and Lagardère Group.",
+          "provenance": "wikipedia:Concentration of media ownership"
+        },
+        {
+          "id": "n3",
+          "text": "Increased concentration of media ownership can lead to the censorship of a wide range of critical thought.",
+          "provenance": "wikipedia:Concentration of media ownership"
+        },
+        {
+          "id": "n4",
+          "text": "Comcast Corporation was the largest media conglomerate in the US, with The Walt Disney Company, 21st Century Fox and WarnerMedia ranking second, third and fourth respectively.",
+          "provenance": "wikipedia:Concentration of media ownership"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Concentration of media ownership",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-26-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Fox Inc. is one of the largest media conglomerates worldwide.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": "It is unclear from the available sources whether concentration of media ownership can result in corporate censorship, affecting critical thought."
+          },
+          "c4": {
+            "label": "K",
+            "support": "supported"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Eric Reid using Wikipedia.",
+      "original_response": "Eric Reid made a Pro Bowl with the San Francisco 49ers. Eric Reid said that there was another factor for which the 49ers were ineligible for the playoffs. Eric Reid plays for the San Francisco 49ers. Eric Reid filed an official grievance letter with the NFL after February 2018.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Eric Reid made a Pro Bowl with the San Francisco 49ers."
+        },
+        {
+          "id": "c2",
+          "text": "Eric Reid said that there was another factor for which the 49ers were ineligible for the playoffs."
+        },
+        {
+          "id": "c3",
+          "text": "Eric Reid plays for the San Francisco 49ers."
+        },
+        {
+          "id": "c4",
+          "text": "Eric Reid filed an official grievance letter with the NFL after February 2018."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "He was selected by the San Francisco 49ers in the first round of the 2013 NFL Draft, He is against racism which is strengthened by our president, with whom he made a Pro Bowl.",
+          "provenance": "wikipedia:Eric Reid"
+        },
+        {
+          "id": "n2",
+          "text": "He decided to sit out the following week as a precaution and stated that an additional mitigating factor in his decision was that the 49ers had missed the playoffs after finishing with an 8-8 record.",
+          "provenance": "wikipedia:Eric Reid"
+        },
+        {
+          "id": "n3",
+          "text": "Eric Todd Reid ( born December 10, 1991 ) is an American football strong safety for the Cleveland Browns of the National Football League ( NFL ).",
+          "provenance": "wikipedia:Eric Reid"
+        },
+        {
+          "id": "n4",
+          "text": "==Protest activities and collusion grievance against the NFL==In October 2017, Reid filed an official grievance letter with the NFL alleging that team owners and the league, influenced by President Donald Trump, colluded to prevent his employment due to h",
+          "provenance": "wikipedia:Eric Reid"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Eric Reid",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-27-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Eric Reid made a Pro Bowl with the San Francisco 49ers.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Maniac -LRB-2012 film-RRB- using Wikipedia.",
+      "original_response": "Maniac received an approval rating of more than 52 % based on fewer than 52 reviews on Rotten Tomatoes. Frank 's body was covered in blood. Anna was picked up by a passing motorist. Maniac received a rating of more than 48 % based on fewer than 60 reviews on Rotten Tomatoes.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Maniac received an approval rating of more than 52 % based on fewer than 52 reviews on Rotten Tomatoes."
+        },
+        {
+          "id": "c2",
+          "text": "Frank 's body was covered in blood."
+        },
+        {
+          "id": "c3",
+          "text": "Anna was picked up by a passing motorist."
+        },
+        {
+          "id": "c4",
+          "text": "Maniac received a rating of more than 48 % based on fewer than 60 reviews on Rotten Tomatoes."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "It has a 53 % approval rating on the review aggregator website Rotten Tomatoes, based on 51 reviews, with an average score of 5.2/10.",
+          "provenance": "wikipedia:Maniac -LRB-2012 film-RRB-"
+        },
+        {
+          "id": "n2",
+          "text": "Later that day, a SWAT team breaks into Frank 's apartment, only to find Frank 's bloodied corpse in his closet.",
+          "provenance": "wikipedia:Maniac -LRB-2012 film-RRB-"
+        },
+        {
+          "id": "n3",
+          "text": "Anna flees and is picked up by a passing pedestrian, who panics at the sight of Frank and runs him down in his car.",
+          "provenance": "wikipedia:Maniac -LRB-2012 film-RRB-"
+        },
+        {
+          "id": "n4",
+          "text": "It has a 49 % approval rating on the review aggregator website Rotten Tomatoes, based on 59 reviews, with an average score of 5/10.",
+          "provenance": "wikipedia:Maniac -LRB-2012 film-RRB-"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Maniac -LRB-2012 film-RRB-",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-28-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Anna was picked up by a passing motorist.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "K",
+            "support": "supported"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Maniac -LRB-2012 film-RRB- using Wikipedia.",
+      "original_response": "Maniac received an approval rating of more than 52 % based on fewer than 52 reviews on Rotten Tomatoes. Frank 's body was covered in blood. Anna was picked up by a passing motorist. Maniac received a rating of more than 48 % based on fewer than 60 reviews on Rotten Tomatoes.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Maniac received an approval rating of more than 52 % based on fewer than 52 reviews on Rotten Tomatoes."
+        },
+        {
+          "id": "c2",
+          "text": "Frank 's body was covered in blood."
+        },
+        {
+          "id": "c3",
+          "text": "Anna was picked up by a passing motorist."
+        },
+        {
+          "id": "c4",
+          "text": "Maniac received a rating of more than 48 % based on fewer than 60 reviews on Rotten Tomatoes."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "It has a 53 % approval rating on the review aggregator website Rotten Tomatoes, based on 51 reviews, with an average score of 5.2/10.",
+          "provenance": "wikipedia:Maniac -LRB-2012 film-RRB-"
+        },
+        {
+          "id": "n2",
+          "text": "Later that day, a SWAT team breaks into Frank 's apartment, only to find Frank 's bloodied corpse in his closet.",
+          "provenance": "wikipedia:Maniac -LRB-2012 film-RRB-"
+        },
+        {
+          "id": "n3",
+          "text": "Anna flees and is picked up by a passing pedestrian, who panics at the sight of Frank and runs him down in his car.",
+          "provenance": "wikipedia:Maniac -LRB-2012 film-RRB-"
+        },
+        {
+          "id": "n4",
+          "text": "It has a 49 % approval rating on the review aggregator website Rotten Tomatoes, based on 59 reviews, with an average score of 5/10.",
+          "provenance": "wikipedia:Maniac -LRB-2012 film-RRB-"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Maniac -LRB-2012 film-RRB-",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-29-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Frank 's body was covered in blood.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "K",
+            "support": "supported"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about The Hottie and the Nottie using Wikipedia.",
+      "original_response": "In March 2008, the film The Hottie and the Nottie was second on the IMDb Bottom 100 raking. In December 2008, the film The Hottie and the Nottie was number 16 on the IMDb Bottom 100 raking. There are less than 18 reviews of The Hottie and the Nottie on Metacritic. In December 2008, the film The Hottie and the Nottie was number 17 on the IMDb Bottom 100 raking.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "In March 2008, the film The Hottie and the Nottie was second on the IMDb Bottom 100 raking."
+        },
+        {
+          "id": "c2",
+          "text": "In December 2008, the film The Hottie and the Nottie was number 16 on the IMDb Bottom 100 raking."
+        },
+        {
+          "id": "c3",
+          "text": "There are less than 18 reviews of The Hottie and the Nottie on Metacritic."
+        },
+        {
+          "id": "c4",
+          "text": "In December 2008, the film The Hottie and the Nottie was number 17 on the IMDb Bottom 100 raking."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "As of April 2008, the film is ranked # 2 in the IMDb Bottom 100 with a rating of 1.1 out of 10.",
+          "provenance": "wikipedia:The Hottie and the Nottie"
+        },
+        {
+          "id": "n2",
+          "text": "As of December 2008, the film is ranked # 16, based on 18,000 votes in the IMDb Bottom 100 with a rating of 1.7 out of 10.",
+          "provenance": "wikipedia:The Hottie and the Nottie"
+        },
+        {
+          "id": "n3",
+          "text": "Metacritic reported the film had an average score of 7 out of 100, based on 17 reviews — indicating `` extreme dislike or disgust. ''",
+          "provenance": "wikipedia:The Hottie and the Nottie"
+        },
+        {
+          "id": "n4",
+          "text": "As of December 2008, the film is ranked # 16, based on 18,000 votes in the IMDb Bottom 100 with a rating of 1.7 out of 10.",
+          "provenance": "wikipedia:The Hottie and the Nottie"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "The Hottie and the Nottie",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-30-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"In December 2008, the film The Hottie and the Nottie was number 17 on the IMDb Bottom 100 raking.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about The Hottie and the Nottie using Wikipedia.",
+      "original_response": "In March 2008, the film The Hottie and the Nottie was second on the IMDb Bottom 100 raking. In December 2008, the film The Hottie and the Nottie was number 16 on the IMDb Bottom 100 raking. There are less than 18 reviews of The Hottie and the Nottie on Metacritic. In December 2008, the film The Hottie and the Nottie was number 17 on the IMDb Bottom 100 raking.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "In March 2008, the film The Hottie and the Nottie was second on the IMDb Bottom 100 raking."
+        },
+        {
+          "id": "c2",
+          "text": "In December 2008, the film The Hottie and the Nottie was number 16 on the IMDb Bottom 100 raking."
+        },
+        {
+          "id": "c3",
+          "text": "There are less than 18 reviews of The Hottie and the Nottie on Metacritic."
+        },
+        {
+          "id": "c4",
+          "text": "In December 2008, the film The Hottie and the Nottie was number 17 on the IMDb Bottom 100 raking."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "As of April 2008, the film is ranked # 2 in the IMDb Bottom 100 with a rating of 1.1 out of 10.",
+          "provenance": "wikipedia:The Hottie and the Nottie"
+        },
+        {
+          "id": "n2",
+          "text": "As of December 2008, the film is ranked # 16, based on 18,000 votes in the IMDb Bottom 100 with a rating of 1.7 out of 10.",
+          "provenance": "wikipedia:The Hottie and the Nottie"
+        },
+        {
+          "id": "n3",
+          "text": "Metacritic reported the film had an average score of 7 out of 100, based on 17 reviews — indicating `` extreme dislike or disgust. ''",
+          "provenance": "wikipedia:The Hottie and the Nottie"
+        },
+        {
+          "id": "n4",
+          "text": "As of December 2008, the film is ranked # 16, based on 18,000 votes in the IMDb Bottom 100 with a rating of 1.7 out of 10.",
+          "provenance": "wikipedia:The Hottie and the Nottie"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "The Hottie and the Nottie",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-31-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"In March 2008, the film The Hottie and the Nottie was second on the IMDb Bottom 100 raking.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about I, Daniel Blake using Wikipedia.",
+      "original_response": "The movie I, Daniel Blake has been reviewed by less than 138 critics on Rotten Tomatoes. The movie I, Daniel Blake has been reviewed by more than 148 critics on Rotten Tomatoes. The movie I, Daniel Blake has been reviewed by more than 116 critics on Rotten Tomatoes. The movie I, Daniel Blake has been reviewed by less than 31 critics on Metacritic.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "The movie I, Daniel Blake has been reviewed by less than 138 critics on Rotten Tomatoes."
+        },
+        {
+          "id": "c2",
+          "text": "The movie I, Daniel Blake has been reviewed by more than 148 critics on Rotten Tomatoes."
+        },
+        {
+          "id": "c3",
+          "text": "The movie I, Daniel Blake has been reviewed by more than 116 critics on Rotten Tomatoes."
+        },
+        {
+          "id": "c4",
+          "text": "The movie I, Daniel Blake has been reviewed by less than 31 critics on Metacritic."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "On review aggregator website Rotten Tomatoes, the film has an approval rating of 92 %, based on 142 reviews, with an average rating of 8/10.",
+          "provenance": "wikipedia:I, Daniel Blake"
+        },
+        {
+          "id": "n2",
+          "text": "On review aggregator website Rotten Tomatoes, the film has an approval rating of 92 %, based on 145 reviews, with an average rating of 8/10.",
+          "provenance": "wikipedia:I, Daniel Blake"
+        },
+        {
+          "id": "n3",
+          "text": "On review aggregator website Rotten Tomatoes, the film has an approval rating of 92 %, based on 114 reviews, with an average rating of 7.9/10.",
+          "provenance": "wikipedia:I, Daniel Blake"
+        },
+        {
+          "id": "n4",
+          "text": "On Metacritic the film has a score of 78 out of 100 score, based on 30 critics, indicating `` generally favourable reviews ''.",
+          "provenance": "wikipedia:I, Daniel Blake"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "I, Daniel Blake",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-32-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"The movie I, Daniel Blake has been reviewed by less than 138 critics on Rotten Tomatoes.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "K",
+            "support": "supported"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about I, Daniel Blake using Wikipedia.",
+      "original_response": "The movie I, Daniel Blake has been reviewed by less than 138 critics on Rotten Tomatoes. The movie I, Daniel Blake has been reviewed by more than 148 critics on Rotten Tomatoes. The movie I, Daniel Blake has been reviewed by more than 116 critics on Rotten Tomatoes. The movie I, Daniel Blake has been reviewed by less than 31 critics on Metacritic.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "The movie I, Daniel Blake has been reviewed by less than 138 critics on Rotten Tomatoes."
+        },
+        {
+          "id": "c2",
+          "text": "The movie I, Daniel Blake has been reviewed by more than 148 critics on Rotten Tomatoes."
+        },
+        {
+          "id": "c3",
+          "text": "The movie I, Daniel Blake has been reviewed by more than 116 critics on Rotten Tomatoes."
+        },
+        {
+          "id": "c4",
+          "text": "The movie I, Daniel Blake has been reviewed by less than 31 critics on Metacritic."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "On review aggregator website Rotten Tomatoes, the film has an approval rating of 92 %, based on 142 reviews, with an average rating of 8/10.",
+          "provenance": "wikipedia:I, Daniel Blake"
+        },
+        {
+          "id": "n2",
+          "text": "On review aggregator website Rotten Tomatoes, the film has an approval rating of 92 %, based on 145 reviews, with an average rating of 8/10.",
+          "provenance": "wikipedia:I, Daniel Blake"
+        },
+        {
+          "id": "n3",
+          "text": "On review aggregator website Rotten Tomatoes, the film has an approval rating of 92 %, based on 114 reviews, with an average rating of 7.9/10.",
+          "provenance": "wikipedia:I, Daniel Blake"
+        },
+        {
+          "id": "n4",
+          "text": "On Metacritic the film has a score of 78 out of 100 score, based on 30 critics, indicating `` generally favourable reviews ''.",
+          "provenance": "wikipedia:I, Daniel Blake"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "I, Daniel Blake",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-33-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"The movie I, Daniel Blake has been reviewed by less than 31 critics on Metacritic.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "K",
+            "support": "supported"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Molly Hatchet using Wikipedia.",
+      "original_response": "Dave Hlubek started the crew. Dave Hlubek and Steve Holland started the crew. Banner Thomas was born Banner Harvey Thomas on September 6, 1954 and died at age 62. Banner Thomas died at age 63.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Dave Hlubek started the crew."
+        },
+        {
+          "id": "c2",
+          "text": "Dave Hlubek and Steve Holland started the crew."
+        },
+        {
+          "id": "c3",
+          "text": "Banner Thomas was born Banner Harvey Thomas on September 6, 1954 and died at age 62."
+        },
+        {
+          "id": "c4",
+          "text": "Banner Thomas died at age 63."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "The band was founded by guitarists Dave Hlubek and Steve Holland in 1971.",
+          "provenance": "wikipedia:Molly Hatchet"
+        },
+        {
+          "id": "n2",
+          "text": "The band was founded by guitarists Dave Hlubek and Steve Holland in 1971.",
+          "provenance": "wikipedia:Molly Hatchet"
+        },
+        {
+          "id": "n3",
+          "text": "Bass guitarist Banner Thomas died of complications of pneumonia, at 63, on April 10, 2017.Dave Hlubek died of a heart attack on September 3, 2017, at the age of 66.",
+          "provenance": "wikipedia:Molly Hatchet"
+        },
+        {
+          "id": "n4",
+          "text": "Bass guitarist Banner Thomas ( born Banner Harvey Thomas on September 6, 1954 in Savannah, Georgia ) died from complications of rheumatoid arthritis, at 62, on April 10, 2017.In Memory of Banner Harvey Thomas September 6, 1954 - April 10, 2017 accessdate December 5, 20017Dave Hlubek died of a heart attack on September 3, 2017, at the age of 66.",
+          "provenance": "wikipedia:Molly Hatchet"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Molly Hatchet",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-34-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Dave Hlubek started the crew.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Molly Hatchet using Wikipedia.",
+      "original_response": "Dave Hlubek started the crew. Dave Hlubek and Steve Holland started the crew. Banner Thomas was born Banner Harvey Thomas on September 6, 1954 and died at age 62. Banner Thomas died at age 63.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Dave Hlubek started the crew."
+        },
+        {
+          "id": "c2",
+          "text": "Dave Hlubek and Steve Holland started the crew."
+        },
+        {
+          "id": "c3",
+          "text": "Banner Thomas was born Banner Harvey Thomas on September 6, 1954 and died at age 62."
+        },
+        {
+          "id": "c4",
+          "text": "Banner Thomas died at age 63."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "The band was founded by guitarists Dave Hlubek and Steve Holland in 1971.",
+          "provenance": "wikipedia:Molly Hatchet"
+        },
+        {
+          "id": "n2",
+          "text": "The band was founded by guitarists Dave Hlubek and Steve Holland in 1971.",
+          "provenance": "wikipedia:Molly Hatchet"
+        },
+        {
+          "id": "n3",
+          "text": "Bass guitarist Banner Thomas died of complications of pneumonia, at 63, on April 10, 2017.Dave Hlubek died of a heart attack on September 3, 2017, at the age of 66.",
+          "provenance": "wikipedia:Molly Hatchet"
+        },
+        {
+          "id": "n4",
+          "text": "Bass guitarist Banner Thomas ( born Banner Harvey Thomas on September 6, 1954 in Savannah, Georgia ) died from complications of rheumatoid arthritis, at 62, on April 10, 2017.In Memory of Banner Harvey Thomas September 6, 1954 - April 10, 2017 accessdate December 5, 20017Dave Hlubek died of a heart attack on September 3, 2017, at the age of 66.",
+          "provenance": "wikipedia:Molly Hatchet"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Molly Hatchet",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-35-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Dave Hlubek and Steve Holland started the crew.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n3"
+            ],
+            "target_text": null
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Hélio Castroneves using Wikipedia.",
+      "original_response": "Hélio Castroneves resides in Miami. Hélio Castroneves resides in Fort Lauderdale. Hélio Castroneves acts as a swimmer in `` The Smoking Gun Presents: World 's Dumbest.. '' Hélio Castroneves has won more than 21 IndyCar Competitions.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Hélio Castroneves resides in Miami."
+        },
+        {
+          "id": "c2",
+          "text": "Hélio Castroneves resides in Fort Lauderdale."
+        },
+        {
+          "id": "c3",
+          "text": "Hélio Castroneves acts as a swimmer in `` The Smoking Gun Presents: World 's Dumbest.. ''"
+        },
+        {
+          "id": "c4",
+          "text": "Hélio Castroneves has won more than 21 IndyCar Competitions."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Castroneves lives in Fort Lauderdale.",
+          "provenance": "wikipedia:Hélio Castroneves"
+        },
+        {
+          "id": "n2",
+          "text": "Castroneves lives in Miami.",
+          "provenance": "wikipedia:Hélio Castroneves"
+        },
+        {
+          "id": "n3",
+          "text": "He has also appeared on truTV 's The Smoking Gun Presents: World 's Dumbest... as a frequent swimmer—mainly on episodes that feature the `` World 's Dumbest Drivers ''.",
+          "provenance": "wikipedia:Hélio Castroneves"
+        },
+        {
+          "id": "n4",
+          "text": "In IndyCar competition, Castroneves has 21 wins and 32 poles, and has never placed lower than sixth in the standings in a complete season of racing till 2011, where he placed eleventh.",
+          "provenance": "wikipedia:Hélio Castroneves"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Hélio Castroneves",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-36-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"Hélio Castroneves resides in Miami.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about Hélio Castroneves using Wikipedia.",
+      "original_response": "Hélio Castroneves resides in Miami. Hélio Castroneves resides in Fort Lauderdale. Hélio Castroneves acts as a swimmer in `` The Smoking Gun Presents: World 's Dumbest.. '' Hélio Castroneves has won more than 21 IndyCar Competitions.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Hélio Castroneves resides in Miami."
+        },
+        {
+          "id": "c2",
+          "text": "Hélio Castroneves resides in Fort Lauderdale."
+        },
+        {
+          "id": "c3",
+          "text": "Hélio Castroneves acts as a swimmer in `` The Smoking Gun Presents: World 's Dumbest.. ''"
+        },
+        {
+          "id": "c4",
+          "text": "Hélio Castroneves has won more than 21 IndyCar Competitions."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "Castroneves lives in Fort Lauderdale.",
+          "provenance": "wikipedia:Hélio Castroneves"
+        },
+        {
+          "id": "n2",
+          "text": "Castroneves lives in Miami.",
+          "provenance": "wikipedia:Hélio Castroneves"
+        },
+        {
+          "id": "n3",
+          "text": "He has also appeared on truTV 's The Smoking Gun Presents: World 's Dumbest... as a frequent swimmer—mainly on episodes that feature the `` World 's Dumbest Drivers ''.",
+          "provenance": "wikipedia:Hélio Castroneves"
+        },
+        {
+          "id": "n4",
+          "text": "In IndyCar competition, Castroneves has 21 wins and 32 poles, and has never placed lower than sixth in the standings in a complete season of racing till 2011, where he placed eleventh.",
+          "provenance": "wikipedia:Hélio Castroneves"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "Hélio Castroneves",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-37-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"Hélio Castroneves acts as a swimmer in `` The Smoking Gun Presents: World 's Dumbest.. ''\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": null
+          },
+          "c2": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n2"
+            ],
+            "target_text": null
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about The Oath -LRB-2018 film-RRB- using Wikipedia.",
+      "original_response": "The Oath is a black comedy film. On Metacritic, The Oath has an average score of more than 50 % according to less than 26 critics. On Rotten Tomatoes, The Oath has an average rating of less than 5.5 out of 10. On Rotten Tomatoes, The Oath has an approval rating of less than 68 % according to more than 45 reviews.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "The Oath is a black comedy film."
+        },
+        {
+          "id": "c2",
+          "text": "On Metacritic, The Oath has an average score of more than 50 % according to less than 26 critics."
+        },
+        {
+          "id": "c3",
+          "text": "On Rotten Tomatoes, The Oath has an average rating of less than 5.5 out of 10."
+        },
+        {
+          "id": "c4",
+          "text": "On Rotten Tomatoes, The Oath has an approval rating of less than 68 % according to more than 45 reviews."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "The Oath is a 2018 American film written and directed by Ike Barinholtz, in his directorial debut.",
+          "provenance": "wikipedia:The Oath -LRB-2018 film-RRB-"
+        },
+        {
+          "id": "n2",
+          "text": "On Metacritic, the film has a weighted average score of 58 out of 100, based on 25 critics, indicating `` mixed or average reviews ''.",
+          "provenance": "wikipedia:The Oath -LRB-2018 film-RRB-"
+        },
+        {
+          "id": "n3",
+          "text": "On review aggregator Rotten Tomatoes, the film holds an approval rating of 60 % based on 78 reviews, with an average rating of 5.4/10.",
+          "provenance": "wikipedia:The Oath -LRB-2018 film-RRB-"
+        },
+        {
+          "id": "n4",
+          "text": "On review aggregator Rotten Tomatoes, the film holds an approval rating of 68 % based on 40 reviews, with an average rating of 5.9/10.",
+          "provenance": "wikipedia:The Oath -LRB-2018 film-RRB-"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "The Oath -LRB-2018 film-RRB-",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-38-valid",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "medium",
+        "text": "I don't think this part is right: \"On Rotten Tomatoes, The Oath has an approval rating of less than 68 % according to more than 45 reviews.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": "It is unclear from the available sources whether the Oath is a black comedy film."
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    },
+    {
+      "domain": "wikipedia",
+      "context": "Answer questions about The Oath -LRB-2018 film-RRB- using Wikipedia.",
+      "original_response": "The Oath is a black comedy film. On Metacritic, The Oath has an average score of more than 50 % according to less than 26 critics. On Rotten Tomatoes, The Oath has an average rating of less than 5.5 out of 10. On Rotten Tomatoes, The Oath has an approval rating of less than 68 % according to more than 45 reviews.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "The Oath is a black comedy film."
+        },
+        {
+          "id": "c2",
+          "text": "On Metacritic, The Oath has an average score of more than 50 % according to less than 26 critics."
+        },
+        {
+          "id": "c3",
+          "text": "On Rotten Tomatoes, The Oath has an average rating of less than 5.5 out of 10."
+        },
+        {
+          "id": "c4",
+          "text": "On Rotten Tomatoes, The Oath has an approval rating of less than 68 % according to more than 45 reviews."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [
+        {
+          "id": "n1",
+          "text": "The Oath is a 2018 American film written and directed by Ike Barinholtz, in his directorial debut.",
+          "provenance": "wikipedia:The Oath -LRB-2018 film-RRB-"
+        },
+        {
+          "id": "n2",
+          "text": "On Metacritic, the film has a weighted average score of 58 out of 100, based on 25 critics, indicating `` mixed or average reviews ''.",
+          "provenance": "wikipedia:The Oath -LRB-2018 film-RRB-"
+        },
+        {
+          "id": "n3",
+          "text": "On review aggregator Rotten Tomatoes, the film holds an approval rating of 60 % based on 78 reviews, with an average rating of 5.4/10.",
+          "provenance": "wikipedia:The Oath -LRB-2018 film-RRB-"
+        },
+        {
+          "id": "n4",
+          "text": "On review aggregator Rotten Tomatoes, the film holds an approval rating of 68 % based on 40 reviews, with an average rating of 5.9/10.",
+          "provenance": "wikipedia:The Oath -LRB-2018 film-RRB-"
+        }
+      ],
+      "source": {
+        "type": "vitaminc",
+        "page": "The Oath -LRB-2018 film-RRB-",
+        "license": "CC BY-SA 3.0",
+        "no_target_text": true
+      },
+      "id": "vitc-39-false",
+      "feedback": {
+        "speaker_role": "user",
+        "confidence_cue": "high",
+        "text": "This is wrong: \"On Rotten Tomatoes, The Oath has an average rating of less than 5.5 out of 10.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "U",
+            "trigger": "evidence",
+            "evidence": [
+              "n1"
+            ],
+            "target_text": "It is unclear from the available sources whether the Oath is a black comedy film."
+          },
+          "c2": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c3": {
+            "label": "K",
+            "support": "supported"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "evidence",
+            "evidence": [
+              "n4"
+            ],
+            "target_text": null
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "",
+        "no_target_text": true
+      }
+    }
+  ]
+}

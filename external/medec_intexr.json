@@ -1,0 +1,4612 @@
+{
+  "version": "medec_intexr_v0",
+  "source_license": "CC BY 4.0",
+  "examples": [
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 33-year-old woman presents to her primary care physician for non-bloody nipple discharge. She states that it has been going on for the past month and that it sometimes soils her shirt. The patient drinks 2 to 3 alcoholic beverages per day and smokes 1 pack of cigarettes per day. She is currently seeking mental health treatment with an outpatient psychiatrist after a recent hospitalization for auditory hallucinations. Her psychiatrist prescribed her a medication that she can not recall. Otherwise, she complains of headaches that occur frequently. Her temperature is 98.6 F (37.0 C), blood pressure is 137/68 mmHg, pulse is 70/min, respirations are 13/min, and oxygen saturation is 98% on room air. Current psychiatric medications are discontinued after physical exam is notable for bilateral galactorrhea that can be expressed with palpation.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 33-year-old woman presents to her primary care physician for non-bloody nipple discharge."
+        },
+        {
+          "id": "c2",
+          "text": "She states that it has been going on for the past month and that it sometimes soils her shirt."
+        },
+        {
+          "id": "c3",
+          "text": "The patient drinks 2 to 3 alcoholic beverages per day and smokes 1 pack of cigarettes per day."
+        },
+        {
+          "id": "c4",
+          "text": "She is currently seeking mental health treatment with an outpatient psychiatrist after a recent hospitalization for auditory hallucinations."
+        },
+        {
+          "id": "c5",
+          "text": "Her psychiatrist prescribed her a medication that she can not recall."
+        },
+        {
+          "id": "c6",
+          "text": "Otherwise, she complains of headaches that occur frequently."
+        },
+        {
+          "id": "c7",
+          "text": "Her temperature is 98.6 F (37.0 C), blood pressure is 137/68"
+        },
+        {
+          "id": "c8",
+          "text": "mmHg, pulse is 70/min, respirations are 13/min, and oxygen saturation is 98% on room air."
+        },
+        {
+          "id": "c9",
+          "text": "Current psychiatric medications are discontinued after physical exam is notable for bilateral galactorrhea that can be expressed with palpation."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-342",
+        "error_type": "management",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-342-valid",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "medium",
+        "text": "I don't think this is right: \"Current psychiatric medications are discontinued after physical exam is notable for bilateral galactorrhea that can be expressed with palpation.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "A TSH level is obtained after physical exam is notable for bilateral galactorrhea that can be expressed with palpation.",
+            "checks": {
+              "must_contain_any": [
+                "TSH",
+                "level",
+                "obtained"
+              ],
+              "must_not_contain": [
+                "psychiatric",
+                "medications",
+                "discontinued"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 33-year-old woman presents to her primary care physician for non-bloody nipple discharge. She states that it has been going on for the past month and that it sometimes soils her shirt. The patient drinks 2 to 3 alcoholic beverages per day and smokes 1 pack of cigarettes per day. She is currently seeking mental health treatment with an outpatient psychiatrist after a recent hospitalization for auditory hallucinations. Her psychiatrist prescribed her a medication that she can not recall. Otherwise, she complains of headaches that occur frequently. Her temperature is 98.6 F (37.0 C), blood pressure is 137/68 mmHg, pulse is 70/min, respirations are 13/min, and oxygen saturation is 98% on room air. A TSH level is obtained after physical exam is notable for bilateral galactorrhea that can be expressed with palpation."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 33-year-old woman presents to her primary care physician for non-bloody nipple discharge. She states that it has been going on for the past month and that it sometimes soils her shirt. The patient drinks 2 to 3 alcoholic beverages per day and smokes 1 pack of cigarettes per day. She is currently seeking mental health treatment with an outpatient psychiatrist after a recent hospitalization for auditory hallucinations. Her psychiatrist prescribed her a medication that she can not recall. Otherwise, she complains of headaches that occur frequently. Her temperature is 98.6 F (37.0 C), blood pressure is 137/68 mmHg, pulse is 70/min, respirations are 13/min, and oxygen saturation is 98% on room air. Current psychiatric medications are discontinued after physical exam is notable for bilateral galactorrhea that can be expressed with palpation.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 33-year-old woman presents to her primary care physician for non-bloody nipple discharge."
+        },
+        {
+          "id": "c2",
+          "text": "She states that it has been going on for the past month and that it sometimes soils her shirt."
+        },
+        {
+          "id": "c3",
+          "text": "The patient drinks 2 to 3 alcoholic beverages per day and smokes 1 pack of cigarettes per day."
+        },
+        {
+          "id": "c4",
+          "text": "She is currently seeking mental health treatment with an outpatient psychiatrist after a recent hospitalization for auditory hallucinations."
+        },
+        {
+          "id": "c5",
+          "text": "Her psychiatrist prescribed her a medication that she can not recall."
+        },
+        {
+          "id": "c6",
+          "text": "Otherwise, she complains of headaches that occur frequently."
+        },
+        {
+          "id": "c7",
+          "text": "Her temperature is 98.6 F (37.0 C), blood pressure is 137/68"
+        },
+        {
+          "id": "c8",
+          "text": "mmHg, pulse is 70/min, respirations are 13/min, and oxygen saturation is 98% on room air."
+        },
+        {
+          "id": "c9",
+          "text": "Current psychiatric medications are discontinued after physical exam is notable for bilateral galactorrhea that can be expressed with palpation."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-342",
+        "error_type": "management",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-342-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence is wrong and should be removed: \"mmHg, pulse is 70/min, respirations are 13/min, and oxygen saturation is 98% on room air.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "A TSH level is obtained after physical exam is notable for bilateral galactorrhea that can be expressed with palpation.",
+            "checks": {
+              "must_contain_any": [
+                "TSH",
+                "level",
+                "obtained"
+              ],
+              "must_not_contain": [
+                "psychiatric",
+                "medications",
+                "discontinued"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 33-year-old woman presents to her primary care physician for non-bloody nipple discharge. She states that it has been going on for the past month and that it sometimes soils her shirt. The patient drinks 2 to 3 alcoholic beverages per day and smokes 1 pack of cigarettes per day. She is currently seeking mental health treatment with an outpatient psychiatrist after a recent hospitalization for auditory hallucinations. Her psychiatrist prescribed her a medication that she can not recall. Otherwise, she complains of headaches that occur frequently. Her temperature is 98.6 F (37.0 C), blood pressure is 137/68 mmHg, pulse is 70/min, respirations are 13/min, and oxygen saturation is 98% on room air. A TSH level is obtained after physical exam is notable for bilateral galactorrhea that can be expressed with palpation."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 62-year-old man is brought to the emergency department from a senior-care facility after he was found with a decreased level of consciousness and fever. His personal history is relevant for colorectal cancer that was managed with surgical excision of the tumor. Upon admission, he is found to have a blood pressure of 130/80 mm Hg, a pulse of 102/min, a respiratory rate of 20/min, and a body temperature 38.8 C (101.8 F). There is no rash on physical examination; he is found to have neck rigidity, confusion, and photophobia. There are no focal neurological deficits. A head CT is normal without mass or hydrocephalus. Ampicillin is added after a lumbar puncture was performed and cerebrospinal fluid (CSF) is sent to analysis while ceftriaxone and vancomycin are started.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 62-year-old man is brought to the emergency department from a senior-care facility after he was found with a decreased level of consciousness and fever."
+        },
+        {
+          "id": "c2",
+          "text": "His personal history is relevant for colorectal cancer that was managed with surgical excision of the tumor."
+        },
+        {
+          "id": "c3",
+          "text": "Upon admission, he is found to have a blood pressure of 130/80 mm"
+        },
+        {
+          "id": "c4",
+          "text": "Hg, a pulse of 102/min, a respiratory rate of 20/min, and a body temperature 38.8 C (101.8 F)."
+        },
+        {
+          "id": "c5",
+          "text": "There is no rash on physical examination; he is found to have neck rigidity, confusion, and photophobia."
+        },
+        {
+          "id": "c6",
+          "text": "There are no focal neurological deficits."
+        },
+        {
+          "id": "c7",
+          "text": "A head CT is normal without mass or hydrocephalus."
+        },
+        {
+          "id": "c8",
+          "text": "Ampicillin is added after a lumbar puncture was performed and cerebrospinal fluid (CSF) is sent to analysis while ceftriaxone and vancomycin are started."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-271",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-271-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"His personal history is relevant for colorectal cancer that was managed with surgical excision of the tumor.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 62-year-old man is brought to the emergency department from a senior-care facility after he was found with a decreased level of consciousness and fever. His personal history is relevant for colorectal cancer that was managed with surgical excision of the tumor. Upon admission, he is found to have a blood pressure of 130/80 mm Hg, a pulse of 102/min, a respiratory rate of 20/min, and a body temperature 38.8 C (101.8 F). There is no rash on physical examination; he is found to have neck rigidity, confusion, and photophobia. There are no focal neurological deficits. A head CT is normal without mass or hydrocephalus. Ampicillin is added after a lumbar puncture was performed and cerebrospinal fluid (CSF) is sent to analysis while ceftriaxone and vancomycin are started."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 16-year-old boy comes to the physician for the evaluation of fatigue over the past month. He reports that his energy levels are low and that he spends most of his time in his room. He also states that he is not in the mood for meeting friends. He used to enjoy playing soccer and going to the shooting range with his father, but recently stopped showing interest in these activities. He has been having difficulties at school due to concentration problems. His appetite is low. He has problems falling asleep. He states that he has thought about ending his life, but he has no specific plan. He lives with his parents, who frequently fight due to financial problems. He does not smoke. He drinks 2â€“3 cans of beer on the weekends. He does not use illicit drugs. He takes no medications. His vital signs are within normal limits. On mental status examination, he is oriented to person, place, and time. Physical examination shows no abnormalities. Parents are instructed to remove guns from the house.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 16-year-old boy comes to the physician for the evaluation of fatigue over the past month."
+        },
+        {
+          "id": "c2",
+          "text": "He reports that his energy levels are low and that he spends most of his time in his room."
+        },
+        {
+          "id": "c3",
+          "text": "He also states that he is not in the mood for meeting friends."
+        },
+        {
+          "id": "c4",
+          "text": "He used to enjoy playing soccer and going to the shooting range with his father, but recently stopped showing interest in these activities."
+        },
+        {
+          "id": "c5",
+          "text": "He has been having difficulties at school due to concentration problems."
+        },
+        {
+          "id": "c6",
+          "text": "His appetite is low."
+        },
+        {
+          "id": "c7",
+          "text": "He has problems falling asleep."
+        },
+        {
+          "id": "c8",
+          "text": "He states that he has thought about ending his life, but he has no specific plan."
+        },
+        {
+          "id": "c9",
+          "text": "He lives with his parents, who frequently fight due to financial problems."
+        },
+        {
+          "id": "c10",
+          "text": "He does not smoke."
+        },
+        {
+          "id": "c11",
+          "text": "He drinks 2â€“3 cans of beer on the weekends."
+        },
+        {
+          "id": "c12",
+          "text": "He does not use illicit drugs."
+        },
+        {
+          "id": "c13",
+          "text": "He takes no medications."
+        },
+        {
+          "id": "c14",
+          "text": "His vital signs are within normal limits."
+        },
+        {
+          "id": "c15",
+          "text": "On mental status examination, he is oriented to person, place, and time."
+        },
+        {
+          "id": "c16",
+          "text": "Physical examination shows no abnormalities."
+        },
+        {
+          "id": "c17",
+          "text": "Parents are instructed to remove guns from the house."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-368",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-368-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"On mental status examination, he is oriented to person, place, and time.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c12": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c13": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c14": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c15": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c16": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c17": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 16-year-old boy comes to the physician for the evaluation of fatigue over the past month. He reports that his energy levels are low and that he spends most of his time in his room. He also states that he is not in the mood for meeting friends. He used to enjoy playing soccer and going to the shooting range with his father, but recently stopped showing interest in these activities. He has been having difficulties at school due to concentration problems. His appetite is low. He has problems falling asleep. He states that he has thought about ending his life, but he has no specific plan. He lives with his parents, who frequently fight due to financial problems. He does not smoke. He drinks 2â€“3 cans of beer on the weekends. He does not use illicit drugs. He takes no medications. His vital signs are within normal limits. On mental status examination, he is oriented to person, place, and time. Physical examination shows no abnormalities. Parents are instructed to remove guns from the house."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 16-year-old girl presents to the emergency room with her 8-month-old daughter for evaluation of 'turning blue when she cries.' The baby is found to have an atrial septal defect that is causing a left to right shunt, resulting in cyanosis and pulmonary hypertension. Surgical intervention is indicated; however, the mother wants to go to another hospital for a second opinion. The patient's mother was allowed to take the child for a second opinion.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 16-year-old girl presents to the emergency room with her 8-month-old daughter for evaluation of 'turning blue when she cries.'"
+        },
+        {
+          "id": "c2",
+          "text": "The baby is found to have an atrial septal defect that is causing a left to right shunt, resulting in cyanosis and pulmonary hypertension."
+        },
+        {
+          "id": "c3",
+          "text": "Surgical intervention is indicated; however, the mother wants to go to another hospital for a second opinion."
+        },
+        {
+          "id": "c4",
+          "text": "The patient's mother was allowed to take the child for a second opinion."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-400",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-400-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"A 16-year-old girl presents to the emergency room with her 8-month-old daughter for evaluation of 'turning blue when she cries.'\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 16-year-old girl presents to the emergency room with her 8-month-old daughter for evaluation of 'turning blue when she cries.' The baby is found to have an atrial septal defect that is causing a left to right shunt, resulting in cyanosis and pulmonary hypertension. Surgical intervention is indicated; however, the mother wants to go to another hospital for a second opinion. The patient's mother was allowed to take the child for a second opinion."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 60-year-old man comes to the physician because of a 6-month history of progressively worsening urinary frequency. He feels the urge to urinate every hour or two, which restricts his daily activities and interferes with his sleep. He has no fever, hematuria, or burning pain on micturition. He has hypertension and type 2 diabetes mellitus. Current medications include metformin and amlodipine. He does not smoke and drinks 1 to 2 beers daily. His vital signs are within normal limits. Abdominal examination shows no abnormalities. Urinalysis was ordered for the patient after completing a digital rectal examination. Digital rectal examination showed a nontender, firm, symmetrically enlarged prostate with no nodules.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 60-year-old man comes to the physician because of a 6-month history of progressively worsening urinary frequency."
+        },
+        {
+          "id": "c2",
+          "text": "He feels the urge to urinate every hour or two, which restricts his daily activities and interferes with his sleep."
+        },
+        {
+          "id": "c3",
+          "text": "He has no fever, hematuria, or burning pain on micturition."
+        },
+        {
+          "id": "c4",
+          "text": "He has hypertension and type 2 diabetes mellitus."
+        },
+        {
+          "id": "c5",
+          "text": "Current medications include metformin and amlodipine."
+        },
+        {
+          "id": "c6",
+          "text": "He does not smoke and drinks 1 to 2 beers daily."
+        },
+        {
+          "id": "c7",
+          "text": "His vital signs are within normal limits."
+        },
+        {
+          "id": "c8",
+          "text": "Abdominal examination shows no abnormalities."
+        },
+        {
+          "id": "c9",
+          "text": "Urinalysis was ordered for the patient after completing a digital rectal examination."
+        },
+        {
+          "id": "c10",
+          "text": "Digital rectal examination showed a nontender, firm, symmetrically enlarged prostate with no nodules."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-288",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-288-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"Urinalysis was ordered for the patient after completing a digital rectal examination.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 60-year-old man comes to the physician because of a 6-month history of progressively worsening urinary frequency. He feels the urge to urinate every hour or two, which restricts his daily activities and interferes with his sleep. He has no fever, hematuria, or burning pain on micturition. He has hypertension and type 2 diabetes mellitus. Current medications include metformin and amlodipine. He does not smoke and drinks 1 to 2 beers daily. His vital signs are within normal limits. Abdominal examination shows no abnormalities. Urinalysis was ordered for the patient after completing a digital rectal examination. Digital rectal examination showed a nontender, firm, symmetrically enlarged prostate with no nodules."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 23-year-old pregnant woman at 22 weeks gestation presents with burning upon urination. She states it started 1 day ago and has been worsening despite drinking more water and taking cranberry extract. She otherwise feels well and is followed by a doctor for her pregnancy. Her temperature is 97.7 F (36.5 C), blood pressure is 122/77 mmHg, pulse is 80/min, respirations are 19/min, and oxygen saturation is 98% on room air. Physical exam is notable for an absence of costovertebral angle tenderness and a gravid uterus. The patient is started on ciprofloxacin.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 23-year-old pregnant woman at 22 weeks gestation presents with burning upon urination."
+        },
+        {
+          "id": "c2",
+          "text": "She states it started 1 day ago and has been worsening despite drinking more water and taking cranberry extract."
+        },
+        {
+          "id": "c3",
+          "text": "She otherwise feels well and is followed by a doctor for her pregnancy."
+        },
+        {
+          "id": "c4",
+          "text": "Her temperature is 97.7 F (36.5 C), blood pressure is 122/77"
+        },
+        {
+          "id": "c5",
+          "text": "mmHg, pulse is 80/min, respirations are 19/min, and oxygen saturation is 98% on room air."
+        },
+        {
+          "id": "c6",
+          "text": "Physical exam is notable for an absence of costovertebral angle tenderness and a gravid uterus."
+        },
+        {
+          "id": "c7",
+          "text": "The patient is started on ciprofloxacin."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-546",
+        "error_type": "treatment",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-546-valid",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "medium",
+        "text": "I don't think this is right: \"The patient is started on ciprofloxacin.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "The patient is started on nitrofurantoin.",
+            "checks": {
+              "must_contain_any": [
+                "nitrofurantoin"
+              ],
+              "must_not_contain": [
+                "ciprofloxacin"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 23-year-old pregnant woman at 22 weeks gestation presents with burning upon urination. She states it started 1 day ago and has been worsening despite drinking more water and taking cranberry extract. She otherwise feels well and is followed by a doctor for her pregnancy. Her temperature is 97.7 F (36.5 C), blood pressure is 122/77 mmHg, pulse is 80/min, respirations are 19/min, and oxygen saturation is 98% on room air. Physical exam is notable for an absence of costovertebral angle tenderness and a gravid uterus. The patient is started on nitrofurantoin."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 23-year-old pregnant woman at 22 weeks gestation presents with burning upon urination. She states it started 1 day ago and has been worsening despite drinking more water and taking cranberry extract. She otherwise feels well and is followed by a doctor for her pregnancy. Her temperature is 97.7 F (36.5 C), blood pressure is 122/77 mmHg, pulse is 80/min, respirations are 19/min, and oxygen saturation is 98% on room air. Physical exam is notable for an absence of costovertebral angle tenderness and a gravid uterus. The patient is started on ciprofloxacin.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 23-year-old pregnant woman at 22 weeks gestation presents with burning upon urination."
+        },
+        {
+          "id": "c2",
+          "text": "She states it started 1 day ago and has been worsening despite drinking more water and taking cranberry extract."
+        },
+        {
+          "id": "c3",
+          "text": "She otherwise feels well and is followed by a doctor for her pregnancy."
+        },
+        {
+          "id": "c4",
+          "text": "Her temperature is 97.7 F (36.5 C), blood pressure is 122/77"
+        },
+        {
+          "id": "c5",
+          "text": "mmHg, pulse is 80/min, respirations are 19/min, and oxygen saturation is 98% on room air."
+        },
+        {
+          "id": "c6",
+          "text": "Physical exam is notable for an absence of costovertebral angle tenderness and a gravid uterus."
+        },
+        {
+          "id": "c7",
+          "text": "The patient is started on ciprofloxacin."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-546",
+        "error_type": "treatment",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-546-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence is wrong and should be removed: \"mmHg, pulse is 80/min, respirations are 19/min, and oxygen saturation is 98% on room air.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "The patient is started on nitrofurantoin.",
+            "checks": {
+              "must_contain_any": [
+                "nitrofurantoin"
+              ],
+              "must_not_contain": [
+                "ciprofloxacin"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 23-year-old pregnant woman at 22 weeks gestation presents with burning upon urination. She states it started 1 day ago and has been worsening despite drinking more water and taking cranberry extract. She otherwise feels well and is followed by a doctor for her pregnancy. Her temperature is 97.7 F (36.5 C), blood pressure is 122/77 mmHg, pulse is 80/min, respirations are 19/min, and oxygen saturation is 98% on room air. Physical exam is notable for an absence of costovertebral angle tenderness and a gravid uterus. The patient is started on nitrofurantoin."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 27-year-old-man is brought to the emergency department 30 minutes after being involved in a motorcycle accident. He lost control at high speed and was thrown forward onto the handlebars. On arrival, he is alert and responsive. He has abdominal pain and superficial lacerations on his left arm. Vital signs are within normal limits. Examination shows a tender, erythematous area over his epigastrium. The abdomen is soft and non-distended. A CT scan of the abdomen shows no abnormalities. Treatment with analgesics is begun, the lacerations are cleaned and dressed, and the patient is discharged home after 2 hours of observation. Four days later, the patient returns to the emergency department with gradually worsening upper abdominal pain, fever, poor appetite, and vomiting. His pulse is 91/min and blood pressure is 135/82 mm Hg. Diagnosis is liver hematoma.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 27-year-old-man is brought to the emergency department 30 minutes after being involved in a motorcycle accident."
+        },
+        {
+          "id": "c2",
+          "text": "He lost control at high speed and was thrown forward onto the handlebars."
+        },
+        {
+          "id": "c3",
+          "text": "On arrival, he is alert and responsive."
+        },
+        {
+          "id": "c4",
+          "text": "He has abdominal pain and superficial lacerations on his left arm."
+        },
+        {
+          "id": "c5",
+          "text": "Vital signs are within normal limits."
+        },
+        {
+          "id": "c6",
+          "text": "Examination shows a tender, erythematous area over his epigastrium."
+        },
+        {
+          "id": "c7",
+          "text": "The abdomen is soft and non-distended."
+        },
+        {
+          "id": "c8",
+          "text": "A CT scan of the abdomen shows no abnormalities."
+        },
+        {
+          "id": "c9",
+          "text": "Treatment with analgesics is begun, the lacerations are cleaned and dressed, and the patient is discharged home after 2 hours of observation."
+        },
+        {
+          "id": "c10",
+          "text": "Four days later, the patient returns to the emergency department with gradually worsening upper abdominal pain, fever, poor appetite, and vomiting."
+        },
+        {
+          "id": "c11",
+          "text": "His pulse is"
+        },
+        {
+          "id": "c12",
+          "text": "91/min and blood pressure is 135/82 mm"
+        },
+        {
+          "id": "c13",
+          "text": "Hg."
+        },
+        {
+          "id": "c14",
+          "text": "Diagnosis is liver hematoma."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-87",
+        "error_type": "diagnosis",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-87-valid",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "medium",
+        "text": "I don't think this is right: \"Diagnosis is liver hematoma.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c12": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c13": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c14": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Diagnosis is pancreatic ductal injury.",
+            "checks": {
+              "must_contain_any": [
+                "pancreatic",
+                "ductal",
+                "injury"
+              ],
+              "must_not_contain": [
+                "liver",
+                "hematoma"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 27-year-old-man is brought to the emergency department 30 minutes after being involved in a motorcycle accident. He lost control at high speed and was thrown forward onto the handlebars. On arrival, he is alert and responsive. He has abdominal pain and superficial lacerations on his left arm. Vital signs are within normal limits. Examination shows a tender, erythematous area over his epigastrium. The abdomen is soft and non-distended. A CT scan of the abdomen shows no abnormalities. Treatment with analgesics is begun, the lacerations are cleaned and dressed, and the patient is discharged home after 2 hours of observation. Four days later, the patient returns to the emergency department with gradually worsening upper abdominal pain, fever, poor appetite, and vomiting. His pulse is 91/min and blood pressure is 135/82 mm Hg. Diagnosis is pancreatic ductal injury."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 27-year-old-man is brought to the emergency department 30 minutes after being involved in a motorcycle accident. He lost control at high speed and was thrown forward onto the handlebars. On arrival, he is alert and responsive. He has abdominal pain and superficial lacerations on his left arm. Vital signs are within normal limits. Examination shows a tender, erythematous area over his epigastrium. The abdomen is soft and non-distended. A CT scan of the abdomen shows no abnormalities. Treatment with analgesics is begun, the lacerations are cleaned and dressed, and the patient is discharged home after 2 hours of observation. Four days later, the patient returns to the emergency department with gradually worsening upper abdominal pain, fever, poor appetite, and vomiting. His pulse is 91/min and blood pressure is 135/82 mm Hg. Diagnosis is liver hematoma.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 27-year-old-man is brought to the emergency department 30 minutes after being involved in a motorcycle accident."
+        },
+        {
+          "id": "c2",
+          "text": "He lost control at high speed and was thrown forward onto the handlebars."
+        },
+        {
+          "id": "c3",
+          "text": "On arrival, he is alert and responsive."
+        },
+        {
+          "id": "c4",
+          "text": "He has abdominal pain and superficial lacerations on his left arm."
+        },
+        {
+          "id": "c5",
+          "text": "Vital signs are within normal limits."
+        },
+        {
+          "id": "c6",
+          "text": "Examination shows a tender, erythematous area over his epigastrium."
+        },
+        {
+          "id": "c7",
+          "text": "The abdomen is soft and non-distended."
+        },
+        {
+          "id": "c8",
+          "text": "A CT scan of the abdomen shows no abnormalities."
+        },
+        {
+          "id": "c9",
+          "text": "Treatment with analgesics is begun, the lacerations are cleaned and dressed, and the patient is discharged home after 2 hours of observation."
+        },
+        {
+          "id": "c10",
+          "text": "Four days later, the patient returns to the emergency department with gradually worsening upper abdominal pain, fever, poor appetite, and vomiting."
+        },
+        {
+          "id": "c11",
+          "text": "His pulse is"
+        },
+        {
+          "id": "c12",
+          "text": "91/min and blood pressure is 135/82 mm"
+        },
+        {
+          "id": "c13",
+          "text": "Hg."
+        },
+        {
+          "id": "c14",
+          "text": "Diagnosis is liver hematoma."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-87",
+        "error_type": "diagnosis",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-87-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence is wrong and should be removed: \"He has abdominal pain and superficial lacerations on his left arm.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c12": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c13": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c14": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Diagnosis is pancreatic ductal injury.",
+            "checks": {
+              "must_contain_any": [
+                "pancreatic",
+                "ductal",
+                "injury"
+              ],
+              "must_not_contain": [
+                "liver",
+                "hematoma"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 27-year-old-man is brought to the emergency department 30 minutes after being involved in a motorcycle accident. He lost control at high speed and was thrown forward onto the handlebars. On arrival, he is alert and responsive. He has abdominal pain and superficial lacerations on his left arm. Vital signs are within normal limits. Examination shows a tender, erythematous area over his epigastrium. The abdomen is soft and non-distended. A CT scan of the abdomen shows no abnormalities. Treatment with analgesics is begun, the lacerations are cleaned and dressed, and the patient is discharged home after 2 hours of observation. Four days later, the patient returns to the emergency department with gradually worsening upper abdominal pain, fever, poor appetite, and vomiting. His pulse is 91/min and blood pressure is 135/82 mm Hg. Diagnosis is pancreatic ductal injury."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 72-year-old woman is brought to the emergency department because of increasing abdominal pain for 6 hours. The pain is dull and diffuse over her abdomen and radiates to her lower back bilaterally. Three weeks ago, she was diagnosed with atrial fibrillation and started on warfarin. Her only other medication is 1 g of acetaminophen daily for osteoarthritis of her knees. Her pulse is 87/min and blood pressure is 112/75 mm Hg. Physical examination shows abdominal tenderness to palpation at both lower quadrants. A CT scan of the abdomen shows a retroperitoneal mass and hazy margins of the surrounding structures. Phytonadione and prothrombin complex concentrate were administered.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 72-year-old woman is brought to the emergency department because of increasing abdominal pain for 6 hours."
+        },
+        {
+          "id": "c2",
+          "text": "The pain is dull and diffuse over her abdomen and radiates to her lower back bilaterally."
+        },
+        {
+          "id": "c3",
+          "text": "Three weeks ago, she was diagnosed with atrial fibrillation and started on warfarin."
+        },
+        {
+          "id": "c4",
+          "text": "Her only other medication is 1 g of acetaminophen daily for osteoarthritis of her knees."
+        },
+        {
+          "id": "c5",
+          "text": "Her pulse is"
+        },
+        {
+          "id": "c6",
+          "text": "87/min and blood pressure is 112/75 mm"
+        },
+        {
+          "id": "c7",
+          "text": "Hg."
+        },
+        {
+          "id": "c8",
+          "text": "Physical examination shows abdominal tenderness to palpation at both lower quadrants."
+        },
+        {
+          "id": "c9",
+          "text": "A CT scan of the abdomen shows a retroperitoneal mass and hazy margins of the surrounding structures."
+        },
+        {
+          "id": "c10",
+          "text": "Phytonadione and prothrombin complex concentrate were administered."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-198",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-198-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"Her only other medication is 1 g of acetaminophen daily for osteoarthritis of her knees.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 72-year-old woman is brought to the emergency department because of increasing abdominal pain for 6 hours. The pain is dull and diffuse over her abdomen and radiates to her lower back bilaterally. Three weeks ago, she was diagnosed with atrial fibrillation and started on warfarin. Her only other medication is 1 g of acetaminophen daily for osteoarthritis of her knees. Her pulse is 87/min and blood pressure is 112/75 mm Hg. Physical examination shows abdominal tenderness to palpation at both lower quadrants. A CT scan of the abdomen shows a retroperitoneal mass and hazy margins of the surrounding structures. Phytonadione and prothrombin complex concentrate were administered."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "Five days after undergoing right knee arthroplasty for osteoarthritis, a 68-year-old man has severe pain in this right knee preventing him from participating in physical therapy. On the third postoperative day when the dressing was changed, the surgical wound appeared to be intact, slightly swollen, and had a clear secretion. He has a history of diabetes, hyperlipidemia, and hypertension. Current medications include metformin, enalapril, and simvastatin. His temperature is 37.3 C (99.1 F), pulse is 94/min, and blood pressure is 130/88 mm Hg. His right knee is swollen, erythematous, and tender to palpation. There is pain on movement of the joint. The medial parapatellar skin incision appears superficially opened in its proximal and distal part with yellow-green discharge. There is blackening of the skin on both sides of the incision. Surgical debridement is performed.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Five days after undergoing right knee arthroplasty for osteoarthritis, a 68-year-old man has severe pain in this right knee preventing him from participating in physical therapy."
+        },
+        {
+          "id": "c2",
+          "text": "On the third postoperative day when the dressing was changed, the surgical wound appeared to be intact, slightly swollen, and had a clear secretion."
+        },
+        {
+          "id": "c3",
+          "text": "He has a history of diabetes, hyperlipidemia, and hypertension."
+        },
+        {
+          "id": "c4",
+          "text": "Current medications include metformin, enalapril, and simvastatin."
+        },
+        {
+          "id": "c5",
+          "text": "His temperature is 37.3 C (99.1 F), pulse is 94/min, and"
+        },
+        {
+          "id": "c6",
+          "text": "blood pressure is 130/88 mm"
+        },
+        {
+          "id": "c7",
+          "text": "Hg."
+        },
+        {
+          "id": "c8",
+          "text": "His right knee is swollen, erythematous, and tender to palpation."
+        },
+        {
+          "id": "c9",
+          "text": "There is pain on movement of the joint."
+        },
+        {
+          "id": "c10",
+          "text": "The medial parapatellar skin incision appears superficially opened in its proximal and distal part with yellow-green discharge."
+        },
+        {
+          "id": "c11",
+          "text": "There is blackening of the skin on both sides of the incision."
+        },
+        {
+          "id": "c12",
+          "text": "Surgical debridement is performed."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-479",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-479-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"There is blackening of the skin on both sides of the incision.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c12": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "Five days after undergoing right knee arthroplasty for osteoarthritis, a 68-year-old man has severe pain in this right knee preventing him from participating in physical therapy. On the third postoperative day when the dressing was changed, the surgical wound appeared to be intact, slightly swollen, and had a clear secretion. He has a history of diabetes, hyperlipidemia, and hypertension. Current medications include metformin, enalapril, and simvastatin. His temperature is 37.3 C (99.1 F), pulse is 94/min, and blood pressure is 130/88 mm Hg. His right knee is swollen, erythematous, and tender to palpation. There is pain on movement of the joint. The medial parapatellar skin incision appears superficially opened in its proximal and distal part with yellow-green discharge. There is blackening of the skin on both sides of the incision. Surgical debridement is performed."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 13-year-old boy is brought to the emergency department with respiratory distress, fever, and a productive cough. Past medical history is significant for a history of recurrent bronchopneumonia since the age of 5, managed conservatively with antibiotics and mucolytic therapy. The patient's weight was normal at birth, but he suffered from a failure to thrive, although there was no neonatal history of chronic diarrhea or jaundice. His current vitals are a respiratory rate of 26/min, a pulse of 96/min, a temperature of 38.8 C (101.8 F), a blood pressure of 90/60 mm Hg, and oxygen saturation of 88% on room air. On physical examination, there is coarse crepitus bilaterally and both expiratory and inspiratory wheezing is present. The chest radiograph shows evidence of diffuse emphysema. A sweat chloride test and nitro tetrazolium test are both within normal limits. A complete blood count is significant for the following: WBC 26300 /mm3 Neutrophils 62% Lymphocytes 36% Eosinophils 2% Total bilirubin 0.8 mg/dL Direct bilirubin 0.2 mg/dL SGOT 100 U/L SGPT 120 U/L ALP 200 U/L Results of serum protein electrophoresis are shown in the figure. Patient is diagnosed with cystic fibrosis.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 13-year-old boy is brought to the emergency department with respiratory distress, fever, and a productive cough."
+        },
+        {
+          "id": "c2",
+          "text": "Past medical history is significant for a history of recurrent bronchopneumonia since the age of 5, managed conservatively with antibiotics and mucolytic therapy."
+        },
+        {
+          "id": "c3",
+          "text": "The patient's weight was normal at birth, but he suffered from a failure to thrive, although there was no neonatal history of chronic diarrhea or jaundice."
+        },
+        {
+          "id": "c4",
+          "text": "His current vitals are a respiratory rate of 26/min, a pulse of 96/min, a temperature of 38.8 C (101.8 F), a blood pressure of"
+        },
+        {
+          "id": "c5",
+          "text": "90/60 mm"
+        },
+        {
+          "id": "c6",
+          "text": "Hg, and oxygen saturation of 88% on room air."
+        },
+        {
+          "id": "c7",
+          "text": "On physical examination, there is coarse crepitus bilaterally and both expiratory and inspiratory wheezing is present."
+        },
+        {
+          "id": "c8",
+          "text": "The chest radiograph shows evidence of diffuse emphysema."
+        },
+        {
+          "id": "c9",
+          "text": "A sweat chloride test and nitro tetrazolium test are both within normal limits."
+        },
+        {
+          "id": "c10",
+          "text": "A complete blood count is significant for the following: WBC 26300"
+        },
+        {
+          "id": "c11",
+          "text": "/mm3"
+        },
+        {
+          "id": "c12",
+          "text": "Neutrophils 62%"
+        },
+        {
+          "id": "c13",
+          "text": "Lymphocytes 36%"
+        },
+        {
+          "id": "c14",
+          "text": "Eosinophils 2%"
+        },
+        {
+          "id": "c15",
+          "text": "Total bilirubin"
+        },
+        {
+          "id": "c16",
+          "text": "0.8 mg/dL"
+        },
+        {
+          "id": "c17",
+          "text": "Direct bilirubin"
+        },
+        {
+          "id": "c18",
+          "text": "0.2 mg/dL"
+        },
+        {
+          "id": "c19",
+          "text": "SGOT 100"
+        },
+        {
+          "id": "c20",
+          "text": "U/L SGPT 120"
+        },
+        {
+          "id": "c21",
+          "text": "U/L"
+        },
+        {
+          "id": "c22",
+          "text": "ALP"
+        },
+        {
+          "id": "c23",
+          "text": "200 U/L Results of serum protein electrophoresis are shown in the figure."
+        },
+        {
+          "id": "c24",
+          "text": "Patient is diagnosed with cystic fibrosis."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-106",
+        "error_type": "diagnosis",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-106-valid",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "medium",
+        "text": "I don't think this is right: \"Patient is diagnosed with cystic fibrosis.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c12": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c13": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c14": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c15": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c16": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c17": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c18": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c19": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c20": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c21": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c22": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c23": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c24": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Patient is diagnosed with alpha-1 antitrypsin deficiency.",
+            "checks": {
+              "must_contain_any": [
+                "alpha-",
+                "antitrypsin",
+                "deficiency"
+              ],
+              "must_not_contain": [
+                "cystic",
+                "fibrosis"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 13-year-old boy is brought to the emergency department with respiratory distress, fever, and a productive cough. Past medical history is significant for a history of recurrent bronchopneumonia since the age of 5, managed conservatively with antibiotics and mucolytic therapy. The patient's weight was normal at birth, but he suffered from a failure to thrive, although there was no neonatal history of chronic diarrhea or jaundice. His current vitals are a respiratory rate of 26/min, a pulse of 96/min, a temperature of 38.8 C (101.8 F), a blood pressure of 90/60 mm Hg, and oxygen saturation of 88% on room air. On physical examination, there is coarse crepitus bilaterally and both expiratory and inspiratory wheezing is present. The chest radiograph shows evidence of diffuse emphysema. A sweat chloride test and nitro tetrazolium test are both within normal limits. A complete blood count is significant for the following: WBC 26300 /mm3 Neutrophils 62% Lymphocytes 36% Eosinophils 2% Total bilirubin 0.8 mg/dL Direct bilirubin 0.2 mg/dL SGOT 100 U/L SGPT 120 U/L ALP 200 U/L Results of serum protein electrophoresis are shown in the figure. Patient is diagnosed with alpha-1 antitrypsin deficiency."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 13-year-old boy is brought to the emergency department with respiratory distress, fever, and a productive cough. Past medical history is significant for a history of recurrent bronchopneumonia since the age of 5, managed conservatively with antibiotics and mucolytic therapy. The patient's weight was normal at birth, but he suffered from a failure to thrive, although there was no neonatal history of chronic diarrhea or jaundice. His current vitals are a respiratory rate of 26/min, a pulse of 96/min, a temperature of 38.8 C (101.8 F), a blood pressure of 90/60 mm Hg, and oxygen saturation of 88% on room air. On physical examination, there is coarse crepitus bilaterally and both expiratory and inspiratory wheezing is present. The chest radiograph shows evidence of diffuse emphysema. A sweat chloride test and nitro tetrazolium test are both within normal limits. A complete blood count is significant for the following: WBC 26300 /mm3 Neutrophils 62% Lymphocytes 36% Eosinophils 2% Total bilirubin 0.8 mg/dL Direct bilirubin 0.2 mg/dL SGOT 100 U/L SGPT 120 U/L ALP 200 U/L Results of serum protein electrophoresis are shown in the figure. Patient is diagnosed with cystic fibrosis.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 13-year-old boy is brought to the emergency department with respiratory distress, fever, and a productive cough."
+        },
+        {
+          "id": "c2",
+          "text": "Past medical history is significant for a history of recurrent bronchopneumonia since the age of 5, managed conservatively with antibiotics and mucolytic therapy."
+        },
+        {
+          "id": "c3",
+          "text": "The patient's weight was normal at birth, but he suffered from a failure to thrive, although there was no neonatal history of chronic diarrhea or jaundice."
+        },
+        {
+          "id": "c4",
+          "text": "His current vitals are a respiratory rate of 26/min, a pulse of 96/min, a temperature of 38.8 C (101.8 F), a blood pressure of"
+        },
+        {
+          "id": "c5",
+          "text": "90/60 mm"
+        },
+        {
+          "id": "c6",
+          "text": "Hg, and oxygen saturation of 88% on room air."
+        },
+        {
+          "id": "c7",
+          "text": "On physical examination, there is coarse crepitus bilaterally and both expiratory and inspiratory wheezing is present."
+        },
+        {
+          "id": "c8",
+          "text": "The chest radiograph shows evidence of diffuse emphysema."
+        },
+        {
+          "id": "c9",
+          "text": "A sweat chloride test and nitro tetrazolium test are both within normal limits."
+        },
+        {
+          "id": "c10",
+          "text": "A complete blood count is significant for the following: WBC 26300"
+        },
+        {
+          "id": "c11",
+          "text": "/mm3"
+        },
+        {
+          "id": "c12",
+          "text": "Neutrophils 62%"
+        },
+        {
+          "id": "c13",
+          "text": "Lymphocytes 36%"
+        },
+        {
+          "id": "c14",
+          "text": "Eosinophils 2%"
+        },
+        {
+          "id": "c15",
+          "text": "Total bilirubin"
+        },
+        {
+          "id": "c16",
+          "text": "0.8 mg/dL"
+        },
+        {
+          "id": "c17",
+          "text": "Direct bilirubin"
+        },
+        {
+          "id": "c18",
+          "text": "0.2 mg/dL"
+        },
+        {
+          "id": "c19",
+          "text": "SGOT 100"
+        },
+        {
+          "id": "c20",
+          "text": "U/L SGPT 120"
+        },
+        {
+          "id": "c21",
+          "text": "U/L"
+        },
+        {
+          "id": "c22",
+          "text": "ALP"
+        },
+        {
+          "id": "c23",
+          "text": "200 U/L Results of serum protein electrophoresis are shown in the figure."
+        },
+        {
+          "id": "c24",
+          "text": "Patient is diagnosed with cystic fibrosis."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-106",
+        "error_type": "diagnosis",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-106-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence is wrong and should be removed: \"Hg, and oxygen saturation of 88% on room air.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c12": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c13": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c14": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c15": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c16": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c17": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c18": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c19": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c20": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c21": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c22": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c23": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c24": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Patient is diagnosed with alpha-1 antitrypsin deficiency.",
+            "checks": {
+              "must_contain_any": [
+                "alpha-",
+                "antitrypsin",
+                "deficiency"
+              ],
+              "must_not_contain": [
+                "cystic",
+                "fibrosis"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 13-year-old boy is brought to the emergency department with respiratory distress, fever, and a productive cough. Past medical history is significant for a history of recurrent bronchopneumonia since the age of 5, managed conservatively with antibiotics and mucolytic therapy. The patient's weight was normal at birth, but he suffered from a failure to thrive, although there was no neonatal history of chronic diarrhea or jaundice. His current vitals are a respiratory rate of 26/min, a pulse of 96/min, a temperature of 38.8 C (101.8 F), a blood pressure of 90/60 mm Hg, and oxygen saturation of 88% on room air. On physical examination, there is coarse crepitus bilaterally and both expiratory and inspiratory wheezing is present. The chest radiograph shows evidence of diffuse emphysema. A sweat chloride test and nitro tetrazolium test are both within normal limits. A complete blood count is significant for the following: WBC 26300 /mm3 Neutrophils 62% Lymphocytes 36% Eosinophils 2% Total bilirubin 0.8 mg/dL Direct bilirubin 0.2 mg/dL SGOT 100 U/L SGPT 120 U/L ALP 200 U/L Results of serum protein electrophoresis are shown in the figure. Patient is diagnosed with alpha-1 antitrypsin deficiency."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 68-year-old woman, otherwise healthy, is admitted to the coronary care unit due to acute ischemic cardiomyopathy. No other significant past medical history. Her vital signs include: pulse 116/min, respiratory rate 21/min, temperature 37.4 C (99.3 F), and blood pressure 160/100 mm Hg. On physical examination, the patient is in distress. Cardiopulmonary exam is positive for bilateral pulmonary crackles at the lung bases, tachycardia, and jugular venous distension. Her laboratory findings are significant for a hemoglobin of 7.8 g/dL. She is initially treated with oxygen, antiplatelet therapy, nitroglycerin, and beta-blockers. In spite of these treatments, her angina does not subside. Packed red blood cells transfusion is given. The patient is not a candidate for percutaneous coronary intervention, so she is being prepared for a coronary artery bypass graft.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 68-year-old woman, otherwise healthy, is admitted to the coronary care unit due to acute ischemic cardiomyopathy."
+        },
+        {
+          "id": "c2",
+          "text": "No other significant past medical history."
+        },
+        {
+          "id": "c3",
+          "text": "Her vital signs include: pulse 116/min, respiratory rate 21/min, temperature 37.4 C (99.3 F), and blood pressure 160/100"
+        },
+        {
+          "id": "c4",
+          "text": "mm"
+        },
+        {
+          "id": "c5",
+          "text": "Hg."
+        },
+        {
+          "id": "c6",
+          "text": "On physical examination, the patient is in distress."
+        },
+        {
+          "id": "c7",
+          "text": "Cardiopulmonary exam is positive for bilateral pulmonary crackles at the lung bases, tachycardia, and jugular venous distension."
+        },
+        {
+          "id": "c8",
+          "text": "Her laboratory findings are significant for a hemoglobin of 7.8 g/dL."
+        },
+        {
+          "id": "c9",
+          "text": "She is initially treated with oxygen, antiplatelet therapy, nitroglycerin, and beta-blockers."
+        },
+        {
+          "id": "c10",
+          "text": "In spite of these treatments, her angina does not subside."
+        },
+        {
+          "id": "c11",
+          "text": "Packed red blood cells transfusion is given."
+        },
+        {
+          "id": "c12",
+          "text": "The patient is not a candidate for percutaneous coronary intervention, so she is being prepared for a coronary artery bypass graft."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-419",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-419-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"A 68-year-old woman, otherwise healthy, is admitted to the coronary care unit due to acute ischemic cardiomyopathy.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c12": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 68-year-old woman, otherwise healthy, is admitted to the coronary care unit due to acute ischemic cardiomyopathy. No other significant past medical history. Her vital signs include: pulse 116/min, respiratory rate 21/min, temperature 37.4 C (99.3 F), and blood pressure 160/100 mm Hg. On physical examination, the patient is in distress. Cardiopulmonary exam is positive for bilateral pulmonary crackles at the lung bases, tachycardia, and jugular venous distension. Her laboratory findings are significant for a hemoglobin of 7.8 g/dL. She is initially treated with oxygen, antiplatelet therapy, nitroglycerin, and beta-blockers. In spite of these treatments, her angina does not subside. Packed red blood cells transfusion is given. The patient is not a candidate for percutaneous coronary intervention, so she is being prepared for a coronary artery bypass graft."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 23-year-old G1P0 female presents to her OB/GYN for her routine 36-week visit. Her current complaints include increased fatigue at the end of the day, and edema in her ankles. The patient's physical examination is unremarkable except for inguinal adenopathy. The patient is diagnosed with primary syphillis when upon pelvic examination for cervical changes, the OB/GYN notices a vaginal chancre. The patient states that it is not painful when touched.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 23-year-old G1P0 female presents to her OB/GYN for her routine 36-week visit."
+        },
+        {
+          "id": "c2",
+          "text": "Her current complaints include increased fatigue at the end of the day, and edema in her ankles."
+        },
+        {
+          "id": "c3",
+          "text": "The patient's physical examination is unremarkable except for inguinal adenopathy."
+        },
+        {
+          "id": "c4",
+          "text": "The patient is diagnosed with primary syphillis when upon pelvic examination for cervical changes, the OB/GYN notices a vaginal chancre."
+        },
+        {
+          "id": "c5",
+          "text": "The patient states that it is not painful when touched."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-70",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-70-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"Her current complaints include increased fatigue at the end of the day, and edema in her ankles.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 23-year-old G1P0 female presents to her OB/GYN for her routine 36-week visit. Her current complaints include increased fatigue at the end of the day, and edema in her ankles. The patient's physical examination is unremarkable except for inguinal adenopathy. The patient is diagnosed with primary syphillis when upon pelvic examination for cervical changes, the OB/GYN notices a vaginal chancre. The patient states that it is not painful when touched."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 55-year-old man with a history of myocardial infarction 3 months ago presents with feelings of depression. He says that he has become detached from his friends and family and has daily feelings of hopelessness. He says he has started to avoid strenuous activities and is no longer going to his favorite bar where he used to spend a lot of time drinking with his buddies. The patient says these symptoms have been ongoing for the past 6 weeks, and his wife is starting to worry about his behavior. He notes that he continues to have nightmares that he is having another heart attack. Patient is diagnosed with post-traumatic stress disorder after he says he is even more jumpy than he used to be, and he startles very easily.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 55-year-old man with a history of myocardial infarction 3 months ago presents with feelings of depression."
+        },
+        {
+          "id": "c2",
+          "text": "He says that he has become detached from his friends and family and has daily feelings of hopelessness."
+        },
+        {
+          "id": "c3",
+          "text": "He says he has started to avoid strenuous activities and is no longer going to his favorite bar where he used to spend a lot of time drinking with his buddies."
+        },
+        {
+          "id": "c4",
+          "text": "The patient says these symptoms have been ongoing for the past 6 weeks, and his wife is starting to worry about his behavior."
+        },
+        {
+          "id": "c5",
+          "text": "He notes that he continues to have nightmares that he is having another heart attack."
+        },
+        {
+          "id": "c6",
+          "text": "Patient is diagnosed with post-traumatic stress disorder after he says he is even more jumpy than he used to be, and he startles very easily."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-205",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-205-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"He notes that he continues to have nightmares that he is having another heart attack.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 55-year-old man with a history of myocardial infarction 3 months ago presents with feelings of depression. He says that he has become detached from his friends and family and has daily feelings of hopelessness. He says he has started to avoid strenuous activities and is no longer going to his favorite bar where he used to spend a lot of time drinking with his buddies. The patient says these symptoms have been ongoing for the past 6 weeks, and his wife is starting to worry about his behavior. He notes that he continues to have nightmares that he is having another heart attack. Patient is diagnosed with post-traumatic stress disorder after he says he is even more jumpy than he used to be, and he startles very easily."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 53-year-old woman comes to the physician for a follow-up examination. One month ago, she was diagnosed with carcinoma of the left breast. She underwent a lumpectomy for a 2.1-cm mass and sentinel lymph node biopsy 2 weeks ago. The biopsy of the breast mass showed margin-free invasive ductal carcinoma; immunohistochemistry showed the carcinoma is estrogen-receptor and progesterone-receptor negative, and HER2-receptor positive. The lymph node biopsy was negative for metastases. Examination shows a healing surgical incision over the left breast. There is no palpable axillary lymphadenopathy. Her physician decides to initiate treatment with appropriate pharmacotherapy. An x-ray of the chest was ordered.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 53-year-old woman comes to the physician for a follow-up examination."
+        },
+        {
+          "id": "c2",
+          "text": "One month ago, she was diagnosed with carcinoma of the left breast."
+        },
+        {
+          "id": "c3",
+          "text": "She underwent a lumpectomy for a 2.1-cm mass and sentinel lymph node biopsy 2 weeks ago."
+        },
+        {
+          "id": "c4",
+          "text": "The biopsy of the breast mass showed margin-free invasive ductal carcinoma; immunohistochemistry showed the carcinoma is estrogen-receptor and progesterone-receptor negative, and HER2-receptor positive."
+        },
+        {
+          "id": "c5",
+          "text": "The lymph node biopsy was negative for metastases."
+        },
+        {
+          "id": "c6",
+          "text": "Examination shows a healing surgical incision over the left breast."
+        },
+        {
+          "id": "c7",
+          "text": "There is no palpable axillary lymphadenopathy."
+        },
+        {
+          "id": "c8",
+          "text": "Her physician decides to initiate treatment with appropriate pharmacotherapy."
+        },
+        {
+          "id": "c9",
+          "text": "An x-ray of the chest was ordered."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-282",
+        "error_type": "management",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-282-valid",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "medium",
+        "text": "I don't think this is right: \"An x-ray of the chest was ordered.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Echocardiography was ordered.",
+            "checks": {
+              "must_contain_any": [
+                "Echocardiography"
+              ],
+              "must_not_contain": [
+                "x-ray",
+                "chest"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 53-year-old woman comes to the physician for a follow-up examination. One month ago, she was diagnosed with carcinoma of the left breast. She underwent a lumpectomy for a 2.1-cm mass and sentinel lymph node biopsy 2 weeks ago. The biopsy of the breast mass showed margin-free invasive ductal carcinoma; immunohistochemistry showed the carcinoma is estrogen-receptor and progesterone-receptor negative, and HER2-receptor positive. The lymph node biopsy was negative for metastases. Examination shows a healing surgical incision over the left breast. There is no palpable axillary lymphadenopathy. Her physician decides to initiate treatment with appropriate pharmacotherapy. Echocardiography was ordered."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 53-year-old woman comes to the physician for a follow-up examination. One month ago, she was diagnosed with carcinoma of the left breast. She underwent a lumpectomy for a 2.1-cm mass and sentinel lymph node biopsy 2 weeks ago. The biopsy of the breast mass showed margin-free invasive ductal carcinoma; immunohistochemistry showed the carcinoma is estrogen-receptor and progesterone-receptor negative, and HER2-receptor positive. The lymph node biopsy was negative for metastases. Examination shows a healing surgical incision over the left breast. There is no palpable axillary lymphadenopathy. Her physician decides to initiate treatment with appropriate pharmacotherapy. An x-ray of the chest was ordered.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 53-year-old woman comes to the physician for a follow-up examination."
+        },
+        {
+          "id": "c2",
+          "text": "One month ago, she was diagnosed with carcinoma of the left breast."
+        },
+        {
+          "id": "c3",
+          "text": "She underwent a lumpectomy for a 2.1-cm mass and sentinel lymph node biopsy 2 weeks ago."
+        },
+        {
+          "id": "c4",
+          "text": "The biopsy of the breast mass showed margin-free invasive ductal carcinoma; immunohistochemistry showed the carcinoma is estrogen-receptor and progesterone-receptor negative, and HER2-receptor positive."
+        },
+        {
+          "id": "c5",
+          "text": "The lymph node biopsy was negative for metastases."
+        },
+        {
+          "id": "c6",
+          "text": "Examination shows a healing surgical incision over the left breast."
+        },
+        {
+          "id": "c7",
+          "text": "There is no palpable axillary lymphadenopathy."
+        },
+        {
+          "id": "c8",
+          "text": "Her physician decides to initiate treatment with appropriate pharmacotherapy."
+        },
+        {
+          "id": "c9",
+          "text": "An x-ray of the chest was ordered."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-282",
+        "error_type": "management",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-282-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence is wrong and should be removed: \"She underwent a lumpectomy for a 2.1-cm mass and sentinel lymph node biopsy 2 weeks ago.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Echocardiography was ordered.",
+            "checks": {
+              "must_contain_any": [
+                "Echocardiography"
+              ],
+              "must_not_contain": [
+                "x-ray",
+                "chest"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 53-year-old woman comes to the physician for a follow-up examination. One month ago, she was diagnosed with carcinoma of the left breast. She underwent a lumpectomy for a 2.1-cm mass and sentinel lymph node biopsy 2 weeks ago. The biopsy of the breast mass showed margin-free invasive ductal carcinoma; immunohistochemistry showed the carcinoma is estrogen-receptor and progesterone-receptor negative, and HER2-receptor positive. The lymph node biopsy was negative for metastases. Examination shows a healing surgical incision over the left breast. There is no palpable axillary lymphadenopathy. Her physician decides to initiate treatment with appropriate pharmacotherapy. Echocardiography was ordered."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 33-year-old woman, gravida 2, para 1, at 26 weeks' gestation presents to the emergency department because of frequent contractions. The contractions last 40 seconds, occur every 2 minutes, and are increasing in intensity. She has a history of recurrent painful ulcers on her vulva, but she currently does not have them. Her first child was delivered by lower segment transverse cesarean section because of a non-reassuring fetal heart rate. Her current medications include acyclovir, folic acid, and a multivitamin. Her temperature is 36.9 C (98.4 F), heart rate is 88/min, and blood pressure is 126/76 mm Hg. Contractions are felt on the abdomen. The cervix is dilated to 5 cm, 70% effaced, and the station of the head is -2. A fetal ultrasound shows no abnormalities. Nifedipine therapy is initiated.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 33-year-old woman, gravida 2, para 1, at 26 weeks' gestation presents to the emergency department because of frequent contractions."
+        },
+        {
+          "id": "c2",
+          "text": "The contractions last 40 seconds, occur every 2 minutes, and are increasing in intensity."
+        },
+        {
+          "id": "c3",
+          "text": "She has a history of recurrent painful ulcers on her vulva, but she currently does not have them."
+        },
+        {
+          "id": "c4",
+          "text": "Her first child was delivered by lower segment transverse cesarean section because of a non-reassuring fetal heart rate."
+        },
+        {
+          "id": "c5",
+          "text": "Her current medications include acyclovir, folic acid, and a multivitamin."
+        },
+        {
+          "id": "c6",
+          "text": "Her temperature is 36.9 C (98.4 F), heart rate is 88/min, and blood pressure is 126/76 mm"
+        },
+        {
+          "id": "c7",
+          "text": "Hg."
+        },
+        {
+          "id": "c8",
+          "text": "Contractions are felt on the abdomen."
+        },
+        {
+          "id": "c9",
+          "text": "The cervix is dilated to 5 cm, 70% effaced, and the station of the head is -2."
+        },
+        {
+          "id": "c10",
+          "text": "A fetal ultrasound shows no abnormalities."
+        },
+        {
+          "id": "c11",
+          "text": "Nifedipine therapy is initiated."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-340",
+        "error_type": "management",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-340-valid",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "medium",
+        "text": "I don't think this is right: \"Nifedipine therapy is initiated.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Vaginal delivery is allowed to progress.",
+            "checks": {
+              "must_contain_any": [
+                "Vaginal",
+                "delivery",
+                "allowed"
+              ],
+              "must_not_contain": [
+                "Nifedipine",
+                "therapy",
+                "initiated"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 33-year-old woman, gravida 2, para 1, at 26 weeks' gestation presents to the emergency department because of frequent contractions. The contractions last 40 seconds, occur every 2 minutes, and are increasing in intensity. She has a history of recurrent painful ulcers on her vulva, but she currently does not have them. Her first child was delivered by lower segment transverse cesarean section because of a non-reassuring fetal heart rate. Her current medications include acyclovir, folic acid, and a multivitamin. Her temperature is 36.9 C (98.4 F), heart rate is 88/min, and blood pressure is 126/76 mm Hg. Contractions are felt on the abdomen. The cervix is dilated to 5 cm, 70% effaced, and the station of the head is -2. A fetal ultrasound shows no abnormalities. Vaginal delivery is allowed to progress."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 33-year-old woman, gravida 2, para 1, at 26 weeks' gestation presents to the emergency department because of frequent contractions. The contractions last 40 seconds, occur every 2 minutes, and are increasing in intensity. She has a history of recurrent painful ulcers on her vulva, but she currently does not have them. Her first child was delivered by lower segment transverse cesarean section because of a non-reassuring fetal heart rate. Her current medications include acyclovir, folic acid, and a multivitamin. Her temperature is 36.9 C (98.4 F), heart rate is 88/min, and blood pressure is 126/76 mm Hg. Contractions are felt on the abdomen. The cervix is dilated to 5 cm, 70% effaced, and the station of the head is -2. A fetal ultrasound shows no abnormalities. Nifedipine therapy is initiated.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 33-year-old woman, gravida 2, para 1, at 26 weeks' gestation presents to the emergency department because of frequent contractions."
+        },
+        {
+          "id": "c2",
+          "text": "The contractions last 40 seconds, occur every 2 minutes, and are increasing in intensity."
+        },
+        {
+          "id": "c3",
+          "text": "She has a history of recurrent painful ulcers on her vulva, but she currently does not have them."
+        },
+        {
+          "id": "c4",
+          "text": "Her first child was delivered by lower segment transverse cesarean section because of a non-reassuring fetal heart rate."
+        },
+        {
+          "id": "c5",
+          "text": "Her current medications include acyclovir, folic acid, and a multivitamin."
+        },
+        {
+          "id": "c6",
+          "text": "Her temperature is 36.9 C (98.4 F), heart rate is 88/min, and blood pressure is 126/76 mm"
+        },
+        {
+          "id": "c7",
+          "text": "Hg."
+        },
+        {
+          "id": "c8",
+          "text": "Contractions are felt on the abdomen."
+        },
+        {
+          "id": "c9",
+          "text": "The cervix is dilated to 5 cm, 70% effaced, and the station of the head is -2."
+        },
+        {
+          "id": "c10",
+          "text": "A fetal ultrasound shows no abnormalities."
+        },
+        {
+          "id": "c11",
+          "text": "Nifedipine therapy is initiated."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-340",
+        "error_type": "management",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-340-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence is wrong and should be removed: \"A fetal ultrasound shows no abnormalities.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Vaginal delivery is allowed to progress.",
+            "checks": {
+              "must_contain_any": [
+                "Vaginal",
+                "delivery",
+                "allowed"
+              ],
+              "must_not_contain": [
+                "Nifedipine",
+                "therapy",
+                "initiated"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 33-year-old woman, gravida 2, para 1, at 26 weeks' gestation presents to the emergency department because of frequent contractions. The contractions last 40 seconds, occur every 2 minutes, and are increasing in intensity. She has a history of recurrent painful ulcers on her vulva, but she currently does not have them. Her first child was delivered by lower segment transverse cesarean section because of a non-reassuring fetal heart rate. Her current medications include acyclovir, folic acid, and a multivitamin. Her temperature is 36.9 C (98.4 F), heart rate is 88/min, and blood pressure is 126/76 mm Hg. Contractions are felt on the abdomen. The cervix is dilated to 5 cm, 70% effaced, and the station of the head is -2. A fetal ultrasound shows no abnormalities. Vaginal delivery is allowed to progress."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 55-year-old man presents to the urgent clinic complaining of pain in his right foot. He reported that the pain is intense that he had to remove his shoe and sock, and rates the pain level as 6 out of 10. He does not report trauma or recent infection. The past medical history includes hypertension. The medications include hydrochlorothiazide, enalapril, and a daily multivitamin. The family history is noncontributory. He consumes alcohol in moderation. His diet mostly consists of red meat and white rice. The blood pressure is 137/85 mm Hg, heart rate is 74/min, respiratory rate is 12/min, and the temperature is 36.9 C (98.4 F). The physical examination demonstrates swelling, redness, and tenderness to palpation in the first metatarsophalangeal joint of his right foot. There are no skin lesions. The rest of the patient's examination is normal. An arthrocentesis procedure is scheduled. Diclofenac was prescribed.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 55-year-old man presents to the urgent clinic complaining of pain in his right foot."
+        },
+        {
+          "id": "c2",
+          "text": "He reported that the pain is intense that he had to remove his shoe and sock, and rates the pain level as 6 out of 10."
+        },
+        {
+          "id": "c3",
+          "text": "He does not report trauma or recent infection."
+        },
+        {
+          "id": "c4",
+          "text": "The past medical history includes hypertension."
+        },
+        {
+          "id": "c5",
+          "text": "The medications include hydrochlorothiazide, enalapril, and a daily multivitamin."
+        },
+        {
+          "id": "c6",
+          "text": "The family history is noncontributory."
+        },
+        {
+          "id": "c7",
+          "text": "He consumes alcohol in moderation."
+        },
+        {
+          "id": "c8",
+          "text": "His diet mostly consists of red meat and white rice."
+        },
+        {
+          "id": "c9",
+          "text": "The blood pressure is 137/85 mm"
+        },
+        {
+          "id": "c10",
+          "text": "Hg, heart rate is"
+        },
+        {
+          "id": "c11",
+          "text": "74/min, respiratory rate is 12/min, and the temperature is 36.9"
+        },
+        {
+          "id": "c12",
+          "text": "C (98.4 F)."
+        },
+        {
+          "id": "c13",
+          "text": "The physical examination demonstrates swelling, redness, and tenderness to palpation in the first metatarsophalangeal joint of his right foot."
+        },
+        {
+          "id": "c14",
+          "text": "There are no skin lesions."
+        },
+        {
+          "id": "c15",
+          "text": "The rest of the patient's examination is normal."
+        },
+        {
+          "id": "c16",
+          "text": "An arthrocentesis procedure is scheduled."
+        },
+        {
+          "id": "c17",
+          "text": "Diclofenac was prescribed."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-485",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-485-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"The physical examination demonstrates swelling, redness, and tenderness to palpation in the first metatarsophalangeal joint of his right foot.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c12": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c13": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c14": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c15": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c16": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c17": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 55-year-old man presents to the urgent clinic complaining of pain in his right foot. He reported that the pain is intense that he had to remove his shoe and sock, and rates the pain level as 6 out of 10. He does not report trauma or recent infection. The past medical history includes hypertension. The medications include hydrochlorothiazide, enalapril, and a daily multivitamin. The family history is noncontributory. He consumes alcohol in moderation. His diet mostly consists of red meat and white rice. The blood pressure is 137/85 mm Hg, heart rate is 74/min, respiratory rate is 12/min, and the temperature is 36.9 C (98.4 F). The physical examination demonstrates swelling, redness, and tenderness to palpation in the first metatarsophalangeal joint of his right foot. There are no skin lesions. The rest of the patient's examination is normal. An arthrocentesis procedure is scheduled. Diclofenac was prescribed."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "Following a recent myocardial infarction, a 60-year-old woman has been started on multiple medications at the time of discharge from the hospital. After 10 days of discharge, she presents to the emergency department with a history of fever, headache, and dark colored urine for 2 days. Her husband mentions that she has not passed urine for the last 24 hours. Her physical examination shows significant pallor, and multiple petechiae are present all over her limbs. Her vital signs include: temperature 38.9 C (102.0 F), pulse rate 94/min, blood pressure 124/82 mm Hg, and respiratory rate 16/min. Her sensorium is altered with the absence of spontaneous speech and spontaneous movements. She responds inappropriately to verbal stimuli. Her laboratory results show the presence of anemia and thrombocytopenia. Examination of peripheral blood smear shows the presence of schistocytes. Plasma exchange is initiated. Serum creatinine is 2 mg/ dL. Serum levels of fibrinogen, fibrin monomers, fibrin degradation products and D-dimers are normal. Prothrombin time (PT) and activated partial thromboplastin time (aPTT) are normal.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "Following a recent myocardial infarction, a 60-year-old woman has been started on multiple medications at the time of discharge from the hospital."
+        },
+        {
+          "id": "c2",
+          "text": "After 10 days of discharge, she presents to the emergency department with a history of fever, headache, and dark colored urine for 2 days."
+        },
+        {
+          "id": "c3",
+          "text": "Her husband mentions that she has not passed urine for the last 24 hours."
+        },
+        {
+          "id": "c4",
+          "text": "Her physical examination shows significant pallor, and multiple petechiae are present all over her limbs."
+        },
+        {
+          "id": "c5",
+          "text": "Her vital signs include: temperature 38.9 C (102.0 F), pulse rate 94/min,"
+        },
+        {
+          "id": "c6",
+          "text": "blood pressure"
+        },
+        {
+          "id": "c7",
+          "text": "124/82"
+        },
+        {
+          "id": "c8",
+          "text": "mm"
+        },
+        {
+          "id": "c9",
+          "text": "Hg, and respiratory rate 16/min."
+        },
+        {
+          "id": "c10",
+          "text": "Her sensorium is altered with the absence of spontaneous speech and spontaneous movements."
+        },
+        {
+          "id": "c11",
+          "text": "She responds inappropriately to verbal stimuli."
+        },
+        {
+          "id": "c12",
+          "text": "Her laboratory results show the presence of anemia and thrombocytopenia."
+        },
+        {
+          "id": "c13",
+          "text": "Examination of peripheral blood smear shows the presence of schistocytes."
+        },
+        {
+          "id": "c14",
+          "text": "Plasma exchange is initiated."
+        },
+        {
+          "id": "c15",
+          "text": "Serum creatinine is 2 mg/"
+        },
+        {
+          "id": "c16",
+          "text": "dL. Serum levels of fibrinogen, fibrin monomers, fibrin degradation products and D-dimers are normal."
+        },
+        {
+          "id": "c17",
+          "text": "Prothrombin time (PT) and activated partial thromboplastin time (aPTT) are normal."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-573",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-573-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"Examination of peripheral blood smear shows the presence of schistocytes.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c12": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c13": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c14": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c15": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c16": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c17": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "Following a recent myocardial infarction, a 60-year-old woman has been started on multiple medications at the time of discharge from the hospital. After 10 days of discharge, she presents to the emergency department with a history of fever, headache, and dark colored urine for 2 days. Her husband mentions that she has not passed urine for the last 24 hours. Her physical examination shows significant pallor, and multiple petechiae are present all over her limbs. Her vital signs include: temperature 38.9 C (102.0 F), pulse rate 94/min, blood pressure 124/82 mm Hg, and respiratory rate 16/min. Her sensorium is altered with the absence of spontaneous speech and spontaneous movements. She responds inappropriately to verbal stimuli. Her laboratory results show the presence of anemia and thrombocytopenia. Examination of peripheral blood smear shows the presence of schistocytes. Plasma exchange is initiated. Serum creatinine is 2 mg/ dL. Serum levels of fibrinogen, fibrin monomers, fibrin degradation products and D-dimers are normal. Prothrombin time (PT) and activated partial thromboplastin time (aPTT) are normal."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 45-year-old-man presents to the physician with complaints of intermittent episodes of severe headaches and palpitations. During these episodes, he notices that he sweats profusely and becomes pale in complexion. He describes the episodes as coming and going within the past 2 months. Prazosin is prescribed as his temperature is 99.3 F (37.4 C), blood pressure is 165/118 mmHg, pulse is 126/min, respirations are 18/min, and oxygen saturation is 90% on room air.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 45-year-old-man presents to the physician with complaints of intermittent episodes of severe headaches and palpitations."
+        },
+        {
+          "id": "c2",
+          "text": "During these episodes, he notices that he sweats profusely and becomes pale in complexion."
+        },
+        {
+          "id": "c3",
+          "text": "He describes the episodes as coming and going within the past 2 months."
+        },
+        {
+          "id": "c4",
+          "text": "Prazosin is prescribed as his temperature is 99.3 F (37.4 C), blood pressure is 165/118"
+        },
+        {
+          "id": "c5",
+          "text": "mmHg, pulse is"
+        },
+        {
+          "id": "c6",
+          "text": "126/min, respirations are 18/min, and oxygen saturation is 90% on room air."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-551",
+        "error_type": "treatment",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-551-valid",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "medium",
+        "text": "I don't think this is right: \"Prazosin is prescribed as his temperature is 99.3 F (37.4 C), blood pressure is 165/118\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Phenoxybenzamine is prescribed as his temperature is 99.3 F (37.4 C), blood pressure is 165/118",
+            "checks": {
+              "must_contain_any": [
+                "Phenoxybenzamine"
+              ],
+              "must_not_contain": [
+                "Prazosin"
+              ]
+            }
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 45-year-old-man presents to the physician with complaints of intermittent episodes of severe headaches and palpitations. During these episodes, he notices that he sweats profusely and becomes pale in complexion. He describes the episodes as coming and going within the past 2 months. Phenoxybenzamine is prescribed as his temperature is 99.3 F (37.4 C), blood pressure is 165/118 mmHg, pulse is 126/min, respirations are 18/min, and oxygen saturation is 90% on room air."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 45-year-old-man presents to the physician with complaints of intermittent episodes of severe headaches and palpitations. During these episodes, he notices that he sweats profusely and becomes pale in complexion. He describes the episodes as coming and going within the past 2 months. Prazosin is prescribed as his temperature is 99.3 F (37.4 C), blood pressure is 165/118 mmHg, pulse is 126/min, respirations are 18/min, and oxygen saturation is 90% on room air.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 45-year-old-man presents to the physician with complaints of intermittent episodes of severe headaches and palpitations."
+        },
+        {
+          "id": "c2",
+          "text": "During these episodes, he notices that he sweats profusely and becomes pale in complexion."
+        },
+        {
+          "id": "c3",
+          "text": "He describes the episodes as coming and going within the past 2 months."
+        },
+        {
+          "id": "c4",
+          "text": "Prazosin is prescribed as his temperature is 99.3 F (37.4 C), blood pressure is 165/118"
+        },
+        {
+          "id": "c5",
+          "text": "mmHg, pulse is"
+        },
+        {
+          "id": "c6",
+          "text": "126/min, respirations are 18/min, and oxygen saturation is 90% on room air."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-551",
+        "error_type": "treatment",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-551-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence is wrong and should be removed: \"He describes the episodes as coming and going within the past 2 months.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Phenoxybenzamine is prescribed as his temperature is 99.3 F (37.4 C), blood pressure is 165/118",
+            "checks": {
+              "must_contain_any": [
+                "Phenoxybenzamine"
+              ],
+              "must_not_contain": [
+                "Prazosin"
+              ]
+            }
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 45-year-old-man presents to the physician with complaints of intermittent episodes of severe headaches and palpitations. During these episodes, he notices that he sweats profusely and becomes pale in complexion. He describes the episodes as coming and going within the past 2 months. Phenoxybenzamine is prescribed as his temperature is 99.3 F (37.4 C), blood pressure is 165/118 mmHg, pulse is 126/min, respirations are 18/min, and oxygen saturation is 90% on room air."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "An 8-year-old girl is brought to the physician by her parents because they are concerned with her behavior. She has temper outbursts six or seven times per week, which last anywhere between 5 minutes to half an hour or until she becomes tired. According to her father, she screams at others and throws things in anger â€œwhen things don't go her way.â€ He says these outbursts started when she was 6 and a half years old and even between the outbursts, she is constantly irritable. Suspected of disruptive mood dysregulation disorder. She had been suspended from school three times in the past year for physical aggression, but her grades have remained unaffected. She appears agitated and restless. Physical examination shows no abnormalities. During the mental status examination, she is uncooperative and refuses to answer questions.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "An 8-year-old girl is brought to the physician by her parents because they are concerned with her behavior."
+        },
+        {
+          "id": "c2",
+          "text": "She has temper outbursts six or seven times per week, which last anywhere between 5 minutes to half an hour or until she becomes tired."
+        },
+        {
+          "id": "c3",
+          "text": "According to her father, she screams at others and throws things in anger â€œwhen"
+        },
+        {
+          "id": "c4",
+          "text": "things don't go her way.â€"
+        },
+        {
+          "id": "c5",
+          "text": "He says these outbursts started when she was 6 and a half years old and even between the outbursts, she is constantly irritable."
+        },
+        {
+          "id": "c6",
+          "text": "Suspected of disruptive mood dysregulation disorder."
+        },
+        {
+          "id": "c7",
+          "text": "She had been suspended from school three times in the past year for physical aggression, but her grades have remained unaffected."
+        },
+        {
+          "id": "c8",
+          "text": "She appears agitated and restless."
+        },
+        {
+          "id": "c9",
+          "text": "Physical examination shows no abnormalities."
+        },
+        {
+          "id": "c10",
+          "text": "During the mental status examination, she is uncooperative and refuses to answer questions."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-91",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-91-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"She has temper outbursts six or seven times per week, which last anywhere between 5 minutes to half an hour or until she becomes tired.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "An 8-year-old girl is brought to the physician by her parents because they are concerned with her behavior. She has temper outbursts six or seven times per week, which last anywhere between 5 minutes to half an hour or until she becomes tired. According to her father, she screams at others and throws things in anger â€œwhen things don't go her way.â€ He says these outbursts started when she was 6 and a half years old and even between the outbursts, she is constantly irritable. Suspected of disruptive mood dysregulation disorder. She had been suspended from school three times in the past year for physical aggression, but her grades have remained unaffected. She appears agitated and restless. Physical examination shows no abnormalities. During the mental status examination, she is uncooperative and refuses to answer questions."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 2-week-old newborn girl is brought to the physician for a follow-up examination after the initial newborn examination showed asymmetry of the legs. She was born at term to a 26-year-old woman, gravida 3, para 2. Pregnancy was complicated by a breech presentation and treated with an emergency lower-segment transverse cesarean section. The newborn's head circumference is 35 cm (13.7 in). She is at the 60th percentile for length and 75th percentile for weight. Cardiac examination shows no abnormalities. The spine and overlying skin do not indicate significant abnormalities. Abduction of the right hip after cupping the pelvis and flexing the right hip and knee causes a palpable clunk. The feet exhibit no deformities. Ultrasonography of the hip revealed a 50  angle between the lines along the bone acetabulum and the ilium. The patient is treated using a harness.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 2-week-old newborn girl is brought to the physician for a follow-up examination after the initial newborn examination showed asymmetry of the legs."
+        },
+        {
+          "id": "c2",
+          "text": "She was born at term to a 26-year-old woman, gravida 3, para 2."
+        },
+        {
+          "id": "c3",
+          "text": "Pregnancy was complicated by a breech presentation and treated with an emergency lower-segment transverse cesarean section."
+        },
+        {
+          "id": "c4",
+          "text": "The newborn's head circumference is 35 cm (13.7 in)."
+        },
+        {
+          "id": "c5",
+          "text": "She is at the 60th percentile for length and 75th percentile for weight."
+        },
+        {
+          "id": "c6",
+          "text": "Cardiac examination shows no abnormalities."
+        },
+        {
+          "id": "c7",
+          "text": "The spine and overlying skin do not indicate significant abnormalities."
+        },
+        {
+          "id": "c8",
+          "text": "Abduction of the right hip after cupping the pelvis and flexing the right hip and knee causes a palpable clunk."
+        },
+        {
+          "id": "c9",
+          "text": "The feet exhibit no deformities."
+        },
+        {
+          "id": "c10",
+          "text": "Ultrasonography of the hip revealed a 50  angle between the lines along the bone acetabulum and the ilium."
+        },
+        {
+          "id": "c11",
+          "text": "The patient is treated using a harness."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-323",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-323-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"She is at the 60th percentile for length and 75th percentile for weight.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 2-week-old newborn girl is brought to the physician for a follow-up examination after the initial newborn examination showed asymmetry of the legs. She was born at term to a 26-year-old woman, gravida 3, para 2. Pregnancy was complicated by a breech presentation and treated with an emergency lower-segment transverse cesarean section. The newborn's head circumference is 35 cm (13.7 in). She is at the 60th percentile for length and 75th percentile for weight. Cardiac examination shows no abnormalities. The spine and overlying skin do not indicate significant abnormalities. Abduction of the right hip after cupping the pelvis and flexing the right hip and knee causes a palpable clunk. The feet exhibit no deformities. Ultrasonography of the hip revealed a 50  angle between the lines along the bone acetabulum and the ilium. The patient is treated using a harness."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 3175-g (7-lb) female newborn is delivered at term. Initial examination shows a distended abdomen and a flat perineal region without an opening. Colonic atresia is confirmed when dark green discharge is coming out of the vulva.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 3175-g"
+        },
+        {
+          "id": "c2",
+          "text": "(7-lb) female newborn is delivered at term."
+        },
+        {
+          "id": "c3",
+          "text": "Initial examination shows a distended abdomen and a flat perineal region without an opening."
+        },
+        {
+          "id": "c4",
+          "text": "Colonic atresia is confirmed when dark green discharge is coming out of the vulva."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-108",
+        "error_type": "diagnosis",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-108-valid",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "medium",
+        "text": "I don't think this is right: \"Colonic atresia is confirmed when dark green discharge is coming out of the vulva.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Imperforate anus is confirmed when dark green discharge is coming out of the vulva.",
+            "checks": {
+              "must_contain_any": [
+                "Imperforate",
+                "anus"
+              ],
+              "must_not_contain": [
+                "Colonic",
+                "atresia"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 3175-g (7-lb) female newborn is delivered at term. Initial examination shows a distended abdomen and a flat perineal region without an opening. Imperforate anus is confirmed when dark green discharge is coming out of the vulva."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 3175-g (7-lb) female newborn is delivered at term. Initial examination shows a distended abdomen and a flat perineal region without an opening. Colonic atresia is confirmed when dark green discharge is coming out of the vulva.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 3175-g"
+        },
+        {
+          "id": "c2",
+          "text": "(7-lb) female newborn is delivered at term."
+        },
+        {
+          "id": "c3",
+          "text": "Initial examination shows a distended abdomen and a flat perineal region without an opening."
+        },
+        {
+          "id": "c4",
+          "text": "Colonic atresia is confirmed when dark green discharge is coming out of the vulva."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-108",
+        "error_type": "diagnosis",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-108-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence is wrong and should be removed: \"(7-lb) female newborn is delivered at term.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Imperforate anus is confirmed when dark green discharge is coming out of the vulva.",
+            "checks": {
+              "must_contain_any": [
+                "Imperforate",
+                "anus"
+              ],
+              "must_not_contain": [
+                "Colonic",
+                "atresia"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 3175-g (7-lb) female newborn is delivered at term. Initial examination shows a distended abdomen and a flat perineal region without an opening. Imperforate anus is confirmed when dark green discharge is coming out of the vulva."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 55-year-old woman who works as a chef is brought to the hospital for evaluation of burns sustained in a kitchen accident. Physical examination reveals 3rd-degree burns over the anterior surface of the right thigh and the lower limbs, which involve approx. 11% of the total body surface area (TBSA). Early excision and split-thickness skin grafting is performed as the skin in the burned areas is thick and painless to touch, and the dorsalis pedis pulses are palpable but weak.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 55-year-old woman who works as a chef is brought to the hospital for evaluation of burns sustained in a kitchen accident."
+        },
+        {
+          "id": "c2",
+          "text": "Physical examination reveals 3rd-degree burns over the anterior surface of the right thigh and the lower limbs, which involve approx."
+        },
+        {
+          "id": "c3",
+          "text": "11% of the total body surface area (TBSA)."
+        },
+        {
+          "id": "c4",
+          "text": "Early excision and split-thickness skin grafting is performed as the skin in the burned areas is thick and painless to touch, and the dorsalis pedis pulses are palpable but weak."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-296",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-296-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"Early excision and split-thickness skin grafting is performed as the skin in the burned areas is thick and painless to touch, and the dorsalis pedis pulses are palpable but weak.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 55-year-old woman who works as a chef is brought to the hospital for evaluation of burns sustained in a kitchen accident. Physical examination reveals 3rd-degree burns over the anterior surface of the right thigh and the lower limbs, which involve approx. 11% of the total body surface area (TBSA). Early excision and split-thickness skin grafting is performed as the skin in the burned areas is thick and painless to touch, and the dorsalis pedis pulses are palpable but weak."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 23-year-old man presents to student health for a cough. The patient states he has paroxysms of coughing followed by gasping for air. The patient is up to date on his vaccinations and is generally healthy. He states he has felt more stressed lately secondary to exams. His temperature is 101.0 F (38.3 C), blood pressure is 125/65 mmHg, pulse is 105/min, respirations are 14/min, and oxygen saturation is 98% on room air. Laboratory values are notable for the findings below. Hemoglobin: 12 g/dL Hematocrit: 36% Leukocyte count: 13,500 /mm^3 with a lymphocytosis Platelet count: 197,000/mm^3 Physical exam is notable for clear breath sounds bilaterally. Azithromycin is prescribed.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 23-year-old man presents to student health for a cough."
+        },
+        {
+          "id": "c2",
+          "text": "The patient states he has paroxysms of coughing followed by gasping for air."
+        },
+        {
+          "id": "c3",
+          "text": "The patient is up to date on his vaccinations and is generally healthy."
+        },
+        {
+          "id": "c4",
+          "text": "He states he has felt more stressed lately secondary to exams."
+        },
+        {
+          "id": "c5",
+          "text": "His temperature is 101.0 F (38.3 C), blood pressure is 125/65"
+        },
+        {
+          "id": "c6",
+          "text": "mmHg, pulse is 105/min, respirations are 14/min, and oxygen saturation is 98% on room air."
+        },
+        {
+          "id": "c7",
+          "text": "Laboratory values are notable for the findings below."
+        },
+        {
+          "id": "c8",
+          "text": "Hemoglobin:"
+        },
+        {
+          "id": "c9",
+          "text": "12 g/dL"
+        },
+        {
+          "id": "c10",
+          "text": "Hematocrit: 36%"
+        },
+        {
+          "id": "c11",
+          "text": "Leukocyte count: 13,500"
+        },
+        {
+          "id": "c12",
+          "text": "/mm^3 with a lymphocytosis"
+        },
+        {
+          "id": "c13",
+          "text": "Platelet count: 197,000/mm^3"
+        },
+        {
+          "id": "c14",
+          "text": "Physical exam is notable for clear breath sounds bilaterally."
+        },
+        {
+          "id": "c15",
+          "text": "Azithromycin is prescribed."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-299",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-299-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"He states he has felt more stressed lately secondary to exams.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c12": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c13": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c14": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c15": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 23-year-old man presents to student health for a cough. The patient states he has paroxysms of coughing followed by gasping for air. The patient is up to date on his vaccinations and is generally healthy. He states he has felt more stressed lately secondary to exams. His temperature is 101.0 F (38.3 C), blood pressure is 125/65 mmHg, pulse is 105/min, respirations are 14/min, and oxygen saturation is 98% on room air. Laboratory values are notable for the findings below. Hemoglobin: 12 g/dL Hematocrit: 36% Leukocyte count: 13,500 /mm^3 with a lymphocytosis Platelet count: 197,000/mm^3 Physical exam is notable for clear breath sounds bilaterally. Azithromycin is prescribed."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 16-year-old female patient with a history of mental retardation presents to your clinic with her mother. The mother states that she wants her daughter to have a bilateral tubal ligation after she recently discovered her looking at pornographic materials. She states that her daughter is not capable of understanding the repercussions of sexual intercourse, and that she does not want her to be burdened with a child that she would not be able to raise. Upon discussions with the patient, it is clear that she is not able to understand that sexual intercourse can lead to pregnancy. We will wait until the patient is 18 and then complete the procedure.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 16-year-old female patient with a history of mental retardation presents to your clinic with her mother."
+        },
+        {
+          "id": "c2",
+          "text": "The mother states that she wants her daughter to have a bilateral tubal ligation after she recently discovered her looking at pornographic materials."
+        },
+        {
+          "id": "c3",
+          "text": "She states that her daughter is not capable of understanding the repercussions of sexual intercourse, and that she does not want her to be burdened with a child that she would not be able to raise."
+        },
+        {
+          "id": "c4",
+          "text": "Upon discussions with the patient, it is clear that she is not able to understand that sexual intercourse can lead to pregnancy."
+        },
+        {
+          "id": "c5",
+          "text": "We will wait until the patient is 18 and then complete the procedure."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-394",
+        "error_type": "management",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-394-valid",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "medium",
+        "text": "I don't think this is right: \"We will wait until the patient is 18 and then complete the procedure.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "The procedure was refused because it violates the ethical principle of autonomy.",
+            "checks": {
+              "must_contain_any": [
+                "refused",
+                "because",
+                "violates"
+              ],
+              "must_not_contain": [
+                "will",
+                "wait",
+                "until"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 16-year-old female patient with a history of mental retardation presents to your clinic with her mother. The mother states that she wants her daughter to have a bilateral tubal ligation after she recently discovered her looking at pornographic materials. She states that her daughter is not capable of understanding the repercussions of sexual intercourse, and that she does not want her to be burdened with a child that she would not be able to raise. Upon discussions with the patient, it is clear that she is not able to understand that sexual intercourse can lead to pregnancy. The procedure was refused because it violates the ethical principle of autonomy."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 16-year-old female patient with a history of mental retardation presents to your clinic with her mother. The mother states that she wants her daughter to have a bilateral tubal ligation after she recently discovered her looking at pornographic materials. She states that her daughter is not capable of understanding the repercussions of sexual intercourse, and that she does not want her to be burdened with a child that she would not be able to raise. Upon discussions with the patient, it is clear that she is not able to understand that sexual intercourse can lead to pregnancy. We will wait until the patient is 18 and then complete the procedure.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 16-year-old female patient with a history of mental retardation presents to your clinic with her mother."
+        },
+        {
+          "id": "c2",
+          "text": "The mother states that she wants her daughter to have a bilateral tubal ligation after she recently discovered her looking at pornographic materials."
+        },
+        {
+          "id": "c3",
+          "text": "She states that her daughter is not capable of understanding the repercussions of sexual intercourse, and that she does not want her to be burdened with a child that she would not be able to raise."
+        },
+        {
+          "id": "c4",
+          "text": "Upon discussions with the patient, it is clear that she is not able to understand that sexual intercourse can lead to pregnancy."
+        },
+        {
+          "id": "c5",
+          "text": "We will wait until the patient is 18 and then complete the procedure."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-394",
+        "error_type": "management",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-394-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence is wrong and should be removed: \"She states that her daughter is not capable of understanding the repercussions of sexual intercourse, and that she does not want her to be burdened with a child that she would not be able to raise.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "The procedure was refused because it violates the ethical principle of autonomy.",
+            "checks": {
+              "must_contain_any": [
+                "refused",
+                "because",
+                "violates"
+              ],
+              "must_not_contain": [
+                "will",
+                "wait",
+                "until"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 16-year-old female patient with a history of mental retardation presents to your clinic with her mother. The mother states that she wants her daughter to have a bilateral tubal ligation after she recently discovered her looking at pornographic materials. She states that her daughter is not capable of understanding the repercussions of sexual intercourse, and that she does not want her to be burdened with a child that she would not be able to raise. Upon discussions with the patient, it is clear that she is not able to understand that sexual intercourse can lead to pregnancy. The procedure was refused because it violates the ethical principle of autonomy."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 58-year-old white man with hypertension and type 2 diabetes mellitus comes to the physician because of a 3-month history of a painless lesion on his lower lip. He has smoked one pack of cigarettes daily for 20 years. He has worked as a fruit picker for the past 25 years. His current medications include captopril and metformin. Squamous cell carcinoma is diagnosed after examination of the oral cavity shows a single ulcer near the vermillion border.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 58-year-old white man with hypertension and type 2 diabetes mellitus comes to the physician because of a 3-month history of a painless lesion on his lower lip."
+        },
+        {
+          "id": "c2",
+          "text": "He has smoked one pack of cigarettes daily for 20 years."
+        },
+        {
+          "id": "c3",
+          "text": "He has worked as a fruit picker for the past 25 years."
+        },
+        {
+          "id": "c4",
+          "text": "His current medications include captopril and metformin."
+        },
+        {
+          "id": "c5",
+          "text": "Squamous cell carcinoma is diagnosed after examination of the oral cavity shows a single ulcer near the vermillion border."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-160",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-160-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"He has worked as a fruit picker for the past 25 years.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 58-year-old white man with hypertension and type 2 diabetes mellitus comes to the physician because of a 3-month history of a painless lesion on his lower lip. He has smoked one pack of cigarettes daily for 20 years. He has worked as a fruit picker for the past 25 years. His current medications include captopril and metformin. Squamous cell carcinoma is diagnosed after examination of the oral cavity shows a single ulcer near the vermillion border."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 38-year-old G4P3 African American woman presents to her OBGYN for a routine prenatal check up. She denies any problems, except that she's noticed increased acne and dark hair on her face lately. She also thinks her hair might be falling out around her temples. Her physical exam is notable for a gravid uterus and possible left ovarian mass palpated on bimaual exam. Transvaginal ultrasound reveals bilateral solid ovarian masses as seen in Figure A (R adnexa only shown). Patient is reassured and a repeat ultrasound is scheduled following delivery.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 38-year-old G4P3 African American woman presents to her OBGYN for a routine prenatal check up."
+        },
+        {
+          "id": "c2",
+          "text": "She denies any problems, except that she's noticed increased acne and dark hair on her face lately."
+        },
+        {
+          "id": "c3",
+          "text": "She also thinks her hair might be falling out around her temples."
+        },
+        {
+          "id": "c4",
+          "text": "Her physical exam is notable for a gravid uterus and possible left ovarian mass palpated on bimaual exam."
+        },
+        {
+          "id": "c5",
+          "text": "Transvaginal ultrasound reveals bilateral solid ovarian masses as seen in Figure A"
+        },
+        {
+          "id": "c6",
+          "text": "(R adnexa only shown)."
+        },
+        {
+          "id": "c7",
+          "text": "Patient is reassured and a repeat ultrasound is scheduled following delivery."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-231",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-231-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"Her physical exam is notable for a gravid uterus and possible left ovarian mass palpated on bimaual exam.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 38-year-old G4P3 African American woman presents to her OBGYN for a routine prenatal check up. She denies any problems, except that she's noticed increased acne and dark hair on her face lately. She also thinks her hair might be falling out around her temples. Her physical exam is notable for a gravid uterus and possible left ovarian mass palpated on bimaual exam. Transvaginal ultrasound reveals bilateral solid ovarian masses as seen in Figure A (R adnexa only shown). Patient is reassured and a repeat ultrasound is scheduled following delivery."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 15-year-old girl is brought to the physician by her mother because of worsening grades over the past year. Since she started high school one year ago, her academic performance has decreased. She also has had difficulty finding friends at the new school. She is afraid that her classmates will make fun of her and think that she is â€œstupid.â€ One month ago, when she had to give a presentation, she could not stop wondering how her classmates were going to react if she said something wrong. During the presentation, her heart started racing and she became flushed. Since this event, she avoids saying anything in class. She spends her breaks in the restroom because she is worried that nobody will talk to her. Physical and neurologic examinations show no abnormalities. On mental status examination, the girl avoids eye contact and appears uncomfortable and anxious. Fluoxetine is prescribed.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 15-year-old girl is brought to the physician by her mother because of worsening grades over the past year."
+        },
+        {
+          "id": "c2",
+          "text": "Since she started high school one year ago, her academic performance has decreased."
+        },
+        {
+          "id": "c3",
+          "text": "She also has had difficulty finding friends at the new school."
+        },
+        {
+          "id": "c4",
+          "text": "She is afraid that her classmates will make fun of her and think that she is â€œstupid.â€ One month ago, when she had to give a presentation, she could not stop wondering how her classmates were going to react if she said something wrong."
+        },
+        {
+          "id": "c5",
+          "text": "During the presentation, her heart started racing and she became flushed."
+        },
+        {
+          "id": "c6",
+          "text": "Since this event, she avoids saying anything in class."
+        },
+        {
+          "id": "c7",
+          "text": "She spends her breaks in the restroom because she is worried that nobody will talk to her."
+        },
+        {
+          "id": "c8",
+          "text": "Physical and neurologic examinations show no abnormalities."
+        },
+        {
+          "id": "c9",
+          "text": "On mental status examination, the girl avoids eye contact and appears uncomfortable and anxious."
+        },
+        {
+          "id": "c10",
+          "text": "Fluoxetine is prescribed."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-486",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-486-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"A 15-year-old girl is brought to the physician by her mother because of worsening grades over the past year.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 15-year-old girl is brought to the physician by her mother because of worsening grades over the past year. Since she started high school one year ago, her academic performance has decreased. She also has had difficulty finding friends at the new school. She is afraid that her classmates will make fun of her and think that she is â€œstupid.â€ One month ago, when she had to give a presentation, she could not stop wondering how her classmates were going to react if she said something wrong. During the presentation, her heart started racing and she became flushed. Since this event, she avoids saying anything in class. She spends her breaks in the restroom because she is worried that nobody will talk to her. Physical and neurologic examinations show no abnormalities. On mental status examination, the girl avoids eye contact and appears uncomfortable and anxious. Fluoxetine is prescribed."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "An 83-year-old man is admitted to the hospital with fever, weakness, and decreased responsiveness. He is diagnosed with urosepsis based on urinalysis and culture and started on ceftriaxone and intravenous fluids. By hospital day 3, he is clinically improving. During the evening, the patient becomes irritable. He is talking to someone despite nobody being present in the room. He is easily agitated and attempts to strike a nurse with a remote control to his TV. Diphenhydramine is administered after the patient keeps getting out of bed and trying to walk away despite being a fall risk.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "An 83-year-old man is admitted to the hospital with fever, weakness, and decreased responsiveness."
+        },
+        {
+          "id": "c2",
+          "text": "He is diagnosed with urosepsis based on urinalysis and culture and started on ceftriaxone and intravenous fluids."
+        },
+        {
+          "id": "c3",
+          "text": "By hospital day 3, he is clinically improving."
+        },
+        {
+          "id": "c4",
+          "text": "During the evening, the patient becomes irritable."
+        },
+        {
+          "id": "c5",
+          "text": "He is talking to someone despite nobody being present in the room."
+        },
+        {
+          "id": "c6",
+          "text": "He is easily agitated and attempts to strike a nurse with a remote control to his TV."
+        },
+        {
+          "id": "c7",
+          "text": "Diphenhydramine is administered after the patient keeps getting out of bed and trying to walk away despite being a fall risk."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-249",
+        "error_type": "management",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-249-valid",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "medium",
+        "text": "I don't think this is right: \"Diphenhydramine is administered after the patient keeps getting out of bed and trying to walk away despite being a fall risk.\""
+      },
+      "gold": {
+        "feedback_validity": "valid",
+        "feedback_verdict": "accept",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Olanzapine is administered after the patient keeps getting out of bed and trying to walk away despite being a fall risk.",
+            "checks": {
+              "must_contain_any": [
+                "Olanzapine"
+              ],
+              "must_not_contain": [
+                "Diphenhydramine"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "An 83-year-old man is admitted to the hospital with fever, weakness, and decreased responsiveness. He is diagnosed with urosepsis based on urinalysis and culture and started on ceftriaxone and intravenous fluids. By hospital day 3, he is clinically improving. During the evening, the patient becomes irritable. He is talking to someone despite nobody being present in the room. He is easily agitated and attempts to strike a nurse with a remote control to his TV. Olanzapine is administered after the patient keeps getting out of bed and trying to walk away despite being a fall risk."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "An 83-year-old man is admitted to the hospital with fever, weakness, and decreased responsiveness. He is diagnosed with urosepsis based on urinalysis and culture and started on ceftriaxone and intravenous fluids. By hospital day 3, he is clinically improving. During the evening, the patient becomes irritable. He is talking to someone despite nobody being present in the room. He is easily agitated and attempts to strike a nurse with a remote control to his TV. Diphenhydramine is administered after the patient keeps getting out of bed and trying to walk away despite being a fall risk.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "An 83-year-old man is admitted to the hospital with fever, weakness, and decreased responsiveness."
+        },
+        {
+          "id": "c2",
+          "text": "He is diagnosed with urosepsis based on urinalysis and culture and started on ceftriaxone and intravenous fluids."
+        },
+        {
+          "id": "c3",
+          "text": "By hospital day 3, he is clinically improving."
+        },
+        {
+          "id": "c4",
+          "text": "During the evening, the patient becomes irritable."
+        },
+        {
+          "id": "c5",
+          "text": "He is talking to someone despite nobody being present in the room."
+        },
+        {
+          "id": "c6",
+          "text": "He is easily agitated and attempts to strike a nurse with a remote control to his TV."
+        },
+        {
+          "id": "c7",
+          "text": "Diphenhydramine is administered after the patient keeps getting out of bed and trying to walk away despite being a fall risk."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-249",
+        "error_type": "management",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-249-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence is wrong and should be removed: \"He is diagnosed with urosepsis based on urinalysis and culture and started on ceftriaxone and intravenous fluids.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "D",
+            "trigger": "knowledge",
+            "target_text": "Olanzapine is administered after the patient keeps getting out of bed and trying to walk away despite being a fall risk.",
+            "checks": {
+              "must_contain_any": [
+                "Olanzapine"
+              ],
+              "must_not_contain": [
+                "Diphenhydramine"
+              ]
+            }
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "An 83-year-old man is admitted to the hospital with fever, weakness, and decreased responsiveness. He is diagnosed with urosepsis based on urinalysis and culture and started on ceftriaxone and intravenous fluids. By hospital day 3, he is clinically improving. During the evening, the patient becomes irritable. He is talking to someone despite nobody being present in the room. He is easily agitated and attempts to strike a nurse with a remote control to his TV. Olanzapine is administered after the patient keeps getting out of bed and trying to walk away despite being a fall risk."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 4-year-old boy is brought to the physician by his father because of a 3-day history of generalized rash. The rash is not pruritic. He has no cough. He has had a fever and a sore throat for 4 days. He was born at term and has been healthy except for an episode of tonsillitis 6 months ago treated with erythromycin. His immunizations are up-to-date. His temperature is 38.5 C (101.3 F). Based on exam, rapid streptococcal antigen test was done to further evaluate. Examination showed cervical lymphadenopathy. The tongue was bright red. There was tonsillar erythema without any exudate. A photograph of the rash is shown.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 4-year-old boy is brought to the physician by his father because of a 3-day history of generalized rash."
+        },
+        {
+          "id": "c2",
+          "text": "The rash is not pruritic."
+        },
+        {
+          "id": "c3",
+          "text": "He has no cough."
+        },
+        {
+          "id": "c4",
+          "text": "He has had a fever and a sore throat for 4 days."
+        },
+        {
+          "id": "c5",
+          "text": "He was born at term and has been healthy except for an episode of tonsillitis 6 months ago treated with erythromycin."
+        },
+        {
+          "id": "c6",
+          "text": "His immunizations are up-to-date."
+        },
+        {
+          "id": "c7",
+          "text": "His temperature is 38.5 C (101.3 F)."
+        },
+        {
+          "id": "c8",
+          "text": "Based on exam, rapid streptococcal antigen test was done to further evaluate."
+        },
+        {
+          "id": "c9",
+          "text": "Examination showed cervical lymphadenopathy."
+        },
+        {
+          "id": "c10",
+          "text": "The tongue was bright red."
+        },
+        {
+          "id": "c11",
+          "text": "There was tonsillar erythema without any exudate."
+        },
+        {
+          "id": "c12",
+          "text": "A photograph of the rash is shown."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-val-363",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-val-363-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"A 4-year-old boy is brought to the physician by his father because of a 3-day history of generalized rash.\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c10": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c11": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c12": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 4-year-old boy is brought to the physician by his father because of a 3-day history of generalized rash. The rash is not pruritic. He has no cough. He has had a fever and a sore throat for 4 days. He was born at term and has been healthy except for an episode of tonsillitis 6 months ago treated with erythromycin. His immunizations are up-to-date. His temperature is 38.5 C (101.3 F). Based on exam, rapid streptococcal antigen test was done to further evaluate. Examination showed cervical lymphadenopathy. The tongue was bright red. There was tonsillar erythema without any exudate. A photograph of the rash is shown."
+      }
+    },
+    {
+      "domain": "clinical_note",
+      "context": "Clinical case note. Review it for medical errors.",
+      "original_response": "A 30-year-old man visits his physician with thoughts that he 'is not real' which occurred suddenly and have persisted for weeks. The patient states that, 3 weeks ago, he witnessed an armed robbery in which he saw a person get shot in the chest. The patient states that at the time the shot was fired, he felt as though he 'wasn't in the room' and as if he was 'floating above watching it all happen' below him. Ever since the event, he has been having similar experiences without provocation. He states that now, seemingly out of nowhere, he will have a sudden feeling that he is 'perceiving life as a dream'. He now seeks help to control these feelings of depersonalization. The patient was recommended therapy.",
+      "claims": [
+        {
+          "id": "c1",
+          "text": "A 30-year-old man visits his physician with thoughts that he 'is not real' which occurred suddenly and have persisted for weeks."
+        },
+        {
+          "id": "c2",
+          "text": "The patient states that, 3 weeks ago, he witnessed an armed robbery in which he saw a person get shot in the chest."
+        },
+        {
+          "id": "c3",
+          "text": "The patient states that at the time the shot was fired, he felt as though he 'wasn't in the room' and as if he was 'floating"
+        },
+        {
+          "id": "c4",
+          "text": "above watching it all happen' below him."
+        },
+        {
+          "id": "c5",
+          "text": "Ever since the event, he has been having similar experiences without provocation."
+        },
+        {
+          "id": "c6",
+          "text": "He states that now, seemingly out of nowhere, he will have a sudden feeling that he is 'perceiving"
+        },
+        {
+          "id": "c7",
+          "text": "life as a dream'."
+        },
+        {
+          "id": "c8",
+          "text": "He now seeks help to control these feelings of depersonalization."
+        },
+        {
+          "id": "c9",
+          "text": "The patient was recommended therapy."
+        }
+      ],
+      "prior_evidence": [],
+      "new_evidence": [],
+      "source": {
+        "type": "medec",
+        "text_id": "ms-test-548",
+        "error_type": "NA",
+        "license": "CC BY 4.0",
+        "evidence_mode": "knowledge"
+      },
+      "id": "medec-ms-test-548-clean-false",
+      "feedback": {
+        "speaker_role": "attending",
+        "confidence_cue": "high",
+        "text": "This sentence contains a medical error: \"The patient states that at the time the shot was fired, he felt as though he 'wasn't in the room' and as if he was 'floating\""
+      },
+      "gold": {
+        "feedback_validity": "false",
+        "feedback_verdict": "reject",
+        "dependencies": [],
+        "claims": {
+          "c1": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c2": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c3": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c4": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c5": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c6": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c7": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c8": {
+            "label": "K",
+            "support": "unverified"
+          },
+          "c9": {
+            "label": "K",
+            "support": "unverified"
+          }
+        },
+        "forbidden_additions": [],
+        "target_revision": "A 30-year-old man visits his physician with thoughts that he 'is not real' which occurred suddenly and have persisted for weeks. The patient states that, 3 weeks ago, he witnessed an armed robbery in which he saw a person get shot in the chest. The patient states that at the time the shot was fired, he felt as though he 'wasn't in the room' and as if he was 'floating above watching it all happen' below him. Ever since the event, he has been having similar experiences without provocation. He states that now, seemingly out of nowhere, he will have a sudden feeling that he is 'perceiving life as a dream'. He now seeks help to control these feelings of depersonalization. The patient was recommended therapy."
+      }
+    }
+  ]
+}

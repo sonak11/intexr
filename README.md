@@ -9,9 +9,14 @@ docs/literature_matrix.csv     same matrix, machine-readable
 docs/02_task_definition.md     formal task, input/output spec, labels D/P/K/U, metrics, conditions A–D
 docs/03_semester1_plan.md      week-by-week plan to 31 Oct novelty review and 18 Dec frozen protocol
 docs/04_annotation_guide.md    labeling procedure for annotators
+docs/05_datasets_and_paper.md  existing datasets, our dataset plan, dataset-paper venues and checklist
+external/                      40-example IntExR-format samples from MEDEC, VitaminC, EditPropBench (see external/README.md)
 pilot/data/pilot_v0.json       16 pilot examples (8 synthetic MIMIC-style CXR, 8 real COCO captions), 86 claims
 intexr/                        harness: data validation, prompts, stdlib LLM clients, systems, metrics
 scripts/run_pilot.py           run systems × conditions → results/report.md
+scripts/check_dataset.py       validate any dataset file, balance tables, thin cells, markdown review sheet
+scripts/fetch_external.py      download MEDEC / VitaminC / EditPropBench
+scripts/convert_external.py    convert them to IntExR format (+ feedback-validity variants)
 scripts/annotation_tools.py    blind annotation sheet + Cohen's kappa
 scripts/mimic_candidates.py    mine MIMIC-CXR candidates (after PhysioNet access)
 ```
@@ -31,6 +36,11 @@ For an OpenAI-compatible endpoint (Azure OpenAI, vLLM, Together, Ollama), set `O
 - Pilot CXR cases are **synthetic** and contain no MIMIC text.
 - Real MIMIC-CXR data needs PhysioNet credentialing and the DUA. Keep it in `data/mimic/` (git-ignored), and send it only to [PhysioNet-approved LLM services](https://physionet.org/news/post/llm-responsible-use/) (e.g. Anthropic API, Azure OpenAI with human review opted out, Bedrock, Vertex). **Not** the direct OpenAI API or ChatGPT.
 - COCO captions are CC-BY 4.0.
+
+## Check a dataset
+```bash
+python3 scripts/check_dataset.py pilot/data/pilot_v0.json external/*.json --show 1 --review results/review.md
+```
 
 ## Rebuild local data (not in git)
 ```bash
