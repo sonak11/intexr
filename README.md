@@ -10,6 +10,9 @@ docs/02_task_definition.md     formal task, input/output spec, labels D/P/K/U, m
 docs/03_semester1_plan.md      week-by-week plan to 31 Oct novelty review and 18 Dec frozen protocol
 docs/04_annotation_guide.md    labeling procedure for annotators
 docs/05_datasets_and_paper.md  existing datasets, our dataset plan, dataset-paper venues and checklist
+docs/06_paperB_dataset_paper.md  Paper B (MedScope clinical dataset): separation from Paper 1, design, review protocol, timeline
+paperB/proposals/              case proposals (LLM-written, NOT clinically reviewed)
+paperB/data/                   built MedScope examples (scripts/build_medec_scope.py)
 external/                      40-example IntExR-format samples from MEDEC, VitaminC, EditPropBench (see external/README.md)
 pilot/data/pilot_v0.json       16 pilot examples (8 synthetic MIMIC-style CXR, 8 real COCO captions), 86 claims
 intexr/                        harness: data validation, prompts, stdlib LLM clients, systems, metrics

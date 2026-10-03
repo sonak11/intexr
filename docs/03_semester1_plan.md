@@ -43,6 +43,9 @@ Pilot label distribution: D 19, P 16 (12 at depth 1, 4 at depth 2), K 44 (23 sup
 
 IU is CC BY-NC-ND 4.0. Because of the no-derivatives term, the released benchmark ships IU report IDs plus the build script, not the edited text.
 
+## 0c. Second paper (Option B, decided 2 Oct)
+A separate clinical dataset paper, **MedScope**: plan, timeline, and how it is kept separate from Paper 1 are in `docs/06_paperB_dataset_paper.md`. It shares the annotation round and the Dec 18 freeze with Paper 1. Target: CHIL 2027 (check the deadline; early Feb in 2026). **Submit Paper B before Paper 1.**
+
 ## 1. Week-by-week
 
 ### Week 1 · Fri 2 – Fri 9 Oct · *Access + reading*

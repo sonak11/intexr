@@ -51,11 +51,27 @@ def medec(n, rng):
     rng.shuffle(rows)
     out = []
     for r in rows:
-        sents = []
+        raw = []
         for line in r["Sentences"].split("\n"):
             m = re.match(r"^(\d+)\s+(.*)$", line.strip())
             if m:
-                sents.append((int(m.group(1)), m.group(2).strip()))
+                raw.append((int(m.group(1)), m.group(2).strip()))
+        # merge fragments: a piece not ending in terminal punctuation is joined with the next one
+        sents, buf_ids, buf = [], [], []
+        for i, t in raw:
+            buf_ids.append(i)
+            buf.append(t)
+            if re.search(r"[.!?][\"')\]]?$", t):
+                sents.append((buf_ids, " ".join(buf)))
+                buf_ids, buf = [], []
+        if buf:
+            sents.append((buf_ids, " ".join(buf)))
+        if r["Error Flag"] == "1":
+            hit = [k for k, (ids, _) in enumerate(sents) if int(r["Error Sentence ID"]) in ids]
+            # keep only notes whose error sentence was not merged (keeps the D claim == MEDEC's error sentence)
+            if not hit or sents[hit[0]][1] != r["Error Sentence"]:
+                continue
+        sents = [(ids[0], t) for ids, t in sents]
         if len(sents) < 4 or len(sents) > 25:
             continue
         cid = {i: f"c{k + 1}" for k, (i, _) in enumerate(sents)}
@@ -67,7 +83,7 @@ def medec(n, rng):
                 "source": {"type": "medec", "text_id": r["Text ID"], "error_type": r["Error Type"],
                            "license": "CC BY 4.0", "evidence_mode": "knowledge"}}
         if r["Error Flag"] == "1":
-            eid = cid[int(r["Error Sentence ID"])]
+            eid = next(cid[i] for i, t in sents if t == r["Error Sentence"])
             err, cor = r["Error Sentence"], r["Corrected Sentence"]
             gclaims = {c["id"]: {"label": "K", "support": "unverified"} for c in claims}
             target = original.replace(err, cor)
@@ -96,7 +112,9 @@ def medec(n, rng):
                                       "dependencies": [], "claims": gclaims, "forbidden_additions": [],
                                       "target_revision": target}))
         else:
-            # error-free note + false feedback: everything is K
+            # error-free note + false feedback: everything is K (capped at ~1/4 of the sample for balance)
+            if sum(o["id"].endswith("clean-false") for o in out) >= n // 4:
+                continue
             wrong = rng.choice([c for c in claims if len(c["text"]) > 40] or claims)
             out.append(dict(base, id=f"medec-{r['Text ID']}-clean-false",
                             feedback={"speaker_role": "attending", "confidence_cue": "high",
@@ -122,16 +140,36 @@ def vitaminc(n, rng, k=4):
     rng.shuffle(pages)
     out = []
     for p in pages:
-        seen, rows = set(), []
+        # VitaminC pairs each claim with evidence from BEFORE and AFTER a Wikipedia edit (same case_id).
+        # Mixing both revisions puts contradictory evidence in one example, so use one row per case_id.
+        # A page is edited many times, so even different case_ids can carry two versions of one sentence
+        # ("grossed $9 million" vs "$33 million"). Keep only rows whose claim AND evidence are on a different
+        # topic from every row already chosen, so no evidence item bears on another row's claim.
+        def cw(t):
+            return {w.lower() for w in WORD.findall(t) if w.lower() not in STOP and len(w) > 3} - page_words
+
+        def jac(a, b):
+            return len(a & b) / max(1, min(len(a), len(b)))
+
+        page_words = {w.lower() for w in WORD.findall(p)}
+        seen_case, rows = set(), []
         for r in rng.sample(by_page[p], len(by_page[p])):
-            if r["claim"] not in seen:
-                seen.add(r["claim"])
+            if r["case_id"] in seen_case:
+                continue
+            c, ev = cw(r["claim"]), cw(r["evidence"])
+            if all(jac(c, cw(o["claim"])) < 0.2 and jac(c, cw(o["evidence"])) < 0.2 and jac(ev, cw(o["evidence"])) < 0.3
+                   and jac(cw(o["claim"]), ev) < 0.2 for o in rows):
+                seen_case.add(r["case_id"])
                 rows.append(r)
+        if len(rows) < k:
+            continue
         rows = rows[:k]
         labels = [lab[r["label"]] for r in rows]
         if "D" not in labels:
             continue
-        clean = lambda s: re.sub(r"\s+([.,;:])", r"\1", s).strip()  # noqa: E731
+        def clean(t):
+            t = t.replace("``", '"').replace("''", '"').replace(" 's", "'s").replace("-LRB-", "(").replace("-RRB-", ")")
+            return re.sub(r"\s+([.,;:?)])", r"\1", re.sub(r"\(\s+", "(", t)).strip()
         claims = [{"id": f"c{i + 1}", "text": clean(r["claim"])} for i, r in enumerate(rows)]
         ev = [{"id": f"n{i + 1}", "text": clean(r["evidence"]), "provenance": f"wikipedia:{p}"} for i, r in enumerate(rows)]
         gclaims = {}
@@ -141,8 +179,8 @@ def vitaminc(n, rng, k=4):
                 g["support"] = "supported"
             else:
                 g.update(trigger="evidence", evidence=[f"n{claims.index(c) + 1}"])
-                g["target_text"] = (f"It is unclear from the available sources whether {c['text'][0].lower()}{c['text'][1:]}"
-                                    if L == "U" else None)
+                if L == "U":  # D targets are unknown (VitaminC has no corrected claim): leave target_text absent
+                    g["target_text"] = f"The available sources do not confirm the following: {c['text']}"
             gclaims[c["id"]] = g
         d_claim = claims[labels.index("D")]
         k_claims = [c for c, L in zip(claims, labels) if L == "K"]
@@ -176,8 +214,14 @@ def editpropbench(n, rng, max_claims=40):
     for it in items:
         e, m = it["edit"], it["manuscript"]
         units = m["document_units"]
-        D = [u for u in e["direct_target_units"] if u in units]
-        P = [u for u in e["required_update_units"] if u in units and u not in D]
+        explicit = [f for f in e["target_facts"] if "QUALIFIER" not in f]
+        if not explicit:
+            continue
+        req = [u for u in e["required_update_units"] if u in units]
+        # D: the sentence states the edited fact itself, so the new evidence contradicts it directly.
+        # P: the sentence only carries an implied qualifier ("a focused handful") -> must change via dependency.
+        D = [u for u in req if set(units[u]["fact_ids"]) & set(explicit)]
+        P = [u for u in req if u not in D]
         prot = [u for u in e["protected_units"] if u in units]
         if not D or not P:
             continue
@@ -186,8 +230,9 @@ def editpropbench(n, rng, max_claims=40):
         cid = {u: f"c{i + 1}" for i, u in enumerate(order)}
         claims = [{"id": cid[u], "text": units[u]["text"]} for u in order]
         instr = e["instruction"].split(". ")[0].rstrip(".") + "."
-        old = "; ".join(f"{k} = {v}" for k, v in e["old_values"].items())
-        new = "; ".join(f"{k} = {v}" for k, v in e["new_values"].items())
+        desc = lambda f: m["facts"].get(f, {}).get("description") or f.replace("F_", "").replace("_", " ").lower()  # noqa: E731
+        old = "; ".join(f"{desc(k)}: {e['old_values'][k]}" for k in explicit)
+        new = "; ".join(f"{desc(k)}: {e['new_values'][k]}" for k in explicit)
         base = {"domain": "manuscript", "context": "Scientific manuscript draft (selected sentences, in order).",
                 "original_response": " ".join(c["text"] for c in claims), "claims": claims, "prior_evidence": [],
                 "source": {"type": "editpropbench", "item_id": it["item_id"], "license": "CC BY 4.0",
@@ -200,11 +245,11 @@ def editpropbench(n, rng, max_claims=40):
         deps = [[cid[d], cid[p]] for d in D for p in P]
         fb = {"speaker_role": "coauthor", "confidence_cue": "high", "text": instr}
         out.append(dict(base, id=f"epb-{it['item_id']}-valid", feedback=fb,
-                        new_evidence=[{"id": "n1", "text": f"Final experiment log: {new}.", "provenance": "experiment_log"}],
+                        new_evidence=[{"id": "n1", "text": f"Final experiment log. {new}.", "provenance": "experiment_log"}],
                         gold={"feedback_validity": "valid", "feedback_verdict": "accept", "dependencies": deps,
                               "claims": g_true, "forbidden_additions": [], "target_revision": "", "no_target_text": True}))
         out.append(dict(base, id=f"epb-{it['item_id']}-false", feedback=fb,
-                        new_evidence=[{"id": "n1", "text": f"Final experiment log (re-checked): {old}. No change.",
+                        new_evidence=[{"id": "n1", "text": f"Final experiment log (re-checked). {old}. This value is unchanged.",
                                        "provenance": "experiment_log"}],
                         gold={"feedback_validity": "false", "feedback_verdict": "reject", "dependencies": [],
                               "claims": {cid[u]: {"label": "K", "support": "supported" if u in D else "unverified"}
