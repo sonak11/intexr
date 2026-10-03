@@ -24,6 +24,7 @@ Once per example, fill in `feedback_verdict`. Write anything you found hard in `
 - `partial`: some of it is supported, some is unsupported or contradicted.
 - `reject`: it is contradicted, or it is about something other than what the response describes (e.g. a later time).
 - `insufficient`: it is too vague to evaluate, or no evidence decides it.
+- **Vague feedback rule:** generic vagueness ("something doesn't sit right") → `insufficient`, even if the evidence independently settles the claims. A vague *question about a specific claim* that the evidence answers ("is it really in a bathroom?") → `accept`.
 
 ## Granularity and dependency rules
 - One claim is **one finding or one assertion**. The pilot fixes claims for you. If you think a claim should be split, say so in `notes`.

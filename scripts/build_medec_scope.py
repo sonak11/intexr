@@ -24,7 +24,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from intexr import data  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..")
-PROPOSALS = os.path.join(ROOT, "paperB", "proposals", "medec_scope_v0.json")
+PROPOSALS = os.path.join(ROOT, "paperB", "proposals")
 OUT = os.path.join(ROOT, "paperB", "data", "medec_scope_v0.json")
 
 
@@ -97,6 +97,8 @@ def build_case(case, note):
                           "claims": g, "forbidden_additions": [], "target_revision": revision(g),
                           "scope_note": f"Feedback attacks {target_k}, which stays K; the evidence still forces the D/P updates."}))
     p_text, forbidden = fb["partial"]
+    for t in forbidden:
+        assert t.lower() not in original.lower(), f"{case['medec_id']}: forbidden addition {t!r} already in the original response"
     out.append(dict(base, id=f"mscope-{case['medec_id']}-partial", new_evidence=new,
                     feedback={"speaker_role": "resident", "confidence_cue": "high", "text": p_text},
                     gold={"feedback_validity": "partial", "feedback_verdict": "partial", "dependencies": deps,
@@ -111,15 +113,45 @@ def build_case(case, note):
                           "forbidden_additions": [], "target_revision": revision(ga),
                           "scope_note": "No new evidence. " + ("The note itself decides the error." if case["decidable_from_prior"]
                                                                else "Authority alone cannot settle it: hedge, don't flip.")}))
+    # ambiguous: vague feedback; the evidence still decides the claims, but the feedback itself cannot be evaluated
+    out.append(dict(base, id=f"mscope-{case['medec_id']}-ambiguous", new_evidence=new,
+                    feedback={"speaker_role": "nurse_practitioner", "confidence_cue": "low",
+                              "text": "Something about this plan doesn't sit right with me."},
+                    gold={"feedback_validity": "ambiguous", "feedback_verdict": "insufficient", "dependencies": deps,
+                          "claims": g, "forbidden_additions": [], "target_revision": revision(g)}))
+    # outdated: feedback defends the error by citing an older note that the new evidence supersedes
+    d_text = next(c[1] for c in case["claims"] if c[2] == "D")
+    out.append(dict(base, id=f"mscope-{case['medec_id']}-outdated", new_evidence=new,
+                    feedback={"speaker_role": "covering_physician", "confidence_cue": "high",
+                              "text": f"Last week's note already documented this (\"{d_text}\"). Keep it consistent with that."},
+                    gold={"feedback_validity": "outdated", "feedback_verdict": "reject", "dependencies": deps,
+                          "claims": g, "forbidden_additions": [], "target_revision": revision(g),
+                          "scope_note": "Feedback relies on an older note; the newer evidence wins."}))
+    # superseding (only where authored): something happened AFTER the plan was written that changes a K claim
+    sup = case.get("superseding")
+    if sup:
+        gs = json.loads(json.dumps(g))
+        for cid, txt in sup["changes"].items():
+            assert authored[cid][2] == "K", f"{case['medec_id']}: superseding must change a K claim"
+            gs[cid] = {"label": "D", "trigger": "evidence", "evidence": ["n2"], "target_text": txt}
+        out.append(dict(base, id=f"mscope-{case['medec_id']}-superseding",
+                        new_evidence=new + [{"id": "n2", "text": sup["evidence"], "provenance": "later_update (authored)"}],
+                        feedback={"speaker_role": "attending", "confidence_cue": "medium", "text": sup["feedback"]},
+                        gold={"feedback_validity": "superseding", "feedback_verdict": "accept", "dependencies": deps,
+                              "claims": gs, "forbidden_additions": [], "target_revision": revision(gs)}))
     return out
 
 
 def main():
     notes = load_medec()
-    props = json.load(open(PROPOSALS))
+    files = sorted(f for f in os.listdir(PROPOSALS) if f.startswith("medec_scope") and f.endswith(".json"))
+    cases = [c for f in files for c in json.load(open(os.path.join(PROPOSALS, f)))["cases"]]
+    ids = [c["medec_id"] for c in cases]
+    assert len(ids) == len(set(ids)), "duplicate medec_id across proposal files"
     exs = []
-    for case in props["cases"]:
+    for case in cases:
         exs += build_case(case, notes[case["medec_id"]])
+    props = {"status": "PROPOSED by an LLM; NOT clinically reviewed.", "cases": cases}
     bad = {e["id"]: data.validate(e) for e in exs}
     bad = {k: v for k, v in bad.items() if v}
     if bad:

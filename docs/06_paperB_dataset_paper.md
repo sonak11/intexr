@@ -21,7 +21,7 @@
 - **Original response:** an AI-drafted assessment & plan. It carries MEDEC's expert-designed error plus 1–3 claims that **follow from the error** (monitoring, follow-up, counselling, next tests).
 - **New evidence:** a decisive result (pathology, imaging, labs) or a guideline statement.
 - **Feedback variants per case:** valid, false (attacks a correct claim), partial (right fix + unsupported extra intervention), authority-only (no evidence). Still to add: ambiguous, outdated (an earlier lab superseded by a repeat), superseding (a new result after the note).
-- **Status:** 8 cases → 32 examples (`paperB/proposals/medec_scope_v0.json` → `scripts/build_medec_scope.py`). MEDEC has 630 error notes; 111 have downstream text after the error.
+- **Status (2 Oct):** 31 cases → 188 examples, 873 claims, all seven feedback types (`paperB/proposals/*.json` → `scripts/build_medec_scope.py`). Error types: diagnosis, management, treatment, pharmacotherapy, causal organism. **Gaps:** only 2 superseding cases and 3 depth-2 chains, so the next batch should target those. Some MEDEC answers are disputable (e.g. ms-val-253, sinusitis antibiotic choice); those were skipped and the skip list is kept for the paper.
 
 **Split 2: Radiology reports.** Built with the IU X-ray recipe (`scripts/build_iu_pilot.py`): real report = target, injected error + propagated impression. Released as a **build script + report IDs** (IU is no-derivatives). If PhysioNet access arrives, add a MIMIC-CXR version hosted on PhysioNet.
 
