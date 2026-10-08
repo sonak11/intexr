@@ -21,7 +21,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from intexr import data, metrics  # noqa: E402
-from intexr.clients import Client  # noqa: E402
+from intexr.clients import Client, QuotaExhausted  # noqa: E402
 from intexr.systems import OFFLINE, SYSTEMS  # noqa: E402
 
 KEYS = ["change_recall_D", "change_recall_P", "under_revision", "preservation_error_Ksupported",
@@ -44,9 +44,16 @@ def main():
     ap.add_argument("--judge", default=None, help="PROVIDER:MODEL for claim alignment of free-text outputs")
     ap.add_argument("--conditions", nargs="+", default=["B"], choices=list("ABCD"))
     ap.add_argument("--out", default="results")
+    ap.add_argument("--match", default=None, help="regex on example ids, e.g. 'valid|false|authority' to fit a daily free quota")
+    ap.add_argument("--limit", type=int, default=None, help="use only the first N matching examples")
     args = ap.parse_args()
 
     exs = data.load(args.data)
+    if args.match:
+        import re
+        exs = [e for e in exs if re.search(args.match, e["id"])]
+    if args.limit:
+        exs = exs[:args.limit]
     bad = {ex["id"]: data.validate(ex) for ex in exs}
     bad = {k: v for k, v in bad.items() if v}
     if bad:
@@ -73,8 +80,11 @@ def main():
             if name in ("dialogue", "evidence_prompt", "always_rewrite") and judge is None:
                 sys.exit(f"{name} needs --judge")
             preds, rows = [], []
-            for ex in exs:
-                p = fn(ex, client=client, judge=judge, condition=cond)
+            for k, ex in enumerate(exs):
+                try:
+                    p = fn(ex, client=client, judge=judge, condition=cond)
+                except QuotaExhausted as e:
+                    sys.exit(f"\nStopped at {spec}, condition {cond}, example {k + 1}/{len(exs)}.\n{e}")
                 p["condition"], p["model"] = cond, model
                 preds.append(p)
                 rows.append(metrics.per_example(ex, p))
