@@ -105,12 +105,17 @@ def aggregate(rows):
     return m
 
 
-def bootstrap(rows, n=2000, seed=0):
+def bootstrap(rows, groups=None, n=2000, seed=0):
+    """95% CIs by resampling whole source cases (groups[i] = case of rows[i]); per row if groups is None."""
     rng = random.Random(seed)
     point = aggregate(rows)
+    clusters = defaultdict(list)
+    for i, r in enumerate(rows):
+        clusters[groups[i] if groups else i].append(r)
+    clusters = list(clusters.values())
     samples = defaultdict(list)
     for _ in range(n):
-        agg = aggregate([rows[rng.randrange(len(rows))] for _ in rows])
+        agg = aggregate([r for _ in clusters for r in clusters[rng.randrange(len(clusters))]])
         for k, v in agg.items():
             if v == v:  # not NaN
                 samples[k].append(v)

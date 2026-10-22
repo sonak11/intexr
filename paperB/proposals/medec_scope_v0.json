@@ -5,6 +5,7 @@
   "cases": [
     {
       "medec_id": "ms-val-32",
+      "false_support": "Neuropsychology consult: episodic memory testing is within normal limits; an MMSE of 28/30 does not exclude a frontotemporal syndrome, which typically spares memory early.",
       "decidable_from_prior": false,
       "claims": [
         ["c1", "55-year-old man with 6 months of disinhibition, apathy, and new hyperphagia.", "K"],
@@ -27,6 +28,7 @@
     },
     {
       "medec_id": "ms-val-197",
+      "false_support": "Hematology note: warfarin stays on hold while the retroperitoneal hemorrhage is managed; the timing of resumption will be reassessed later.",
       "decidable_from_prior": false,
       "claims": [
         ["c1", "72-year-old woman on warfarin for atrial fibrillation, started 3 weeks ago.", "K"],
@@ -48,6 +50,7 @@
     },
     {
       "medec_id": "ms-val-565",
+      "false_support": "Rheumatology review: rheumatoid factor and anti-CCP are negative, with no small-joint synovitis on exam; findings fit polymyalgia rheumatica.",
       "decidable_from_prior": false,
       "claims": [
         ["c1", "Months of bilateral shoulder, neck, and hip girdle stiffness, worse in the morning, with ESR 52 mm/hr.", "K"],
@@ -70,6 +73,7 @@
     },
     {
       "medec_id": "ms-val-485",
+      "false_support": "AACAP guideline excerpt: cognitive behavioral therapy is a first-line treatment for pediatric social anxiety disorder and is recommended alone or combined with an SSRI.",
       "decidable_from_prior": false,
       "claims": [
         ["c1", "15-year-old with a year of fear of negative evaluation, avoidance of speaking in class, and a panic-like episode during a presentation.", "K"],
@@ -90,6 +94,7 @@
     },
     {
       "medec_id": "ms-val-185",
+      "false_support": "CDC STI guideline excerpt: women with a Bartholin gland abscess should be tested for gonorrhea and chlamydia, because these organisms can cause it.",
       "decidable_from_prior": false,
       "claims": [
         ["c1", "Acute, painful left labial swelling with fever of 38 C.", "K"],
@@ -110,6 +115,7 @@
     },
     {
       "medec_id": "ms-val-60",
+      "false_support": "Guideline excerpt (ADA): intensive glucose and blood pressure control slows progression of diabetic retinopathy.",
       "decidable_from_prior": false,
       "claims": [
         ["c1", "62-year-old with 8 years of gradually worsening bilateral central blurring and metamorphopsia on Amsler grid.", "K"],
@@ -129,6 +135,7 @@
     },
     {
       "medec_id": "ms-val-12",
+      "false_support": "Guideline excerpt (DHHS): continue antiretroviral therapy during treatment of opportunistic skin conditions; interruption is not recommended.",
       "decidable_from_prior": true,
       "claims": [
         ["c1", "45-year-old man with HIV on antiretroviral therapy, CD4 count 450/mm3.", "K"],
@@ -150,6 +157,7 @@
     },
     {
       "medec_id": "ms-val-24",
+      "false_support": "Wound care nurse, same day: stump incision clean and dry, no erythema, warmth, or drainage; capillary refill brisk.",
       "decidable_from_prior": true,
       "claims": [
         ["c1", "66-year-old man 3 weeks after right below-knee amputation for an unsalvageable arterial embolism.", "K"],

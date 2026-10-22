@@ -106,6 +106,15 @@ def model_view(ex, condition="B"):
     return view
 
 
+def case_key(ex):
+    """The source case an example was derived from; feedback variants of one case share it (bootstrap unit)."""
+    src = ex.get("source") or {}
+    for k in ("medec_id", "item_id", "text_id", "case_id", "page", "iu_id"):
+        if src.get(k):
+            return f"{src.get('type', '')}:{src[k]}"
+    return ex["id"]
+
+
 def summarize(examples):
     lab = Counter(g["label"] for ex in examples for g in ex["gold"]["claims"].values())
     val = Counter(ex["gold"]["feedback_validity"] for ex in examples)

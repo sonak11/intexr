@@ -4,6 +4,7 @@
  "cases": [
   {
    "medec_id": "ms-val-480",
+   "false_support": "Guideline excerpt (AASLD): patients with chronic hepatitis C who lack immunity should be vaccinated against hepatitis A and B.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -83,6 +84,7 @@
   },
   {
    "medec_id": "ms-val-514",
+   "false_support": "Guideline excerpt (ACOG): severe-range blood pressure (>=160/110) in pregnancy should be treated urgently with IV labetalol or hydralazine, or oral nifedipine.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -158,6 +160,7 @@
   },
   {
    "medec_id": "ms-test-115",
+   "false_support": "Guideline excerpt (CDC STI): all persons diagnosed with syphilis should be tested for HIV.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -241,6 +244,7 @@
   },
   {
    "medec_id": "ms-val-289",
+   "false_support": "Guideline excerpt (ACG): advise avoiding NSAIDs and limiting alcohol in patients with dyspepsia.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -305,6 +309,7 @@
   },
   {
    "medec_id": "ms-val-333",
+   "false_support": "Guideline excerpt: lactational mastitis can progress to breast abscess; a fluctuant mass warrants ultrasound and drainage.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -376,6 +381,7 @@
   },
   {
    "medec_id": "ms-val-303",
+   "false_support": "Hospital policy and psychiatry consult note: any intentional or unclear ingestion requires psychiatric evaluation once the patient is medically stable.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -444,6 +450,7 @@
   },
   {
    "medec_id": "ms-val-520",
+   "false_support": "Repeat serum quantitative beta-hCG: negative (<5 mIU/mL).",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -508,6 +515,7 @@
   },
   {
    "medec_id": "ms-test-97",
+   "false_support": "Blood cultures: Escherichia coli growing in 2 of 2 bottles, susceptible to piperacillin-tazobactam.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -577,6 +585,7 @@
   },
   {
    "medec_id": "ms-test-236",
+   "false_support": "Pulmonology note: her inhaled asthma controllers did not cause this presentation and should be continued.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -657,6 +666,7 @@
   },
   {
    "medec_id": "ms-test-75",
+   "false_support": "Allergy note: urticaria and wheezing within an hour of a penicillin dose is consistent with an IgE-mediated reaction; discontinue penicillin and record the allergy.",
    "decidable_from_prior": true,
    "claims": [
     [
@@ -726,6 +736,7 @@
   },
   {
    "medec_id": "ms-val-30",
+   "false_support": "SMFM consult addendum: the pruritus is explained by intrahepatic cholestasis of pregnancy, not by oral iron; continue iron supplementation.",
    "decidable_from_prior": true,
    "claims": [
     [
@@ -789,6 +800,7 @@
   },
   {
    "medec_id": "ms-val-50",
+   "false_support": "Guideline excerpt (DHHS): start Pneumocystis prophylaxis when the CD4 count is below 200 cells/mm3.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -860,6 +872,7 @@
   },
   {
    "medec_id": "ms-val-56",
+   "false_support": "AHA guideline excerpt: in acute rheumatic fever, ESR and CRP are followed to monitor rheumatic activity and response to anti-inflammatory therapy.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -923,6 +936,7 @@
   },
   {
    "medec_id": "ms-val-75",
+   "false_support": "Guideline excerpt (ADA): a fasting glucose of 100-125 mg/dL indicates prediabetes and should be followed up with HbA1c.",
    "decidable_from_prior": true,
    "claims": [
     [
@@ -986,6 +1000,7 @@
   },
   {
    "medec_id": "ms-val-86",
+   "false_support": "Guideline excerpt: relapse of giant cell arteritis is common during steroid taper; monitor for recurrent symptoms.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -1051,6 +1066,7 @@
   },
   {
    "medec_id": "ms-val-140",
+   "false_support": "Emergency department protocol: a pregnancy test is required for every woman of reproductive age with abdominal or flank pain before imaging or treatment, regardless of contraception.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -1114,6 +1130,7 @@
   },
   {
    "medec_id": "ms-test-61",
+   "false_support": "Oncology guideline excerpt: smoking cessation improves treatment tolerance and survival in small cell lung cancer and should be offered to every patient who smokes.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -1192,6 +1209,7 @@
   },
   {
    "medec_id": "ms-val-375",
+   "false_support": "Guideline excerpt (AAP): simple febrile seizures have an excellent prognosis; the risk of later epilepsy is only slightly above the general population.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -1256,6 +1274,7 @@
   },
   {
    "medec_id": "ms-val-393",
+   "false_support": "Orthopedics note: transient synovitis is discharged with return precautions for fever or inability to bear weight, which could signal septic arthritis.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -1320,6 +1339,7 @@
   },
   {
    "medec_id": "ms-test-224",
+   "false_support": "Repeat serum calcium, drawn without tourniquet: 11.4 mg/dL (elevated); albumin normal.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -1398,6 +1418,7 @@
   },
   {
    "medec_id": "ms-val-248",
+   "false_support": "Trauma guideline excerpt: in crush-related rhabdomyolysis, early aggressive IV isotonic fluid is the mainstay to prevent acute kidney injury.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -1461,6 +1482,7 @@
   },
   {
    "medec_id": "ms-val-338",
+   "false_support": "AHA/ASA aneurysmal subarachnoid hemorrhage guideline excerpt: control blood pressure before aneurysm securing and treat pain.",
    "decidable_from_prior": false,
    "claims": [
     [
@@ -1526,6 +1548,7 @@
   },
   {
    "medec_id": "ms-val-526",
+   "false_support": "CDC guidance excerpt: oral rehydration is recommended for patients with amebic colitis and diarrhea.",
    "decidable_from_prior": false,
    "claims": [
     [

@@ -92,7 +92,7 @@ def main():
             with open(os.path.join(args.out, f"preds_{tag}.jsonl"), "w") as f:
                 for p in preds:
                     f.write(json.dumps(p) + "\n")
-            point, ci = metrics.bootstrap(rows)
+            point, ci = metrics.bootstrap(rows, [data.case_key(e) for e in exs])
             report.append(f"| {spec} | " + " | ".join(fmt(point, ci, k) for k in KEYS) + " |")
             # breakdown by domain and by feedback validity
             for key in ("domain", "feedback_validity"):
