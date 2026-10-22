@@ -74,7 +74,11 @@ def main():
             if name in OFFLINE and cond != "B":
                 continue
             fn = SYSTEMS[name]
-            client = Client(model) if model else None
+            if name == "evidence_gate":
+                from intexr.gate import make_scorer
+                client = make_scorer(model) if model else None
+            else:
+                client = Client(model) if model else None
             if name not in OFFLINE and client is None:
                 sys.exit(f"{name} needs @PROVIDER:MODEL")
             if name in ("dialogue", "evidence_prompt", "always_rewrite") and judge is None:

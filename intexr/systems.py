@@ -99,6 +99,18 @@ def scope_first(ex, client, judge=None, condition="B", **_):
     return pred
 
 
+def _scope_pipeline(name, **kw):
+    def run(ex, client, judge=None, condition="B", **_):
+        from . import scope
+        return scope.run(ex, client, judge=judge, condition=condition, name=name, **kw)
+    return run
+
+
+def evidence_gate(ex, client, judge=None, condition="B", **_):
+    from . import gate
+    return gate.run(ex, client, judge=judge, condition=condition)
+
+
 SYSTEMS = {
     "no_revision": no_revision,
     "accept_feedback_lexical": accept_feedback_lexical,
@@ -107,5 +119,9 @@ SYSTEMS = {
     "evidence_prompt": free_text_system("evidence_prompt", prompts.evidence_messages),
     "always_rewrite": free_text_system("always_rewrite", prompts.rewrite_messages),
     "scope_first": scope_first,
+    "scope_pipeline": _scope_pipeline("scope_pipeline"),
+    "scope_pipeline_noprop": _scope_pipeline("scope_pipeline_noprop", propagate=False),
+    "scope_pipeline_nocheck": _scope_pipeline("scope_pipeline_nocheck", check=False),
+    "evidence_gate": evidence_gate,
 }
 OFFLINE = {"no_revision", "accept_feedback_lexical", "oracle"}
