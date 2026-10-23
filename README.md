@@ -1,5 +1,7 @@
 # IntExR — Interactive Explanation and Refinement (senior thesis, Prof. Metaxas)
 
+**Start with [`HANDOFF.md`](HANDOFF.md)**: it records the current state and the ordered task list.
+
 Paper 1, **IntExR-Scope**: given an original response, its supporting evidence, user feedback, and new evidence, revise every affected claim, preserve unaffected supported claims, and abstain when the evidence is insufficient.
 
 ## Layout
@@ -16,7 +18,16 @@ paperB/data/                   built MedScope examples (scripts/build_medec_scop
 external/                      40-example IntExR-format samples from MEDEC, VitaminC, EditPropBench (see external/README.md)
 pilot/data/pilot_v0.json       16 pilot examples (8 synthetic MIMIC-style CXR, 8 real COCO captions), 86 claims
 intexr/                        harness: data validation, prompts, stdlib LLM clients, systems, metrics
-scripts/run_pilot.py           run systems × conditions → results/report.md
+intexr/scope.py                scope-first PIPELINE (the method): align (LLM) → label (code) → revise (LLM) → assemble → leak check
+intexr/gate.py                 claim-level evidence-gate baseline (HF NLI model or LLM scorer)
+tests/test_pipeline.py         gold-perfect LLM stages must reproduce the oracle  (python3 -m unittest tests.test_pipeline)
+paper1/                        Paper 1 draft (ACL format): cd paper1 && latexmk -pdf main.tex
+scripts/run_pilot.py           run systems × conditions → results/report.md (--match REGEX, --limit N for free quotas)
+scripts/run_v0.sh              first real results in one command: MODEL=gemini:<id> JUDGE=groq:<id> bash scripts/run_v0.sh
+scripts/summarize_results.py   paper tables: main, paired A−B gap, P recall by depth, validity strata (+ LaTeX)
+scripts/label_actions.py       judge calibration: sample / label / score (Cohen's kappa vs the LLM judge)
+scripts/list_models.py         list a provider's model ids
+docs/08_free_compute.md        $0 compute plan (free API tiers, thasos vLLM, Kaggle)
 scripts/check_dataset.py       validate any dataset file, balance tables, thin cells, markdown review sheet
 scripts/fetch_external.py      download MEDEC / VitaminC / EditPropBench
 scripts/convert_external.py    convert them to IntExR format (+ feedback-validity variants)
@@ -28,7 +39,16 @@ scripts/mimic_candidates.py    mine MIMIC-CXR candidates (after PhysioNet access
 ```bash
 python3 scripts/run_pilot.py --systems no_revision accept_feedback_lexical oracle --out results/offline
 ```
-With a model (Python 3.9+, no packages needed):
+Free models (public data only; see docs/08):
+```bash
+export GEMINI_API_KEY=... GROQ_API_KEY=...
+python3 scripts/list_models.py gemini && python3 scripts/list_models.py groq
+SMOKE=1 MODEL=gemini:<id> JUDGE=groq:<id> bash scripts/run_v0.sh     # 3 examples first
+MODEL=gemini:<id> JUDGE=groq:<id> bash scripts/run_v0.sh             # resumable after daily caps
+```
+Systems include `scope_pipeline`, `scope_pipeline_noprop`, `scope_pipeline_nocheck`, and `evidence_gate@hf:<NLI model>` (on a GPU box) or `evidence_gate@<provider:model>`.
+
+With a paid model (Python 3.9+, no packages needed):
 ```bash
 export ANTHROPIC_API_KEY=...
 python3 scripts/run_pilot.py --systems no_revision oracle dialogue@anthropic:claude-sonnet-5-5 evidence_prompt@anthropic:claude-sonnet-5-5 always_rewrite@anthropic:claude-sonnet-5-5 scope_first@anthropic:claude-sonnet-5-5 --judge anthropic:claude-haiku-4-5-20251001 --conditions A B C D --out results/sonnet

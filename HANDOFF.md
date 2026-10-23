@@ -1,4 +1,63 @@
-# IntExR — Session Handoff (written 22 Oct 2026)
+# IntExR — Session Handoff (written 22 Oct 2026; updated 23 Oct 2026)
+
+## UPDATE 23 Oct (session 2, cloud container). Read this first; it overrides §0, §4, and §8 where they disagree.
+
+**Environment of session 2.** It ran in a claude.ai cloud container, not on the Mac:
+- no GPU, and no LLM API keys;
+- the network blocks huggingface.co, api.groq.com, arxiv.org, aclanthology.org and openi.nlm.nih.gov;
+- GitHub raw, generativelanguage.googleapis.com (Gemini), storage.googleapis.com and the AI2 S3 bucket (ARIES) are reachable.
+
+So **no LLM has been run yet**. Nothing below is a model result.
+
+**Done in session 2 (all on branch `claude/zen-pascal-0xzu4f`):**
+1. **MedScope batch 3** (`paperB/proposals/medec_scope_v0_batch3.json`, 9 cases, LLM-written and UNREVIEWED). It adds depth-2 chains (diagnosis → treatment → monitoring), 3 superseding cases and 3 conflicting-evidence cases.
+   - MedScope v0 is now 40 cases → 248 examples / 1,186 claims.
+   - Labels D/P/K/U = 220/309/577/80.
+   - P depth 1 / 2 = 250 / 59 (was 6 at depth 2).
+   - U triggers evidence / dependency / feedback = 3 / 47 / 30.
+   - 40 K-supported claims (was 0).
+2. **Gold fix: the false variant.** Previously the claim attacked by false feedback was K/unverified. Under the guide's own step 5 it should have been U-feedback (feedback disputes it, no evidence either way). Every case now has `false_support`, an evidence item n2 that supports the attacked claim, so the claim is **K-supported** and the verdict stays `reject`. This variant now directly measures claim-level sycophancy on supported claims.
+3. **New `conflicting` variant** (builder option): n2 contradicts n1 about the D claim, giving U-evidence on the D claim and U-dependency on its descendants; verdict `insufficient`.
+4. **Builder asserts** that checks are satisfied by the gold revision and not by the original response.
+5. **Bootstrap CIs now resample source cases** (`data.case_key`), as `docs/02` specifies. Before, they resampled examples, which made the CIs too narrow because there are ~6 variants per case.
+6. **Method: `intexr/scope.py` (`scope_pipeline`)**, two LLM calls per example:
+   - ALIGN (LLM): claim × evidence relations, dependencies, disputes, verdict;
+   - LABEL (code): the guide's precedence; newest evidence tier wins; a split within the newest tier gives U;
+   - REVISE (LLM): writes only D/U claims, and checks each P candidate (UNCHANGED → K);
+   - ASSEMBLE (code): splices the revised claims in, so K claims stay verbatim by construction;
+   - CHECK (code): feedback-only words must not leak into the revision; re-revise once if they do.
+   - Ablations: `scope_pipeline_noprop`, `scope_pipeline_nocheck`.
+7. **Baseline: `intexr/gate.py` (`evidence_gate`)**, the claim-level NLI gate (no propagation).
+   - `evidence_gate@hf:<model>` runs on thasos/Kaggle; `evidence_gate@<provider:model>` uses an LLM as the NLI scorer.
+   - NLI caching is built in.
+8. **`tests/test_pipeline.py`**: with gold-perfect LLM stages, the pipeline reproduces the oracle on all of MedScope, pilot v0 and EditPropBench-IX. That makes the label rules executable. MEDEC-knowledge is skipped because it has no evidence by design.
+9. **`scripts/summarize_results.py`**: paper tables covering the main results, the paired A−B gap with a case-level CI, P recall by depth, and validity strata; it also writes `paper1/tables/*.tex`.
+10. **`scripts/run_v0.sh`**: Task 1 in one command (`SMOKE=1` for 3 examples).
+11. **`scripts/label_actions.py`**: Task 6 judge calibration (sample → label in the terminal → kappa + confusion matrix).
+12. **Paper 1 draft `paper1/main.tex`** (ACL style, 8 pages, compiles; PDF committed).
+    - Drafted sections: abstract, intro, related work, task, benchmark, method, setup with **pre-registered hypotheses H1–H5**, results, limitations, ethics, appendix.
+    - Offline baseline numbers are real. Every LLM cell is `\pending`; never fill those by hand.
+    - Bib entries for EditPropBench, RevPropBench, LEDGER and Med-Stress were checked via web search; the 7 entries still marked `VERIFY` need checking.
+13. Updated `docs/03` (status block) and `README.md`.
+
+**Offline facts usable now (MedScope, condition B, case-level CIs):**
+- The lexical always-accept baseline changes 72% [57–85] of the K-supported claims attacked by false feedback.
+- Its change recall falls from D 0.40 to P 0.17, and to 0.10 at depth 2.
+
+**Next session, in order:**
+1. **Unblock models (only the user can do this).** Pick one path:
+   - Create a free Gemini key and add `GEMINI_API_KEY` to the cloud environment; generativelanguage.googleapis.com is reachable from it. Or run on the Mac.
+   - For Groq: add `GROQ_API_KEY` and allow `api.groq.com` in the environment's network settings.
+   - Or: VPN → `ssh thasos` → vLLM (§6b), and run `MODEL=vllm:Qwen/Qwen3-8B bash scripts/run_v0.sh` there.
+2. `SMOKE=1 MODEL=... JUDGE=... bash scripts/run_v0.sh`. Inspect `preds_scope_pipeline*` for `errors` and `preds_scope_first*` for `parse_error`, then do the full run.
+3. Paste `results/RESULTS_medscope.md` into paper §6. Copy the generated `paper1/tables/main_medec_scope_v0.tex` rows into Table 2. Write H1–H5 honestly.
+4. NLI gate on thasos: `evidence_gate@hf:<verified NLI id>`; needs `pip install torch transformers` there.
+5. Judge calibration with `scripts/label_actions.py` on the first outputs (~100 pairs).
+6. Clinician review and second annotator are still outstanding (Task 9). The batch 3 and `false_support` texts also need clinician review.
+7. Optional: ARIES (s3, reachable) as the second real non-medical set.
+
+---
+
 
 Read this first in a new session. It is the single source of truth for where the project stands. Everything referenced is in this repo (`/Users/sonakshisharma/intexr`, GitHub `sonak11/intexr`, **private**).
 
@@ -99,8 +158,8 @@ scripts/annotation_tools.py    blind sheet export + Cohen's kappa
 scripts/mimic_candidates.py    skeleton miner for MIMIC-CXR (addenda / hedged / consecutive / RadGraph suggestive_of)
 pilot/data/pilot_v0.json       16 items: 8 synthetic MIMIC-style CXR (cxr-001..008) + 8 real COCO (coco-001..008)
 pilot/data/pilot_v1*.json      git-ignored (IU license): 24 items = iu-001..008 + coco + syn-001..008
-paperB/proposals/              medec_scope_v0.json (8 cases) + medec_scope_v0_batch2.json (23 cases). LLM-WRITTEN, NOT CLINICALLY REVIEWED
-paperB/data/medec_scope_v0.json built output (188 examples)
+paperB/proposals/              medec_scope_v0.json (8) + _batch2.json (23) + _batch3.json (9 cases). LLM-WRITTEN, NOT CLINICALLY REVIEWED
+paperB/data/medec_scope_v0.json built output (248 examples)
 external/                      medec / vitaminc / editpropbench _intexr.json (40 each) + README (attribution)
 annotation/                    sheet_blank.csv (+inputs) for pilot_v0; sheet_v1_blank.csv git-ignored
 meeting_notes/                 LOCAL ONLY (excluded via .git/info/exclude): Meeting_script_Defei_Oct2026.docx
@@ -114,7 +173,7 @@ Python on the Mac: `/usr/bin/python3` 3.9.6, stdlib only for the harness. `pypdf
 
 | File | Examples | Claims | Labels D/P/K/U | Notes |
 |---|---|---|---|---|
-| `paperB/data/medec_scope_v0.json` | 188 (31 cases) | 873 | 164/203/447/59 | 7 feedback types; P depth: 197 at d1, 6 at d2; only 2 superseding cases |
+| `paperB/data/medec_scope_v0.json` | 248 (40 cases) | 1186 | 220/309/577/80 | 8 variant types; P depth: 250 at d1, 59 at d2; 5 superseding, 3 conflicting; 40 K-supported (false variant) |
 | `pilot/data/pilot_v1.json` | 24 | 136 | 24/23/79/10 | iu (real IU), coco (real captions), syn (synthetic) |
 | `pilot/data/pilot_v0.json` | 16 | 86 | 19/16/44/7 | the committed subset |
 | `external/editpropbench_intexr.json` | 40 | 1600 | 205/103/1292/0 | valid + false variants; D = sentences stating the edited fact, P = qualifier-only |

@@ -16,6 +16,19 @@ If (2) or (3) fails, see the fallback options in §4.
 
 ---
 
+## Update 23 Oct 2026 (overrides the stale items below)
+
+- **Compute / API:** $0 only: Gemini and Groq free tiers (public data), vLLM on thasos, and Kaggle as a backup. See `docs/08_free_compute.md`. The Anthropic/Azure items in week 1 are dropped.
+- **MIMIC / PhysioNet:** off the critical path. MedScope (MEDEC-based) is the clinical core. MIMIC is only added if credentialing arrives, and then only on self-hosted models.
+- **Prof. Metaxas email:** on hold until the cases and first model results are ready (Defei's advice).
+- **Non-medical domain:** COCO is now a baseline only. EditPropBench-IntExR is the hard non-medical set. FRUIT or ARIES are optional (ARIES's S3 bucket is reachable from the cloud sessions).
+- **Done since 2 Oct:**
+  - MedScope v0: 40 cases, 248 examples, 1,186 claims; 59 depth-2 P claims; superseding and conflicting-evidence variants; evidence-backed false variant.
+  - Scope-first pipeline and evidence-gate baseline (`intexr/scope.py`, `intexr/gate.py`) plus tests.
+  - Results summarizer, `scripts/run_v0.sh`, and the judge-labelling CLI.
+  - Paper 1 draft (`paper1/main.tex`, 8 pp.).
+- **Still blocking Oct 31:** first model numbers (needs API keys or thasos), and verifying the `recall` rows of the literature matrix.
+
 ## 0. Status as of 2 Oct
 
 | Item | File | State |
