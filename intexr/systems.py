@@ -109,6 +109,30 @@ def scope_first(ex, client, judge=None, condition="B", **_):
     return pred
 
 
+def verify_revise(ex, client, judge, condition="B", **_):
+    """Strong correction baseline (Chain-of-Verification / RARR style): verify each claim against the evidence, then
+    revise in free text. Unlike scope_pipeline it has no label rules, no explicit propagation check, and no verbatim
+    assembly, so the comparison isolates what those add beyond per-claim verification."""
+    v = model_view(ex, condition)
+    sys_, msgs = prompts.verify_messages(v)
+    raw = client(sys_, msgs)
+    err = None
+    try:
+        checks = prompts.parse_json(raw)
+        if not isinstance(checks, dict):
+            raise ValueError("verification output is not a JSON object")
+    except ValueError as e:
+        checks, err = {}, f"verify: {e}"
+    sys_, msgs = prompts.verified_revise_messages(v, checks)
+    revised = client(sys_, msgs).strip()
+    pred = {"id": ex["id"], "system": "verify_revise", "structured": False, "revised_response": revised,
+            "claims": _judge_statuses(ex, revised, judge),
+            "verification": {k: c.get("verdict") for k, c in checks.items() if isinstance(c, dict)}}
+    if err:
+        pred["errors"] = [err]
+    return pred
+
+
 def _scope_pipeline(name, **kw):
     def run(ex, client, judge=None, condition="B", **_):
         from . import scope
@@ -129,6 +153,7 @@ SYSTEMS = {
     "evidence_prompt": free_text_system("evidence_prompt", prompts.evidence_messages),
     "always_rewrite": free_text_system("always_rewrite", prompts.rewrite_messages),
     "scope_first": scope_first,
+    "verify_revise": verify_revise,
     "scope_pipeline": _scope_pipeline("scope_pipeline"),
     "scope_pipeline_noprop": _scope_pipeline("scope_pipeline_noprop", propagate=False),
     "scope_pipeline_nocheck": _scope_pipeline("scope_pipeline_nocheck", check=False),

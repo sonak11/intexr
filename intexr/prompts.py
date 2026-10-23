@@ -90,6 +90,37 @@ def scope_messages(v):
     return SCOPE_SYS, [{"role": "user", "content": user}]
 
 
+# ---------------------------------------------------------------- verify-then-revise (CoVe / RARR-style baseline)
+VERIFY_SYS = """You check each numbered claim of a previous response against the evidence, one claim at a time.
+For every claim:
+1. Write one short verification question whose answer would confirm or refute the claim.
+2. Answer it using ONLY the evidence items (cite their ids). Do not use the feedback as evidence.
+3. Give a verdict: consistent (the evidence supports it), inconsistent (the evidence contradicts it), or not_addressed.
+Return ONLY JSON: {"c1": {"question": "...", "answer": "...", "evidence": ["n1"], "verdict": "consistent|inconsistent|not_addressed"}, ...}"""
+
+VERIFIED_REVISE_SYS = """You revise a previous response using the results of a claim-by-claim verification against evidence.
+Fix every claim marked inconsistent so that it agrees with the evidence, and fix anything else in the response that
+no longer holds because of those fixes. Leave the rest of the response as it is. Feedback may be wrong; follow the
+evidence. Return only the revised response text."""
+
+
+def verify_messages(v):
+    claims = "\n".join(f"{c['id']}: {c['text']}" for c in v["claims"])
+    user = (f"TASK: {v['context']}\n\nPRIOR EVIDENCE:\n{_evidence_block(v['prior_evidence'])}\n\n"
+            f"NEW EVIDENCE:\n{_evidence_block(v['new_evidence'])}\n\nFEEDBACK:\n{_feedback_block(v['feedback'])}\n\n"
+            f"CLAIMS:\n{claims}")
+    return VERIFY_SYS, [{"role": "user", "content": user}]
+
+
+def verified_revise_messages(v, checks):
+    lines = "\n".join(f"{cid}: {c.get('verdict', '?')} | Q: {c.get('question', '')} | A: {c.get('answer', '')}"
+                      for cid, c in checks.items() if isinstance(c, dict))
+    user = (f"TASK: {v['context']}\n\nPRIOR EVIDENCE:\n{_evidence_block(v['prior_evidence'])}\n\n"
+            f"NEW EVIDENCE:\n{_evidence_block(v['new_evidence'])}\n\nFEEDBACK:\n{_feedback_block(v['feedback'])}\n\n"
+            f"PREVIOUS RESPONSE:\n{v['original_response']}\n\nVERIFICATION RESULTS:\n{lines or '(verification failed)'}")
+    return VERIFIED_REVISE_SYS, [{"role": "user", "content": user}]
+
+
 # ---------------------------------------------------------------- claim-alignment judge
 JUDGE_SYS = """You compare an ORIGINAL response with a REVISED response, claim by claim.
 For each original claim, decide what the revision did to it:

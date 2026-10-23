@@ -86,7 +86,7 @@ def main():
                 client = Client(model) if model else None
             if name not in OFFLINE and client is None:
                 sys.exit(f"{name} needs @PROVIDER:MODEL")
-            if name in ("dialogue", "evidence_prompt", "always_rewrite") and judge is None:
+            if name in ("dialogue", "evidence_prompt", "always_rewrite", "verify_revise") and judge is None:
                 sys.exit(f"{name} needs --judge")
             preds, rows = [], []
             t0 = time.time()

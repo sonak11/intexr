@@ -39,6 +39,8 @@ def prompts_tex():
         listing("Evidence-aware prompt (system)", prompts.EVIDENCE_SYS),
         listing("Always rewrite (system)", prompts.REWRITE_SYS),
         listing("Single-prompt scope-first (system)", prompts.SCOPE_SYS),
+        listing("Verify-then-revise baseline, step 1: verify (system)", prompts.VERIFY_SYS),
+        listing("Verify-then-revise baseline, step 2: revise (system)", prompts.VERIFIED_REVISE_SYS),
         listing("Scope-first pipeline, step 1: align (system)", scope.ALIGN_SYS),
         listing("Scope-first pipeline, step 3: revise (system)", scope.REVISE_SYS),
         listing("Evidence gate, LLM scorer (system)", gate.NLI_SYS),

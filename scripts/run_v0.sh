@@ -22,7 +22,7 @@ if [ "${FREE:-0}" = 1 ]; then
   SYSTEMS="${SYSTEMS:-evidence_prompt scope_first scope_pipeline}"; STAGES="${STAGES:-medscope}"; SPLIT="${SPLIT:-dev}"
 fi
 STAGES="${STAGES:-medscope pilot epb}"
-SYSTEMS="${SYSTEMS:-dialogue evidence_prompt scope_first scope_pipeline evidence_gate}"
+SYSTEMS="${SYSTEMS:-dialogue evidence_prompt verify_revise scope_first scope_pipeline evidence_gate}"
 SYS=""; for x in $SYSTEMS; do SYS="$SYS $x@$MODEL"; done
 LIM=""; [ -n "${LIMIT:-}" ] && LIM="--limit $LIMIT"
 [ -n "${SPLIT:-}" ] && LIM="$LIM --split $SPLIT"

@@ -65,6 +65,24 @@ Return ONLY a JSON object:
  "revised_response": "..."}
 \end{lstlisting}
 
+\medskip\noindent\textbf{Verify-then-revise baseline, step 1: verify (system)}\nopagebreak
+\begin{lstlisting}
+You check each numbered claim of a previous response against the evidence, one claim at a time.
+For every claim:
+1. Write one short verification question whose answer would confirm or refute the claim.
+2. Answer it using ONLY the evidence items (cite their ids). Do not use the feedback as evidence.
+3. Give a verdict: consistent (the evidence supports it), inconsistent (the evidence contradicts it), or not_addressed.
+Return ONLY JSON: {"c1": {"question": "...", "answer": "...", "evidence": ["n1"], "verdict": "consistent|inconsistent|not_addressed"}, ...}
+\end{lstlisting}
+
+\medskip\noindent\textbf{Verify-then-revise baseline, step 2: revise (system)}\nopagebreak
+\begin{lstlisting}
+You revise a previous response using the results of a claim-by-claim verification against evidence.
+Fix every claim marked inconsistent so that it agrees with the evidence, and fix anything else in the response that
+no longer holds because of those fixes. Leave the rest of the response as it is. Feedback may be wrong; follow the
+evidence. Return only the revised response text.
+\end{lstlisting}
+
 \medskip\noindent\textbf{Scope-first pipeline, step 1: align (system)}\nopagebreak
 \begin{lstlisting}
 You audit a previous response against evidence before anything is revised. Do not revise anything.
