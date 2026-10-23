@@ -16,6 +16,8 @@
 \usepackage{amssymb}
 \usepackage{xcolor}
 \usepackage{tikz}
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily\scriptsize,breaklines=true,breakatwhitespace=true,columns=fullflexible,keepspaces=true,frame=single,framerule=0.3pt,aboveskip=4pt,belowskip=4pt}
 \usetikzlibrary{arrows.meta,positioning,fit}
 
 \newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO:} #1\textbf{]}}}
@@ -83,7 +85,7 @@ FRUIT \citep{logan2022fruit} updates Wikipedia articles from new evidence, RARR 
 They treat evidence as the oracle and rarely label the claims that depend on a fix. Clinical correction benchmarks \citep{benabacha2025medec,zou2025corbenchx} correct one injected error per note or report and do not measure whether correct content survives.
 
 \paragraph{Sycophancy and persuasion.}
-Models capitulate to user pushback \citep{sharma2024sycophancy,laban2023flipflop}, including in medicine \citep{fanous2025syceval,xiao2026medstress}. Persuasion-balanced training \citep{stengeleskin2025pbt} shows that resisting bad persuasion and accepting good persuasion trade off. These studies score whole answers; IntExR-Scope scores the partition of a response, so a reply that rightly corrects one claim but also deletes a supported one is penalised for the second.
+Models capitulate to user pushback \citep{sharma2024sycophancy,laban2023flipflop}, including in medicine \citep{fanous2025syceval,xiao2026medstress}. Persuasion-balanced training \citep{stengeleskin2025pbt} shows that resisting bad persuasion and accepting good persuasion trade off. \citet{ma2026selectivity} show that methods suppressing unsupported yielding also suppress rational updating, and argue that anti-sycophancy is a \emph{selectivity} problem. These studies score whole answers; IntExR-Scope scores the partition of a response, so a reply that rightly corrects one claim but also deletes a supported one is penalised for the second.
 
 \paragraph{Belief revision and abstention.}
 AGM revision \citep{alchourron1985agm} formalises minimal change, \citet{katsuno1991update} separate revising beliefs about a fixed world from updating them after the world changes (our \emph{superseding} condition), and truth-maintenance systems retract beliefs whose justifications are withdrawn \citep{doyle1979tms,dekleer1986atms}, the formal ancestor of our \Pp{} label. LLM belief-revision benchmarks use synthetic logic \citep{wilie2024beliefr}. Abstention work studies answer-level refusal \citep{kirichenko2025abstentionbench}; our \U{} label asks for claim-level hedging inside a revision.
@@ -198,9 +200,9 @@ Single-prompt revision asks one model call to verify feedback, find dependents, 
 %=====================================================================
 \paragraph{Systems.} Following the thesis plan, we compare: \textbf{no revision}; \textbf{always accept} (a lexical heuristic that marks claims sharing content words with the feedback); \textbf{always rewrite} (rewrite the response from all inputs); \textbf{dialogue} (the feedback and new evidence pasted as the next chat turn); \textbf{evidence-aware prompting} (instructions that feedback may be wrong, to change only what evidence requires including inferred statements, to keep other sentences verbatim, and to hedge undecided claims, which is the ``preservation clause'' baseline recommended by minimal-edit work); \textbf{single-prompt scope-first}; a claim-level \textbf{evidence gate} (an NLI model scores each claim--evidence pair; contradiction $\Rightarrow$ remove, dispute without entailment $\Rightarrow$ hedge, no propagation); and the \textbf{scope-first pipeline} with its ablations. \todo{Strong current correction baseline: LEDGER-style dependency-graph editing if code is available, else RARR-style research-and-revise.}
 
-\paragraph{Models.} All experiments run at zero monetary cost on public data. Open-weight models are served with vLLM on a university GPU server: \todo{Qwen3-8B, Qwen3-32B (AWQ), Llama-3.3-70B (AWQ)}; API models use free tiers: \todo{Gemini Flash; gpt-oss-120b via Groq}. Temperature is 0; every response is cached and released. The NLI gate uses \todo{DeBERTa-v3-large NLI checkpoint, id verified on the hub}.
+\paragraph{Models.} All experiments run at zero monetary cost on public data. Two open-weight models are queried through a free inference tier (Groq): gpt-oss-120b with low reasoning effort and Qwen3.8-27B with reasoning disabled. Free-tier token caps limit these runs to a pre-specified slice: the first 20 \ms{} source cases under the valid, false, and authority-only conditions (60 examples), conditions A and B, and the three systems the main comparisons need (evidence-aware prompt, single-prompt scope-first, scope-first pipeline). The full design (all 248 examples, all conditions and systems) runs on self-hosted open-weight models served with vLLM on a university GPU server: \todo{Qwen3-8B; a 32B model in AWQ if memory allows}. Temperature is 0; every response is cached and released with the code. The NLI gate uses \todo{DeBERTa-v3-large NLI checkpoint, id verified on the hub}.
 
-\paragraph{Judge and its calibration.} Free-text revisions are mapped to claim actions by an LLM judge that sees the original claims and the revision but not the evidence or gold. \todo{Report Cohen's $\kappa$ between the judge and the first author on 100 stratified (claim, revision) pairs (scripts/label\_actions.py); target $\kappa\geq0.75$; report the confusion matrix and, if below target, switch judge model or add human labels for the affected strata.}
+\paragraph{Judge and its calibration.} Free-text revisions are mapped to claim actions by an LLM judge (gemini-3.5-flash-lite, fixed across all runs) that sees the original claims and the revision but not the evidence or gold. The judge also reads the text produced by structured systems, so that their self-reported labels can be checked against what their revisions actually do. \todo{Report Cohen's $\kappa$ between the judge and the first author on 100 stratified (claim, revision) pairs (scripts/label\_actions.py); target $\kappa\geq0.75$; report the confusion matrix and, if below target, switch judge model or add human labels for the affected strata.}
 
 \paragraph{Pre-registered hypotheses.} We state the predictions before running models.
 \textbf{H1 (cost of verification):} on the same claims, condition B lowers \Pp{} change recall and interaction-exact accuracy relative to A.
@@ -264,9 +266,9 @@ Annotators read all evidence first, then the feedback, and for each claim apply 
 
 \section{Example}
 \label{app:example}
-\todo{One \ms{} case across its conditions (valid / false / authority-only) as a figure.}
+\input{generated/example}
 
 \section{Prompts}
-\todo{Align, revise, evidence-aware, dialogue, judge prompts verbatim (intexr/scope.py, intexr/prompts.py).}
+\input{generated/prompts}
 
 \end{document}
