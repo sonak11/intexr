@@ -46,6 +46,13 @@
   - appendix generated from code (`scripts/make_paper_appendix.py`: verbatim prompts + a worked example, ms-val-99, across 4 conditions);
   - Setup names the real models, the free-tier slice and the fixed judge.
 
+**Later still (23 Oct):**
+- **Dev/test split frozen** (`paperB/data/splits.json`, by source case). dev = the 20 cases in the free-tier runs; **test is held out**: never tune on it. Use `run_pilot.py --split`.
+- New strong baseline `verify_revise` (Chain-of-Verification / RARR style; in the full design and the paper).
+- Annotation guide v0.9 (new rules also on the annotation page).
+- `docs/10_frozen_protocol.md`: a draft with TBDs, including H1–H5 tests with Holm correction.
+- `scripts/sample_size.py`: test-set size from dev A/B variance.
+
 ---
 
 ## UPDATE 23 Oct (session 2, cloud container). Read this first; it overrides §0, §4, and §8 where they disagree.
