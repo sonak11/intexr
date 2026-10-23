@@ -9,6 +9,7 @@ label ∈ D|P|K|U (only for structured systems: what the system says it did).
 import re
 
 from . import prompts
+from . import STATUSES
 from .data import model_view
 
 _STOP = set("""a an the is are was were be been of in on at to for and or but not no it its this that with as by from
@@ -56,11 +57,18 @@ def oracle(ex, **_):
 # ---------------------------------------------------------------- LLM systems
 def _judge_statuses(ex, revised, judge):
     sys_, msgs = prompts.judge_messages(ex, revised)
+    raw = judge(sys_, msgs)  # API failures (quota, auth, HTTP) propagate and stop the run: never score them as "keep"
     try:
-        out = prompts.parse_json(judge(sys_, msgs))
-    except Exception as e:  # noqa: BLE001
-        return {c["id"]: {"status": "keep", "judge_error": str(e)} for c in ex["claims"]}
-    return {c["id"]: {"status": out.get(c["id"], "keep")} for c in ex["claims"]}
+        out = prompts.parse_json(raw)
+        if not isinstance(out, dict):
+            raise ValueError("judge output is not a JSON object")
+    except ValueError as e:
+        return {c["id"]: {"status": "keep", "judge_error": f"unparseable judge output: {e}"} for c in ex["claims"]}
+    res = {}
+    for c in ex["claims"]:
+        st = out.get(c["id"])
+        res[c["id"]] = {"status": st} if st in STATUSES else {"status": "keep", "judge_error": f"bad or missing status {st!r}"}
+    return res
 
 
 def free_text_system(name, builder):
@@ -79,7 +87,9 @@ def scope_first(ex, client, judge=None, condition="B", **_):
     raw = client(sys_, msgs)
     try:
         out = prompts.parse_json(raw)
-    except Exception as e:  # noqa: BLE001
+        if not isinstance(out, dict):
+            raise ValueError("output is not a JSON object")
+    except ValueError as e:
         return {"id": ex["id"], "system": "scope_first", "structured": True, "parse_error": str(e), "raw": raw,
                 "revised_response": ex["original_response"], "verdict": None,
                 "claims": {c["id"]: {"label": "K", "status": "keep"} for c in ex["claims"]}}

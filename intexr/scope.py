@@ -233,7 +233,9 @@ def run(ex, client, judge=None, condition="B", propagate=True, check=True, name=
     raw_align = client(sys_, msgs)
     try:
         align = prompts.parse_json(raw_align)
-    except Exception as e:  # noqa: BLE001
+        if not isinstance(align, dict):
+            raise ValueError("align output is not a JSON object")
+    except ValueError as e:
         errors.append(f"align: {e}")
         align = {"claims": [], "feedback": {}}
     labels, triggers, parents = assign_labels(v, align)
@@ -259,7 +261,7 @@ def run(ex, client, judge=None, condition="B", propagate=True, check=True, name=
         raw_rev = client(sys_, msgs)
         try:
             new_text = _texts(raw_rev)
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, AttributeError) as e:
             errors.append(f"revise: {e}")
     final = {}
     for c in cids:
@@ -282,13 +284,14 @@ def run(ex, client, judge=None, condition="B", propagate=True, check=True, name=
         extra = ("Your previous answer added content that only the feedback asserts (" + ", ".join(sorted(leaks)) +
                  "). No evidence supports it. Do not include it.")
         sys_, msgs = revise_messages(v, ev, redo, new_text, extra)
+        raw_again = client(sys_, msgs)
         try:
-            again = _texts(client(sys_, msgs))
+            again = _texts(raw_again)
             for c in bad:
                 if c in again and again[c] != "UNCHANGED":
                     final[c]["revised_text"] = again[c]
                     final[c]["status"] = _status(final[c]["label"], again[c])
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, AttributeError) as e:
             errors.append(f"check: {e}")
     revised = assemble(v["original_response"], v["claims"],
                        {c: f["revised_text"] for c, f in final.items() if f["label"] != "K"})

@@ -94,6 +94,9 @@ def main():
                     p = fn(ex, client=client, judge=judge, condition=cond)
                 except QuotaExhausted as e:
                     sys.exit(f"\nStopped at {spec}, condition {cond}, example {k + 1}/{len(exs)}.\n{e}")
+                except RuntimeError as e:  # an API error (judge or model): stop instead of writing bad scores
+                    sys.exit(f"\nAPI error at {spec}, condition {cond}, example {k + 1}/{len(exs)} "
+                             f"(model {model}, judge {args.judge}):\n{e}")
                 p["condition"], p["model"] = cond, model
                 preds.append(p)
                 rows.append(metrics.per_example(ex, p))

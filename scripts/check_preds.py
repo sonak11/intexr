@@ -23,5 +23,6 @@ for d in sys.argv[1:]:
         if problem:
             p = next(p for p in ps if "parse_error" in p or p.get("errors") or not (p.get("revised_response") or "").strip()
                      or any("judge_error" in c for c in p.get("claims", {}).values()))
-            print("         first bad example:", p["id"], (p.get("parse_error") or p.get("errors") or "")[:300])
+            je = next((c["judge_error"] for c in p.get("claims", {}).values() if "judge_error" in c), "")
+            print("         first bad example:", p["id"], str(p.get("parse_error") or p.get("errors") or je)[:300])
 sys.exit(1 if bad else 0)

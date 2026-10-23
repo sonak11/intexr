@@ -75,9 +75,11 @@ class LLMScorer:
         user = ("CLAIMS:\n" + "\n".join(f"{c['id']}: {c['text']}" for c in claims) +
                 "\n\nEVIDENCE:\n" + prompts._evidence_block(evidence) +
                 "\n\nPAIRS:\n" + "\n".join(f"{c['id']}|{e['id']}" for c in claims for e in evidence))
+        raw = self.client(NLI_SYS, [{"role": "user", "content": user}])  # API failures propagate
         try:
-            out = prompts.parse_json(self.client(NLI_SYS, [{"role": "user", "content": user}]))
-        except Exception:  # noqa: BLE001
+            out = prompts.parse_json(raw)
+            out = out if isinstance(out, dict) else {}
+        except ValueError:
             out = {}
         res = {}
         for c in claims:
