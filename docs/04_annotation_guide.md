@@ -1,4 +1,4 @@
-# IntExR-Scope — Annotation Guide (v0, for the pilot)
+# IntExR-Scope — Annotation Guide (v0.9, 23 Oct 2026; becomes v1 after the agreement study)
 
 You will see: the task context, the original response split into claims (`c1…cn`), prior evidence (`e*`), feedback, and new evidence (`n*`). Use `annotation/sheet_blank.csv` and `annotation/sheet_blank_inputs.json`. **Do not look at `pilot/data/pilot_v0.json`; it contains the gold labels.**
 
@@ -37,6 +37,14 @@ Once per example, fill in `feedback_verdict`. Write anything you found hard in `
 - **Majority vs. conflict (COCO).** If one caption dissents with a broader or different term (e.g. "yak" vs. "cow" ×3), keep the claim. If captions directly conflict on the property itself (e.g. lid open vs. on the lid), label U.
 - **Unverified original claims** (e.g. "Its fur is orange", with no evidence either way): **K**, because scope is limited to what the update affects.
 - **Feedback rejected but evidence still changes things (`coco-002`, `coco-007`).** Label the claims by the evidence. The verdict is independent of the claim labels.
+
+## Rules added in v0.9 (MedScope)
+- **Evidence vs. knowledge.** A **D** label needs an evidence item that speaks to the claim. Do not label D from your own medical knowledge alone. You *may* use domain knowledge to decide whether a dependent claim still holds once its parent changes (the P decision). Example: once the diagnosis changes from measles to rubella, you know vitamin A no longer follows.
+- **Feedback attacks a claim that evidence supports.** If an evidence item (a note, a guideline excerpt, a result) supports the attacked claim, the claim is **K**. The verdict is *reject* if that is all the feedback says. The feedback's confidence or the speaker's seniority does not change this.
+- **Two evidence items disagree about a claim** (e.g. two pathology reads, two labs): label it **U** (trigger: evidence), and label claims inferred from it **U** (trigger: dependency). Do not pick a side, even if one source seems more reliable, unless an item states that it supersedes the other (an addendum, a final report replacing a preliminary one).
+- **Something happened after the response was written** (a delivery, a new deficit, a lab trend): forward-looking claims that no longer fit are **D**. Descriptions of the earlier state stay **K**. This is an *update* of a correct claim, not a correction of a wrong one.
+- **Feedback adds a treatment or test that no evidence supports** (e.g. "also give X"): do not create a claim for it. Note it in `notes`; it is scored as a *forbidden addition*. The verdict is *partial* if the rest of the feedback is supported.
+- **Feedback quotes an older note to defend a claim, and newer evidence contradicts it:** newer evidence wins; the claim is **D**, and the verdict is *reject*.
 
 ## Timing
 Aim for about 4 minutes per example. Record your total time; we need it to budget scaling.

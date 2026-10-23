@@ -113,6 +113,13 @@ The **A vs. B gap** on the same claims is the central novelty evidence: it measu
 
 ## 7. Open definitional questions (resolve in the pilot)
 
+*Status 23 Oct 2026:*
+- MedScope implements rules 2 and 3 as stated below. It adds two decided rules, now in the guide (v0.9):
+  - **evidence vs. knowledge**: D needs an evidence item; P may use domain knowledge;
+  - **K-supported under false feedback**: a claim attacked by feedback but supported by an evidence item stays K.
+- Question 4 is generalised: two evidence items that disagree about a claim make it U-evidence, unless one explicitly supersedes the other.
+- These rules are final only after the agreement study (`annotation/README_second_annotator.md`).
+
 1. **Refinement vs. keep.** Is a claim that evidence makes *more specific* without contradicting it ("6 mm nodule" → "6 mm calcified nodule") D or K? *Current rule: D, if the refinement changes a downstream inference; otherwise K.*
 2. **Temporal scope.** Claims about the state at time `t_0` stay true after the world changes (extubation in `cxr-004`). *Current rule: K for descriptions of `t_0`; D for forward-looking claims (recommendations, current status).*
 3. **Authority as evidence.** Is an attending's verbal statement evidence or feedback? *Current rule: feedback, unless it is documented (addendum, signed read).* This is the most likely source of annotator disagreement (`cxr-007`). Discuss with the clinical collaborator.
