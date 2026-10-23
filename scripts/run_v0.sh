@@ -8,8 +8,9 @@
 # Optional: SMOKE=1 (2 examples, condition B only), TAG=<name for the results dir>, STAGES="medscope pilot epb",
 #           SYSTEMS="evidence_prompt scope_pipeline" (subset), LIMIT=<n> (first n MedScope core examples).
 # FREE=1    preset for free API tiers (Groq: ~200K tokens/day per model): the three systems the main claims need
-#           (evidence_prompt, scope_first, scope_pipeline), MedScope only, first 20 cases x valid/false/authority
-#           (LIMIT=60), conditions A and B. The full design runs on thasos (no caps).
+#           (evidence_prompt, scope_first, scope_pipeline), MedScope only, the 20 dev cases x valid/false/authority
+#           (SPLIT=dev, 60 examples), conditions A and B. The full design runs on thasos (no caps).
+# SPLIT=dev|test  MedScope split by source case (paperB/data/splits.json). Test is held out until the protocol freeze.
 # Fewer tokens on Groq's gpt-oss:  INTEXR_EXTRA_BODY_GROQ='{"reasoning_effort": "low"}'
 # Check spending afterwards:        python3 scripts/usage.py --since 1d
 set -euo pipefail
@@ -18,12 +19,13 @@ cd "$(dirname "$0")/.."
 JUDGE="${JUDGE:-$MODEL}"
 TAG="${TAG:-$(echo "$MODEL" | tr ':/' '__')}"
 if [ "${FREE:-0}" = 1 ]; then
-  SYSTEMS="${SYSTEMS:-evidence_prompt scope_first scope_pipeline}"; STAGES="${STAGES:-medscope}"; LIMIT="${LIMIT:-60}"
+  SYSTEMS="${SYSTEMS:-evidence_prompt scope_first scope_pipeline}"; STAGES="${STAGES:-medscope}"; SPLIT="${SPLIT:-dev}"
 fi
 STAGES="${STAGES:-medscope pilot epb}"
 SYSTEMS="${SYSTEMS:-dialogue evidence_prompt scope_first scope_pipeline evidence_gate}"
 SYS=""; for x in $SYSTEMS; do SYS="$SYS $x@$MODEL"; done
 LIM=""; [ -n "${LIMIT:-}" ] && LIM="--limit $LIMIT"
+[ -n "${SPLIT:-}" ] && LIM="$LIM --split $SPLIT"
 OFF="no_revision oracle"
 CORE='valid$|false$|authority$|conflicting$'   # 123 MedScope examples: the four cells the A/B claim rests on
 

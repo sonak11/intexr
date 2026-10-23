@@ -183,6 +183,13 @@ def main():
     for case in cases:
         exs += build_case(case, notes[case["medec_id"]])
     props = {"status": "PROPOSED by an LLM; NOT clinically reviewed.", "cases": cases}
+    # every example carries its split (by source case); new cases default to test
+    split_path = os.path.join(ROOT, "paperB", "data", "splits.json")
+    splits = json.load(open(split_path)) if os.path.exists(split_path) else {"dev": [], "test": []}
+    for e in exs:
+        e["source"]["split"] = "dev" if e["source"]["medec_id"] in splits["dev"] else "test"
+    overlap = set(splits["dev"]) & set(splits["test"])
+    assert not overlap, f"cases in both splits: {overlap}"
     bad = {e["id"]: data.validate(e) for e in exs}
     bad = {k: v for k, v in bad.items() if v}
     if bad:

@@ -47,12 +47,16 @@ def main():
     ap.add_argument("--out", default="results")
     ap.add_argument("--match", default=None, help="regex on example ids, e.g. 'valid|false|authority' to fit a daily free quota")
     ap.add_argument("--limit", type=int, default=None, help="use only the first N matching examples")
+    ap.add_argument("--split", choices=["dev", "test"], default=None,
+                    help="MedScope split by source case (paperB/data/splits.json); test is held out until the protocol freeze")
     args = ap.parse_args()
 
     exs = data.load(args.data)
     if args.match:
         import re
         exs = [e for e in exs if re.search(args.match, e["id"])]
+    if args.split:
+        exs = [e for e in exs if e.get("source", {}).get("split") == args.split]
     if args.limit:
         exs = exs[:args.limit]
     bad = {ex["id"]: data.validate(ex) for ex in exs}
