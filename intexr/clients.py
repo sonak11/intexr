@@ -74,9 +74,11 @@ def _post(url, headers, body, retries=6):
 
 
 class Client:
-    def __init__(self, spec, temperature=0.0, max_tokens=4000):
+    def __init__(self, spec, temperature=0.0, max_tokens=None):
         self.provider, self.model = spec.split(":", 1)
-        self.temperature, self.max_tokens = temperature, max_tokens
+        # INTEXR_MAX_TOKENS lowers the output cap for providers with small per-request limits (e.g. Qwen on Groq)
+        self.temperature = temperature
+        self.max_tokens = max_tokens or int(os.environ.get("INTEXR_MAX_TOKENS", "4000"))
         if self.provider not in PRESETS and self.provider not in ("anthropic", "openai", "vllm"):
             raise ValueError(f"unknown provider in {spec}; choose from {sorted(PRESETS) + ['anthropic', 'openai', 'vllm']}")
         free = PRESETS.get(self.provider, (None, None, self.provider == "vllm"))[2]
