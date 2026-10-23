@@ -17,6 +17,7 @@ import argparse
 import json
 import os
 import sys
+import time
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
@@ -84,7 +85,11 @@ def main():
             if name in ("dialogue", "evidence_prompt", "always_rewrite") and judge is None:
                 sys.exit(f"{name} needs --judge")
             preds, rows = [], []
+            t0 = time.time()
             for k, ex in enumerate(exs):
+                if name not in OFFLINE:  # progress, so slow free-tier runs don't look frozen
+                    print(f"  [{spec} | condition {cond}] {k + 1}/{len(exs)} {ex['id']}  ({time.time() - t0:.0f}s elapsed)",
+                          file=sys.stderr, flush=True)
                 try:
                     p = fn(ex, client=client, judge=judge, condition=cond)
                 except QuotaExhausted as e:
