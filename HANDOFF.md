@@ -1,5 +1,53 @@
 # IntExR — Session Handoff (written 22 Oct 2026; updated 23 Oct 2026)
 
+## UPDATE 23 Oct, later (session 2, continued). Read this first.
+
+**Git:** see `CLAUDE.md`. Work only on `main`, commit as sonak11 (GitHub noreply email), and add no Claude trailers.
+
+**Model runs are live on the owner's Mac** (free tiers, public data only).
+- Keys live in `~/.intexr_keys` (Mac home folder, never in the repo; `.gitignore` covers `.intexr_keys*`).
+- Facts learned the hard way:
+  - Python from python.org needs `Install Certificates.command`.
+  - `gemini-2.5-flash` and `gemini-2.5-flash-lite` are retired (404) even though they are listed.
+  - The Gemini free quota for `gemini-3.5-flash` is too small to use it as a model.
+  - Groq free tier: ~200K tokens/day per model, so ~120 calls/day for gpt-oss-120b (~1.2–1.7K tokens/call).
+  - Qwen on Groq needs `INTEXR_MAX_TOKENS=2000` and `reasoning_effort: none`.
+- Commands, run daily until each one prints "Wrote results/RESULTS_medscope.md":
+  ```
+  # window 1
+  export INTEXR_RPM=4 INTEXR_EXTRA_BODY_GROQ='{"reasoning_effort": "low"}'
+  caffeinate -i env FREE=1 MODEL=groq:openai/gpt-oss-120b JUDGE=gemini:gemini-3.5-flash-lite bash scripts/run_v0.sh
+  # window 2
+  export INTEXR_RPM=2 INTEXR_MAX_TOKENS=2000 INTEXR_EXTRA_BODY_GROQ='{"reasoning_effort": "none"}'
+  caffeinate -i env FREE=1 MODEL=groq:qwen/qwen3.8-27b JUDGE=gemini:gemini-3.5-flash-lite bash scripts/run_v0.sh
+  ```
+- `FREE=1` = 60 examples (first 20 cases × valid/false/authority) × conditions A, B × {evidence_prompt, scope_first, scope_pipeline}. The full design is for thasos (not yet logged in; the user needs Cisco Secure Client VPN `vpn.rutgers.edu` + Duo).
+- When results are pushed: run `scripts/summarize_results.py` and `scripts/error_audit.py`, then fill paper §6 and novelty memo §4.
+
+**Added in this part of the session:**
+- Client robustness:
+  - API errors stop the run (they are never scored as "keep");
+  - waits are visible; daily caps stop the run immediately;
+  - `INTEXR_EXTRA_BODY_<PROVIDER>`, `INTEXR_MAX_TOKENS`.
+- New scripts:
+  - `scripts/usage.py`: token use from the cache;
+  - `scripts/check_preds.py`: post-run sanity check;
+  - `scripts/error_audit.py`: confusion matrix + align / revise / cascade attribution.
+- `docs/09_novelty_memo.md`: Oct 31 memo; §4 waits for the numbers.
+- Literature matrix:
+  - 14 more rows verified on the web, and MedLaSA and RaDialog venues fixed;
+  - 4 new 2026 papers added (rows 56–59) after a fresh competitor search, which found no paper combining propagation with unreliable feedback;
+  - 20 canonical rows remain `recall`.
+- Second annotator package:
+  - `annotation/medscope_annotate.html`: blind page, 24 stratified examples, neutral item ids, CSV export; tested in headless Chromium;
+  - key file + `annotation/README_second_annotator.md`;
+  - scoring: `annotation_tools.py agree … --key`.
+- Paper:
+  - appendix generated from code (`scripts/make_paper_appendix.py`: verbatim prompts + a worked example, ms-val-99, across 4 conditions);
+  - Setup names the real models, the free-tier slice and the fixed judge.
+
+---
+
 ## UPDATE 23 Oct (session 2, cloud container). Read this first; it overrides §0, §4, and §8 where they disagree.
 
 **Environment of session 2.** It ran in a claude.ai cloud container, not on the Mac:
