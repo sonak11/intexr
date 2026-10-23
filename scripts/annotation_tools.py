@@ -33,9 +33,10 @@ def sheet(args):
     print("wrote", args.out)
 
 
-def _read(path):
-    with open(path) as f:
-        return {(r["example_id"], r["claim_id"]): r for r in csv.DictReader(f)}
+def _read(path, key=None):
+    """key: {neutral item id: example id} from make_annotation_html.py, so blind sheets map back to real ids."""
+    with open(path, newline="") as f:
+        return {((key or {}).get(r["example_id"], r["example_id"]), r["claim_id"]): r for r in csv.DictReader(f)}
 
 
 def _gold_as_sheet(path):
@@ -60,8 +61,9 @@ def kappa(a, b):
 
 
 def agree(args):
-    A = _read(args.a)
-    B = _gold_as_sheet(args.gold) if args.gold else _read(args.b)
+    key = json.load(open(args.key)) if args.key else None
+    A = _read(args.a, key)
+    B = _gold_as_sheet(args.gold) if args.gold else _read(args.b, key)
     keys = sorted(k for k in A if k in B and A[k]["label"].strip())
     la = [A[k]["label"].strip().upper() for k in keys]
     lb = [B[k]["label"].strip().upper() for k in keys]
@@ -93,6 +95,7 @@ def main():
     g.add_argument("a")
     g.add_argument("b", nargs="?")
     g.add_argument("--gold")
+    g.add_argument("--key", help="item-id key from make_annotation_html.py")
     args = ap.parse_args()
     sheet(args) if args.cmd == "sheet" else agree(args)
 
