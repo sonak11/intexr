@@ -62,7 +62,7 @@ Prothrombin time 11 seconds
 Serum
 Total bilirubin 4 mg/dL
 Direct bilirubin 3.2 mg/dL
-Bile acid 15 Î¼mol/L (N = 0.3â€“10)
+Bile acid 15 $\mu$mol/L (N = 0.3–10)
 AST 45 U/L
 ALT 50 U/L
 A peripheral blood smear is normal. There are no abnormalities on abdominopelvic ultrasonography.
@@ -187,7 +187,7 @@ Comments:
 
 **Clinical note (MEDEC; the injected error sentence is removed):**
 
-> a 34-year-old G2P2 woman presents to her obstetrician because of new onset discharge from her breast. She first noticed it in her bra a few days ago, but now she notes that at times she's soaking through to her blouse, which is mortifying. She was also concerned about being pregnant because she has not gotten her period in 3 months. In the office ÃŸ-HCG is negative. The patient's nipple discharge is guaiac negative.
+> a 34-year-old G2P2 woman presents to her obstetrician because of new onset discharge from her breast. She first noticed it in her bra a few days ago, but now she notes that at times she's soaking through to her blouse, which is mortifying. She was also concerned about being pregnant because she has not gotten her period in 3 months. In the office ß-HCG is negative. The patient's nipple discharge is guaiac negative.
 
 **AI-drafted assessment and plan, claim by claim** (D = contains the error; P = follows from the error):
 

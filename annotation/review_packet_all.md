@@ -140,7 +140,7 @@ Comments:
 
 **Clinical note (MEDEC; the injected error sentence is removed):**
 
-> A 15-year-old girl is brought to the physician by her mother because of worsening grades over the past year. Since she started high school one year ago, her academic performance has decreased. She also has had difficulty finding friends at the new school. She is afraid that her classmates will make fun of her and think that she is â€œstupid.â€ One month ago, when she had to give a presentation, she could not stop wondering how her classmates were going to react if she said something wrong. During the presentation, her heart started racing and she became flushed. Since this event, she avoids saying anything in class. She spends her breaks in the restroom because she is worried that nobody will talk to her. Physical and neurologic examinations show no abnormalities. On mental status examination, the girl avoids eye contact and appears uncomfortable and anxious.
+> A 15-year-old girl is brought to the physician by her mother because of worsening grades over the past year. Since she started high school one year ago, her academic performance has decreased. She also has had difficulty finding friends at the new school. She is afraid that her classmates will make fun of her and think that she is “stupid.” One month ago, when she had to give a presentation, she could not stop wondering how her classmates were going to react if she said something wrong. During the presentation, her heart started racing and she became flushed. Since this event, she avoids saying anything in class. She spends her breaks in the restroom because she is worried that nobody will talk to her. Physical and neurologic examinations show no abnormalities. On mental status examination, the girl avoids eye contact and appears uncomfortable and anxious.
 
 **AI-drafted assessment and plan, claim by claim** (D = contains the error; P = follows from the error):
 
@@ -262,7 +262,7 @@ Comments:
 
 **Clinical note (MEDEC; the injected error sentence is removed):**
 
-> A 45-year-old man with HIV comes to the physician because of multiple lesions on his lower extremity. The lesions are increasing in size and are not painful or pruritic. He does not have lymphadenopathy. He works at a garden center. He lives in Mississippi. Medications include abacavir, dolutegravir, and lamivudine. His temperature is 37.7 C (98.8 F), pulse is 75/min, and blood pressure is 125/80 mm Hg. Examination shows multiple lesions on both heels; some are elevated. There are two similar lesions on the chest. An image of the patient's right heel is shown. His CD4+ T-lymphocyte count was 450/mm3 (normal â‰¥ 500/mm3). A skin biopsy showed multiple spindle-shaped cells and leukocyte infiltration.
+> A 45-year-old man with HIV comes to the physician because of multiple lesions on his lower extremity. The lesions are increasing in size and are not painful or pruritic. He does not have lymphadenopathy. He works at a garden center. He lives in Mississippi. Medications include abacavir, dolutegravir, and lamivudine. His temperature is 37.7 C (98.8 F), pulse is 75/min, and blood pressure is 125/80 mm Hg. Examination shows multiple lesions on both heels; some are elevated. There are two similar lesions on the chest. An image of the patient's right heel is shown. His CD4+ T-lymphocyte count was 450/mm3 (normal $\geq$ 500/mm3). A skin biopsy showed multiple spindle-shaped cells and leukocyte infiltration.
 
 **AI-drafted assessment and plan, claim by claim** (D = contains the error; P = follows from the error):
 
@@ -499,7 +499,7 @@ Comments:
 
 **Clinical note (MEDEC; the injected error sentence is removed):**
 
-> A previously healthy 37-year-old man comes to the physician for the evaluation of a 8-week history of intermittent burning epigastric pain. During this period, he has also felt bloated and uncomfortable after meals. He has not had weight loss or a change in bowel habits. He has no personal or family history of serious illness. He takes no medications. He does not smoke. He drinks 1â€“3 beers per week. Vital signs are within normal limits. Abdominal examination showed mild epigastric tenderness on palpation without guarding or rebound tenderness. Bowel sounds were normal. The remainder of the examination showed no abnormalities.
+> A previously healthy 37-year-old man comes to the physician for the evaluation of a 8-week history of intermittent burning epigastric pain. During this period, he has also felt bloated and uncomfortable after meals. He has not had weight loss or a change in bowel habits. He has no personal or family history of serious illness. He takes no medications. He does not smoke. He drinks 1–3 beers per week. Vital signs are within normal limits. Abdominal examination showed mild epigastric tenderness on palpation without guarding or rebound tenderness. Bowel sounds were normal. The remainder of the examination showed no abnormalities.
 
 **AI-drafted assessment and plan, claim by claim** (D = contains the error; P = follows from the error):
 
@@ -621,7 +621,7 @@ Comments:
 
 **Clinical note (MEDEC; the injected error sentence is removed):**
 
-> a 34-year-old G2P2 woman presents to her obstetrician because of new onset discharge from her breast. She first noticed it in her bra a few days ago, but now she notes that at times she's soaking through to her blouse, which is mortifying. She was also concerned about being pregnant because she has not gotten her period in 3 months. In the office ÃŸ-HCG is negative. The patient's nipple discharge is guaiac negative.
+> a 34-year-old G2P2 woman presents to her obstetrician because of new onset discharge from her breast. She first noticed it in her bra a few days ago, but now she notes that at times she's soaking through to her blouse, which is mortifying. She was also concerned about being pregnant because she has not gotten her period in 3 months. In the office ß-HCG is negative. The patient's nipple discharge is guaiac negative.
 
 **AI-drafted assessment and plan, claim by claim** (D = contains the error; P = follows from the error):
 
@@ -793,7 +793,7 @@ Prothrombin time 11 seconds
 Serum
 Total bilirubin 4 mg/dL
 Direct bilirubin 3.2 mg/dL
-Bile acid 15 Î¼mol/L (N = 0.3â€“10)
+Bile acid 15 $\mu$mol/L (N = 0.3–10)
 AST 45 U/L
 ALT 50 U/L
 A peripheral blood smear is normal. There are no abnormalities on abdominopelvic ultrasonography.
@@ -836,7 +836,7 @@ Comments:
 
 **Clinical note (MEDEC; the injected error sentence is removed):**
 
-> A 52-year-old woman with HIV infection is brought to the emergency department 20 minutes after she had a generalized tonic-clonic seizure. She appears lethargic and confused. Laboratory studies show a CD4+ count of 89 cells/Î¼L (N > 500). A CT scan of the head with contrast shows multiple ring-enhancing lesions in the basal ganglia and subcortical white matter. An India ink preparation of cerebrospinal fluid is negative.
+> A 52-year-old woman with HIV infection is brought to the emergency department 20 minutes after she had a generalized tonic-clonic seizure. She appears lethargic and confused. Laboratory studies show a CD4+ count of 89 cells/$\mu$L (N > 500). A CT scan of the head with contrast shows multiple ring-enhancing lesions in the basal ganglia and subcortical white matter. An India ink preparation of cerebrospinal fluid is negative.
 
 **AI-drafted assessment and plan, claim by claim** (D = contains the error; P = follows from the error):
 
@@ -1019,8 +1019,8 @@ Protein 1+
 Glucose negative
 Leukocyte esterase positive
 Nitrites negative
-RBC 6â€“8/hpf
-WBC 80â€“85/hpf
+RBC 6–8/hpf
+WBC 80–85/hpf
 
 **AI-drafted assessment and plan, claim by claim** (D = contains the error; P = follows from the error):
 
@@ -1283,7 +1283,7 @@ Comments:
 
 **Clinical note (MEDEC; the injected error sentence is removed):**
 
-> A 48-year-old woman is brought to the emergency department because of a 1-hour history of sudden-onset headache associated with nausea and vomiting. The patient reports she was sitting at her desk when the headache began. The headache is global and radiates to her neck. She has hypertension. She has smoked one pack of cigarettes daily for the last 10 years. She drinks alcohol occasionally. Her father had a stroke at the age 58 years. Current medications include hydrochlorothiazide. She is in severe distress. She is alert and oriented to person, place, and time. Her temperature is 38.2 C (100.8 F), pulse is 89/min, respirations are 19/min, and blood pressure is 150/90 mm Hg. Cardiopulmonary examination shows no abnormalities. Cranial nerves IIâ€“XII were intact. She had no focal motor or sensory deficits. She flexed her hips and knees when her neck was flexed while lying in a supine position. A CT scan of the head is shown.
+> A 48-year-old woman is brought to the emergency department because of a 1-hour history of sudden-onset headache associated with nausea and vomiting. The patient reports she was sitting at her desk when the headache began. The headache is global and radiates to her neck. She has hypertension. She has smoked one pack of cigarettes daily for the last 10 years. She drinks alcohol occasionally. Her father had a stroke at the age 58 years. Current medications include hydrochlorothiazide. She is in severe distress. She is alert and oriented to person, place, and time. Her temperature is 38.2 C (100.8 F), pulse is 89/min, respirations are 19/min, and blood pressure is 150/90 mm Hg. Cardiopulmonary examination shows no abnormalities. Cranial nerves II–XII were intact. She had no focal motor or sensory deficits. She flexed her hips and knees when her neck was flexed while lying in a supine position. A CT scan of the head is shown.
 
 **AI-drafted assessment and plan, claim by claim** (D = contains the error; P = follows from the error):
 

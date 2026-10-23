@@ -11,6 +11,7 @@ written with LLM assistance; that is what the reviewer is checking.
 import argparse
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -22,8 +23,24 @@ from scripts.build_medec_scope import load_medec  # noqa: E402
 LABEL_NAMES = {"K": "keep", "D": "**correct** (the error)", "P": "**follows from the error**"}
 
 
+def fix_mojibake(s):
+    """Some MEDEC notes contain UTF-8 text decoded as cp1252 (e.g. 'Î¼L' for 'μL'); repair each garbled run."""
+    def repair(m):
+        try:
+            return m.group(0).encode("cp1252").decode("utf-8")
+        except (UnicodeEncodeError, UnicodeDecodeError):
+            return m.group(0)
+    s = re.sub("[\u00c2-\u00f4][\u0080-\u00bf\u0152-\u2122]{1,2}", repair, s)
+    return s.replace("\u00e2\u20ac\u0153", "\u201c").replace("\u00e2\u20ac\u009d", "\u201d")
+
+
+def pdf_safe(s):
+    """Symbols the default pdflatex template cannot print, as inline math."""
+    return s.replace("\u2265", "$\\geq$").replace("\u2264", "$\\leq$").replace("\u03bc", "$\\mu$")
+
+
 def case_md(i, case, note):
-    text = note["Text"].replace(note["Error Sentence"], "").replace("  ", " ").strip()
+    text = fix_mojibake(note["Text"].replace(note["Error Sentence"], "").replace("  ", " ").strip())
     fb = case["feedback"]
     out = [f"## Case {i}: {case['medec_id']} ({note['Error Type']})", "",
            "**Clinical note (MEDEC; the injected error sentence is removed):**", "", f"> {text}", "",
@@ -81,7 +98,7 @@ def main():
         md.append(case_md(i, props[cid], notes[cid]))
     os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
     with open(a.out + ".md", "w") as f:
-        f.write("\n".join(md))
+        f.write(pdf_safe("\n".join(md)))
     if shutil.which("pandoc"):
         r = subprocess.run(["pandoc", a.out + ".md", "-o", a.out + ".pdf"], capture_output=True, text=True)
         print(r.stderr.strip() or f"wrote {a.out}.md and {a.out}.pdf")
