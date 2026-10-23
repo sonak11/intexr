@@ -92,7 +92,7 @@ def main():
                 p["condition"], p["model"] = cond, model
                 preds.append(p)
                 rows.append(metrics.per_example(ex, p))
-            tag = f"{name}{'@' + model.replace(':', '_') if model else ''}_{cond}"
+            tag = f"{name}{'@' + model.replace(':', '_').replace('/', '_') if model else ''}_{cond}"
             with open(os.path.join(args.out, f"preds_{tag}.jsonl"), "w") as f:
                 for p in preds:
                     f.write(json.dumps(p) + "\n")
