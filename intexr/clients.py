@@ -91,7 +91,7 @@ class Client:
         return os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"), os.environ.get("OPENAI_API_KEY", "none")
 
     def __call__(self, system, messages):
-        key = hashlib.sha256(json.dumps([self.provider, self.model, self.temperature, system, messages]).encode()).hexdigest()
+        key = hashlib.sha256(json.dumps([self.provider, self.model, self.temperature, system, messages] + ([os.environ["INTEXR_EXTRA_BODY"]] if os.environ.get("INTEXR_EXTRA_BODY") else [])).encode()).hexdigest()
         path = os.path.join(CACHE_DIR, key + ".json")
         if os.path.exists(path):
             with open(path) as f:
@@ -123,6 +123,8 @@ class Client:
         body = {"model": self.model, "messages": msgs, "max_tokens": self.max_tokens}
         if os.environ.get("OPENAI_SEND_TEMPERATURE", "1") == "1":
             body["temperature"] = self.temperature
+        # extra request fields, e.g. for Qwen3 on vLLM: INTEXR_EXTRA_BODY='{"chat_template_kwargs": {"enable_thinking": false}}'
+        body.update(json.loads(os.environ.get("INTEXR_EXTRA_BODY", "{}")))
         r = _post(base.rstrip("/") + "/chat/completions",
                   {"Authorization": f"Bearer {key}", "content-type": "application/json",
                    "User-Agent": "intexr-research/0.1"}, body)
