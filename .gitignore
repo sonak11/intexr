@@ -11,3 +11,8 @@ results/
 annotation/sheet_v1_blank.csv
 .DS_Store
 data/external/
+
+# local secrets: never commit API keys (also catches editor temp copies like .intexr_keysXXX)
+.intexr_keys*
+*.key
+.env

@@ -50,12 +50,12 @@ def _post(url, headers, body, retries=6):
             with urllib.request.urlopen(req, timeout=300) as r:
                 return json.loads(r.read())
         except urllib.error.HTTPError as e:
-            msg = e.read()[:500]
+            msg = e.read()[:6000]
             if e.code == 429:
                 text = msg.decode("utf-8", "replace")
-                daily = any(k in text.lower() for k in ("per day", "perday", "(tpd)", "(rpd)", "daily"))
+                daily = any(k in text.lower() for k in ("per day", "perday", "(tpd)", "(rpd)", "daily", "_free_tier_requests"))
                 if daily or attempt == retries - 1:
-                    raise QuotaExhausted(f"{url}: {'DAILY' if daily else 'rate'} limit reached ({text[:300]}). "
+                    raise QuotaExhausted(f"{url}: {'DAILY' if daily else 'rate'} limit reached ({text[:1500]}). "
                                          "Cached results are saved; re-run the same command later to resume.")
                 wait = min(float(e.headers.get("retry-after") or 0) or min(120, 10 * 2 ** attempt), 300)
                 print(f"  [rate limit] {url.split('/')[2]}: waiting {wait:.0f}s, then retrying "
