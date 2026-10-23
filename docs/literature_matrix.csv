@@ -4,7 +4,7 @@
 3,LEDGER (Findings ACL 2026),propagation,dependency-graph agentic doc editing,yes,yes,partial,no,no,web,MED
 4,"RippleEdits (Cohen et al., TACL 2024)",propagation,ripple effects of KE,yes,yes,yes,no,no,web,MED
 5,"MQuAKE (Zhong et al., EMNLP 2023)",propagation,multi-hop after edit,yes,yes,no,no,no,recall,LOW
-6,"DepEdit (Li et al., Findings EMNLP 2023)",propagation,specificity + implication,yes,yes,yes,no,no,recall,LOW
+6,"DepEdit (Li et al., Findings EMNLP 2023)",propagation,specificity + implication,yes,yes,yes,no,no,web,LOW
 7,Onoe et al. (ACL 2023),propagation,entity-knowledge inferences,yes,yes,partial,no,no,recall,LOW
 8,"PropMEND (Liu et al., 2025)",propagation,hypernetwork propagation,yes,yes,partial,no,no,web,LOW
 9,ChainEdit (2025),propagation,logic-rule ripple propagation,yes,yes,partial,no,no,web,LOW
@@ -12,26 +12,26 @@
 11,"DocMEdit (Zeng et al., Findings ACL 2025)",model editing,document-level edits,yes,partial,partial,no,no,web,MED
 12,"ROME / MEMIT (Meng et al., 2022/23)",model editing,"efficacy, paraphrase, neighborhood",yes,no,yes,no,no,recall,LOW
 13,GRACE / WISE / AlphaEdit (2023–25),lifelong editing,"sequential edits, locality, retention",yes,no,yes,no,no,recall,LOW (P2: MED)
-14,Gupta et al. (Findings ACL 2024),model editing,forgetting at scale,no,no,yes,no,no,recall,LOW
-15,"MedLaSA/MedCF (Xu et al., 2024)",medical KE,medical edits + locality,yes,no,yes,no,no,recall,LOW
-16,"FRUIT (Logan IV et al., NAACL 2022)",evidence revision,article update from new evidence,yes,partial,yes,no,no,recall,MED
+14,Gupta et al. (Findings ACL 2024),model editing,forgetting at scale,no,no,yes,no,no,web,LOW
+15,"MedLaSA/MedCF (Xu et al., CIKM 2024)",medical KE,medical edits + locality,yes,no,yes,no,no,web,LOW
+16,"FRUIT (Logan IV et al., NAACL 2022)",evidence revision,article update from new evidence,yes,partial,yes,no,no,web,MED
 17,"RARR (Gao et al., ACL 2023)",evidence revision,attribution + preservation,yes,no,yes,no,no,recall,MED
-18,"PURR (Chen et al., 2023)",evidence revision,denoising editor,yes,no,yes,no,no,recall,LOW
+18,"PURR (Chen et al., 2023)",evidence revision,denoising editor,yes,no,yes,no,no,web,LOW
 19,"VitaminC (Schuster et al., NAACL 2021)",evidence revision,"contrastive evidence, revision",yes,no,partial,partial,no,recall,LOW
 20,Thorne & Vlachos (ACL 2021),claim correction,evidence-based FEC,yes,no,partial,no,no,recall,LOW
-21,Shah et al. (AAAI 2020),claim correction,fact-guided sentence modification,yes,no,partial,no,no,recall,LOW
-22,"ZeroFEC (Huang et al., ACL 2023)",claim correction,zero-shot FEC,yes,no,partial,no,no,recall,LOW
+21,Shah et al. (AAAI 2020),claim correction,fact-guided sentence modification,yes,no,partial,no,no,web,LOW
+22,"ZeroFEC (Huang et al., ACL 2023)",claim correction,zero-shot FEC,yes,no,partial,no,no,web,LOW
 23,"FAVA (Mishra et al., COLM 2024)",claim correction,fine-grained hallucination edit,yes,no,yes,partial,no,recall,LOW
 24,"Chain-of-Verification (Dhuliawala et al., 2024)",claim correction,per-claim verify then revise,yes,no,partial,no,no,recall,LOW (method ancestor)
 25,"CRITIC (Gou et al., ICLR 2024)",evidence revision,tool-based critique,yes,no,no,no,partial,recall,LOW
 26,"Self-Refine (Madaan et al., NeurIPS 2023)",revision,iterative self-feedback,partial,no,no,no,no,recall,LOW (baseline)
-27,Wadhwa et al. (Findings EMNLP 2024),claim correction,detect–critique–refine,yes,no,partial,no,no,recall,LOW
+27,Wadhwa et al. (Findings EMNLP 2024),claim correction,detect–critique–refine,yes,no,partial,no,no,web,LOW
 28,"MEDEC (Ben Abacha et al., Findings ACL 2025)",medical correction,single-error clinical note correction,yes,no,partial,no,no,web,MED
 29,"CorBenchX (Zou et al., 2025)",medical correction,CXR report error detect/correct,yes,no,no,no,no,web,MED
 30,"ReXErr (Rao et al., PSB 2025)",medical correction,CXR error injection,yes,no,no,no,no,web,LOW
-31,"RaDialog (Pellegrini et al., MIDL 2025)",medical interactive,report correction from instructions,yes,no,no,no,no,recall,MED
+31,"RaDialog (Pellegrini et al., MIDL 2025, PMLR 301)",medical interactive,report correction from instructions,yes,no,no,no,no,web,MED
 32,IteraTeR / CoEdIT / EditEval,minimal revision,instruction editing,partial,no,yes,no,no,recall,LOW
-33,"ARIES (D'Arcy et al., ACL 2024)",minimal revision,edits in response to reviews,yes,partial,partial,no,partial,recall,LOW
+33,"ARIES (D'Arcy et al., ACL 2024)",minimal revision,edits in response to reviews,yes,partial,partial,no,partial,web,LOW
 34,Minimal-edit GEC over-correction (2025–26),minimal revision,over-correction,partial,no,yes,no,no,web,LOW
 35,Sharma et al. (ICLR 2024) sycophancy,feedback verification,capitulation to user,no,no,partial,no,yes,recall,LOW
 36,"FlipFlop (Laban et al., 2023)",feedback verification,answer flips under challenge,no,no,partial,no,yes,recall,LOW
@@ -39,12 +39,12 @@
 38,"PBT (Stengel-Eskin et al., NAACL 2025)",feedback verification,accept good / resist bad persuasion,yes,no,yes,no,yes,web,MED
 39,"Med-Stress (Xiao et al., ACL 2026)",feedback verification,clinical belief stability,no,no,yes,no,yes,web,MED
 40,MedPRESS (2026),feedback verification,multi-turn patient pressure,no,no,yes,no,yes,web,LOW
-41,"ClashEval (Wu et al., NeurIPS D&B 2024)",knowledge conflict,adoption of wrong retrieved evidence,yes,no,partial,no,yes,recall,MED
+41,"ClashEval (Wu et al., NeurIPS D&B 2024)",knowledge conflict,adoption of wrong retrieved evidence,yes,no,partial,no,yes,web,MED
 42,Xie et al. (ICLR 2024) knowledge conflicts,knowledge conflict,receptiveness to conflicting evidence,partial,no,no,no,yes,recall,LOW
-43,Huang et al. (ICLR 2024) / Kamoi et al. (TACL 2024),self-correction,limits of self-correction,partial,no,partial,no,partial,recall,LOW
+43,Huang et al. (ICLR 2024) / Kamoi et al. (TACL 2024),self-correction,limits of self-correction,partial,no,partial,no,partial,web,LOW
 44,"MINT (Wang et al., ICLR 2024)",multi-turn feedback,tool + NL feedback,partial,no,no,no,partial,recall,LOW
-45,"BeliefBank (Kassner et al., EMNLP 2021)",belief revision,consistency via constraints,yes,yes,partial,no,partial,recall,LOW
-46,Hase et al. (EACL 2023) belief graphs,belief revision,update + spread to related beliefs,yes,yes,yes,no,no,recall,LOW
+45,"BeliefBank (Kassner et al., EMNLP 2021)",belief revision,consistency via constraints,yes,yes,partial,no,partial,web,LOW
+46,Hase et al. (EACL 2023) belief graphs,belief revision,update + spread to related beliefs,yes,yes,yes,no,no,web,LOW
 47,"Belief-R (Wilie et al., EMNLP 2024)",belief revision,update vs. maintain under new premises,yes,partial,yes,no,no,web,MED
 48,"ReviseQA (Helwe et al., ICML-WS 2025)",belief revision,multi-turn logical revision,yes,yes,partial,no,no,web,LOW
 49,"AGM 1985; Katsuno–Mendelzon 1991; TMS (Doyle 1979, de Kleer 1986)",theory,minimal change; revision vs. update; dependency retraction,yes,yes,yes,partial,no,recall,— (foundation)
@@ -54,3 +54,7 @@
 53,"CHAIR (Rohrbach et al., 2018) / POPE (Li et al., 2023) / FaithScore (Jing et al., 2024)",VLM eval (COCO),object / atomic-fact hallucination,no,no,no,no,no,recall,— (metric)
 54,FActScore / SAFE / VeriScore,claim decomposition,atomic-fact support,no,no,no,partial,no,recall,— (infrastructure)
 55,"RadGraph (Jain et al., 2021) / RadFact (Bannur et al., 2024) / GREEN (2024)",CXR infrastructure,entities/relations; entailment metrics,no,partial,no,no,no,web,— (infrastructure)
+56,"Sycophancy Suppression Can Impair Rational Updating (Ma et al., arXiv 2608.26511, 2026)",feedback verification,unsupported yielding vs. rational updating trade-off (answer level),no,no,partial,no,yes,web,MED
+57,RefuteBench 2.0 (arXiv 2502.18308),feedback verification,"responses to user refutation instructions, transient vs. persistent",partial,no,no,no,partial,web,LOW
+58,ReviseBench: Can AI Revise Research Papers with Human Review? (Findings ACL 2026),minimal revision,paper revision from human reviews,yes,partial,partial,no,no,web,LOW
+59,"Exact Feedback Is Not Control (arXiv 2609.28150, 2026)",revision,"closed-loop revision with complete, correct verifier feedback",yes,no,partial,no,no,web,LOW

@@ -185,7 +185,7 @@ Decide after the pilot (see plan, wk 5).
 | 3 | LEDGER (Findings ACL 2026) | propagation | dependency-graph agentic doc editing | ✓ | ✓ | ◐ | ✗ | ✗ | web | MED |
 | 4 | RippleEdits (Cohen et al., TACL 2024) | propagation | ripple effects of KE | ✓ | ✓ | ✓ | ✗ | ✗ | web | MED |
 | 5 | MQuAKE (Zhong et al., EMNLP 2023) | propagation | multi-hop after edit | ✓ | ✓ | ✗ | ✗ | ✗ | recall | LOW |
-| 6 | DepEdit (Li et al., Findings EMNLP 2023) | propagation | specificity + implication | ✓ | ✓ | ✓ | ✗ | ✗ | recall | LOW |
+| 6 | DepEdit (Li et al., Findings EMNLP 2023) | propagation | specificity + implication | ✓ | ✓ | ✓ | ✗ | ✗ | web | LOW |
 | 7 | Onoe et al. (ACL 2023) | propagation | entity-knowledge inferences | ✓ | ✓ | ◐ | ✗ | ✗ | recall | LOW |
 | 8 | PropMEND (Liu et al., 2025) | propagation | hypernetwork propagation | ✓ | ✓ | ◐ | ✗ | ✗ | web | LOW |
 | 9 | ChainEdit (2025) | propagation | logic-rule ripple propagation | ✓ | ✓ | ◐ | ✗ | ✗ | web | LOW |
@@ -193,26 +193,26 @@ Decide after the pilot (see plan, wk 5).
 | 11 | DocMEdit (Zeng et al., Findings ACL 2025) | model editing | document-level edits | ✓ | ◐ | ◐ | ✗ | ✗ | web | MED |
 | 12 | ROME / MEMIT (Meng et al., 2022/23) | model editing | efficacy, paraphrase, neighborhood | ✓ | ✗ | ✓ | ✗ | ✗ | recall | LOW |
 | 13 | GRACE / WISE / AlphaEdit (2023–25) | lifelong editing | sequential edits, locality, retention | ✓ | ✗ | ✓ | ✗ | ✗ | recall | LOW (P2: MED) |
-| 14 | Gupta et al. (Findings ACL 2024) | model editing | forgetting at scale | ✗ | ✗ | ✓ | ✗ | ✗ | recall | LOW |
-| 15 | MedLaSA/MedCF (Xu et al., 2024) | medical KE | medical edits + locality | ✓ | ✗ | ✓ | ✗ | ✗ | recall | LOW |
-| 16 | FRUIT (Logan IV et al., NAACL 2022) | evidence revision | article update from new evidence | ✓ | ◐ | ✓ | ✗ | ✗ | recall | MED |
+| 14 | Gupta et al. (Findings ACL 2024) | model editing | forgetting at scale | ✗ | ✗ | ✓ | ✗ | ✗ | web | LOW |
+| 15 | MedLaSA/MedCF (Xu et al., CIKM 2024) | medical KE | medical edits + locality | ✓ | ✗ | ✓ | ✗ | ✗ | web | LOW |
+| 16 | FRUIT (Logan IV et al., NAACL 2022) | evidence revision | article update from new evidence | ✓ | ◐ | ✓ | ✗ | ✗ | web | MED |
 | 17 | RARR (Gao et al., ACL 2023) | evidence revision | attribution + preservation | ✓ | ✗ | ✓ | ✗ | ✗ | recall | MED |
-| 18 | PURR (Chen et al., 2023) | evidence revision | denoising editor | ✓ | ✗ | ✓ | ✗ | ✗ | recall | LOW |
+| 18 | PURR (Chen et al., 2023) | evidence revision | denoising editor | ✓ | ✗ | ✓ | ✗ | ✗ | web | LOW |
 | 19 | VitaminC (Schuster et al., NAACL 2021) | evidence revision | contrastive evidence, revision | ✓ | ✗ | ◐ | ◐ | ✗ | recall | LOW |
 | 20 | Thorne & Vlachos (ACL 2021) | claim correction | evidence-based FEC | ✓ | ✗ | ◐ | ✗ | ✗ | recall | LOW |
-| 21 | Shah et al. (AAAI 2020) | claim correction | fact-guided sentence modification | ✓ | ✗ | ◐ | ✗ | ✗ | recall | LOW |
-| 22 | ZeroFEC (Huang et al., ACL 2023) | claim correction | zero-shot FEC | ✓ | ✗ | ◐ | ✗ | ✗ | recall | LOW |
+| 21 | Shah et al. (AAAI 2020) | claim correction | fact-guided sentence modification | ✓ | ✗ | ◐ | ✗ | ✗ | web | LOW |
+| 22 | ZeroFEC (Huang et al., ACL 2023) | claim correction | zero-shot FEC | ✓ | ✗ | ◐ | ✗ | ✗ | web | LOW |
 | 23 | FAVA (Mishra et al., COLM 2024) | claim correction | fine-grained hallucination edit | ✓ | ✗ | ✓ | ◐ | ✗ | recall | LOW |
 | 24 | Chain-of-Verification (Dhuliawala et al., 2024) | claim correction | per-claim verify then revise | ✓ | ✗ | ◐ | ✗ | ✗ | recall | LOW (method ancestor) |
 | 25 | CRITIC (Gou et al., ICLR 2024) | evidence revision | tool-based critique | ✓ | ✗ | ✗ | ✗ | ◐ | recall | LOW |
 | 26 | Self-Refine (Madaan et al., NeurIPS 2023) | revision | iterative self-feedback | ◐ | ✗ | ✗ | ✗ | ✗ | recall | LOW (baseline) |
-| 27 | Wadhwa et al. (Findings EMNLP 2024) | claim correction | detect–critique–refine | ✓ | ✗ | ◐ | ✗ | ✗ | recall | LOW |
+| 27 | Wadhwa et al. (Findings EMNLP 2024) | claim correction | detect–critique–refine | ✓ | ✗ | ◐ | ✗ | ✗ | web | LOW |
 | 28 | MEDEC (Ben Abacha et al., Findings ACL 2025) | medical correction | single-error clinical note correction | ✓ | ✗ | ◐ | ✗ | ✗ | web | MED |
 | 29 | CorBenchX (Zou et al., 2025) | medical correction | CXR report error detect/correct | ✓ | ✗ | ✗ | ✗ | ✗ | web | MED |
 | 30 | ReXErr (Rao et al., PSB 2025) | medical correction | CXR error injection | ✓ | ✗ | ✗ | ✗ | ✗ | web | LOW |
-| 31 | RaDialog (Pellegrini et al., MIDL 2025) | medical interactive | report correction from instructions | ✓ | ✗ | ✗ | ✗ | ✗ | recall | MED |
+| 31 | RaDialog (Pellegrini et al., MIDL 2025, PMLR 301) | medical interactive | report correction from instructions | ✓ | ✗ | ✗ | ✗ | ✗ | web | MED |
 | 32 | IteraTeR / CoEdIT / EditEval | minimal revision | instruction editing | ◐ | ✗ | ✓ | ✗ | ✗ | recall | LOW |
-| 33 | ARIES (D'Arcy et al., ACL 2024) | minimal revision | edits in response to reviews | ✓ | ◐ | ◐ | ✗ | ◐ | recall | LOW |
+| 33 | ARIES (D'Arcy et al., ACL 2024) | minimal revision | edits in response to reviews | ✓ | ◐ | ◐ | ✗ | ◐ | web | LOW |
 | 34 | Minimal-edit GEC over-correction (2025–26) | minimal revision | over-correction | ◐ | ✗ | ✓ | ✗ | ✗ | web | LOW |
 | 35 | Sharma et al. (ICLR 2024) sycophancy | feedback verification | capitulation to user | ✗ | ✗ | ◐ | ✗ | ✓ | recall | LOW |
 | 36 | FlipFlop (Laban et al., 2023) | feedback verification | answer flips under challenge | ✗ | ✗ | ◐ | ✗ | ✓ | recall | LOW |
@@ -220,12 +220,12 @@ Decide after the pilot (see plan, wk 5).
 | 38 | PBT (Stengel-Eskin et al., NAACL 2025) | feedback verification | accept good / resist bad persuasion | ✓ | ✗ | ✓ | ✗ | ✓ | web | MED |
 | 39 | Med-Stress (Xiao et al., ACL 2026) | feedback verification | clinical belief stability | ✗ | ✗ | ✓ | ✗ | ✓ | web | MED |
 | 40 | MedPRESS (2026) | feedback verification | multi-turn patient pressure | ✗ | ✗ | ✓ | ✗ | ✓ | web | LOW |
-| 41 | ClashEval (Wu et al., NeurIPS D&B 2024) | knowledge conflict | adoption of wrong retrieved evidence | ✓ | ✗ | ◐ | ✗ | ✓ | recall | MED |
+| 41 | ClashEval (Wu et al., NeurIPS D&B 2024) | knowledge conflict | adoption of wrong retrieved evidence | ✓ | ✗ | ◐ | ✗ | ✓ | web | MED |
 | 42 | Xie et al. (ICLR 2024) knowledge conflicts | knowledge conflict | receptiveness to conflicting evidence | ◐ | ✗ | ✗ | ✗ | ✓ | recall | LOW |
-| 43 | Huang et al. (ICLR 2024) / Kamoi et al. (TACL 2024) | self-correction | limits of self-correction | ◐ | ✗ | ◐ | ✗ | ◐ | recall | LOW |
+| 43 | Huang et al. (ICLR 2024) / Kamoi et al. (TACL 2024) | self-correction | limits of self-correction | ◐ | ✗ | ◐ | ✗ | ◐ | web | LOW |
 | 44 | MINT (Wang et al., ICLR 2024) | multi-turn feedback | tool + NL feedback | ◐ | ✗ | ✗ | ✗ | ◐ | recall | LOW |
-| 45 | BeliefBank (Kassner et al., EMNLP 2021) | belief revision | consistency via constraints | ✓ | ✓ | ◐ | ✗ | ◐ | recall | LOW |
-| 46 | Hase et al. (EACL 2023) belief graphs | belief revision | update + spread to related beliefs | ✓ | ✓ | ✓ | ✗ | ✗ | recall | LOW |
+| 45 | BeliefBank (Kassner et al., EMNLP 2021) | belief revision | consistency via constraints | ✓ | ✓ | ◐ | ✗ | ◐ | web | LOW |
+| 46 | Hase et al. (EACL 2023) belief graphs | belief revision | update + spread to related beliefs | ✓ | ✓ | ✓ | ✗ | ✗ | web | LOW |
 | 47 | Belief-R (Wilie et al., EMNLP 2024) | belief revision | update vs. maintain under new premises | ✓ | ◐ | ✓ | ✗ | ✗ | web | MED |
 | 48 | ReviseQA (Helwe et al., ICML-WS 2025) | belief revision | multi-turn logical revision | ✓ | ✓ | ◐ | ✗ | ✗ | web | LOW |
 | 49 | AGM 1985; Katsuno–Mendelzon 1991; TMS (Doyle 1979, de Kleer 1986) | theory | minimal change; revision vs. update; dependency retraction | ✓ | ✓ | ✓ | ◐ | ✗ | recall | — (foundation) |
@@ -235,6 +235,12 @@ Decide after the pilot (see plan, wk 5).
 | 53 | CHAIR (Rohrbach et al., 2018) / POPE (Li et al., 2023) / FaithScore (Jing et al., 2024) | VLM eval (COCO) | object / atomic-fact hallucination | ✗ | ✗ | ✗ | ✗ | ✗ | recall | — (metric) |
 | 54 | FActScore / SAFE / VeriScore | claim decomposition | atomic-fact support | ✗ | ✗ | ✗ | ◐ | ✗ | recall | — (infrastructure) |
 | 55 | RadGraph (Jain et al., 2021) / RadFact (Bannur et al., 2024) / GREEN (2024) | CXR infrastructure | entities/relations; entailment metrics | ✗ | ◐ | ✗ | ✗ | ✗ | web | — (infrastructure) |
+| 56 | Sycophancy Suppression Can Impair Rational Updating (Ma et al., arXiv 2608.26511, 2026) | feedback verification | unsupported yielding vs. rational updating (answer level) | ✗ | ✗ | ◐ | ✗ | ✓ | web | MED |
+| 57 | RefuteBench 2.0 (arXiv 2502.18308) | feedback verification | responses to user refutation instructions | ◐ | ✗ | ✗ | ✗ | ◐ | web | LOW |
+| 58 | ReviseBench (Findings ACL 2026) | minimal revision | paper revision from human reviews | ✓ | ◐ | ◐ | ✗ | ✗ | web | LOW |
+| 59 | Exact Feedback Is Not Control (arXiv 2609.28150, 2026) | revision | closed-loop revision with correct verifier feedback | ✓ | ✗ | ◐ | ✗ | ✗ | web | LOW |
+
+**Update 23 Oct 2026:** 14 more rows verified on the web (venues corrected for MedLaSA and RaDialog) and four 2026 papers added (rows 56–59) after a fresh search for competing work. The search found no paper that combines unknown feedback validity with claim-level propagation. The closest new one, row 56, shows that suppressing unsupported yielding also suppresses justified updating at the answer level; it frames anti-sycophancy as a *selectivity* problem, which is exactly what IntExR-Scope measures per claim. ARIES (row 33) reports that GPT-4 follows the literal wording of reviewer feedback rather than its intent. The 20 remaining `recall` rows are canonical, low-risk papers (MQuAKE, ROME/MEMIT, RARR, Self-Refine, FActScore, AGM, …).
 
 **No row has ✓ in all five columns, and no row has ✓ in both Propagated and Unreliable FB.** Unresolved ✓ occurs only in abstention work, which has no revision.
 
@@ -266,4 +272,5 @@ Decide after the pilot (see plan, wk 5).
 - [PBT, NAACL 2025](https://aclanthology.org/2025.naacl-long.412/)
 - [ReviseQA](https://openreview.net/pdf?id=Z4KBiAYXlI) · [Belief-R, EMNLP 2024](https://aclanthology.org/2024.emnlp-main.586.pdf)
 - [RadGraph](https://physionet.org/content/radgraph/1.0.0/) · [PhysioNet: MIMIC data with LLMs and online services](https://physionet.org/news/post/llm-responsible-use/)
+- 23 Oct: [Sycophancy Suppression Can Impair Rational Updating](https://arxiv.org/pdf/2608.26511) · [RefuteBench 2.0](https://arxiv.org/pdf/2502.18308) · [ReviseBench, Findings ACL 2026](https://aclanthology.org/2026.findings-acl.887.pdf) · [Exact Feedback Is Not Control](https://arxiv.org/pdf/2609.28150) · [DepEdit](https://arxiv.org/abs/2312.01858v1) · [MedLaSA](https://arxiv.org/html/2402.18099v3) · [Wadhwa et al.](https://arxiv.org/pdf/2407.02397) · [Hase et al. EACL 2023](https://aclanthology.org/2023.eacl-main.199) · [Gupta et al.](https://arxiv.org/pdf/2401.07453) · [PURR](https://arxiv.org/pdf/2305.14908) · [ZeroFEC](https://aclanthology.org/2023.acl-long.311) · [Shah et al.](https://ojs.aaai.org/index.php/AAAI/article/view/6406) · [Kamoi et al.](https://aclanthology.org/2024.tacl-1.78.pdf) · [ARIES](https://aclanthology.org/2024.acl-long.377) · [BeliefBank](https://aclanthology.org/2021.emnlp-main.697/) · [FRUIT](https://aclanthology.org/2022.naacl-main.269) · [ClashEval](https://arxiv.org/abs/2404.10198v3) · [RaDialog](https://proceedings.mlr.press/v301/pellegrini26a.html)
 - [Evidence Sufficiency Benchmark (2026)](https://www.sciencedirect.com/org/science/article/pii/S1546221826007526)
