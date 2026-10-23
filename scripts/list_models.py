@@ -23,7 +23,9 @@ req = urllib.request.Request(base.rstrip("/") + "/models", headers={"Authorizati
                                                                     "User-Agent": "intexr-research/0.1"})
 with urllib.request.urlopen(req, timeout=60) as r:
     data = json.loads(r.read())
-ids = sorted(m.get("id", "") for m in data.get("data", data.get("models", [])))
+# Gemini lists ids as "models/gemini-..."; the chat endpoint wants them without the prefix
+ids = sorted(m.get("id", "").removeprefix("models/") if hasattr(str, "removeprefix") else m.get("id", "").split("models/", 1)[-1]
+             for m in data.get("data", data.get("models", [])))
 for i in ids:
     if not a.free or i.endswith(":free"):
         print(i)
