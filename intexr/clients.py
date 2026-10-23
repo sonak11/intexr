@@ -22,6 +22,7 @@ PhysioNet's rules: https://physionet.org/news/post/llm-responsible-use/
 import hashlib
 import json
 import os
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -51,11 +52,15 @@ def _post(url, headers, body, retries=6):
         except urllib.error.HTTPError as e:
             msg = e.read()[:500]
             if e.code == 429:
-                if attempt == retries - 1:
-                    raise QuotaExhausted(f"{url}: rate/daily limit reached ({msg!r}). Cached results are saved; "
-                                         "re-run the same command later to resume.")
-                wait = float(e.headers.get("retry-after") or 0) or min(120, 10 * 2 ** attempt)
-                time.sleep(min(wait, 300))
+                text = msg.decode("utf-8", "replace")
+                daily = any(k in text.lower() for k in ("per day", "perday", "(tpd)", "(rpd)", "daily"))
+                if daily or attempt == retries - 1:
+                    raise QuotaExhausted(f"{url}: {'DAILY' if daily else 'rate'} limit reached ({text[:300]}). "
+                                         "Cached results are saved; re-run the same command later to resume.")
+                wait = min(float(e.headers.get("retry-after") or 0) or min(120, 10 * 2 ** attempt), 300)
+                print(f"  [rate limit] {url.split('/')[2]}: waiting {wait:.0f}s, then retrying "
+                      f"({attempt + 1}/{retries - 1}). {text[:160]}", file=sys.stderr, flush=True)
+                time.sleep(wait)
                 continue
             if e.code in (500, 502, 503, 529) and attempt < retries - 1:
                 time.sleep(2 ** attempt * 5)
@@ -91,7 +96,9 @@ class Client:
         return os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"), os.environ.get("OPENAI_API_KEY", "none")
 
     def __call__(self, system, messages):
-        key = hashlib.sha256(json.dumps([self.provider, self.model, self.temperature, system, messages] + ([os.environ["INTEXR_EXTRA_BODY"]] if os.environ.get("INTEXR_EXTRA_BODY") else [])).encode()).hexdigest()
+        extra = self.extra_body()
+        key = hashlib.sha256(json.dumps([self.provider, self.model, self.temperature, system, messages]
+                                        + ([extra] if extra else [])).encode()).hexdigest()
         path = os.path.join(CACHE_DIR, key + ".json")
         if os.path.exists(path):
             with open(path) as f:
@@ -117,14 +124,21 @@ class Client:
                    "content-type": "application/json"}, body)
         return "".join(b.get("text", "") for b in r["content"]), r.get("usage")
 
+    def extra_body(self):
+        """Extra request fields: INTEXR_EXTRA_BODY (all providers), then INTEXR_EXTRA_BODY_<PROVIDER>. Examples:
+        INTEXR_EXTRA_BODY_GROQ='{"reasoning_effort": "low"}'     (gpt-oss on Groq: fewer reasoning tokens)
+        INTEXR_EXTRA_BODY_VLLM='{"chat_template_kwargs": {"enable_thinking": false}}'   (Qwen3 on vLLM)"""
+        out = json.loads(os.environ.get("INTEXR_EXTRA_BODY", "{}"))
+        out.update(json.loads(os.environ.get("INTEXR_EXTRA_BODY_" + self.provider.upper(), "{}")))
+        return out
+
     def _openai(self, system, messages):
         base, key = self.endpoint()
         msgs = ([{"role": "system", "content": system}] if system else []) + messages
         body = {"model": self.model, "messages": msgs, "max_tokens": self.max_tokens}
         if os.environ.get("OPENAI_SEND_TEMPERATURE", "1") == "1":
             body["temperature"] = self.temperature
-        # extra request fields, e.g. for Qwen3 on vLLM: INTEXR_EXTRA_BODY='{"chat_template_kwargs": {"enable_thinking": false}}'
-        body.update(json.loads(os.environ.get("INTEXR_EXTRA_BODY", "{}")))
+        body.update(self.extra_body())
         r = _post(base.rstrip("/") + "/chat/completions",
                   {"Authorization": f"Bearer {key}", "content-type": "application/json",
                    "User-Agent": "intexr-research/0.1"}, body)

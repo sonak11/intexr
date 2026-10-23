@@ -5,26 +5,37 @@
 #   MODEL=gemini:<id>  JUDGE=groq:<id>   bash scripts/run_v0.sh        # free tiers (public data only)
 #   MODEL=vllm:Qwen/Qwen3-8B JUDGE=vllm:Qwen/Qwen3-8B VLLM_BASE_URL=http://localhost:8001/v1 bash scripts/run_v0.sh
 #
-# Optional: SMOKE=1 (3 examples, condition B only), TAG=<name for the results dir>, STAGES="medscope pilot epb"
+# Optional: SMOKE=1 (2 examples, condition B only), TAG=<name for the results dir>, STAGES="medscope pilot epb",
+#           SYSTEMS="evidence_prompt scope_pipeline" (subset), LIMIT=<n> (first n MedScope core examples).
+# FREE=1    preset for free API tiers (Groq: ~200K tokens/day per model): the three systems the main claims need
+#           (evidence_prompt, scope_first, scope_pipeline), MedScope only, first 20 cases x valid/false/authority
+#           (LIMIT=60), conditions A and B. The full design runs on thasos (no caps).
+# Fewer tokens on Groq's gpt-oss:  INTEXR_EXTRA_BODY_GROQ='{"reasoning_effort": "low"}'
+# Check spending afterwards:        python3 scripts/usage.py --since 1d
 set -euo pipefail
 cd "$(dirname "$0")/.."
 : "${MODEL:?set MODEL=provider:model (see python3 scripts/list_models.py <provider>)}"
 JUDGE="${JUDGE:-$MODEL}"
 TAG="${TAG:-$(echo "$MODEL" | tr ':/' '__')}"
+if [ "${FREE:-0}" = 1 ]; then
+  SYSTEMS="${SYSTEMS:-evidence_prompt scope_first scope_pipeline}"; STAGES="${STAGES:-medscope}"; LIMIT="${LIMIT:-60}"
+fi
 STAGES="${STAGES:-medscope pilot epb}"
-SYS="dialogue@$MODEL evidence_prompt@$MODEL scope_first@$MODEL scope_pipeline@$MODEL evidence_gate@$MODEL"
+SYSTEMS="${SYSTEMS:-dialogue evidence_prompt scope_first scope_pipeline evidence_gate}"
+SYS=""; for x in $SYSTEMS; do SYS="$SYS $x@$MODEL"; done
+LIM=""; [ -n "${LIMIT:-}" ] && LIM="--limit $LIMIT"
 OFF="no_revision oracle"
 CORE='valid$|false$|authority$|conflicting$'   # 123 MedScope examples: the four cells the A/B claim rests on
 
 if [ "${SMOKE:-0}" = 1 ]; then
-  python3 scripts/run_pilot.py --data paperB/data/medec_scope_v0.json --limit 3 --systems $OFF $SYS \
+  python3 scripts/run_pilot.py --data paperB/data/medec_scope_v0.json --limit 2 --systems $OFF $SYS \
     --judge "$JUDGE" --conditions B --out "results/smoke_$TAG"
-  echo; echo "Inspect results/smoke_$TAG/preds_*.jsonl: scope_first / scope_pipeline must have no parse_error / errors."
+  echo; python3 scripts/check_preds.py "results/smoke_$TAG" || true; python3 scripts/usage.py --since 1h
   exit 0
 fi
 for s in $STAGES; do
   case $s in
-    medscope) python3 scripts/run_pilot.py --data paperB/data/medec_scope_v0.json --match "$CORE" \
+    medscope) python3 scripts/run_pilot.py --data paperB/data/medec_scope_v0.json --match "$CORE" $LIM \
                 --systems $OFF $SYS --judge "$JUDGE" --conditions A B --out "results/medscope_$TAG" ;;
     pilot)    f=pilot/data/pilot_v1.json; [ -f $f ] || f=pilot/data/pilot_v0.json
               python3 scripts/run_pilot.py --data $f --systems $OFF $SYS --judge "$JUDGE" \
