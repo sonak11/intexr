@@ -47,7 +47,7 @@
 ## What the error audit found (pipeline, Qwen, B)
 
 - **77% of label errors are gold-P claims labelled D.** The action is still correct; the D-vs-P label is what's wrong. This is mainly a **dataset issue**: in about a third of gold-P claims (9/26 dev, 10/31 test), the authored new evidence states the corrected content outright (e.g. "12 weeks"). That makes those claims directly addressed, which is D by our own guide.
-- **Fix before the freeze:** rewrite those evidence items so they correct only the error and leave the dependents to be inferred. That is the same fix EditPropBench needed.
+- **Fixed (MedScope v0.2, 25 Oct):** 11 evidence items rewritten so they correct only the error; dependents must now be inferred. The 9 remaining overlaps only name the corrected treatment itself. These results are from v0.1; the affected dev examples are re-run before the freeze.
 - The other errors are 6 disputes treated as evidence, 3 errors inherited from a parent, and 3 missed contradictions.
 
 ## Sample size
@@ -61,5 +61,5 @@
 1. One more daily gpt-oss run (pipeline × B).
 2. Run condition E (Qwen, evidence-aware prompt; ~120 calls):
    `CONDITIONS="E" SYSTEMS="evidence_prompt" FREE=1 MODEL=groq:qwen/qwen3.8-27b JUDGE=gemini:gemini-3.5-flash-lite bash scripts/run_v0.sh`
-3. Fix the ~19 evidence items that state P content (dataset v0.2), after or together with the clinical review.
+3. ~~Fix the evidence items that state P content~~: done (v0.2). Re-run the dev slice on v0.2 when convenient; unchanged examples come from the cache.
 4. Judge calibration (`scripts/label_actions.py`); second annotator; full design on thasos.

@@ -195,7 +195,7 @@ def main():
     if bad:
         sys.exit(json.dumps(bad, indent=1))
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
-    json.dump({"version": "medec_scope_v0", "status": props["status"], "examples": exs}, open(OUT, "w"), indent=2)
+    json.dump({"version": "medec_scope_v0.2", "status": props["status"], "examples": exs}, open(OUT, "w"), indent=2)
     print(f"wrote {len(exs)} examples from {len(props['cases'])} cases -> {OUT}")
     print(json.dumps(data.summarize(exs)))
 

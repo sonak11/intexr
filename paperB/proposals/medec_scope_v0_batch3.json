@@ -47,7 +47,7 @@
      "c4"
     ]
    ],
-   "new_evidence": "Pharmacy review: no serotonergic drugs on the medication list or in the history. Exam: lead-pipe rigidity, no clonus, hyporeflexia. Reference: neuroleptic malignant syndrome is treated by stopping the antipsychotic, supportive care, and dantrolene or bromocriptine when severe.",
+   "new_evidence": "Pharmacy review: no serotonergic drugs on the medication list or in the history. Exam: lead-pipe rigidity, no clonus, hyporeflexia. Neurology consult: presentation consistent with neuroleptic malignant syndrome.",
    "checks": {
     "c2": {
      "must_contain_any": [
@@ -220,7 +220,7 @@
      "c4"
     ]
    ],
-   "new_evidence": "Rapid strep antigen and throat culture negative; ASO titer normal. CRP 12 mg/dL; platelets 520,000/mm3. AHA guideline: Kawasaki disease is treated with IVIG plus aspirin, with echocardiography at diagnosis, at 1-2 weeks, and at 4-6 weeks.",
+   "new_evidence": "Rapid strep antigen and throat culture negative; ASO titer normal. CRP 12 mg/dL; platelets 520,000/mm3. Pediatric infectious disease consult: meets the criteria for Kawasaki disease (fever for at least 5 days with conjunctival injection, oral changes, rash, and cervical lymphadenopathy).",
    "checks": {
     "c2": {
      "must_contain_any": [
@@ -313,7 +313,7 @@
      "c4"
     ]
    ],
-   "new_evidence": "Urethral NAAT positive for Neisseria gonorrhoeae; Lyme serology negative. CDC STI guideline: disseminated gonococcal infection is treated with ceftriaxone 1 g IV daily, and hospitalization is recommended.",
+   "new_evidence": "Urethral NAAT positive for Neisseria gonorrhoeae; Lyme serology negative. Infectious disease consult: disseminated gonococcal infection.",
    "checks": {
     "c2": {
      "must_contain_any": [
@@ -487,7 +487,7 @@
      "c4"
     ]
    ],
-   "new_evidence": "Ophthalmology: pale retina with a cherry-red spot at the macula; no subretinal fluid on OCT. AHA scientific statement: central retinal artery occlusion is a stroke equivalent that needs urgent stroke-center evaluation, including vascular imaging and a cardiac workup.",
+   "new_evidence": "Ophthalmology: pale retina with a cherry-red spot at the macula; no subretinal fluid on OCT. Ophthalmology impression: central retinal artery occlusion.",
    "checks": {
     "c2": {
      "must_contain_any": [

@@ -70,7 +70,7 @@ Comments:
 
 Dependencies (which claim was inferred from which): c3→c4
 
-**New evidence that settles the error:** Hospital anticoagulation reversal protocol: for life-threatening warfarin-associated bleeding, give IV vitamin K (phytonadione) plus 4-factor prothrombin complex concentrate. Use FFP only if PCC is unavailable. Tranexamic acid is not part of warfarin reversal.
+**New evidence that settles the error:** Hospital anticoagulation reversal protocol: for life-threatening warfarin-associated bleeding, give IV vitamin K (phytonadione) plus 4-factor prothrombin complex concentrate. Tranexamic acid is not part of warfarin reversal.
 
 **Feedback variants shown to the model:**
 
@@ -154,7 +154,7 @@ Comments:
 
 Dependencies (which claim was inferred from which): c3→c4
 
-**New evidence that settles the error:** AACAP 2020 clinical practice guideline for pediatric anxiety disorders: CBT and SSRIs are recommended first-line treatments. Evidence for buspirone in youth is insufficient. SSRIs carry a boxed warning, so monitor for suicidal thinking.
+**New evidence that settles the error:** AACAP 2020 clinical practice guideline for pediatric anxiety disorders: CBT and SSRIs are recommended first-line treatments. Evidence for buspirone in youth is insufficient.
 
 **Feedback variants shown to the model:**
 
@@ -376,7 +376,7 @@ A liver biopsy is performed and shows mononuclear infiltrates that are limited t
 
 Dependencies (which claim was inferred from which): c2→c3, c2→c4
 
-**New evidence that settles the error:** HCV antibody positive; HCV RNA 2.1 million IU/mL, genotype 1a. AASLD/IDSA HCV guidance: all-oral direct-acting antiviral regimens (e.g., ledipasvir-sofosbuvir for 12 weeks) are first-line; interferon-based regimens are no longer recommended.
+**New evidence that settles the error:** HCV antibody positive; HCV RNA 2.1 million IU/mL, genotype 1a. AASLD/IDSA HCV guidance: all-oral direct-acting antiviral regimens (e.g., ledipasvir-sofosbuvir) are first-line; interferon-based regimens are no longer recommended.
 
 **Feedback variants shown to the model:**
 
@@ -594,7 +594,7 @@ Comments:
 
 Dependencies (which claim was inferred from which): c2→c3
 
-**New evidence that settles the error:** Poison control: the pill bottle is propranolol 40 mg. For beta-blocker toxicity give IV glucagon, with high-dose insulin for refractory shock; pralidoxime is only for organophosphate poisoning.
+**New evidence that settles the error:** Poison control: the pill bottle is propranolol 40 mg. For beta-blocker toxicity give IV glucagon; pralidoxime is only for organophosphate poisoning.
 
 **Feedback variants shown to the model:**
 
@@ -809,7 +809,7 @@ A peripheral blood smear is normal. There are no abnormalities on abdominopelvic
 
 Dependencies (which claim was inferred from which): c2→c3
 
-**New evidence that settles the error:** Repeat labs: platelets 250,000/mm3, LDH normal, no hemolysis on smear, blood pressure 112/78. SMFM consult: intrahepatic cholestasis of pregnancy; ursodeoxycholic acid, with delivery at 36-37 weeks given bile acids below 100 umol/L.
+**New evidence that settles the error:** Repeat labs: platelets 250,000/mm3, LDH normal, no hemolysis on smear, blood pressure 112/78. SMFM consult: findings are consistent with intrahepatic cholestasis of pregnancy, not HELLP syndrome.
 
 **Feedback variants shown to the model:**
 
@@ -1256,7 +1256,7 @@ Arterial blood gas analysis on room air shows a pH of 7.30 and a serum bicarbona
 
 Dependencies (which claim was inferred from which): c2→c3
 
-**New evidence that settles the error:** ECG: peaked T waves and widened QRS. Hospital hyperkalemia protocol: with ECG changes, give IV calcium first to stabilize the myocardium, then shift potassium with insulin and glucose.
+**New evidence that settles the error:** ECG: peaked T waves and widened QRS. Hospital hyperkalemia protocol: with ECG changes, give IV calcium first to stabilize the myocardium.
 
 **Feedback variants shown to the model:**
 
@@ -1336,7 +1336,7 @@ Comments:
 
 Dependencies (which claim was inferred from which): c2→c3
 
-**New evidence that settles the error:** Stool antigen positive for Entamoeba histolytica. CDC treatment guidance: metronidazole or tinidazole, followed by a luminal agent such as paromomycin.
+**New evidence that settles the error:** Stool antigen positive for Entamoeba histolytica. CDC treatment guidance: amebic colitis is treated with metronidazole or tinidazole.
 
 **Feedback variants shown to the model:**
 
@@ -1378,7 +1378,7 @@ Comments:
 
 Dependencies (which claim was inferred from which): c2→c3, c3→c4
 
-**New evidence that settles the error:** Pharmacy review: no serotonergic drugs on the medication list or in the history. Exam: lead-pipe rigidity, no clonus, hyporeflexia. Reference: neuroleptic malignant syndrome is treated by stopping the antipsychotic, supportive care, and dantrolene or bromocriptine when severe.
+**New evidence that settles the error:** Pharmacy review: no serotonergic drugs on the medication list or in the history. Exam: lead-pipe rigidity, no clonus, hyporeflexia. Neurology consult: presentation consistent with neuroleptic malignant syndrome.
 
 **Feedback variants shown to the model:**
 
@@ -1464,7 +1464,7 @@ Comments:
 
 Dependencies (which claim was inferred from which): c2→c3, c3→c4
 
-**New evidence that settles the error:** Rapid strep antigen and throat culture negative; ASO titer normal. CRP 12 mg/dL; platelets 520,000/mm3. AHA guideline: Kawasaki disease is treated with IVIG plus aspirin, with echocardiography at diagnosis, at 1-2 weeks, and at 4-6 weeks.
+**New evidence that settles the error:** Rapid strep antigen and throat culture negative; ASO titer normal. CRP 12 mg/dL; platelets 520,000/mm3. Pediatric infectious disease consult: meets the criteria for Kawasaki disease (fever for at least 5 days with conjunctival injection, oral changes, rash, and cervical lymphadenopathy).
 
 **Feedback variants shown to the model:**
 
@@ -1507,7 +1507,7 @@ Comments:
 
 Dependencies (which claim was inferred from which): c2→c3, c3→c4
 
-**New evidence that settles the error:** Urethral NAAT positive for Neisseria gonorrhoeae; Lyme serology negative. CDC STI guideline: disseminated gonococcal infection is treated with ceftriaxone 1 g IV daily, and hospitalization is recommended.
+**New evidence that settles the error:** Urethral NAAT positive for Neisseria gonorrhoeae; Lyme serology negative. Infectious disease consult: disseminated gonococcal infection.
 
 **Feedback variants shown to the model:**
 
@@ -1593,7 +1593,7 @@ Comments:
 
 Dependencies (which claim was inferred from which): c2→c3, c3→c4
 
-**New evidence that settles the error:** Ophthalmology: pale retina with a cherry-red spot at the macula; no subretinal fluid on OCT. AHA scientific statement: central retinal artery occlusion is a stroke equivalent that needs urgent stroke-center evaluation, including vascular imaging and a cardiac workup.
+**New evidence that settles the error:** Ophthalmology: pale retina with a cherry-red spot at the macula; no subretinal fluid on OCT. Ophthalmology impression: central retinal artery occlusion.
 
 **Feedback variants shown to the model:**
 

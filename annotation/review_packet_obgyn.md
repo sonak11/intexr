@@ -78,7 +78,7 @@ A peripheral blood smear is normal. There are no abnormalities on abdominopelvic
 
 Dependencies (which claim was inferred from which): c2→c3
 
-**New evidence that settles the error:** Repeat labs: platelets 250,000/mm3, LDH normal, no hemolysis on smear, blood pressure 112/78. SMFM consult: intrahepatic cholestasis of pregnancy; ursodeoxycholic acid, with delivery at 36-37 weeks given bile acids below 100 umol/L.
+**New evidence that settles the error:** Repeat labs: platelets 250,000/mm3, LDH normal, no hemolysis on smear, blood pressure 112/78. SMFM consult: findings are consistent with intrahepatic cholestasis of pregnancy, not HELLP syndrome.
 
 **Feedback variants shown to the model:**
 

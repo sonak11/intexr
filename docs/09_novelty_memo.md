@@ -56,7 +56,7 @@ Findings:
 - **The pipeline is best** on interaction-exact (Qwen 0.80 vs. 0.43 for the evidence-aware prompt), at a small cost in D recall (0.93).
 
 What the pilot also showed:
-- In about a third of propagated claims, the authored evidence states the corrected content outright, which blurs D vs. P. The evidence will be rewritten before the freeze.
+- In about a third of propagated claims, the authored evidence states the corrected content outright, which blurs D vs. P. Fixed in MedScope v0.2: 11 evidence items rewritten.
 - Detecting 0.10 effects on the test split needs about 110–170 cases. MedScope should grow to ~100+ cases.
 
 ## 5. Risks and how the design answers them

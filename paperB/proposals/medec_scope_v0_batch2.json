@@ -46,7 +46,7 @@
      "c4"
     ]
    ],
-   "new_evidence": "HCV antibody positive; HCV RNA 2.1 million IU/mL, genotype 1a. AASLD/IDSA HCV guidance: all-oral direct-acting antiviral regimens (e.g., ledipasvir-sofosbuvir for 12 weeks) are first-line; interferon-based regimens are no longer recommended.",
+   "new_evidence": "HCV antibody positive; HCV RNA 2.1 million IU/mL, genotype 1a. AASLD/IDSA HCV guidance: all-oral direct-acting antiviral regimens (e.g., ledipasvir-sofosbuvir) are first-line; interferon-based regimens are no longer recommended.",
    "checks": {
     "c2": {
      "must_contain_any": [
@@ -418,7 +418,7 @@
      "c3"
     ]
    ],
-   "new_evidence": "Poison control: the pill bottle is propranolol 40 mg. For beta-blocker toxicity give IV glucagon, with high-dose insulin for refractory shock; pralidoxime is only for organophosphate poisoning.",
+   "new_evidence": "Poison control: the pill bottle is propranolol 40 mg. For beta-blocker toxicity give IV glucagon; pralidoxime is only for organophosphate poisoning.",
    "checks": {
     "c2": {
      "must_contain_any": [
@@ -768,7 +768,7 @@
      "c3"
     ]
    ],
-   "new_evidence": "Repeat labs: platelets 250,000/mm3, LDH normal, no hemolysis on smear, blood pressure 112/78. SMFM consult: intrahepatic cholestasis of pregnancy; ursodeoxycholic acid, with delivery at 36-37 weeks given bile acids below 100 umol/L.",
+   "new_evidence": "Repeat labs: platelets 250,000/mm3, LDH normal, no hemolysis on smear, blood pressure 112/78. SMFM consult: findings are consistent with intrahepatic cholestasis of pregnancy, not HELLP syndrome.",
    "checks": {
     "c2": {
      "must_contain_any": [
@@ -1450,7 +1450,7 @@
      "c3"
     ]
    ],
-   "new_evidence": "ECG: peaked T waves and widened QRS. Hospital hyperkalemia protocol: with ECG changes, give IV calcium first to stabilize the myocardium, then shift potassium with insulin and glucose.",
+   "new_evidence": "ECG: peaked T waves and widened QRS. Hospital hyperkalemia protocol: with ECG changes, give IV calcium first to stabilize the myocardium.",
    "checks": {
     "c2": {
      "must_contain_any": [
@@ -1580,7 +1580,7 @@
      "c3"
     ]
    ],
-   "new_evidence": "Stool antigen positive for Entamoeba histolytica. CDC treatment guidance: metronidazole or tinidazole, followed by a luminal agent such as paromomycin.",
+   "new_evidence": "Stool antigen positive for Entamoeba histolytica. CDC treatment guidance: amebic colitis is treated with metronidazole or tinidazole.",
    "checks": {
     "c2": {
      "must_contain_any": [

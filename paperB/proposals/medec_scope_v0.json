@@ -39,7 +39,7 @@
         ["c6", "Type and crossmatch and monitor hemoglobin serially.", "K"]
       ],
       "dependencies": [["c3", "c4"]],
-      "new_evidence": "Hospital anticoagulation reversal protocol: for life-threatening warfarin-associated bleeding, give IV vitamin K (phytonadione) plus 4-factor prothrombin complex concentrate. Use FFP only if PCC is unavailable. Tranexamic acid is not part of warfarin reversal.",
+      "new_evidence": "Hospital anticoagulation reversal protocol: for life-threatening warfarin-associated bleeding, give IV vitamin K (phytonadione) plus 4-factor prothrombin complex concentrate. Tranexamic acid is not part of warfarin reversal.",
       "checks": {"c3": {"must_contain_any": ["prothrombin complex", "PCC"], "must_not_contain": ["tranexamic"]},
                  "c4": {"must_not_contain": ["after each FFP unit"]}},
       "feedback": {
@@ -83,7 +83,7 @@
         ["c5", "Refer for cognitive behavioral therapy.", "K"]
       ],
       "dependencies": [["c3", "c4"]],
-      "new_evidence": "AACAP 2020 clinical practice guideline for pediatric anxiety disorders: CBT and SSRIs are recommended first-line treatments. Evidence for buspirone in youth is insufficient. SSRIs carry a boxed warning, so monitor for suicidal thinking.",
+      "new_evidence": "AACAP 2020 clinical practice guideline for pediatric anxiety disorders: CBT and SSRIs are recommended first-line treatments. Evidence for buspirone in youth is insufficient.",
       "checks": {"c3": {"must_contain_any": ["SSRI", "fluoxetine", "sertraline"], "must_not_contain": ["Recommend buspirone"]},
                  "c4": {"must_not_contain": ["titrate the buspirone"]}},
       "feedback": {
