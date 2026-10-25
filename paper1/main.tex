@@ -242,11 +242,43 @@ Scope-first pipeline & \pending & \pending & \pending & \pending & \pending & \p
 
 \paragraph{Offline baselines.} Table~\ref{tab:main} gives final numbers for the systems that need no model. Two observations already hold. First, the lexical always-accept heuristic changes 72\% of the evidence-supported claims that false feedback attacks [57--85], so the false condition does measure claim-level deference. Second, its change recall drops from 0.40 on \D{} to 0.17 on \Pp{} and to 0.10 at depth two: dependents rarely share words with the feedback, so following the feedback's surface finds direct targets but not their consequences. Its \D{} recall is inflated in the outdated condition (1.00), whose feedback quotes the erroneous sentence verbatim; we report this as a known shortcut.
 
-\paragraph{H1--H5.} \todo{Fill from results/RESULTS\_medscope.md and results/RESULTS\_epb.md: (i) the B$-$A table with paired intervals; (ii) change recall by depth; (iii) per-condition preservation error on \K$^{+}$; (iv) the authority-only \U{} analysis; (v) pipeline vs.\ evidence-aware prompt. Report null results as such.}
+\begin{table*}[t]
+\centering\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llcccccc}
+\toprule
+Model & System (condition B) & Chg-\D{}$\uparrow$ & Chg-\Pp{}$\uparrow$ & PresErr-\K$^{+}\downarrow$ & \U-F1$\uparrow$ & Verdict$\uparrow$ & Exact$\uparrow$ \\
+\midrule
+gpt-oss-120b & Evidence-aware prompt & 1.00 & 0.88 & 0.10 & 0.15 & --- & 0.53 \\
+ & Scope-first (1 prompt) & 0.86 & 0.89 & 0.15 & 0.62 & 0.63 & 0.62 \\
+ & Scope-first pipeline & \pending & \pending & \pending & \pending & \pending & \pending \\
+\midrule
+Qwen3.8-27B & Evidence-aware prompt & 0.98 & 0.74 & 0.25 & 0.05 & --- & 0.43 \\
+ & Scope-first (1 prompt) & 1.00 & 0.98 & 0.05 & 0.44 & 0.73 & 0.73 \\
+ & Scope-first pipeline & 0.93 & 1.00 & 0.00 & 0.72 & 0.80 & 0.80 \\
+\bottomrule
+\end{tabular}}
+\caption{Pilot results on the \ms{} dev split (20 source cases $\times$ valid, false and authority-only feedback; 60 examples, 294 claims). Case-level 95\% intervals are in \texttt{results/RESULTS\_medscope.md}; e.g.\ pipeline exact 0.80 [0.68, 0.90] vs.\ evidence-aware prompt 0.43 [0.28, 0.58] (Qwen). Final numbers will come from the held-out test split.}
+\label{tab:pilot}
+\end{table*}
+
+\paragraph{Pilot results (dev split).} Table~\ref{tab:pilot} reports the first model runs; all numbers are from the dev split and are preliminary.
+
+\emph{Verified edits make free-text revision more literal (H1, reversed).} For the evidence-aware prompt, change recall on propagated claims is \emph{higher} with unverified feedback plus evidence than with the verified edit: B$-$A $= +0.18$ [0.08, 0.29] for gpt-oss and $+0.60$ [0.40, 0.77] for Qwen. Given a list of correct edits, the models apply the list and leave dependent claims stale. For example, after a correction from Creutzfeldt-Jakob disease to frontotemporal dementia, ``death within a year'' and the EEG work-up remain. With evidence and unverified feedback, they revise the dependents. This reproduces the propagation failure reported by EditPropBench on the same claims, and shows that the verified-edit setting understates it. For structured systems the two conditions do not differ (e.g.\ pipeline $0.00$). A wording control, condition E (the verified edit plus an instruction to update statements that depend on it), tests whether the effect is specific to how the edit is phrased. \todo{condition E result.}
+
+\emph{Propagation is harder for free-text systems (H2).} The evidence-aware prompt reaches 0.98--1.00 change recall on \D{} but 0.74--0.88 on \Pp{}; the structured systems close the gap. Only three depth-two \Pp{} claims fall in the dev split, so depth is tested on the test split.
+
+\emph{Claim-level sycophancy (H3).} Under false feedback, the evidence-aware prompt (Qwen) changes 25\% [10, 45] of the evidence-supported claims the feedback attacks, and its preservation error on \K{} rises from 0.02 (valid) to 0.10 [0.04, 0.17]. The scope-first pipeline changes none of them (0.00), with the same preservation error under valid and false feedback (0.02).
+
+\emph{Under-hedging (H4).} Free-text revision rarely hedges claims the evidence cannot settle (\U-F1 0.05--0.15); structured output raises this to 0.44--0.72.
+
+\emph{The method (H5).} With Qwen, the pipeline has the best interaction-exact accuracy (0.80, vs.\ 0.73 for the single prompt and 0.43 for the evidence-aware prompt), perfect \Pp{} recall, and verdict accuracy 0.80. Its cost is a small loss of \D{} recall (0.93). Judged from its text rather than its labels, its exact accuracy is 0.68; the judge and the labels agree on 93\% of claims.
 
 \subsection{Analysis}
 \label{sec:analysis}
-\todo{Error audit of 50 pipeline failures: align errors (missed contradiction, false dependency, dispute treated as evidence) vs.\ revise errors (wrong \textsc{unchanged}, hedge written as flip); judged-from-text vs.\ self-reported labels for structured systems; cost (tokens, calls) and latency per example.}
+Of the pipeline's label errors (Qwen, condition B), 77\% are gold-\Pp{} claims labelled \D{}. The revision itself is right; the label is not. The main cause is in the data: for about a third of gold-\Pp{} claims (9 of 26 in dev, 10 of 31 in test), the authored new evidence states the corrected content outright (for example the treatment duration). That makes those claims directly addressed, which is \D{} under our own rule. Before the protocol freeze we rewrite these evidence items so that they correct only the erroneous claim, and the dependents must be inferred. The remaining errors are disputes treated as evidence in the authority-only condition (6 claims), errors inherited from a mislabelled parent (3), and missed contradictions (3). \todo{Cost and latency per example.}
+
+\paragraph{Sample size.} The per-case differences on the dev split have standard deviation 0.37--0.47. With 20 test cases, differences of about 0.25 or more are detectable (the effects above exceed this). Detecting a 0.10 difference needs about 110--170 source cases. We therefore grow \ms{} to roughly 100 or more cases before the final experiments.
 
 %=====================================================================
 \section{Limitations}

@@ -1,6 +1,6 @@
 # IntExR-Scope — Novelty Memo (31 Oct 2026 review)
 
-*Sonakshi Sharma. Draft of 23 Oct 2026; section 4 is filled in when the free-tier runs finish.*
+*Sonakshi Sharma. 25 Oct 2026. Results are a pilot on the dev split; see `docs/11_results_v0.md`.*
 
 ## 1. Claim
 
@@ -42,24 +42,28 @@ All of this must happen while every other claim is kept (K), and claims the evid
 - Its change recall falls from **0.40 on D to 0.17 on P, and 0.10 at depth 2**. Following the feedback's surface finds direct targets but not their consequences.
 - The gold oracle scores 1.0, and the deterministic label rules reproduce every gold label.
 
-**Model runs (in progress, $0):**
-- `gpt-oss-120b` and `qwen3.8-27b` on Groq's free tier; `gemini-3.5-flash-lite` as a fixed judge.
-- 60 examples (20 cases × valid / false / authority) × conditions A and B × {evidence-aware prompt, single-prompt scope-first, scope-first pipeline}.
-- The full design (248 examples, all conditions, 5 systems) runs on the department GPU server.
+**First model runs** ($0; MedScope dev split, 20 cases × valid / false / authority-only feedback, 60 examples):
+- Models: gpt-oss-120b and Qwen3.8-27B (Groq free tier); judge gemini-3.5-flash-lite.
 
-> **To fill in (from `results/RESULTS_medscope.md`):**
-> - B − A gap on change recall D / P and interaction-exact, with paired case-level CIs;
-> - preservation error on K⁺ in the false condition;
-> - U-F1 on authority-only;
-> - pipeline vs. evidence-aware prompt.
->
-> Report a null A−B gap as a null.
+Findings:
+- **Verified edits make free-text revision more literal.** For an evidence-aware prompt, P change recall is *higher* with unverified feedback + evidence (B) than with the verified edit (A):
+  - gpt-oss: **+0.18** [0.08, 0.29];
+  - Qwen: **+0.60** [0.40, 0.77].
+  
+  Given a list of correct edits, models apply the list and leave dependents stale. That is the EditPropBench failure, reproduced on the same claims. It is the opposite of our pre-registered direction, and a stronger argument for the joint setting: the propagation benchmarks' own condition is the one that hides the failure. A wording control (condition E) is running.
+- **Claim-level sycophancy is measurable.** Under false feedback, the evidence-aware prompt (Qwen) changes **25%** [10, 45] of the evidence-supported claims the feedback attacks. Our scope-first pipeline changes **0%**.
+- **Free-text revision under-hedges:** unresolved-F1 is 0.05–0.15, vs. 0.72 for the pipeline.
+- **The pipeline is best** on interaction-exact (Qwen 0.80 vs. 0.43 for the evidence-aware prompt), at a small cost in D recall (0.93).
+
+What the pilot also showed:
+- In about a third of propagated claims, the authored evidence states the corrected content outright, which blurs D vs. P. The evidence will be rewritten before the freeze.
+- Detecting 0.10 effects on the test split needs about 110–170 cases. MedScope should grow to ~100+ cases.
 
 ## 5. Risks and how the design answers them
 
 | Risk | Answer |
 |---|---|
-| "This is EditPropBench plus a sycophancy test." | The paired A/B design measures whether verification changes scope on identical claims. If the gap is null, the benchmark still contributes the U label, claim-level sycophancy (K⁺ in the false condition) and clinical chains. The paper is framed by whichever result holds. |
+| "This is EditPropBench plus a sycophancy test." | The pilot answers it: on identical claims, the verified-edit condition (theirs) and the unverified condition (ours) give different propagation behaviour, by up to 0.60 in P recall. Neither benchmark alone could show that. Claim-level sycophancy and the U label add to it. |
 | LLM-authored clinical content | All authored text is flagged unreviewed. A clinically trained reviewer pass and a second annotator (Cohen's κ) come before release; cases that fail are dropped. |
 | Small benchmark (40 cases) | CIs are computed over source cases, not claims. A radiology split (IU X-ray build script) and more MEDEC cases are planned; EditPropBench-IX gives a second domain. |
 | Judge validity | 100 hand-labelled (claim, revision) pairs; target κ ≥ 0.75; switch judges if it falls short. |
@@ -67,4 +71,4 @@ All of this must happen while every other claim is kept (K), and claims the evid
 
 ## 6. Decision requested
 
-Keep the framing: **feedback is a hypothesis; evidence is the arbiter**. Lead with the cost of verification (A vs. B) if the runs show a gap. Otherwise lead with claim-level sycophancy and unresolved propagation.
+Keep the framing: **feedback is a hypothesis; evidence is the arbiter**. Lead with the A-vs-B difference, which is real but in the opposite direction from the pre-registered one: verified edits *hide* propagation failures. Report it with the wording control (condition E). Support it with claim-level sycophancy and unresolved handling. Grow MedScope to ~100+ cases before the final test.
