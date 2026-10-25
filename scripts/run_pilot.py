@@ -43,7 +43,7 @@ def main():
     ap.add_argument("--data", default="pilot/data/pilot_v0.json")
     ap.add_argument("--systems", nargs="+", required=True)
     ap.add_argument("--judge", default=None, help="PROVIDER:MODEL for claim alignment of free-text outputs")
-    ap.add_argument("--conditions", nargs="+", default=["B"], choices=list("ABCD"))
+    ap.add_argument("--conditions", nargs="+", default=["B"], choices=list("ABCDE"))
     ap.add_argument("--out", default="results")
     ap.add_argument("--match", default=None, help="regex on example ids, e.g. 'valid|false|authority' to fit a daily free quota")
     ap.add_argument("--limit", type=int, default=None, help="use only the first N matching examples")

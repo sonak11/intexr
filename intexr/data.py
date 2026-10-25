@@ -78,6 +78,7 @@ def model_view(ex, condition="B"):
     B: unverified feedback + new evidence (IntExR default).
     C: new evidence only (no feedback).
     D: feedback only (no new evidence).
+    E: A plus an explicit instruction to update statements inferred from the corrected ones.
     """
     view = {
         "id": ex["id"],
@@ -88,7 +89,7 @@ def model_view(ex, condition="B"):
         "feedback": {"speaker_role": ex["feedback"]["speaker_role"], "text": ex["feedback"]["text"]},
         "new_evidence": [{k: e[k] for k in e if k in ("id", "text", "provenance", "time")} for e in ex["new_evidence"]],
     }
-    if condition == "A":
+    if condition in ("A", "E"):
         edits = [
             f'"{c["text"]}" -> ' + (f'"{g["target_text"]}"' if g["target_text"] else "(delete)")
             for c in ex["claims"]
@@ -99,6 +100,9 @@ def model_view(ex, condition="B"):
             "speaker_role": "verified_editor",
             "text": "VERIFIED CORRECTIONS (apply these; they are correct): " + ("; ".join(edits) or "none"),
         }
+        if condition == "E":  # A + an explicit instruction to propagate (tests whether A's literalness is wording)
+            view["feedback"]["text"] += (" Also update every other statement that was inferred from a corrected "
+                                         "statement and no longer holds.")
     elif condition == "C":
         view["feedback"] = None
     elif condition == "D":

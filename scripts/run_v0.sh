@@ -10,6 +10,7 @@
 # FREE=1    preset for free API tiers (Groq: ~200K tokens/day per model): the three systems the main claims need
 #           (evidence_prompt, scope_first, scope_pipeline), MedScope only, the 20 dev cases x valid/false/authority
 #           (SPLIT=dev, 60 examples), conditions A and B. The full design runs on thasos (no caps).
+# CONDITIONS="E"  run other conditions (E = verified edit + "also update what depends on it")
 # SPLIT=dev|test  MedScope split by source case (paperB/data/splits.json). Test is held out until the protocol freeze.
 # Fewer tokens on Groq's gpt-oss:  INTEXR_EXTRA_BODY_GROQ='{"reasoning_effort": "low"}'
 # Check spending afterwards:        python3 scripts/usage.py --since 1d
@@ -38,7 +39,7 @@ fi
 for s in $STAGES; do
   case $s in
     medscope) python3 scripts/run_pilot.py --data paperB/data/medec_scope_v0.json --match "$CORE" $LIM \
-                --systems $OFF $SYS --judge "$JUDGE" --conditions A B --out "results/medscope_$TAG" ;;
+                --systems $OFF $SYS --judge "$JUDGE" --conditions ${CONDITIONS:-A B} --out "results/medscope_$TAG" ;;
     pilot)    f=pilot/data/pilot_v1.json; [ -f $f ] || f=pilot/data/pilot_v0.json
               python3 scripts/run_pilot.py --data $f --systems $OFF $SYS --judge "$JUDGE" \
                 --conditions A B C D --out "results/pilot_$TAG" ;;

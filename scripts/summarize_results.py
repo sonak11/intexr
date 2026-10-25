@@ -34,7 +34,7 @@ def load_preds(runs):
     out = defaultdict(dict)  # (spec, cond) -> id -> pred
     for d in runs:
         for f in glob.glob(os.path.join(d, "preds_*.jsonl")):
-            m = re.match(r"preds_(.+)_([ABCD])\.jsonl$", os.path.basename(f))
+            m = re.match(r"preds_(.+)_([ABCDE])\.jsonl$", os.path.basename(f))
             if not m:
                 continue
             spec, cond = m.group(1), m.group(2)
@@ -102,7 +102,7 @@ def main():
           "Point estimate [95% CI, bootstrap over source cases]. PresErr: lower is better. "
           "K+ = K claims supported by evidence.", ""]
     tex_rows = []
-    for cond in "ABCD":
+    for cond in "ABCDE":
         rows_c = [(s, preds[(s, cond)]) for s in specs if (s, cond) in preds]
         if not rows_c:
             continue
@@ -118,17 +118,20 @@ def main():
         md.append("")
     # A vs B
     gap_keys = ["change_recall_D", "change_recall_P", "preservation_error_K", "unresolved_F1", "interaction_exact"]
-    md += ["## Cost of verification: B − A (same claims)", "",
-           "Negative change recall / exact = worse when feedback must be verified; positive PresErr = more collateral change.", "",
-           "| system | " + " | ".join(gap_keys) + " |", "|---|" + "---|" * len(gap_keys)]
-    for s in specs:
-        if (s, "A") in preds and (s, "B") in preds:
-            cells = []
-            for k in gap_keys:
-                v, ci = paired_gap(exs, preds[(s, "A")], preds[(s, "B")], k)
-                cells.append(fmt(v, ci))
-            md.append(f"| {s} | " + " | ".join(cells) + " |")
-    md += ["", "## Change recall on P by dependency depth (condition B)", "", "| system | depth 1 | depth 2+ |", "|---|---|---|"]
+    pairs = [("A", "B", "Cost of verification: B − A (same claims)",
+              "Negative change recall / exact = worse when feedback must be verified; positive PresErr = more collateral change."),
+             ("A", "E", "Asking a verified editor to propagate: E − A (same claims)",
+              "Positive change recall on P = the literal reading of verified edits is a wording effect.")]
+    for c1, c2, head, expl in pairs:
+        have = [s_ for s_ in specs if (s_, c1) in preds and (s_, c2) in preds]
+        if not have:
+            continue
+        md += [f"## {head}", "", expl, "", "| system | " + " | ".join(gap_keys) + " |", "|---|" + "---|" * len(gap_keys)]
+        for s_ in have:
+            cells = [fmt(*paired_gap(exs, preds[(s_, c1)], preds[(s_, c2)], k)) for k in gap_keys]
+            md.append(f"| {s_} | " + " | ".join(cells) + " |")
+        md.append("")
+    md += ["## Change recall on P by dependency depth (condition B)", "", "| system | depth 1 | depth 2+ |", "|---|---|---|"]
     for s in specs:
         if (s, "B") in preds:
             dr = depth_recall(exs, preds[(s, "B")])
