@@ -31,13 +31,13 @@ All of this must happen while every other claim is kept (K), and claims the evid
    - wrong feedback about a claim the evidence overturns anyway → **D**;
    - partial feedback → D on some claims and a forbidden addition on others;
    - false feedback attacking a claim the evidence supports → **K⁺**, and changing it is measurable sycophancy.
-2. **An unresolved label that propagates** (U-dependency), with a precedence rule that makes every label decidable. The rule is executable: with gold alignments, our pipeline reproduces all 1,186 MedScope gold labels.
+2. **An unresolved label that propagates** (U-dependency), with a precedence rule that makes every label decidable. The rule is executable: with gold alignments, our pipeline reproduces every MedScope gold label.
 3. **Real clinical inference chains.** MEDEC notes with expert-injected errors, extended to error → treatment → monitoring chains (59 P claims at depth 2). Temporal *superseding* cases separate revision from update (Katsuno–Mendelzon).
 4. **A paired design.** Eight feedback conditions over the *same* response and claims (valid, false, partial, authority-only, vague, outdated, superseding, conflicting evidence). Condition A reproduces the EditPropBench/RevPropBench setting on the same claims, so the difference is measured, not argued.
 
 ## 4. Evidence so far
 
-**Offline (final; MedScope, 248 examples, CIs by bootstrap over 40 source cases):**
+**Offline (MedScope v0.1, 248 examples, CIs by bootstrap over 40 source cases):**
 - A system that "accepts" feedback by keyword overlap changes **72% [57–85]** of the evidence-supported claims that false feedback attacks. The false condition does measure claim-level deference.
 - Its change recall falls from **0.40 on D to 0.17 on P, and 0.10 at depth 2**. Following the feedback's surface finds direct targets but not their consequences.
 - The gold oracle scores 1.0, and the deterministic label rules reproduce every gold label.
@@ -65,7 +65,7 @@ What the pilot also showed:
 |---|---|
 | "This is EditPropBench plus a sycophancy test." | The pilot answers it: on identical claims, the verified-edit condition (theirs) and the unverified condition (ours) give different propagation behaviour, by up to 0.60 in P recall. Neither benchmark alone could show that. Claim-level sycophancy and the U label add to it. |
 | LLM-authored clinical content | All authored text is flagged unreviewed. A clinically trained reviewer pass and a second annotator (Cohen's κ) come before release; cases that fail are dropped. |
-| Small benchmark (40 cases) | CIs are computed over source cases, not claims. A radiology split (IU X-ray build script) and more MEDEC cases are planned; EditPropBench-IX gives a second domain. |
+| Small benchmark (47 cases; 20 dev / 27 test) | CIs are computed over source cases, not claims. A radiology split (IU X-ray build script) and more MEDEC cases are planned; EditPropBench-IX gives a second domain. |
 | Judge validity | 100 hand-labelled (claim, revision) pairs; target κ ≥ 0.75; switch judges if it falls short. |
 | Plan-then-edit hurt propagation on EditPropBench | The `no-prop` ablation isolates our propagation check; we will report it either way. |
 

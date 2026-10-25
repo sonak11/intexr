@@ -16,6 +16,12 @@ If (2) or (3) fails, see the fallback options in §4.
 
 ---
 
+## Update 25 Oct 2026
+- First model results (dev pilot): `docs/11_results_v0.md`.
+- MedScope v0.2: 47 cases (20 dev / 27 test).
+- Novelty memo ready for 31 Oct.
+- Remaining for Dec 18: second annotator + κ, clinical review, judge calibration, thasos full design, condition E, test-split growth.
+
 ## Update 23 Oct 2026 (overrides the stale items below)
 
 - **Compute / API:** $0 only: Gemini and Groq free tiers (public data), vLLM on thasos, and Kaggle as a backup. See `docs/08_free_compute.md`. The Anthropic/Azure items in week 1 are dropped.

@@ -1,6 +1,23 @@
 # IntExR — Session Handoff (written 22 Oct 2026; updated 23 Oct 2026)
 
-## UPDATE 23 Oct, later (session 2, continued). Read this first.
+## UPDATE 25 Oct (first results). Read this first.
+
+- **First model results are in** (free-tier dev slice). See `docs/11_results_v0.md`.
+  - Verified edits (A) make free-text revision *more literal*: P recall B − A = +0.18 (gpt-oss), +0.60 (Qwen). This is H1 reversed.
+  - Claim-level sycophancy: 25% → 0% (evidence prompt vs. pipeline).
+  - Pipeline exact accuracy 0.80 vs. 0.43.
+  - Still missing: gpt-oss × pipeline × B (one more daily run), and condition E (wording control; `CONDITIONS="E"`).
+- **MedScope v0.2.**
+  - 11 evidence items were rewritten so they decide only the error (the D/P boundary bug found by the error audit).
+  - Batch 4 (7 cases, all test) brings it to **47 cases, 293 examples, 1,418 claims**; 98 depth-2 P claims; split 20 dev / 27 test.
+  - The dev results above are on v0.1; re-run the affected dev examples before the freeze (unchanged ones come from the cache).
+- **Sample size:** detecting a 0.10 effect needs ~110–170 cases, so keep growing the test split (protocol §6).
+- Novelty memo §4, paper §6 (pilot table + findings + error analysis), slides 2/4/9 and the speaking script are updated. Emails to Dr. Pradhan (MD, OB/GYN) and Dr. Yanamala (clinical AI) are drafted in the chat history; the review packets are in `annotation/`.
+- The auto-mode classifier refused a commit that force-added `results/ERROR_AUDIT.md`. Regenerate it with `scripts/error_audit.py` instead of committing it.
+
+---
+
+## UPDATE 23 Oct, later (session 2, continued).
 
 **Git:** see `CLAUDE.md`. Work only on `main`, commit as sonak11 (GitHub noreply email), and add no Claude trailers.
 

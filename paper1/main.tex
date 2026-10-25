@@ -40,7 +40,7 @@ When a user corrects a language model, the correction may be right, partly right
 Existing benchmarks split this problem: edit-propagation benchmarks label direct and downstream updates but assume the requested edit is correct, while sycophancy benchmarks test whether models resist false feedback but score only whole answers.
 We introduce \textbf{IntExR-Scope}, a claim-level revision task in which feedback is an unverified hypothesis and evidence is the arbiter.
 Given an original response, prior evidence, feedback of unknown validity, and new evidence, a system must label every claim as a direct update, a propagated update, unresolved (to be hedged, not deleted), or keep, judge the feedback, and write a minimal revision.
-We release a validated benchmark built from clinical notes with expert-injected errors (\ms{}: 40 source cases, 248 examples, 1{,}186 claims across eight feedback conditions, with dependency chains up to depth two) together with converted non-medical sets, an evaluation harness with case-level uncertainty, and a \emph{scope-first} method that delegates evidence alignment and wording to an LLM but assigns labels and preserves untouched claims deterministically.
+We release a validated benchmark built from clinical notes with expert-injected errors (\ms{}: 47 source cases, 293 examples, 1{,}418 claims across eight feedback conditions, with dependency chains up to depth two) together with converted non-medical sets, an evaluation harness with case-level uncertainty, and a \emph{scope-first} method that delegates evidence alignment and wording to an LLM but assigns labels and preserves untouched claims deterministically.
 Our central experiment compares the same claims under a verified edit and under unverified feedback plus evidence, isolating the cost of verification on scope and propagation.
 \todo{one sentence of headline findings once runs are in.}
 \end{abstract}
@@ -125,8 +125,8 @@ For each selected note we remove the error sentence and use the remainder as pri
   \item \textbf{authority-only}: the valid feedback from a department chief with \emph{no} new evidence. If the note itself decides the error the labels stand; otherwise \D{} becomes \U-feedback and its dependents \U-dependency, insufficient.
   \item \textbf{ambiguous}: generic vague feedback (``something doesn't sit right''); evidence still decides the claims; insufficient.
   \item \textbf{outdated}: feedback defends the error by citing an older note; the newer evidence wins; reject.
-  \item \textbf{superseding} (5 cases): an event \emph{after} the plan was written changes a claim that was correct when written, the revision-versus-update distinction of \citet{katsuno1991update}.
-  \item \textbf{conflicting} (3 cases): a second read contradicts the decisive evidence $\Rightarrow$ \U-evidence for the erroneous claim and \U-dependency below it.
+  \item \textbf{superseding} (6 cases): an event \emph{after} the plan was written changes a claim that was correct when written, the revision-versus-update distinction of \citet{katsuno1991update}.
+  \item \textbf{conflicting} (5 cases): a second read contradicts the decisive evidence $\Rightarrow$ \U-evidence for the erroneous claim and \U-dependency below it.
 \end{itemize}
 
 \paragraph{Quality control.} A validator rejects any example in which a claim is not a span of $R$, a \Pp{} claim lacks a changed parent, a \U-dependency lacks a \U{} parent, a deleted claim is \U{}, or an evidence identifier is unknown. The builder asserts that every forbidden addition is absent from $R$, that every text check is satisfied by the gold revision and violated by $R$, and that false feedback targets a \K{} claim. The gold oracle scores 1.0 on every metric, and our method's deterministic stages reproduce all gold labels from gold alignments (\S\ref{sec:method}).
@@ -142,20 +142,20 @@ For each selected note we remove the error sentence and use the remainder as pri
 \toprule
  & cases & ex. & claims & \D & \Pp & \K & \U \\
 \midrule
-\ms{} & 40 & 248 & 1186 & 220 & 309 & 577 & 80 \\
-\quad \Pp{} depth 1 / 2 & & & & & 250/59 & & \\
-\quad \K$^{+}$ / \U{} by trigger$^{\dagger}$ & & & & & & 40 & 3/47/30 \\
+\ms{} & 47 & 293 & 1418 & 260 & 387 & 673 & 98 \\
+\quad \Pp{} depth 1 / 2 & & & & & 289/98 & & \\
+\quad \K$^{+}$ / \U{} by trigger$^{\dagger}$ & & & & & & 47 & 5/59/34 \\
 Pilot (CXR, COCO) & 16 & 16 & 86 & 19 & 16 & 44 & 7 \\
 EditPropBench-IX & 20 & 40 & 1600 & 205 & 103 & 1292 & 0 \\
 VitaminC-IX & 21 & 40 & 160 & 45 & 0 & 86 & 29 \\
 MEDEC-knowledge & 25 & 40 & 370 & 30 & 0 & 340 & 0 \\
 \bottomrule
 \end{tabular}}
-\caption{Benchmark statistics. $^{\dagger}$\U{} triggers: evidence / dependency / feedback. \ms{} conditions: 40 each of valid, false, partial, authority-only, ambiguous, outdated; 5 superseding; 3 conflicting. The pilot set is synthetic MIMIC-style chest X-ray reports and real COCO captions; a 24-example version with real IU X-ray reports exists but is not redistributed (CC BY-NC-ND).}
+\caption{Benchmark statistics. $^{\dagger}$\U{} triggers: evidence / dependency / feedback. \ms{} conditions: 47 each of valid, false, partial, authority-only, ambiguous, outdated; 6 superseding; 5 conflicting. Split by source case: 20 dev, 27 test. The pilot set is synthetic MIMIC-style chest X-ray reports and real COCO captions; a 24-example version with real IU X-ray reports exists but is not redistributed (CC BY-NC-ND).}
 \label{tab:stats}
 \end{table}
 
-Table~\ref{tab:stats} summarises the data. \ms{} averages 4.8 claims per example; 26\% of its claims are \Pp{}, more than its \D{} claims, because each error has several dependents, and 59 \Pp{} claims sit at depth two (error $\to$ treatment $\to$ monitoring).
+Table~\ref{tab:stats} summarises the data. \ms{} averages 4.8 claims per example; 27\% of its claims are \Pp{}, more than its \D{} claims, because each error has several dependents, and 98 \Pp{} claims sit at depth two (error $\to$ treatment $\to$ monitoring).
 
 \subsection{Converted public sets}
 To test the claims outside medicine and against the closest prior benchmark, we convert three datasets into the IntExR format with valid and false feedback variants. \textbf{EditPropBench-IX}: synthetic manuscripts from EditPropBench \citep{kruthof2026editpropbench}; the evidence states only the explicit edited facts, units stating them are \D{}, and required units that carry only an implied qualifier are \Pp{}, so the set tests propagation under verification. \textbf{VitaminC-IX}: contrastive Wikipedia revisions \citep{schuster2021vitaminc} whose not-enough-info cases provide \U-evidence. \textbf{MEDEC-knowledge}: MEDEC notes whose error can be found only from medical knowledge, with no evidence item; it is a control for evidence-gated methods. \todo{Decide on a second real non-medical source (FRUIT or ARIES); \S\ref{sec:limits}.}
@@ -190,7 +190,7 @@ Single-prompt revision asks one model call to verify feedback, find dependents, 
   \item \textbf{Check (code).} Content words that occur in the feedback but in no evidence item, the context, or $R$ are \emph{feedback-only}. Any revised claim containing one is re-revised once with an explicit instruction not to include it.
 \end{enumerate}
 
-\paragraph{Executable specification.} Because labels are assigned by code, the label rules can be tested: feeding the pipeline gold alignments and gold revision texts reproduces every gold label, verdict, and text check on all 248 \ms{} examples, the pilot, and EditPropBench-IX (a unit test in the release). Errors of the full system are therefore attributable to the two LLM stages, which we analyse separately (\S\ref{sec:analysis}).
+\paragraph{Executable specification.} Because labels are assigned by code, the label rules can be tested: feeding the pipeline gold alignments and gold revision texts reproduces every gold label, verdict, and text check on all \ms{} examples, the pilot, and EditPropBench-IX (a unit test in the release). Errors of the full system are therefore attributable to the two LLM stages, which we analyse separately (\S\ref{sec:analysis}).
 
 \paragraph{Ablations.} \emph{no-prop} keeps every \Pp{} candidate (no propagation check); \emph{no-check} removes step~5; and the single-prompt \emph{scope-first} baseline asks one call for the same JSON (labels, dependencies, revised claims, verdict, full revision) without deterministic stages.
 
@@ -236,7 +236,7 @@ Scope-first pipeline & \pending & \pending & \pending & \pending & \pending & \p
 \quad no-check & \pending & \pending & \pending & \pending & \pending & \pending & \pending & \pending \\
 \bottomrule
 \end{tabular}}
-\caption{Main results on \ms{} (all 248 examples; offline rows are final). 95\% case-level bootstrap intervals are in the appendix. $^{*}$By construction: the gate never propagates and never writes new content. ``---'': not applicable (free-text systems give no verdict; the lexical baseline writes no text). Model rows will be filled from \texttt{tables/main\_medec\_scope\_v0.tex}.}
+\caption{Offline baselines on \ms{} v0.1 (all 248 examples of the first 40 cases; final numbers will be recomputed on the frozen v1). 95\% case-level bootstrap intervals are in the appendix. $^{*}$By construction: the gate never propagates and never writes new content. ``---'': not applicable (free-text systems give no verdict; the lexical baseline writes no text). Model rows will be filled from \texttt{tables/main\_medec\_scope\_v0.tex}.}
 \label{tab:main}
 \end{table*}
 

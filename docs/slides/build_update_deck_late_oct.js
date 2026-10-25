@@ -91,10 +91,10 @@ s.addNotes("Last time the harness was built but no model had been run, and I had
 
 // ---------------------------------------------------------------- 2 at a glance
 s = content("Overview", "At a glance", "Three weeks of progress in four numbers", "All work is in github.com/sonak11/intexr (private)",
-  "MedScope grew from 31 to 40 cases. The scope-first method is now a real pipeline. First model results are in, on the dev split: two open models, three systems. Our pipeline gets 0.80 interaction-exact accuracy with Qwen, against 0.43 for an evidence-aware prompt. The Paper 1 draft exists in ACL format.");
+  "MedScope grew from 31 to 47 cases. The scope-first method is now a real pipeline. First model results are in, on the dev split: two open models, three systems. Our pipeline gets 0.80 interaction-exact accuracy with Qwen, against 0.43 for an evidence-aware prompt. The Paper 1 draft exists in ACL format.");
 const glance = [
-  ["40", "MedScope source cases\n(was 31 on 7 Oct)"],
-  ["1,186", "gold-labelled claims\n(was 873)"],
+  ["47", "MedScope source cases\n(was 31 on 7 Oct)"],
+  ["1,418", "gold-labelled claims\n(was 873)"],
   ["0.80", "best exact accuracy:\nour pipeline (Qwen)"],
   ["$0", "spent: free tiers + Rutgers GPUs\nno lab API key needed"],
 ];
@@ -121,11 +121,11 @@ s.addTable([
 
 // ---------------------------------------------------------------- 4 MedScope growth (chart)
 pres.addSection({ title: "Data" });
-s = content("Data", "MedScope · batch 3", "Batch 3 filled the thin cells", "40 cases → 248 examples, 1,186 claims · all authored content still clinically unreviewed",
-  "Nine new cases target what was thin: two-step chains (diagnosis, then treatment, then monitoring), events after the plan was written, and conflicting evidence. Depth-2 propagated claims went from 6 to 59. All new content is LLM-drafted and flagged unreviewed.");
+s = content("Data", "MedScope · batches 3 and 4", "New cases filled the thin cells", "47 cases → 293 examples, 1,418 claims · 20 dev / 27 test · all authored content still clinically unreviewed",
+  "Sixteen new cases target what was thin: two-step chains (diagnosis, then treatment, then monitoring), events after the plan was written, and conflicting evidence. Depth-2 propagated claims went from 6 to 98. All new content is LLM-drafted and flagged unreviewed.");
 s.addChart(pres.charts.BAR, [
   { name: "7 Oct", labels: ["Source cases", "Depth-2 P claims", "Supported K claims", "Superseding examples", "Conflicting-evidence ex."], values: [31, 6, 0, 2, 0] },
-  { name: "Now", labels: ["Source cases", "Depth-2 P claims", "Supported K claims", "Superseding examples", "Conflicting-evidence ex."], values: [40, 59, 40, 5, 3] },
+  { name: "Now", labels: ["Source cases", "Depth-2 P claims", "Supported K claims", "Superseding examples", "Conflicting-evidence ex."], values: [47, 98, 47, 6, 5] },
 ], { objectName: "growth-chart", x: M, y: 1.85, w: 7.6, h: 4.8, barDir: "bar", barGrouping: "clustered",
   chartColors: [HEX.line, HEX.orange], showLegend: true, legendPos: "b", legendFontSize: 12, legendFontFace: "+mn-lt",
   showValue: true, dataLabelPosition: "outEnd", dataLabelFontSize: 12, dataLabelFontFace: "+mn-lt", dataLabelColor: HEX.navy,
@@ -156,7 +156,7 @@ s = content("Data", "Rigor", "Two problems found and fixed", "Both fixes are in 
 
 // ---------------------------------------------------------------- 6 method
 pres.addSection({ title: "Method" });
-s = content("Method", "Scope-first pipeline", "The LLM reads; code decides the labels", "With perfect alignment, the code reproduces all 1,186 gold labels: the label rules are executable and tested",
+s = content("Method", "Scope-first pipeline", "The LLM reads; code decides the labels", "With perfect alignment, the code reproduces every gold label: the label rules are executable and tested",
   "The single-prompt version asks one call to do everything. The pipeline gives the model only what needs language understanding: which evidence supports or contradicts each claim, and how to word the changes. The precedence rule is code. Kept claims are copied verbatim, so they cannot be reworded. A final check catches content that only the feedback asserts. Two to three calls per example.");
 const steps = [
   ["1 · Align", "LLM", "Which evidence supports or contradicts each claim; dependencies; disputes"],
@@ -194,12 +194,12 @@ s.addTable([
 // ---------------------------------------------------------------- 8 runs at $0
 pres.addSection({ title: "Experiments" });
 s = content("Experiments", "Model runs", "Real runs started, at zero cost", "Free tiers only for public data; MIMIC would only ever run on self-hosted models",
-  "Groq's free tier allows about 200 thousand tokens per model per day, roughly 120 calls. So the free tier runs a pre-specified slice: the 20 dev cases under valid, false and authority-only feedback, conditions A and B, and the three systems the main claims need. That takes about four days per model, running in parallel. The full design (all 248 examples, all systems) needs the thasos GPUs, which I can use with my own account.");
+  "Groq's free tier allows about 200 thousand tokens per model per day, roughly 120 calls. So the free tier runs a pre-specified slice: the 20 dev cases under valid, false and authority-only feedback, conditions A and B, and the three systems the main claims need. That takes about four days per model, running in parallel. The full design (all 293 examples, all systems) needs the thasos GPUs, which I can use with my own account.");
 const runs = [
   ["Models", "gpt-oss-120b (low reasoning)\nQwen3.8-27B (reasoning off)\nboth via Groq free tier"],
   ["Judge", "gemini-3.5-flash-lite,\nfixed for every run;\ncalibration against my labels next"],
   ["Free-tier slice", "60 dev examples × conditions A, B\n× 3 systems ≈ 4 days per model\n(200K tokens/day cap)"],
-  ["Full design", "248 examples, all systems,\nNLI gate: thasos GPUs\n(own account, no scheduler)"],
+  ["Full design", "293 examples, all systems,\nNLI gate: thasos GPUs\n(own account, no scheduler)"],
 ];
 runs.forEach(([h, b], i) => {
   const x = M + (i % 2) * 6.15, y = 2.0 + Math.floor(i / 2) * 2.3;

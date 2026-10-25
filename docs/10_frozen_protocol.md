@@ -19,7 +19,7 @@ Everything here is decided *before* test-set results are seen. Items marked **TB
   - **TBD:** reviewer, number of cases changed or dropped.
 
 ## 3. Data and splits
-- MedScope v1 = the cases that pass review, built by `scripts/build_medec_scope.py`. The source is MEDEC (CC BY 4.0); authored text is released under the same licence.
+- MedScope v1 = the cases that pass review, built by `scripts/build_medec_scope.py`. Current: v0.2 (47 cases, 293 examples); evidence items decide the erroneous claim only, so propagated claims must be inferred (rule added after the dev pilot). The source is MEDEC (CC BY 4.0); authored text is released under the same licence.
 - Split by source case (`paperB/data/splits.json`, frozen 23 Oct 2026):
   - **dev** (20 cases) is used for prompts, pilot runs and error analysis;
   - **test** (20 cases + any new cases) is held out.
@@ -54,8 +54,12 @@ Pre-registered in the paper (§5): H1 cost of verification, H2 propagation harde
 - Null results are reported as null.
 
 ## 6. Sample size
-- `scripts/sample_size.py` computes, from dev A/B runs, the SD of per-case B − A differences and the number of test cases needed to detect a gap of 0.10 in P change recall (α = 0.05, power 0.8).
-- On a simulated gap it gives about 34 cases. **TBD:** the dev-based number and the resulting test-set target. If more cases are needed, write them (test split) before the freeze.
+- From the dev pilot (`docs/11_results_v0.md`), the per-case B − A differences have SD 0.37–0.47.
+- With 20 test cases, the smallest detectable difference is about 0.23–0.29. Detecting 0.10 needs about **110–170 source cases** (α = 0.05, power 0.8; `scripts/sample_size.py`).
+- **Decision:**
+  - grow the test split to at least 60 cases before the freeze if review capacity allows, reporting the minimum detectable difference that results;
+  - the headline effects seen on dev (+0.37 to +0.60) are detectable at the current size;
+  - the test split has 27 cases as of 25 Oct (v0.2 + batch 4).
 
 ## 7. Release
 - Code (harness, systems, metrics, builders), MedScope v1 (MEDEC-derived, CC BY 4.0), splits, annotation guide, agreement data, judge calibration labels, all model outputs.

@@ -1,0 +1,602 @@
+{
+ "version": "medec_scope_proposals_v0_batch4",
+ "status": "PROPOSED by Claude (LLM) on 2026-10-25. NOT clinically reviewed. Every case needs clinician review before use as gold.",
+ "design": "Batch 4 follows the v0.2 evidence rule: new evidence decides the erroneous claim but never states the downstream correction, so propagated claims must be inferred. All cases have depth-2 chains. New cases go to the test split.",
+ "cases": [
+  {
+   "medec_id": "ms-val-114",
+   "false_support": "Guideline excerpt: incentive spirometry and early ambulation are recommended after abdominal surgery, including in postoperative pneumonia.",
+   "decidable_from_prior": false,
+   "claims": [
+    [
+     "c1",
+     "Postoperative day 3 after cholecystectomy with fever of 39 C, productive cough, pleuritic right chest pain, and right basilar crackles.",
+     "K"
+    ],
+    [
+     "c2",
+     "Suspected pulmonary embolism.",
+     "D",
+     "Suspected hospital-acquired pneumonia."
+    ],
+    [
+     "c3",
+     "Start therapeutic heparin.",
+     "P",
+     "Start empiric antibiotics for hospital-acquired pneumonia after blood and sputum cultures."
+    ],
+    [
+     "c4",
+     "Monitor the aPTT every 6 hours to titrate the heparin.",
+     "P",
+     "Reassess fever and oxygenation at 48-72 hours to judge the antibiotic response."
+    ],
+    [
+     "c5",
+     "Encourage incentive spirometry and early ambulation.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c3",
+     "c4"
+    ]
+   ],
+   "new_evidence": "CT pulmonary angiography: no pulmonary embolism; right lower lobe consolidation with air bronchograms. WBC 16,500/mm3.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "pneumonia"
+     ],
+     "must_not_contain": [
+      "pulmonary embolism"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "antibiotic"
+     ],
+     "must_not_contain": [
+      "heparin"
+     ]
+    },
+    "c4": {
+     "must_not_contain": [
+      "aPTT"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Productive cough and crackles at the right base. Are you sure this is a PE?",
+    "false": [
+     "c5",
+     "Keep her in bed; walking will make the chest pain worse."
+    ],
+    "partial": [
+     "It's pneumonia; start antibiotics and add a course of prednisone.",
+     [
+      "prednisone"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-val-66",
+   "false_support": "Obstetrics note: a patient at 30 weeks with acute pain needs fetal heart rate and contraction monitoring.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "At 30 weeks' gestation: colicky right flank pain radiating to the groin, dysuria, right costovertebral angle tenderness, and microscopic hematuria.",
+     "K"
+    ],
+    [
+     "c2",
+     "Diagnosis: right ovarian torsion.",
+     "D",
+     "Diagnosis: right nephrolithiasis."
+    ],
+    [
+     "c3",
+     "Arrange emergency laparoscopy to detorse the ovary.",
+     "P",
+     "Give IV fluids, opioid analgesia, and antiemetics while the stone passes."
+    ],
+    [
+     "c4",
+     "Obtain surgical consent and keep her NPO for the operating room.",
+     "P",
+     "Strain the urine, and involve urology if the pain persists or signs of infection develop."
+    ],
+    [
+     "c5",
+     "Monitor the fetal heart rate and uterine activity.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c3",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Renal ultrasound: right hydronephrosis with a 5 mm distal ureteral stone. Pelvic ultrasound: normal ovaries with normal Doppler flow.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "nephrolithiasis",
+      "kidney stone",
+      "ureteral stone"
+     ],
+     "must_not_contain": [
+      "torsion"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "analges",
+      "opioid"
+     ],
+     "must_not_contain": [
+      "laparoscopy"
+     ]
+    },
+    "c4": {
+     "must_not_contain": [
+      "NPO"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Colicky flank pain to the groin with blood in the urine. Why ovarian torsion?",
+    "false": [
+     "c5",
+     "Fetal monitoring isn't needed for kidney pain."
+    ],
+    "partial": [
+     "It's a kidney stone; give ketorolac for the pain.",
+     [
+      "ketorolac"
+     ]
+    ]
+   },
+   "superseding": {
+    "feedback": "Update from labor and delivery: she has started contracting regularly.",
+    "evidence": "Three hours after the plan was written: regular painful contractions every 5 minutes; cervix 2 cm dilated.",
+    "changes": {
+     "c5": "Contractions have begun: obtain urgent obstetric evaluation for preterm labor, with continuous fetal monitoring."
+    }
+   }
+  },
+  {
+   "medec_id": "ms-val-128",
+   "false_support": "AAP guidance excerpt: adolescents seen for genital symptoms should be offered confidential sexual health counseling.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "15-year-old with 2 weeks of thin, white, odorless vaginal discharge and a normal wet mount.",
+     "K"
+    ],
+    [
+     "c2",
+     "Diagnosis: bacterial vaginosis.",
+     "D",
+     "Diagnosis: physiologic leukorrhea."
+    ],
+    [
+     "c3",
+     "Treat with oral metronidazole for 7 days.",
+     "P",
+     null
+    ],
+    [
+     "c4",
+     "Advise avoiding alcohol until 72 hours after the last metronidazole dose.",
+     "P",
+     null
+    ],
+    [
+     "c5",
+     "Offer confidential counseling about sexual health.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c3",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Vaginal pH 4.0; whiff test negative; no clue cells on repeat microscopy. Gynecology: discharge consistent with physiologic leukorrhea of puberty.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "physiologic"
+     ],
+     "must_not_contain": [
+      "bacterial vaginosis"
+     ]
+    },
+    "c3": {
+     "must_not_contain": [
+      "metronidazole"
+     ]
+    },
+    "c4": {
+     "must_not_contain": [
+      "alcohol"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Odorless discharge and a normal wet mount in a teenager. Is this really BV?",
+    "false": [
+     "c5",
+     "Don't bring up sexual health; it will upset her."
+    ],
+    "partial": [
+     "It's physiologic, but give fluconazole just in case.",
+     [
+      "fluconazole"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-val-130",
+   "false_support": "Surgery and pharmacy note: hold antihypertensives while systolic pressure is below 100 mmHg after surgery.",
+   "decidable_from_prior": false,
+   "claims": [
+    [
+     "c1",
+     "Postoperative day 5 after open abdominal aortic aneurysm repair with crampy abdominal pain, bloody diarrhea, fever, and tachycardia.",
+     "K"
+    ],
+    [
+     "c2",
+     "Diagnosis: abdominal compartment syndrome.",
+     "D",
+     "Diagnosis: ischemic colitis."
+    ],
+    [
+     "c3",
+     "Arrange emergency decompressive laparotomy.",
+     "P",
+     "Arrange urgent flexible sigmoidoscopy to assess the extent of the ischemia."
+    ],
+    [
+     "c4",
+     "Plan to leave the abdomen open with a temporary closure after decompression.",
+     "P",
+     "Keep her NPO on IV fluids and broad-spectrum antibiotics while the sigmoidoscopy is arranged."
+    ],
+    [
+     "c5",
+     "Hold her antihypertensives while she is hypotensive.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c3",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Bladder pressure 9 mmHg. CT abdomen: wall thickening of the sigmoid colon without perforation; no intra-abdominal fluid collection.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "ischemic colitis"
+     ],
+     "must_not_contain": [
+      "compartment"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "sigmoidoscopy",
+      "colonoscopy",
+      "endoscop"
+     ],
+     "must_not_contain": [
+      "laparotomy"
+     ]
+    },
+    "c4": {
+     "must_not_contain": [
+      "temporary closure"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Bloody stools after an aortic repair. Shouldn't we be thinking about the colon?",
+    "false": [
+     "c5",
+     "Keep giving her full antihypertensives; her blood pressure history is high."
+    ],
+    "partial": [
+     "It's ischemic colitis; start IV heparin as well.",
+     [
+      "heparin"
+     ]
+    ]
+   },
+   "conflicting": {
+    "evidence": "Repeat bladder pressure four hours later, by a different nurse: 24 mmHg, with falling urine output.",
+    "hedge": "Diagnosis: ischemic colitis versus evolving abdominal compartment syndrome; the bladder pressures conflict, so repeat the measurement and involve surgery now."
+   }
+  },
+  {
+   "medec_id": "ms-val-148",
+   "false_support": "Pediatric guideline excerpt: leg bowing with rickets on laboratory testing should be followed by orthopedics, since it may need guided-growth surgery.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "2-year-old with low phosphorus (1.1 mg/dL), high alkaline phosphatase, and normal calcium, PTH, and 1,25-dihydroxyvitamin D.",
+     "K"
+    ],
+    [
+     "c2",
+     "Diagnosis: vitamin D deficiency rickets.",
+     "D",
+     "Diagnosis: vitamin D-resistant (hypophosphatemic) rickets."
+    ],
+    [
+     "c3",
+     "Treat with high-dose cholecalciferol.",
+     "P",
+     "Treat with oral phosphate and calcitriol."
+    ],
+    [
+     "c4",
+     "Recheck 25-hydroxyvitamin D in 3 months to confirm repletion.",
+     "P",
+     "Monitor urine calcium and renal ultrasound for nephrocalcinosis during therapy."
+    ],
+    [
+     "c5",
+     "Refer to orthopedics to follow the leg bowing.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c3",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Renal phosphate wasting (low TmP/GFR); FGF23 elevated; 25-hydroxyvitamin D normal at 32 ng/mL. Genetic testing: PHEX mutation.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "resistant",
+      "hypophosphat"
+     ],
+     "must_not_contain": [
+      "deficiency rickets"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "phosphate"
+     ],
+     "must_not_contain": [
+      "cholecalciferol"
+     ]
+    },
+    "c4": {
+     "must_not_contain": [
+      "25-hydroxyvitamin"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Normal PTH and vitamin D with a very low phosphorus. Does that fit nutritional rickets?",
+    "false": [
+     "c5",
+     "Leg bowing in toddlers is always physiologic; skip orthopedics."
+    ],
+    "partial": [
+     "It's hypophosphatemic rickets; also add high-dose vitamin D drops.",
+     [
+      "high-dose vitamin D"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-val-26",
+   "false_support": "Allergy guideline excerpt: children with peanut allergy should carry injectable epinephrine regardless of how severe past reactions were.",
+   "decidable_from_prior": false,
+   "claims": [
+    [
+     "c1",
+     "4-year-old with 3 months of episodic nighttime cough and wheeze, exercise-triggered shortness of breath, and a peanut allergy.",
+     "K"
+    ],
+    [
+     "c2",
+     "Suspected primary ciliary dyskinesia.",
+     "D",
+     "Suspected asthma."
+    ],
+    [
+     "c3",
+     "Order nasal nitric oxide testing and a ciliary biopsy.",
+     "P",
+     "Start a low-dose inhaled corticosteroid with albuterol as needed."
+    ],
+    [
+     "c4",
+     "Refer for genetic counseling based on the biopsy results.",
+     "P",
+     "Review inhaler technique and symptom control in 4-6 weeks."
+    ],
+    [
+     "c5",
+     "Make sure he carries epinephrine for his peanut allergy.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c3",
+     "c4"
+    ]
+   ],
+   "new_evidence": "In clinic, the wheezing resolved after a bronchodilator trial. Sweat chloride normal; no history of neonatal respiratory distress or chronic wet cough.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "asthma"
+     ],
+     "must_not_contain": [
+      "ciliary dyskinesia"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "corticosteroid",
+      "steroid"
+     ],
+     "must_not_contain": [
+      "biopsy"
+     ]
+    },
+    "c4": {
+     "must_not_contain": [
+      "genetic"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Nighttime cough, exercise symptoms, and wheeze in an allergic child. Why PCD?",
+    "false": [
+     "c5",
+     "He doesn't need an epinephrine autoinjector; his peanut reactions have been mild."
+    ],
+    "partial": [
+     "It's asthma; give a course of oral antibiotics as well.",
+     [
+      "antibiotic"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-val-46",
+   "false_support": "AAP guideline excerpt: infants who fail the newborn hearing screen should have a full audiologic evaluation by 3 months of age.",
+   "decidable_from_prior": false,
+   "claims": [
+    [
+     "c1",
+     "Term newborn with a continuous murmur, bilateral cataracts, non-blanching bluish macules, and a failed hearing screen; no prenatal care.",
+     "K"
+    ],
+    [
+     "c2",
+     "Diagnosis: congenital cytomegalovirus infection.",
+     "D",
+     "Diagnosis: congenital rubella syndrome."
+    ],
+    [
+     "c3",
+     "Start oral valganciclovir for 6 months.",
+     "P",
+     null
+    ],
+    [
+     "c4",
+     "Check a CBC weekly for valganciclovir-induced neutropenia.",
+     "P",
+     null
+    ],
+    [
+     "c5",
+     "Refer to ophthalmology and audiology.",
+     "K"
+    ],
+    [
+     "c6",
+     "Obtain an echocardiogram for the murmur.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c3",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Newborn rubella IgM positive; urine CMV PCR negative. Head ultrasound: no periventricular calcifications.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "rubella"
+     ],
+     "must_not_contain": [
+      "cytomegalovirus"
+     ]
+    },
+    "c3": {
+     "must_not_contain": [
+      "valganciclovir"
+     ]
+    },
+    "c4": {
+     "must_not_contain": [
+      "CBC"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Cataracts and a PDA-type murmur. Doesn't that point to rubella rather than CMV?",
+    "false": [
+     "c5",
+     "Audiology can wait until she's a year old."
+    ],
+    "partial": [
+     "It's congenital rubella; give the baby IV immunoglobulin.",
+     [
+      "immunoglobulin"
+     ]
+    ]
+   },
+   "conflicting": {
+    "evidence": "Second laboratory on the same samples: urine CMV PCR positive; rubella IgM equivocal.",
+    "hedge": "Diagnosis: congenital rubella versus congenital CMV infection; the tests conflict, so repeat urine CMV PCR and rubella serology before deciding on antivirals."
+   }
+  }
+ ]
+}
