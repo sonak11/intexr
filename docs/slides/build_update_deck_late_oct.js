@@ -91,11 +91,11 @@ s.addNotes("Last time the harness was built but no model had been run, and I had
 
 // ---------------------------------------------------------------- 2 at a glance
 s = content("Overview", "At a glance", "Three weeks of progress in four numbers", "All work is in github.com/sonak11/intexr (private)",
-  "MedScope grew from 31 to 40 cases. The scope-first method is now a real pipeline, not a single prompt. Model runs started with two open models through a free API tier. The Paper 1 draft exists in ACL format.");
+  "MedScope grew from 31 to 40 cases. The scope-first method is now a real pipeline. First model results are in, on the dev split: two open models, three systems. Our pipeline gets 0.80 interaction-exact accuracy with Qwen, against 0.43 for an evidence-aware prompt. The Paper 1 draft exists in ACL format.");
 const glance = [
   ["40", "MedScope source cases\n(was 31 on 7 Oct)"],
   ["1,186", "gold-labelled claims\n(was 873)"],
-  ["2", "open models running\n(gpt-oss, Qwen)"],
+  ["0.80", "best exact accuracy:\nour pipeline (Qwen)"],
   ["$0", "spent: free tiers + Rutgers GPUs\nno lab API key needed"],
 ];
 glance.forEach(([v, l], i) => {
@@ -208,19 +208,22 @@ runs.forEach(([h, b], i) => {
   s.addText(b, { objectName: `run-body-${i}`, x: x + 0.3, y: y + 0.7, w: 5.3, h: 1.2, fontSize: 15, color: C.text1, valign: "top", margin: 0, isTextBox: true });
 });
 
-// ---------------------------------------------------------------- 9 first signal (offline baseline)
-s = content("Experiments", "First signal · no model needed", "Keyword matching finds errors, not consequences",
-  "Keyword-overlap 'always accept' baseline on all 248 MedScope examples; 95% CIs by bootstrap over 40 source cases",
-  "Before any model: a baseline that changes every claim sharing words with the feedback. It changes 72 percent of the evidence-supported claims that false feedback attacks, so the false condition does measure claim-level deference. And its change recall drops from 0.40 on direct claims to 0.17 on propagated claims and 0.10 at depth two: consequences rarely share words with the feedback. Model numbers will replace this slide.");
-s.addChart(pres.charts.BAR, [{ name: "Change recall", labels: ["Direct (D)", "Propagated (P)", "P at depth 2"], values: [0.40, 0.17, 0.10] }], {
-  objectName: "recall-chart", x: M, y: 1.95, w: 7.0, h: 4.6, barDir: "col", chartColors: [HEX.orange, HEX.peach, HEX.peach], showLegend: false,
+// ---------------------------------------------------------------- 9 first model results
+s = content("Experiments", "First model results · dev split, 60 examples", "Verified edits make models more literal",
+  "Evidence-aware prompt. B − A: gpt-oss +0.18 [0.08, 0.29], Qwen +0.60 [0.40, 0.77] (95% CIs over 20 source cases). gpt-oss pipeline × B still running",
+  "This is the headline. With an evidence-aware prompt, models fix dependent claims more often when they get unverified feedback plus evidence than when they get the verified edit: plus 0.18 for gpt-oss and plus 0.60 for Qwen. Given a list of correct edits, they apply the list and leave the consequences stale, the EditPropBench failure, on the same claims. That's the opposite of what I pre-registered, and it makes the joint setting more interesting: the verified-edit setting hides the failure. I'm running a wording control, condition E, which adds 'also update what depends on it'. Second result: under false feedback, the evidence-aware prompt changes 25 percent of evidence-supported claims; our pipeline changes none.");
+s.addChart(pres.charts.BAR, [
+  { name: "A · verified edit", labels: ["gpt-oss-120b", "Qwen3.8-27B"], values: [0.70, 0.14] },
+  { name: "B · feedback + evidence", labels: ["gpt-oss-120b", "Qwen3.8-27B"], values: [0.88, 0.74] },
+], { objectName: "ab-chart", x: M, y: 1.95, w: 7.0, h: 4.6, barDir: "col", barGrouping: "clustered", chartColors: [HEX.line, HEX.orange],
+  showLegend: true, legendPos: "b", legendFontSize: 12, legendFontFace: "+mn-lt",
   showValue: true, dataLabelPosition: "outEnd", dataLabelFormatCode: "0.00", dataLabelFontSize: 14, dataLabelFontFace: "+mn-lt", dataLabelColor: HEX.navy,
-  catAxisLabelFontSize: 14, catAxisLabelFontFace: "+mn-lt", catAxisLabelColor: HEX.soft, valAxisHidden: true, valAxisMinVal: 0, valAxisMaxVal: 0.5,
-  valGridLine: { style: "none" }, catGridLine: { style: "none" }, showTitle: true, title: "Change recall of the keyword baseline", titleFontSize: 14, titleFontFace: "+mn-lt", titleColor: HEX.soft });
+  catAxisLabelFontSize: 14, catAxisLabelFontFace: "+mn-lt", catAxisLabelColor: HEX.soft, valAxisHidden: true, valAxisMinVal: 0, valAxisMaxVal: 1,
+  valGridLine: { style: "none" }, catGridLine: { style: "none" }, showTitle: true, title: "Change recall on propagated claims", titleFontSize: 14, titleFontFace: "+mn-lt", titleColor: HEX.soft });
 card(s, "syco-card", 8.1, 2.0, 4.6, 4.4);
-stat(s, "syco", 8.45, 2.35, 4.0, "72%", "of evidence-supported claims attacked by false feedback get changed  [95% CI 57–85%]");
-s.addText("So the false-feedback condition measures claim-level sycophancy, and propagation is the hard part.", {
-  objectName: "syco-text", x: 8.45, y: 4.35, w: 4.0, h: 1.8, fontSize: 15, color: C.text1, valign: "top", margin: 0, isTextBox: true });
+stat(s, "syco", 8.45, 2.3, 4.0, "25% → 0%", "of evidence-supported claims changed under false feedback: evidence-aware prompt vs. our pipeline (Qwen)");
+s.addText("Pipeline exact accuracy 0.80 vs. 0.43 for the evidence-aware prompt (Qwen). The verified-edit gap could be wording: condition E tests that next.", {
+  objectName: "syco-text", x: 8.45, y: 4.3, w: 4.0, h: 1.9, fontSize: 15, color: C.text1, valign: "top", margin: 0, isTextBox: true });
 
 // ---------------------------------------------------------------- 10 novelty
 pres.addSection({ title: "Novelty and protocol" });
