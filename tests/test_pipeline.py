@@ -108,6 +108,17 @@ class TestPipeline(unittest.TestCase):
         self.assertEqual(scope.direct_status([{"id": "n1", "relation": "supports"}], tier), "S")
         self.assertIsNone(scope.direct_status([], tier))
 
+    def test_rule_verdict(self):
+        v = {"feedback": {"speaker_role": "attending", "text": "x"}}
+        al = lambda d: {"feedback": {"disputes": d, "verdict": "partial"}}
+        final = {"c1": {"label": "K"}, "c2": {"label": "D"}, "c3": {"label": "P"}, "c4": {"label": "U"}}
+        self.assertEqual(scope.decide_verdict(v, al(["c2"]), final, set()), "accept")          # valid feedback
+        self.assertEqual(scope.decide_verdict(v, al(["c2"]), final, {"phenytoin"}), "partial")  # adds unsupported content
+        self.assertEqual(scope.decide_verdict(v, al(["c1"]), final, set()), "reject")           # attacks a kept claim
+        self.assertEqual(scope.decide_verdict(v, al(["c4"]), final, set()), "insufficient")     # evidence cannot settle it
+        self.assertEqual(scope.decide_verdict(v, al([]), final, set()), "partial")               # no dispute: model's verdict
+        self.assertIsNone(scope.decide_verdict({"feedback": None}, al([]), final, set()))
+
     def test_gate_plumbing(self):
         ex = data.load(os.path.join(ROOT, FILES[0]))[0]
         p = gate.run(ex, GoldScorer(ex))

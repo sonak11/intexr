@@ -223,7 +223,33 @@ def _texts(raw):
     return {k: v for k, v in out.items() if isinstance(k, str)}
 
 
-def run(ex, client, judge=None, condition="B", propagate=True, check=True, name="scope_pipeline", **_):
+def decide_verdict(v, align, final, leaks):
+    """Feedback verdict by rule, from what the feedback disputes and how the evidence labelled those claims.
+    Falls back to the model's verdict when the feedback disputes no claim (vague or defending a claim)."""
+    fb = v.get("feedback")
+    if not fb:
+        return None
+    llm = (align.get("feedback") or {}).get("verdict")
+    if fb.get("speaker_role") == "verified_editor":
+        return llm
+    disputes = [c for c in ((align.get("feedback") or {}).get("disputes") or []) if c in final]
+    if not disputes:
+        return llm if llm in ("accept", "partial", "reject", "insufficient") else "insufficient"
+    labs = {final[c]["label"] for c in disputes}
+    if labs <= {"D", "P"}:
+        return "partial" if leaks else "accept"
+    if labs == {"K"}:
+        return "reject"
+    if "U" in labs and not labs & {"D", "P"}:
+        return "insufficient"
+    return "partial"
+
+
+def run(ex, client, judge=None, condition="B", propagate=True, check=True, check_scope="after", rule_verdict=True,
+        name="scope_pipeline", **_):
+    """check_scope: 'deps' checks only claims the model linked to a changed claim; 'after' also checks every later
+    claim that has no direct evidence (models often omit dependency links). rule_verdict: decide the verdict by
+    decide_verdict instead of taking the model's."""
     v = model_view(ex, condition)
     ev = evidence_for(v)
     cids = [c["id"] for c in v["claims"]]
@@ -241,6 +267,13 @@ def run(ex, client, judge=None, condition="B", propagate=True, check=True, name=
     labels, triggers, parents = assign_labels(v, align)
     if not propagate:
         labels = {c: ("K" if l == "P?" else l) for c, l in labels.items()}
+    elif check_scope == "after":
+        changed_at = [i for i, c in enumerate(cids) if labels[c] in ("D", "P?")]
+        if changed_at:
+            for c in cids[changed_at[0] + 1:]:
+                if labels[c] == "K" and triggers[c] == "unverified":
+                    labels[c], triggers[c] = "P?", "dependency"
+                    parents[c] = parents[c] or [cids[changed_at[0]]]
 
     order = topo_order(cids, parents)
     jobs = []
@@ -296,10 +329,12 @@ def run(ex, client, judge=None, condition="B", propagate=True, check=True, name=
     revised = assemble(v["original_response"], v["claims"],
                        {c: f["revised_text"] for c, f in final.items() if f["label"] != "K"})
     pred = {"id": ex["id"], "system": name, "structured": True,
-            "verdict": (align.get("feedback") or {}).get("verdict") if v.get("feedback") else "insufficient",
+            "verdict": decide_verdict(v, align, final, leaks) if rule_verdict else
+                       ((align.get("feedback") or {}).get("verdict") if v.get("feedback") else "insufficient"),
             "revised_response": revised, "claims": final,
             "trace": {"labels_pre": labels, "triggers": triggers, "parents": parents, "leaks": sorted(leaks),
-                      "rechecked": bad}}
+                      "rechecked": bad, "disputes": (align.get("feedback") or {}).get("disputes"),
+                      "llm_verdict": (align.get("feedback") or {}).get("verdict")}}
     if v.get("feedback") is None:
         pred["verdict"] = None  # condition C has no feedback to judge
     if errors:

@@ -157,6 +157,8 @@ SYSTEMS = {
     "scope_pipeline": _scope_pipeline("scope_pipeline"),
     "scope_pipeline_noprop": _scope_pipeline("scope_pipeline_noprop", propagate=False),
     "scope_pipeline_nocheck": _scope_pipeline("scope_pipeline_nocheck", check=False),
+    # the v0 pipeline (pilot of 25 Oct): only model-linked dependents are checked, and the model chooses the verdict
+    "scope_pipeline_v0": _scope_pipeline("scope_pipeline_v0", check_scope="deps", rule_verdict=False),
     "evidence_gate": evidence_gate,
 }
 OFFLINE = {"no_revision", "accept_feedback_lexical", "oracle"}
