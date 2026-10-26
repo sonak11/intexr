@@ -113,7 +113,7 @@ class TestPipeline(unittest.TestCase):
         al = lambda d: {"feedback": {"disputes": d, "verdict": "partial"}}
         final = {"c1": {"label": "K"}, "c2": {"label": "D"}, "c3": {"label": "P"}, "c4": {"label": "U"}}
         self.assertEqual(scope.decide_verdict(v, al(["c2"]), final, set()), "accept")          # valid feedback
-        self.assertEqual(scope.decide_verdict(v, al(["c2"]), final, {"phenytoin"}), "partial")  # adds unsupported content
+        self.assertEqual(scope.decide_verdict(v, al(["c2", "c1"]), final, set()), "partial")    # right about one, wrong about another
         self.assertEqual(scope.decide_verdict(v, al(["c1"]), final, set()), "reject")           # attacks a kept claim
         self.assertEqual(scope.decide_verdict(v, al(["c4"]), final, set()), "insufficient")     # evidence cannot settle it
         self.assertEqual(scope.decide_verdict(v, al([]), final, set()), "partial")               # no dispute: model's verdict

@@ -225,7 +225,8 @@ def _texts(raw):
 
 def decide_verdict(v, align, final, leaks):
     """Feedback verdict by rule, from what the feedback disputes and how the evidence labelled those claims.
-    Falls back to the model's verdict when the feedback disputes no claim (vague or defending a claim)."""
+    Falls back to the model's verdict when the feedback disputes no claim (vague or defending a claim).
+    Known limit: feedback that is right about the error but adds an unsupported intervention gets 'accept'."""
     fb = v.get("feedback")
     if not fb:
         return None
@@ -236,8 +237,11 @@ def decide_verdict(v, align, final, leaks):
     if not disputes:
         return llm if llm in ("accept", "partial", "reject", "insufficient") else "insufficient"
     labs = {final[c]["label"] for c in disputes}
+    # `leaks` (feedback-only words) is too noisy to signal unsupported additions: ordinary words in valid feedback
+    # trip it (dev pilot, 26 Oct). Unsupported additions are scored by the forbidden-addition metric instead, so
+    # 'partial' here comes only from feedback whose disputed claims are partly overturned and partly kept.
     if labs <= {"D", "P"}:
-        return "partial" if leaks else "accept"
+        return "accept"
     if labs == {"K"}:
         return "reject"
     if "U" in labs and not labs & {"D", "P"}:
