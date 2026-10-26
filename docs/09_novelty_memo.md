@@ -46,14 +46,13 @@ All of this must happen while every other claim is kept (K), and claims the evid
 - Models: gpt-oss-120b and Qwen3.8-27B (Groq free tier); judge gemini-3.5-flash-lite.
 
 Findings:
-- **Verified edits make free-text revision more literal.** For an evidence-aware prompt, P change recall is *higher* with unverified feedback + evidence (B) than with the verified edit (A):
-  - gpt-oss: **+0.18** [0.08, 0.29];
-  - Qwen: **+0.60** [0.40, 0.77].
-  
-  Given a list of correct edits, models apply the list and leave dependents stale. That is the EditPropBench failure, reproduced on the same claims. It is the opposite of our pre-registered direction, and a stronger argument for the joint setting: the propagation benchmarks' own condition is the one that hides the failure. A wording control (condition E) is running.
-- **Claim-level sycophancy is measurable.** Under false feedback, the evidence-aware prompt (Qwen) changes **25%** [10, 45] of the evidence-supported claims the feedback attacks. Our scope-first pipeline changes **0%**.
+- **Given a bare verified edit, models apply it literally and leave the dependent claims stale.** P recall is higher under unverified feedback + evidence than under the bare verified edit: +0.18 (gpt-oss), +0.67 (Qwen).
+  - A wording control (condition E: the verified edit + "also update what depends on it") shows this is the instruction's wording: E − A = +0.72; B ≈ E.
+  - So propagation benchmarks built on bare verified edits measure literal application as much as propagation.
+  - With wording controlled, **the cost of unverified feedback is sycophancy**: +0.15 [0.00, 0.30] more evidence-supported claims changed.
+- **Claim-level sycophancy is measurable.** Under false feedback, the evidence-aware prompt changes **15–20%** of the evidence-supported claims the feedback attacks. Our scope-first pipeline changes **0%** (Qwen).
 - **Free-text revision under-hedges:** unresolved-F1 is 0.05–0.15, vs. 0.72 for the pipeline.
-- **The pipeline is best** on interaction-exact (Qwen 0.80 vs. 0.43 for the evidence-aware prompt), at a small cost in D recall (0.93).
+- **The pipeline is best with Qwen** (exact 0.80 vs. 0.45), but not yet with gpt-oss (0.57 vs. 0.63), where the model omits dependency links. Pipeline v1 fixes that by rule; re-runs are pending.
 
 What the pilot also showed:
 - In about a third of propagated claims, the authored evidence states the corrected content outright, which blurs D vs. P. Fixed in MedScope v0.2: 11 evidence items rewritten.
@@ -63,7 +62,7 @@ What the pilot also showed:
 
 | Risk | Answer |
 |---|---|
-| "This is EditPropBench plus a sycophancy test." | The pilot answers it: on identical claims, the verified-edit condition (theirs) and the unverified condition (ours) give different propagation behaviour, by up to 0.60 in P recall. Neither benchmark alone could show that. Claim-level sycophancy and the U label add to it. |
+| "This is EditPropBench plus a sycophancy test." | Partly answered. Propagation under verified edits depends on the instruction's wording (bare edits are applied literally). Once that is controlled, unverified feedback adds a measurable claim-level sycophancy cost on the same claims, plus the U label and its propagation. Neither benchmark alone shows either. |
 | LLM-authored clinical content | All authored text is flagged unreviewed. A clinically trained reviewer pass and a second annotator (Cohen's κ) come before release; cases that fail are dropped. |
 | Small benchmark (47 cases; 20 dev / 27 test) | CIs are computed over source cases, not claims. A radiology split (IU X-ray build script) and more MEDEC cases are planned; EditPropBench-IX gives a second domain. |
 | Judge validity | 100 hand-labelled (claim, revision) pairs; target κ ≥ 0.75; switch judges if it falls short. |
@@ -71,4 +70,4 @@ What the pilot also showed:
 
 ## 6. Decision requested
 
-Keep the framing: **feedback is a hypothesis; evidence is the arbiter**. Lead with the A-vs-B difference, which is real but in the opposite direction from the pre-registered one: verified edits *hide* propagation failures. Report it with the wording control (condition E). Support it with claim-level sycophancy and unresolved handling. Grow MedScope to ~100+ cases before the final test.
+Keep the framing: **feedback is a hypothesis; evidence is the arbiter**. Lead with claim-level sycophancy and unresolved handling under unverified feedback, measured against a wording-controlled verified-edit baseline (condition E). Report the bare-edit literalness as a methodological finding for propagation benchmarks. Grow MedScope to ~100+ cases before the final test.

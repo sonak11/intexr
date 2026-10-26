@@ -1,6 +1,11 @@
 # IntExR — Session Handoff (written 22 Oct 2026; updated 23 Oct 2026)
 
-## UPDATE 25 Oct (first results). Read this first.
+## UPDATE 26 Oct. Read this first.
+- **Condition E (wording control) settles H1:** the A < B propagation gap was the wording of bare verified edits (E − A = +0.72; B ≈ E). With wording controlled, the cost of unverified feedback is sycophancy on supported claims (B − E = +0.15 [0.00, 0.30]). Paper, memo, results doc, slide 9 and the script all say this now.
+- **gpt-oss pipeline v0 was weaker** (exact 0.57 < 0.63 single prompt), because it omits dependency links and its verdicts skew to partial. **Pipeline v1** (commit 11f4aa7) adds a rule-based verdict and checks every later claim without direct evidence. `scope_pipeline_v0` is kept as the ablation. Next: re-run both models once (align calls are cached).
+- All dev numbers are now on MedScope v0.2.
+
+## UPDATE 25 Oct (first results).
 
 - **First model results are in** (free-tier dev slice). See `docs/11_results_v0.md`.
   - Verified edits (A) make free-text revision *more literal*: P recall B − A = +0.18 (gpt-oss), +0.60 (Qwen). This is H1 reversed.

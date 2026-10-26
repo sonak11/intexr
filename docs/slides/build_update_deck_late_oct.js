@@ -91,7 +91,7 @@ s.addNotes("Last time the harness was built but no model had been run, and I had
 
 // ---------------------------------------------------------------- 2 at a glance
 s = content("Overview", "At a glance", "Three weeks of progress in four numbers", "All work is in github.com/sonak11/intexr (private)",
-  "MedScope grew from 31 to 47 cases. The scope-first method is now a real pipeline. First model results are in, on the dev split: two open models, three systems. Our pipeline gets 0.80 interaction-exact accuracy with Qwen, against 0.43 for an evidence-aware prompt. The Paper 1 draft exists in ACL format.");
+  "MedScope grew from 31 to 47 cases. The scope-first method is now a real pipeline. First model results are in, on the dev split: two open models, three systems. Our pipeline gets 0.80 interaction-exact accuracy with Qwen, against 0.45 for an evidence-aware prompt. The Paper 1 draft exists in ACL format.");
 const glance = [
   ["47", "MedScope source cases\n(was 31 on 7 Oct)"],
   ["1,418", "gold-labelled claims\n(was 873)"],
@@ -209,20 +209,18 @@ runs.forEach(([h, b], i) => {
 });
 
 // ---------------------------------------------------------------- 9 first model results
-s = content("Experiments", "First model results · dev split, 60 examples", "Verified edits make models more literal",
-  "Evidence-aware prompt. B − A: gpt-oss +0.18 [0.08, 0.29], Qwen +0.60 [0.40, 0.77] (95% CIs over 20 source cases). gpt-oss pipeline × B still running",
-  "This is the headline. With an evidence-aware prompt, models fix dependent claims more often when they get unverified feedback plus evidence than when they get the verified edit: plus 0.18 for gpt-oss and plus 0.60 for Qwen. Given a list of correct edits, they apply the list and leave the consequences stale, the EditPropBench failure, on the same claims. That's the opposite of what I pre-registered, and it makes the joint setting more interesting: the verified-edit setting hides the failure. I'm running a wording control, condition E, which adds 'also update what depends on it'. Second result: under false feedback, the evidence-aware prompt changes 25 percent of evidence-supported claims; our pipeline changes none.");
+s = content("Experiments", "First model results · dev split, 60 examples", "Unverified feedback costs preservation, not propagation",
+  "Qwen3.8-27B, evidence-aware prompt. E − A = +0.72 [0.57, 0.86]; B − E = −0.05 [−0.21, 0.09] on P recall; B − E = +0.15 [0.00, 0.30] on supported-claim changes",
+  "Three conditions on the same claims. A: a bare verified edit. The model applies exactly that edit and leaves dependents stale: only 7 percent of dependent claims get fixed. E: the same verified edit plus 'also update what depends on it': 79 percent. B: unverified feedback plus evidence: 74 percent. So the gap I first saw between A and B was the wording of the edit, not verification. That matters for benchmarks built on bare verified edits. With wording controlled, propagation is the same, and the real cost of unverified feedback is sycophancy: the model changes more of the claims the evidence supports. Our pipeline changes none of them, and gets 0.80 exact accuracy with Qwen versus 0.45. With gpt-oss the pipeline was weaker, because the model skips dependency links; I fixed that by rule in version 1.");
 s.addChart(pres.charts.BAR, [
-  { name: "A · verified edit", labels: ["gpt-oss-120b", "Qwen3.8-27B"], values: [0.70, 0.14] },
-  { name: "B · feedback + evidence", labels: ["gpt-oss-120b", "Qwen3.8-27B"], values: [0.88, 0.74] },
-], { objectName: "ab-chart", x: M, y: 1.95, w: 7.0, h: 4.6, barDir: "col", barGrouping: "clustered", chartColors: [HEX.line, HEX.orange],
-  showLegend: true, legendPos: "b", legendFontSize: 12, legendFontFace: "+mn-lt",
+  { name: "Change recall on propagated claims", labels: ["A · bare verified edit", "E · verified edit + 'update dependents'", "B · feedback + evidence"], values: [0.07, 0.79, 0.74] },
+], { objectName: "abe-chart", x: M, y: 1.95, w: 7.0, h: 4.6, barDir: "col", chartColors: [HEX.line, HEX.blue, HEX.orange], showLegend: false,
   showValue: true, dataLabelPosition: "outEnd", dataLabelFormatCode: "0.00", dataLabelFontSize: 14, dataLabelFontFace: "+mn-lt", dataLabelColor: HEX.navy,
-  catAxisLabelFontSize: 14, catAxisLabelFontFace: "+mn-lt", catAxisLabelColor: HEX.soft, valAxisHidden: true, valAxisMinVal: 0, valAxisMaxVal: 1,
-  valGridLine: { style: "none" }, catGridLine: { style: "none" }, showTitle: true, title: "Change recall on propagated claims", titleFontSize: 14, titleFontFace: "+mn-lt", titleColor: HEX.soft });
+  catAxisLabelFontSize: 12, catAxisLabelFontFace: "+mn-lt", catAxisLabelColor: HEX.soft, valAxisHidden: true, valAxisMinVal: 0, valAxisMaxVal: 1,
+  valGridLine: { style: "none" }, catGridLine: { style: "none" }, showTitle: true, title: "Change recall on propagated claims (Qwen, evidence-aware prompt)", titleFontSize: 13, titleFontFace: "+mn-lt", titleColor: HEX.soft });
 card(s, "syco-card", 8.1, 2.0, 4.6, 4.4);
-stat(s, "syco", 8.45, 2.3, 4.0, "25% → 0%", "of evidence-supported claims changed under false feedback: evidence-aware prompt vs. our pipeline (Qwen)");
-s.addText("Pipeline exact accuracy 0.80 vs. 0.43 for the evidence-aware prompt (Qwen). The verified-edit gap could be wording: condition E tests that next.", {
+stat(s, "syco", 8.45, 2.3, 4.0, "20% → 0%", "of evidence-supported claims changed under false feedback: evidence-aware prompt vs. our pipeline (Qwen)");
+s.addText("Pipeline exact accuracy 0.80 vs. 0.45 (Qwen). With gpt-oss it was weaker (0.57), because the model skips dependency links; v1 fixes this by rule.", {
   objectName: "syco-text", x: 8.45, y: 4.3, w: 4.0, h: 1.9, fontSize: 15, color: C.text1, valign: "top", margin: 0, isTextBox: true });
 
 // ---------------------------------------------------------------- 10 novelty
@@ -238,7 +236,7 @@ s.addTable([
   ["IntExR-Scope", "yes", "yes", "yes"],
 ], { objectName: "novelty-table", x: M, y: 1.95, w: 12.1, colW: [5.6, 1.9, 2.7, 1.9], fontSize: 15, color: HEX.navy, fill: { color: HEX.card },
   border: { type: "solid", pt: 0.75, color: HEX.line }, margin: [0.08, 0.12, 0.08, 0.12], rowH: 0.7, valign: "middle" });
-s.addText("The decisive test is unchanged: condition A (verified edit) vs. B (unverified feedback + evidence) on the same claims.", {
+s.addText("Same claims, three conditions: bare verified edit (A), verified edit + 'update dependents' (E), unverified feedback + evidence (B).", {
   objectName: "novelty-test", x: M, y: 5.75, w: 12.1, h: 0.5, fontSize: 16, bold: true, color: C.text1, margin: 0, isTextBox: true });
 
 // ---------------------------------------------------------------- 11 protocol
