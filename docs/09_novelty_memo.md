@@ -52,7 +52,7 @@ Findings:
   - With wording controlled, **the cost of unverified feedback is sycophancy**: +0.15 [0.00, 0.30] more evidence-supported claims changed.
 - **Claim-level sycophancy is measurable.** Under false feedback, the evidence-aware prompt changes **15–20%** of the evidence-supported claims the feedback attacks. Our scope-first pipeline changes **0%** (Qwen).
 - **Free-text revision under-hedges:** unresolved-F1 is 0.05–0.15, vs. 0.72 for the pipeline.
-- **The pipeline is best with Qwen** (exact 0.80 vs. 0.45), but not yet with gpt-oss (0.57 vs. 0.63), where the model omits dependency links. Pipeline v1 fixes that by rule; re-runs are pending.
+- **The pipeline is best with Qwen** (exact 0.80 vs. 0.45). With gpt-oss the first version lagged (0.57), because the model omits dependency links. Pipeline v1 fixes that by rule: P recall 0.95, verdict accuracy 0.93 (vs. 0.25 for the model's own verdict), exact 0.63.
 
 What the pilot also showed:
 - In about a third of propagated claims, the authored evidence states the corrected content outright, which blurs D vs. P. Fixed in MedScope v0.2: 11 evidence items rewritten.

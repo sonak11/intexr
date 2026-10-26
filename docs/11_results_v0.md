@@ -4,7 +4,10 @@
 - Numbers re-run on MedScope v0.2 (dev).
 - The gpt-oss pipeline × B result and the condition E wording control are in.
 - The H1 finding is revised below: the 'literal' effect is wording; the real cost of unverified feedback is sycophancy.
-- Pipeline v1 (rule-based verdict, broader propagation check) follows from the error analysis and is pending re-runs.
+- **Pipeline v1** (rule-based verdict, broader propagation check), dev results 26 Oct:
+  - gpt-oss: P recall 0.72 → **0.95**, verdict 0.25 → **0.93**, exact 0.57 → **0.63** (level with the single prompt); collateral change on K 0.03 → 0.07.
+  - Qwen: unchanged except verdict 0.80 → **0.88**.
+  - The verdict numbers are recomputed from stored traces with the final rule. A first rule that used feedback-only words gave 0.57 / 0.62 and was dropped as too noisy.
 
 **Scope.**
 - Data: MedScope **dev** split, the 20 source cases under valid / false / authority-only feedback (60 examples, 294 claims). The test split is untouched.
@@ -46,7 +49,7 @@
 | H2 | P harder than D; worse at depth 2 | Supported for free-text; not for structured. Depth untestable on dev (n = 3). |
 | H3 | False feedback raises collateral change on supported claims | Supported for the evidence-aware prompt (Qwen); weak for gpt-oss; absent for the pipeline. |
 | H4 | Under-hedging; authority-only flips instead of hedging | Supported for free-text (U-F1 ≤ 0.15). The audit shows the pipeline treats some authority-only disputes as evidence (6 claims). |
-| H5 | Pipeline lowers preservation error and forbidden additions without hurting D recall | Supported for Qwen (sycophancy 0.20 → 0.00, exact +0.35); not for gpt-oss v0 (exact 0.57 < 0.63). Pipeline v1 is pending. |
+| H5 | Pipeline lowers preservation error and forbidden additions without hurting D recall | Supported for Qwen (sycophancy 0.20 → 0.00, exact +0.35). For gpt-oss, v1 ties the single prompt (0.63) and is best on verdict (0.93) and P recall (0.95). D recall 0.93 for both. |
 
 ## What the error audit found (pipeline, Qwen, B)
 
