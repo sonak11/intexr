@@ -10,6 +10,7 @@ Reads every preds_<system>@<model>_<cond>.jsonl in the run directories and repor
   2. A vs B gap per system, with a PAIRED case-level bootstrap CI (same claims, both conditions)
   3. change recall on P by dependency depth (1 vs 2+)
   4. per feedback-validity stratum (condition B): preservation error and change recall
+  5. by model scale (--tiers configs/model_tiers.tsv): one row per model, ordered by family and size
 Only examples present in both the data file and the predictions are used.
 """
 import argparse
@@ -87,12 +88,60 @@ def depth_recall(exs, preds):
     return {k: (hit[k] / tot[k], int(tot[k])) for k in tot}
 
 
+def load_tiers(path):
+    """model tag as it appears in prediction file names -> roster row"""
+    if not path or not os.path.exists(path):
+        return {}
+    with open(path) as f:
+        lines = [ln.rstrip("\n").split("\t") for ln in f if ln.strip() and not ln.startswith("#")]
+    head = lines[0]
+    return {r[0].replace(":", "_").replace("/", "_"): dict(zip(head, r)) for r in lines[1:]}
+
+
+def scale_table(exs, by_id, preds, tiers_path):
+    """One row per model: does propagation, sycophancy or hedging change with scale / family?"""
+    tiers = load_tiers(tiers_path)
+    models = sorted({s.split("@", 1)[1] for s, _ in preds if "@" in s})
+    if not models:
+        return []
+
+    def agg(spec, cond):
+        pr = preds.get((spec, cond))
+        if not pr:
+            return {}
+        ex_s = [by_id[i] for i in pr if i in by_id]
+        return metrics.aggregate([metrics.per_example(e, pr[e["id"]]) for e in ex_s])
+
+    def size(m):
+        try:
+            return float(tiers.get(m, {}).get("params_b", "inf"))
+        except ValueError:
+            return float("inf")
+    models.sort(key=lambda m: (tiers.get(m, {}).get("family", "~"), size(m), m))
+    out = ["", "## By model scale (condition B unless marked; dev unless the run used --split test)", "",
+           "Prompt = evidence_prompt, Pipe = scope_pipeline. Syc = PresErr-K+ (evidence-supported claims changed "
+           "under false feedback). A-Chg-P = bare verified edit.", "",
+           "| model | family | params (B) | tier | review | Prompt A-Chg-P | Prompt Chg-P | Prompt Syc | Prompt U-F1 "
+           "| Prompt Exact | Pipe Chg-P | Pipe Syc | Pipe Verdict | Pipe Exact |", "|---|---|---|---|---|" + "---|" * 9]
+    for m in models:
+        t = tiers.get(m, {})
+        pa, pb, sb = agg(f"evidence_prompt@{m}", "A"), agg(f"evidence_prompt@{m}", "B"), agg(f"scope_pipeline@{m}", "B")
+        cells = [pa.get("change_recall_P"), pb.get("change_recall_P"), pb.get("preservation_error_Ksupported"),
+                 pb.get("unresolved_F1"), pb.get("interaction_exact"), sb.get("change_recall_P"),
+                 sb.get("preservation_error_Ksupported"), sb.get("verdict_acc"), sb.get("interaction_exact")]
+        out.append(f"| {m} | {t.get('family', '?')} | {t.get('params_b', '?')} | {t.get('tier', '?')} | "
+                   f"{'yes' if t.get('review') == '1' else ''} | " + " | ".join(fmt(c) for c in cells) + " |")
+    return out + [""]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--data", required=True)
     ap.add_argument("--runs", nargs="+", required=True)
     ap.add_argument("--out", default=None)
     ap.add_argument("--tex", default=None, help="directory for LaTeX table snippets")
+    ap.add_argument("--tiers", default=os.path.join(os.path.dirname(__file__), "..", "configs", "model_tiers.tsv"),
+                    help="model roster (family, size, tier) for the scale table")
     args = ap.parse_args()
     exs = data.load(args.data)
     by_id = {e["id"]: e for e in exs}
@@ -151,6 +200,7 @@ def main():
             md.append(f"| {s} | {v} | {len(rows)} | " + " | ".join(fmt(a[k]) for k in (
                 "change_recall_D", "change_recall_P", "preservation_error_K", "preservation_error_Ksupported",
                 "unresolved_F1", "verdict_acc")) + " |")
+    md += scale_table(exs, by_id, preds, args.tiers)
     text = "\n".join(md) + "\n"
     if args.out:
         os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)

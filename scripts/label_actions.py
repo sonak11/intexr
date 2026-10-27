@@ -11,6 +11,12 @@ with the LLM claim-alignment judge.
   # 3. agreement with the judge (target Cohen's kappa >= 0.75)
   python3 scripts/label_actions.py score annotation/actions_sheet.csv
 
+Review one representative model per size tier (Difei, 27 Oct), not every model:
+  python3 scripts/label_actions.py sample --data paperB/data/medec_scope_v0.json \
+      --preds 'results/medscope_*/preds_evidence_prompt@*_B.jsonl' --reps-only --n 120 --out annotation/actions_sheet.csv
+  (--reps-only keeps the models marked review=1 in configs/model_tiers.tsv; the sample is balanced across models,
+  then across gold labels, so `score` reports judge agreement per model, i.e. per tier.)
+
 Actions: keep (meaning unchanged) | revised (content changed) | removed (gone) | hedged (kept but marked uncertain).
 The sample is stratified by gold label so that rare actions (hedged, removed) are not swamped by keeps.
 """
@@ -33,29 +39,40 @@ HIDDEN = ["judge_action", "gold_label", "system"]
 
 def sample(args):
     by_id = {e["id"]: e for e in data.load(args.data)}
+    reps = None
+    if args.reps_only:
+        sys.path.insert(0, os.path.dirname(__file__))
+        from summarize_results import load_tiers
+        reps = {m for m, t in load_tiers(args.tiers).items() if t.get("review") == "1"}
     pool = defaultdict(list)
     for pat in args.preds:
         for f in glob.glob(pat):
+            # preds_<system>@<model tag>_<condition>.jsonl
+            stem = os.path.basename(f)[len("preds_"):].rsplit("_", 1)[0]
+            model = stem.split("@", 1)[1] if "@" in stem else ""
             with open(f) as fh:
                 for line in fh:
                     p = json.loads(line)
                     ex = by_id.get(p["id"])
                     if not ex or p.get("structured"):
                         continue
+                    if reps is not None and model not in reps:
+                        continue
+                    sysname = f"{p['system']}@{model}" if model else p["system"]
                     for c in ex["claims"]:
                         lab = ex["gold"]["claims"][c["id"]]["label"]
-                        pool[lab].append({"key": f"{p['system']}|{p['id']}|{c['id']}", "example_id": p["id"],
+                        pool[(sysname, lab)].append({"key": f"{sysname}|{p['id']}|{c['id']}", "example_id": p["id"],
                                           "claim_id": c["id"], "claim": c["text"], "revised_response": p["revised_response"],
                                           "human_action": "", "note": "", "judge_action": p["claims"][c["id"]]["status"],
-                                          "gold_label": lab, "system": p["system"]})
+                                          "gold_label": lab, "system": sysname})
     rng = random.Random(args.seed)
-    labs = [lab for lab in "DPUK" if pool[lab]]
-    if not labs:
+    cells = sorted(k for k in pool if pool[k])
+    if not cells:
         sys.exit("no free-text predictions found (structured systems are labelled by construction)")
-    rows, per = [], max(1, args.n // len(labs))
-    for lab in labs:
-        rng.shuffle(pool[lab])
-        rows += pool[lab][:per]
+    rows, per = [], max(1, args.n // len(cells))
+    for k in cells:
+        rng.shuffle(pool[k])
+        rows += pool[k][:per]
     rng.shuffle(rows)
     os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
     with open(args.out, "w", newline="") as f:
@@ -65,7 +82,7 @@ def sample(args):
             w.writerow({k: r[k] for k in FIELDS})
     with open(args.out + ".hidden.json", "w") as f:
         json.dump({r["key"]: {k: r[k] for k in HIDDEN} for r in rows}, f, indent=1)
-    print(f"wrote {len(rows)} pairs to {args.out} ({dict(Counter(r['gold_label'] for r in rows))}); "
+    print(f"wrote {len(rows)} pairs to {args.out} ({dict(Counter(r['gold_label'] for r in rows))}; {dict(Counter(r['system'] for r in rows))}); "
           f"judge labels kept in {args.out}.hidden.json — don't open it before labelling")
 
 
@@ -133,6 +150,8 @@ def main():
     s.add_argument("--n", type=int, default=100)
     s.add_argument("--seed", type=int, default=0)
     s.add_argument("--out", default="annotation/actions_sheet.csv")
+    s.add_argument("--reps-only", action="store_true", help="only the review=1 model of each tier (see --tiers)")
+    s.add_argument("--tiers", default=os.path.join(os.path.dirname(__file__), "..", "configs", "model_tiers.tsv"))
     for name in ("label", "score"):
         p = sub.add_parser(name)
         p.add_argument("sheet")

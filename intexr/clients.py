@@ -7,6 +7,7 @@ Spec format: "<provider>:<model>". Providers:
   openrouter  ':free' models only stay free                 OPENROUTER_API_KEY
   ollama      local, free (http://localhost:11434)          no key
   vllm        your own server, e.g. on Kaggle/Colab GPUs    VLLM_BASE_URL (+ optional VLLM_API_KEY)
+  vllm2       a second local server (e.g. the judge)       VLLM2_BASE_URL (default http://localhost:8001/v1)
   openai      any OpenAI-compatible endpoint                OPENAI_BASE_URL, OPENAI_API_KEY
   anthropic   paid                                          ANTHROPIC_API_KEY
 List a provider's model ids with:  python3 scripts/list_models.py groq
@@ -79,10 +80,10 @@ class Client:
         # INTEXR_MAX_TOKENS lowers the output cap for providers with small per-request limits (e.g. Qwen on Groq)
         self.temperature = temperature
         self.max_tokens = max_tokens or int(os.environ.get("INTEXR_MAX_TOKENS", "4000"))
-        if self.provider not in PRESETS and self.provider not in ("anthropic", "openai", "vllm"):
-            raise ValueError(f"unknown provider in {spec}; choose from {sorted(PRESETS) + ['anthropic', 'openai', 'vllm']}")
-        free = PRESETS.get(self.provider, (None, None, self.provider == "vllm"))[2]
-        local = self.provider in ("ollama", "vllm")
+        if self.provider not in PRESETS and self.provider not in ("anthropic", "openai", "vllm", "vllm2"):
+            raise ValueError(f"unknown provider in {spec}; choose from {sorted(PRESETS) + ['anthropic', 'openai', 'vllm', 'vllm2']}")
+        free = PRESETS.get(self.provider, (None, None, self.provider in ("vllm", "vllm2")))[2]
+        local = self.provider in ("ollama", "vllm", "vllm2")
         rpm = float(os.environ.get("INTEXR_RPM", "20" if free and not local else "0"))
         self.min_interval = 60.0 / rpm if rpm > 0 else 0.0
         self._last = 0.0
@@ -95,6 +96,8 @@ class Client:
             return base, os.environ.get(env, "none") if env else "none"
         if self.provider == "vllm":
             return os.environ.get("VLLM_BASE_URL", "http://localhost:8000/v1"), os.environ.get("VLLM_API_KEY", "none")
+        if self.provider == "vllm2":
+            return os.environ.get("VLLM2_BASE_URL", "http://localhost:8001/v1"), os.environ.get("VLLM_API_KEY", "none")
         return os.environ.get("OPENAI_BASE_URL", "https://api.openai.com/v1"), os.environ.get("OPENAI_API_KEY", "none")
 
     def __call__(self, system, messages):

@@ -1,0 +1,22 @@
+# Model roster for the scale study (Difei, 27 Oct: "one per model tier"; "large and small GPT, Claude, Qwen").
+# spec: provider:model as passed to run_v0.sh.  params_b: total parameters in billions (active for MoE in notes).
+# where: groq / gemini = free API tier; thasos = vLLM on the lab server (8x RTX 6000 24GB, fp16); credits = paid API,
+#        run only on the test split once research credits are granted.  tp: tensor-parallel GPUs on thasos.
+# review: 1 = the representative model of its tier, used for human review (judge calibration + error audit).
+# extra: per-model request fields (INTEXR_EXTRA_BODY_<PROVIDER>); max_tokens: INTEXR_MAX_TOKENS ('-' = default).
+spec	family	params_b	tier	where	tp	review	extra	max_tokens	notes
+vllm:Qwen/Qwen3-4B	Qwen	4	3-4B	thasos	1	1	{"chat_template_kwargs": {"enable_thinking": false}}	-	thinking off
+vllm:meta-llama/Llama-3.2-3B-Instruct	Llama	3	3-4B	thasos	1	0	{}	-	gated on HF: accept the licence, set HF_TOKEN
+vllm:Qwen/Qwen3-8B	Qwen	8	7-8B	thasos	1	1	{"chat_template_kwargs": {"enable_thinking": false}}	-	thinking off
+vllm:meta-llama/Llama-3.1-8B-Instruct	Llama	8	7-8B	thasos	1	0	{}	-	gated on HF
+vllm:Qwen/Qwen3-14B	Qwen	14	14B	thasos	2	1	{"chat_template_kwargs": {"enable_thinking": false}}	-	thinking off
+groq:openai/gpt-oss-20b	GPT (open-weight)	21	20-32B	groq	-	0	{"reasoning_effort": "low"}	-	MoE, 3.6B active; MXFP4 needs a newer GPU than thasos, so Groq only
+gemini:gemma-4-31b-it	Gemma	31	20-32B	gemini	-	0	{}	-	free Gemini API quota
+groq:qwen/qwen3.8-27b	Qwen	27	20-32B	groq	-	1	{"reasoning_effort": "none"}	2000	done on dev (25-26 Oct)
+vllm:Qwen/Qwen3-32B-AWQ	Qwen	32	20-32B	thasos	2	0	{"chat_template_kwargs": {"enable_thinking": false}}	-	same family as the small tiers
+vllm:casperhansen/llama-3.3-70b-instruct-awq	Llama	70	70B	thasos	4	1	{}	-	AWQ int4, ~40 GB
+groq:openai/gpt-oss-120b	GPT (open-weight)	117	100B+	groq	-	1	{"reasoning_effort": "low"}	-	MoE, 5.1B active; done on dev
+anthropic:claude-haiku-5-5	Claude	-	closed-small	credits	-	0	{}	-	no free tier: needs research credits
+anthropic:claude-sonnet-5-5	Claude	-	closed-large	credits	-	1	{}	-	no free tier: needs research credits
+openai:CHECK_SMALL_GPT	GPT (closed)	-	closed-small	credits	-	0	{}	-	fill in the current small GPT id (python3 scripts/list_models.py openai)
+openai:CHECK_LARGE_GPT	GPT (closed)	-	closed-large	credits	-	0	{}	-	fill in the current flagship GPT id
