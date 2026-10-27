@@ -36,7 +36,8 @@ def fix_mojibake(s):
 
 def pdf_safe(s):
     """Symbols the default pdflatex template cannot print, as inline math."""
-    return s.replace("\u2265", "$\\geq$").replace("\u2264", "$\\leq$").replace("\u03bc", "$\\mu$")
+    s = s.replace("\u2265", "$\\geq$").replace("\u2264", "$\\leq$").replace("\u03bc", "$\\mu$")
+    return s.replace("\u02da", "\u00b0").replace("\u00b5", "$\\mu$")  # ring-above used as a degree sign; micro sign
 
 
 def case_md(i, case, note):

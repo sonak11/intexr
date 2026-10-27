@@ -61,7 +61,7 @@
 
 - From the dev A/B and system pairs, the per-case differences have SD 0.37–0.47.
 - With 20 test cases, the smallest detectable difference is about 0.23–0.29. The effects seen here (+0.37 to +0.60) are above that.
-- To detect a 0.10 difference, the test split needs **about 110–170 cases**. That argues for growing MedScope to ~100+ cases before the final experiments.
+- To detect a 0.10 difference, the test split needs **about 110–170 cases**. **Done (27 Oct):** MedScope v0.3 has 134 test cases (154 total).
 
 ## Next (26 Oct)
 

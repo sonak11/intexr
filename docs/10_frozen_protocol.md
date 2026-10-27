@@ -19,10 +19,10 @@ Everything here is decided *before* test-set results are seen. Items marked **TB
   - **TBD:** reviewer, number of cases changed or dropped.
 
 ## 3. Data and splits
-- MedScope v1 = the cases that pass review, built by `scripts/build_medec_scope.py`. Current: v0.2 (47 cases, 293 examples); evidence items decide the erroneous claim only, so propagated claims must be inferred (rule added after the dev pilot). The source is MEDEC (CC BY 4.0); authored text is released under the same licence.
+- MedScope v1 = the cases that pass review, built by `scripts/build_medec_scope.py`. Current: v0.3 (154 cases, 941 examples, 4,525 claims; 20 dev / 134 test; the 47 v0.2 cases are unchanged); evidence items decide the erroneous claim only, so propagated claims must be inferred (rule added after the dev pilot). The source is MEDEC (CC BY 4.0); authored text is released under the same licence.
 - Split by source case (`paperB/data/splits.json`, frozen 23 Oct 2026):
   - **dev** (20 cases) is used for prompts, pilot runs and error analysis;
-  - **test** (20 cases + any new cases) is held out.
+  - **test** (134 cases as of v0.3; every case added after 23 Oct goes to test) is held out.
   - No prompt, rule or method change may follow from test outputs.
 - Secondary sets:
   - EditPropBench-IX (verified edit vs. unverified feedback);
@@ -32,7 +32,13 @@ Everything here is decided *before* test-set results are seen. Items marked **TB
 
 ## 4. Systems and settings
 - Systems: no revision, always accept (lexical), always rewrite, dialogue, evidence-aware prompt, verify-then-revise (strong baseline), evidence gate (NLI), single-prompt scope-first, scope-first pipeline (+ no-prop, no-check ablations). Prompts are reproduced verbatim in the paper appendix (`scripts/make_paper_appendix.py`).
-- Models: gpt-oss-120b and Qwen3.8-27B (free API tier); self-hosted open-weight models on the GPU server (**TBD:** final list). Temperature 0. All responses are cached and released.
+- Models: one or two per size tier, from `configs/model_tiers.tsv` (Difei, 27 Oct: "one for each model tier"; "large and small GPT, Claude, Qwen"). Temperature 0. All responses are cached and released.
+  - 3–4B: Qwen3-4B, Llama-3.2-3B · 7–8B: Qwen3-8B, Llama-3.1-8B · 14B: Qwen3-14B (GPU server, vLLM).
+  - 20–32B: gpt-oss-20b, Qwen3.8-27B (Groq free tier), Gemma-4-31B (Gemini free tier), Qwen3-32B-AWQ (GPU server).
+  - 70B+: Llama-3.3-70B-AWQ (GPU server), gpt-oss-120b (Groq free tier).
+  - Closed: Claude (small + large) and closed GPT (small + large), **only if** research credits are granted; test split only.
+  - Run with `scripts/run_tiers.sh`; the scale table is the "By model scale" section of `results/RESULTS_medscope.md`.
+- Human review is done per tier, not per model: the model marked `review=1` in each tier (5 open tiers + closed) supplies the judge-calibration and error-audit samples (`label_actions.py sample --reps-only`).
 - Judge: gemini-3.5-flash-lite, fixed, with the prompt in the appendix.
   - Calibration: 100 stratified (claim, revision) pairs labelled by the first author (`scripts/label_actions.py`).
   - **Target κ ≥ 0.75.** If it falls below, switch the judge and re-judge from the cache.
@@ -56,10 +62,9 @@ Pre-registered in the paper (§5): H1 cost of verification, H2 propagation harde
 ## 6. Sample size
 - From the dev pilot (`docs/11_results_v0.md`), the per-case B − A differences have SD 0.37–0.47.
 - With 20 test cases, the smallest detectable difference is about 0.23–0.29. Detecting 0.10 needs about **110–170 source cases** (α = 0.05, power 0.8; `scripts/sample_size.py`).
-- **Decision:**
-  - grow the test split to at least 60 cases before the freeze if review capacity allows, reporting the minimum detectable difference that results;
-  - the headline effects seen on dev (+0.37 to +0.60) are detectable at the current size;
-  - the test split has 27 cases as of 25 Oct (v0.2 + batch 4).
+- **Decision (27 Oct):** grow to 154 cases (MedScope v0.3: 20 dev / 134 test), which meets the 110–170 target and matches the scale of RevPropBench (150 items).
+  - Cases that fail clinical review are dropped; we report the minimum detectable difference for the final test size.
+  - The headline effects seen on dev (+0.37 to +0.60) are detectable at any of these sizes.
 
 ## 7. Release
 - Code (harness, systems, metrics, builders), MedScope v1 (MEDEC-derived, CC BY 4.0), splits, annotation guide, agreement data, judge calibration labels, all model outputs.

@@ -1,5 +1,15 @@
 # IntExR — Session Handoff (written 22 Oct 2026; updated 23 Oct 2026)
 
+## UPDATE 27 Oct (Difei's feedback). Read this first.
+Difei asked for three things: (1) decide human review per model vs. per tier; (2) a dataset on the same scale as similar ones; (3) as many models as possible, at least small and large GPT, Claude and Qwen. Done:
+- **Dataset: MedScope v0.3 = 154 cases, 941 examples, 4,525 claims** (20 dev / 134 test; batches 5–10 add 107 MEDEC cases, all test). The 293 v0.2 examples are byte-identical, so every dev result and cache stays valid. Scale is comparable to RevPropBench (150 items) and meets the 110–170-case sample-size target. Review packet for the new cases: `annotation/review_packet_v03_new.pdf`. Authoring helper: `scripts/proposal_helper.py`.
+- **Models by tier:** `configs/model_tiers.tsv` (3–4B, 7–8B, 14B, 20–32B, 70B+, closed). Runner: `WHERE=groq|gemini|thasos|credits bash scripts/run_tiers.sh`. The scale table is the last section of `results/RESULTS_medscope.md`.
+  - Free now (Groq): gpt-oss-20b is the "small GPT" (gpt-oss-120b is the large one). Gemini free tier: Gemma-4-31B.
+  - thasos (vLLM, fp16 on RTX 6000): Qwen3-4B/8B/14B/32B-AWQ, Llama-3.2-3B/3.1-8B/3.3-70B-AWQ. Llama needs an HF token with the licence accepted. `JUDGE_LOCAL=Qwen/Qwen3-32B-AWQ` serves a local judge on GPUs 6–7 (provider `vllm2`) if the Gemini judge quota runs out.
+  - Claude and closed GPT have no free tier: apply for research credits (Anthropic, OpenAI researcher access) or ask the lab; test split only. Fill in the closed GPT ids in the roster.
+- **Human review per tier:** one representative per tier (`review=1` in the roster). `label_actions.py sample --reps-only` balances the sample across those models; `score` reports judge agreement per model.
+
+
 ## UPDATE 26 Oct. Read this first.
 - **Condition E (wording control) settles H1:** the A < B propagation gap was the wording of bare verified edits (E − A = +0.72; B ≈ E). With wording controlled, the cost of unverified feedback is sycophancy on supported claims (B − E = +0.15 [0.00, 0.30]). Paper, memo, results doc, slide 9 and the script all say this now.
 - **gpt-oss pipeline v0 was weaker** (exact 0.57 < 0.63 single prompt), because it omits dependency links and its verdicts skew to partial. **Pipeline v1** (commit 11f4aa7) adds a rule-based verdict and checks every later claim without direct evidence. `scope_pipeline_v0` is kept as the ablation. Next: re-run both models once (align calls are cached).

@@ -56,7 +56,7 @@ Findings:
 
 What the pilot also showed:
 - In about a third of propagated claims, the authored evidence states the corrected content outright, which blurs D vs. P. Fixed in MedScope v0.2: 11 evidence items rewritten.
-- Detecting 0.10 effects on the test split needs about 110–170 cases. MedScope should grow to ~100+ cases.
+- Detecting 0.10 effects on the test split needs about 110–170 cases. **Done 27 Oct:** MedScope v0.3 has 154 cases (20 dev / 134 test), 941 examples, 4,525 claims.
 
 ## 5. Risks and how the design answers them
 
@@ -64,10 +64,10 @@ What the pilot also showed:
 |---|---|
 | "This is EditPropBench plus a sycophancy test." | Partly answered. Propagation under verified edits depends on the instruction's wording (bare edits are applied literally). Once that is controlled, unverified feedback adds a measurable claim-level sycophancy cost on the same claims, plus the U label and its propagation. Neither benchmark alone shows either. |
 | LLM-authored clinical content | All authored text is flagged unreviewed. A clinically trained reviewer pass and a second annotator (Cohen's κ) come before release; cases that fail are dropped. |
-| Small benchmark (47 cases; 20 dev / 27 test) | CIs are computed over source cases, not claims. A radiology split (IU X-ray build script) and more MEDEC cases are planned; EditPropBench-IX gives a second domain. |
+| Benchmark size | v0.3: 154 cases (20 dev / 134 test), on the scale of RevPropBench (150 items) and enough to detect ~0.10 effects. CIs are over source cases. EditPropBench-IX gives a second domain. |
 | Judge validity | 100 hand-labelled (claim, revision) pairs; target κ ≥ 0.75; switch judges if it falls short. |
 | Plan-then-edit hurt propagation on EditPropBench | The `no-prop` ablation isolates our propagation check; we will report it either way. |
 
 ## 6. Decision requested
 
-Keep the framing: **feedback is a hypothesis; evidence is the arbiter**. Lead with claim-level sycophancy and unresolved handling under unverified feedback, measured against a wording-controlled verified-edit baseline (condition E). Report the bare-edit literalness as a methodological finding for propagation benchmarks. Grow MedScope to ~100+ cases before the final test.
+Keep the framing: **feedback is a hypothesis; evidence is the arbiter**. Lead with claim-level sycophancy and unresolved handling under unverified feedback, measured against a wording-controlled verified-edit baseline (condition E). Report the bare-edit literalness as a methodological finding for propagation benchmarks. Run the scale study (one model per size tier, GPT / Qwen / Llama / Gemma open weights, Claude and closed GPT if credits come through) on the 134-case test split after the freeze.

@@ -40,7 +40,7 @@ When a user corrects a language model, the correction may be right, partly right
 Existing benchmarks split this problem: edit-propagation benchmarks label direct and downstream updates but assume the requested edit is correct, while sycophancy benchmarks test whether models resist false feedback but score only whole answers.
 We introduce \textbf{IntExR-Scope}, a claim-level revision task in which feedback is an unverified hypothesis and evidence is the arbiter.
 Given an original response, prior evidence, feedback of unknown validity, and new evidence, a system must label every claim as a direct update, a propagated update, unresolved (to be hedged, not deleted), or keep, judge the feedback, and write a minimal revision.
-We release a validated benchmark built from clinical notes with expert-injected errors (\ms{}: 47 source cases, 293 examples, 1{,}418 claims across eight feedback conditions, with dependency chains up to depth two) together with converted non-medical sets, an evaluation harness with case-level uncertainty, and a \emph{scope-first} method that delegates evidence alignment and wording to an LLM but assigns labels and preserves untouched claims deterministically.
+We release a validated benchmark built from clinical notes with expert-injected errors (\ms{}: 154 source cases, 941 examples, 4{,}525 claims across eight feedback conditions, with dependency chains up to depth two) together with converted non-medical sets, an evaluation harness with case-level uncertainty, and a \emph{scope-first} method that delegates evidence alignment and wording to an LLM but assigns labels and preserves untouched claims deterministically.
 Our central experiment compares the same claims under a verified edit and under unverified feedback plus evidence, isolating the cost of verification on scope and propagation.
 \todo{one sentence of headline findings once runs are in.}
 \end{abstract}
@@ -142,16 +142,16 @@ For each selected note we remove the error sentence and use the remainder as pri
 \toprule
  & cases & ex. & claims & \D & \Pp & \K & \U \\
 \midrule
-\ms{} & 47 & 293 & 1418 & 260 & 387 & 673 & 98 \\
-\quad \Pp{} depth 1 / 2 & & & & & 289/98 & & \\
-\quad \K$^{+}$ / \U{} by trigger$^{\dagger}$ & & & & & & 47 & 5/59/34 \\
+\ms{} & 154 & 941 & 4525 & 873 & 1292 & 2167 & 193 \\
+\quad \Pp{} depth 1 / 2 & & & & & 1133/159 & & \\
+\quad \K$^{+}$ / \U{} by trigger$^{\dagger}$ & & & & & & 154 & 8/116/69 \\
 Pilot (CXR, COCO) & 16 & 16 & 86 & 19 & 16 & 44 & 7 \\
 EditPropBench-IX & 20 & 40 & 1600 & 205 & 103 & 1292 & 0 \\
 VitaminC-IX & 21 & 40 & 160 & 45 & 0 & 86 & 29 \\
 MEDEC-knowledge & 25 & 40 & 370 & 30 & 0 & 340 & 0 \\
 \bottomrule
 \end{tabular}}
-\caption{Benchmark statistics. $^{\dagger}$\U{} triggers: evidence / dependency / feedback. \ms{} conditions: 47 each of valid, false, partial, authority-only, ambiguous, outdated; 6 superseding; 5 conflicting. Split by source case: 20 dev, 27 test. The pilot set is synthetic MIMIC-style chest X-ray reports and real COCO captions; a 24-example version with real IU X-ray reports exists but is not redistributed (CC BY-NC-ND).}
+\caption{Benchmark statistics. $^{\dagger}$\U{} triggers: evidence / dependency / feedback. \ms{} conditions: 154 each of valid, false, partial, authority-only, ambiguous, outdated; 9 superseding; 8 conflicting. Split by source case: 20 dev, 134 test (comparable in size to RevPropBench's 150 items). The pilot set is synthetic MIMIC-style chest X-ray reports and real COCO captions; a 24-example version with real IU X-ray reports exists but is not redistributed (CC BY-NC-ND).}
 \label{tab:stats}
 \end{table}
 

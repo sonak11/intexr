@@ -1,0 +1,1418 @@
+{
+ "version": "medec_scope_v0.3_proposals",
+ "status": "PROPOSED by Claude (LLM) on 2026-10-27. NOT clinically reviewed. Every case needs clinician review before use as gold. Batch 9: MEDEC test-split diagnosis errors.",
+ "design": "scale-up toward ~150 source cases (Difei, 27 Oct)",
+ "cases": [
+  {
+   "medec_id": "ms-test-87",
+   "false_support": "Urology guideline: smoking is a major risk factor for kidney and bladder cancers; offer cessation support.",
+   "decidable_from_prior": false,
+   "claims": [
+    [
+     "c1",
+     "63-year-old smoker with 2 months of left flank fullness and pain, a 10-cm palpable left flank mass, hemoglobin 19.5 g/dL, and non-dysmorphic microscopic hematuria.",
+     "K"
+    ],
+    [
+     "c2",
+     "Differential led by transitional cell carcinoma of the upper urinary tract.",
+     "D",
+     "Differential led by renal cell carcinoma, with tumor-related polycythemia."
+    ],
+    [
+     "c3",
+     "Cystoscopy, urine cytology and ureteroscopy with biopsy.",
+     "P",
+     "Stage with chest CT and refer for radical nephrectomy."
+    ],
+    [
+     "c4",
+     "Plan lifelong cystoscopic surveillance of the bladder.",
+     "P",
+     "Recheck the hemoglobin after nephrectomy, since the polycythemia should resolve."
+    ],
+    [
+     "c5",
+     "Smoking cessation counseling.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c3",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Contrast CT: a 10-cm heterogeneously enhancing mass arising from the left renal cortex with tumor in the left renal vein; renal pelvis, ureter and bladder normal.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "renal cell"
+     ],
+     "must_not_contain": [
+      "transitional"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "nephrectomy"
+     ],
+     "must_not_contain": [
+      "ureteroscopy"
+     ]
+    },
+    "c4": {
+     "must_contain_any": [
+      "polycythemia should resolve"
+     ],
+     "must_not_contain": [
+      "cystoscopic"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "A solid renal mass with a hemoglobin of 19.5. Doesn't that point to renal cell rather than urothelial?",
+    "false": [
+     "c5",
+     "Smoking isn't relevant to a kidney mass; skip the counseling."
+    ],
+    "partial": [
+     "It's renal cell; stage him, plan nephrectomy, and start sunitinib before surgery.",
+     [
+      "sunitinib"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-89",
+   "false_support": "Paget disease guideline: give analgesics for bone pain alongside antiresorptive treatment.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "65-year-old man with a week of deep, boring left thigh pain worse at night, warmth over the thigh, a thickened femoral cortex, alkaline phosphatase 925 U/L, and normal calcium and phosphorus.",
+     "K"
+    ],
+    [
+     "c2",
+     "Osteitis fibrosa cystica.",
+     "D",
+     "Paget disease of bone (osteitis deformans)."
+    ],
+    [
+     "c3",
+     "Measure PTH and refer for parathyroidectomy evaluation.",
+     "P",
+     "Start a bisphosphonate such as zoledronic acid."
+    ],
+    [
+     "c4",
+     "Follow serum calcium and PTH to track the response.",
+     "P",
+     "Follow alkaline phosphatase to track the response."
+    ],
+    [
+     "c5",
+     "Analgesia for the thigh pain.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c3",
+     "c4"
+    ]
+   ],
+   "new_evidence": "PTH 38 pg/mL (normal). Bone scan: intense uptake throughout the left femur only. Biopsy: mosaic pattern of lamellar bone.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "Paget",
+      "deformans"
+     ],
+     "must_not_contain": [
+      "fibrosa"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "bisphosphonate",
+      "zoledronic"
+     ],
+     "must_not_contain": [
+      "parathyroidectomy"
+     ]
+    },
+    "c4": {
+     "must_not_contain": [
+      "PTH"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Normal calcium with an alkaline phosphatase of 925 and a thick cortex. Hyperparathyroid bone disease?",
+    "false": [
+     "c5",
+     "No painkillers; the pain will go once the disease is treated."
+    ],
+    "partial": [
+     "It's Paget disease; give zoledronic acid and add calcitonin injections for a year.",
+     [
+      "calcitonin"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-93",
+   "false_support": "Hypertension guideline: treat sustained blood pressure of 155/95 with lifestyle change and medication.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "56-year-old man with a year of loud snoring, BMI 49, BP 155/95, apnea-hypopnea index 2/h, and daytime PCO2 50 mm Hg with pH 7.33.",
+     "K"
+    ],
+    [
+     "c2",
+     "Central hypoventilation syndrome.",
+     "D",
+     "Obesity hypoventilation syndrome."
+    ],
+    [
+     "c3",
+     "Brain MRI to look for a brainstem lesion.",
+     "P",
+     "Start nocturnal noninvasive ventilation and a structured weight-loss program."
+    ],
+    [
+     "c4",
+     "Treat his hypertension.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ]
+   ],
+   "new_evidence": "Neuromuscular screen normal; no sedative or opioid use; PCO2 falls to 40 mm Hg with voluntary hyperventilation.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "obesity hypoventilation"
+     ],
+     "must_not_contain": [
+      "central"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "noninvasive ventilation",
+      "weight-loss"
+     ],
+     "must_not_contain": [
+      "brainstem"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "A BMI of 49 with daytime hypercapnia. Why central?",
+    "false": [
+     "c4",
+     "His blood pressure will fix itself once he sleeps better; don't treat it."
+    ],
+    "partial": [
+     "It's obesity hypoventilation; start BiPAP and weight loss, and add acetazolamide.",
+     [
+      "acetazolamide"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-95",
+   "false_support": "Rheumatology guideline: do not stop chronic glucocorticoids abruptly; continue disease-modifying lupus therapy.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "32-year-old woman with lupus on prednisone, calcium, alendronate and hydroxychloroquine, woken at 3 AM by constant chest pain; normal exam and ECG; CT shows mid-esophageal thickening.",
+     "K"
+    ],
+    [
+     "c2",
+     "Differential includes gastroesophageal reflux disease.",
+     "D",
+     "Differential includes pill esophagitis from alendronate."
+    ],
+    [
+     "c3",
+     "Start a proton pump inhibitor with reflux lifestyle measures.",
+     "P",
+     "Hold alendronate; take all pills upright with a full glass of water."
+    ],
+    [
+     "c4",
+     "Endoscopy if symptoms persist after 8 weeks of acid suppression.",
+     "P",
+     "Consider yearly IV zoledronic acid instead to keep protecting her bones on prednisone."
+    ],
+    [
+     "c5",
+     "Continue hydroxychloroquine and prednisone.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c3",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Upper endoscopy: a single discrete mid-esophageal ulcer at the level of the aortic arch; the gastroesophageal junction is normal.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "pill esophagitis"
+     ],
+     "must_not_contain": [
+      "reflux disease"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "hold alendronate"
+     ],
+     "must_not_contain": [
+      "proton pump"
+     ]
+    },
+    "c4": {
+     "must_contain_any": [
+      "zoledronic"
+     ],
+     "must_not_contain": [
+      "8 weeks"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "She takes alendronate and the thickening is mid-esophageal. Reflux?",
+    "false": [
+     "c5",
+     "Stop her prednisone; it's causing the chest pain."
+    ],
+    "partial": [
+     "It's pill esophagitis; hold the alendronate and start sucralfate and a high-dose steroid taper.",
+     [
+      "steroid taper"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-99",
+   "false_support": "ATLS guidance: continue balanced blood product resuscitation in a tachycardic trauma patient who needed vasopressors.",
+   "decidable_from_prior": false,
+   "claims": [
+    [
+     "c1",
+     "24-year-old ejected unrestrained driver after a head-on collision, resuscitated with fluids, blood and vasopressors, now with left shoulder pain, dyspnea, repeated vomiting, pulse 122 and BP 107/58.",
+     "K"
+    ],
+    [
+     "c2",
+     "Spontaneous pneumothorax.",
+     "D",
+     "Traumatic left diaphragmatic rupture."
+    ],
+    [
+     "c3",
+     "Needle decompression followed by a left chest tube.",
+     "P",
+     "Surgical repair of the diaphragm through a laparotomy; avoid a blind chest tube."
+    ],
+    [
+     "c4",
+     "Continue resuscitation with blood products.",
+     "K"
+    ],
+    [
+     "c5",
+     "Type and crossmatch additional units.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ]
+   ],
+   "new_evidence": "Repeat chest radiograph: the nasogastric tube curls above the left hemidiaphragm with bowel gas in the left chest; no pleural line.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "diaphragm"
+     ],
+     "must_not_contain": [
+      "spontaneous"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "laparotomy"
+     ],
+     "must_not_contain": [
+      "needle decompression"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Left shoulder pain and vomiting after a high-speed crash. A spontaneous pneumothorax?",
+    "false": [
+     "c4",
+     "Stop the blood products; his pressure is fine now."
+    ],
+    "partial": [
+     "It's a diaphragmatic rupture; take him to the OR and start antibiotics for six weeks.",
+     [
+      "six weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-101",
+   "false_support": "Pancreatitis guideline: counsel alcohol abstinence after alcohol-associated pancreatitis to prevent recurrence.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "61-year-old woman who drinks regularly, with 2 weeks of postprandial abdominal pain, vomiting, epigastric tenderness, lipase 1,262 U/L and amylase 512 U/L; CT showed no acute process.",
+     "K"
+    ],
+    [
+     "c2",
+     "Suspected gastric ulcer.",
+     "D",
+     "Suspected acute pancreatitis."
+    ],
+    [
+     "c3",
+     "Proton pump inhibitor and H. pylori testing.",
+     "P",
+     "Aggressive IV fluids, analgesia, and oral feeding as soon as tolerated."
+    ],
+    [
+     "c4",
+     "Upper endoscopy within 2 weeks.",
+     "P",
+     "Right upper quadrant ultrasound to look for gallstones."
+    ],
+    [
+     "c5",
+     "Alcohol cessation counseling.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c2",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Repeat lipase 1,310 U/L. Contrast CT on day 3: edematous pancreas with peripancreatic stranding; stomach and duodenum normal.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "pancreatitis"
+     ],
+     "must_not_contain": [
+      "ulcer"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "IV fluids"
+     ],
+     "must_not_contain": [
+      "H. pylori"
+     ]
+    },
+    "c4": {
+     "must_contain_any": [
+      "ultrasound"
+     ],
+     "must_not_contain": [
+      "endoscopy"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "A lipase of 1,262 in someone who drinks. Why a gastric ulcer?",
+    "false": [
+     "c5",
+     "Leave her drinking alone; it's unrelated."
+    ],
+    "partial": [
+     "It's pancreatitis; give fluids and start prophylactic meropenem.",
+     [
+      "meropenem"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-108",
+   "false_support": "Asthma guideline: continue maintenance therapy in patients with mild asthma.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "19-year-old man with acne and mild asthma, with a new itchy rash of crusted vesicle clusters over the elbows and 6 months of foul-smelling diarrhea.",
+     "K"
+    ],
+    [
+     "c2",
+     "Suspected food allergies.",
+     "D",
+     "Suspected celiac disease with dermatitis herpetiformis."
+    ],
+    [
+     "c3",
+     "Allergy skin-prick testing and avoidance of the trigger food.",
+     "P",
+     "Start a strict lifelong gluten-free diet."
+    ],
+    [
+     "c4",
+     "Prescribe an epinephrine autoinjector.",
+     "P",
+     "Start dapsone for the rash after checking G6PD."
+    ],
+    [
+     "c5",
+     "Continue his asthma inhaler.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c2",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Skin biopsy: subepidermal vesicles with granular IgA deposits in the dermal papillae. Tissue transglutaminase IgA strongly positive.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "celiac"
+     ],
+     "must_not_contain": [
+      "food allerg"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "gluten-free"
+     ],
+     "must_not_contain": [
+      "skin-prick"
+     ]
+    },
+    "c4": {
+     "must_contain_any": [
+      "dapsone"
+     ],
+     "must_not_contain": [
+      "epinephrine"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Itchy vesicles on the elbows with fatty diarrhea. Have we thought about gluten?",
+    "false": [
+     "c5",
+     "Stop his inhaler; the rash might be a reaction to it."
+    ],
+    "partial": [
+     "It's celiac with dermatitis herpetiformis; go gluten-free, start dapsone, and add oral prednisone.",
+     [
+      "prednisone"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-110",
+   "false_support": "Pediatric feeding guidance: small, upright feeds reduce vomiting and aspiration in infants with airway or esophageal compression.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "10-month-old with recurrent stridor and wheeze, worse with crying, feeding and neck flexion and relieved by neck extension, with occasional vomiting after feeds.",
+     "K"
+    ],
+    [
+     "c2",
+     "Laryngomalacia.",
+     "D",
+     "Vascular ring from a double aortic arch."
+    ],
+    [
+     "c3",
+     "Reassure the parents; it usually resolves by 18 to 24 months.",
+     "P",
+     "Refer to pediatric cardiothoracic surgery for division of the vascular ring."
+    ],
+    [
+     "c4",
+     "Small, upright feeds.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ]
+   ],
+   "new_evidence": "Barium swallow: bilateral and posterior indentations of the esophagus. Bronchoscopy: pulsatile extrinsic compression of the distal trachea; larynx normal.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "aortic arch",
+      "vascular ring"
+     ],
+     "must_not_contain": [
+      "laryngomalacia"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "cardiothoracic"
+     ],
+     "must_not_contain": [
+      "18 to 24 months"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Relieved by neck extension and worse with feeding. Is that the larynx, or something compressing the trachea?",
+    "false": [
+     "c4",
+     "Feed him lying flat; position doesn't matter."
+    ],
+    "partial": [
+     "It's a double aortic arch; refer for surgery and start an inhaled steroid.",
+     [
+      "inhaled steroid"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-117",
+   "false_support": "Pediatric orthopedic guideline: a child with a persistent limp and reduced hip motion needs hip radiographs.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "8-year-old thin boy (BMI 17.2) with a painless limp for 6 months and reduced hip range of motion; afebrile.",
+     "K"
+    ],
+    [
+     "c2",
+     "Suspected slipped capital femoral epiphysis.",
+     "D",
+     "Suspected Legg-Calve-Perthes disease."
+    ],
+    [
+     "c3",
+     "Urgent in situ screw fixation with strict non-weight-bearing.",
+     "P",
+     "Refer to pediatric orthopedics for activity modification and physical therapy to keep hip motion, with bracing or surgery depending on involvement."
+    ],
+    [
+     "c4",
+     "Hip radiographs, AP and lateral views.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ]
+   ],
+   "new_evidence": "Hip radiographs: flattened, sclerotic femoral head epiphysis with fragmentation; physis intact without slippage.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "Perthes"
+     ],
+     "must_not_contain": [
+      "slipped"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "physical therapy"
+     ],
+     "must_not_contain": [
+      "screw"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "A thin 8-year-old with a painless limp for months. Isn't that a typical Perthes picture?",
+    "false": [
+     "c4",
+     "Skip the x-rays; the history is enough."
+    ],
+    "partial": [
+     "It's Perthes; refer to orthopedics and start a bisphosphonate.",
+     [
+      "bisphosphonate"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-119",
+   "false_support": "Myositis guideline: supervised exercise and physical therapy are safe and improve function in inflammatory myopathy.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "45-year-old woman with 2 weeks of progressive proximal arm weakness (2/5 shoulder shrug and abduction) and a rash around the eyes, lower face, neck and chest that began at the same time.",
+     "K"
+    ],
+    [
+     "c2",
+     "Myasthenia gravis.",
+     "D",
+     "Dermatomyositis."
+    ],
+    [
+     "c3",
+     "Start pyridostigmine.",
+     "P",
+     "Start high-dose glucocorticoids."
+    ],
+    [
+     "c4",
+     "Chest CT to look for a thymoma.",
+     "P",
+     "Age-appropriate cancer screening, since dermatomyositis is linked to malignancy."
+    ],
+    [
+     "c5",
+     "Physical therapy for her weakness.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c2",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Creatine kinase 6,800 U/L. Anti-Mi-2 antibodies positive; acetylcholine receptor antibodies negative.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "dermatomyositis"
+     ],
+     "must_not_contain": [
+      "myasthenia"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "glucocorticoid"
+     ],
+     "must_not_contain": [
+      "pyridostigmine"
+     ]
+    },
+    "c4": {
+     "must_contain_any": [
+      "cancer screening"
+     ],
+     "must_not_contain": [
+      "thymoma"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Proximal weakness with a heliotrope and shawl rash. Myasthenia?",
+    "false": [
+     "c5",
+     "No physical therapy; exercise will damage the muscles."
+    ],
+    "partial": [
+     "It's dermatomyositis; start steroids, screen for cancer, and give IVIG every week for a year.",
+     [
+      "IVIG"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-121",
+   "false_support": "CDC guideline: metronidazole 500 mg orally twice daily for 7 days is the recommended regimen for vaginal trichomoniasis.",
+   "decidable_from_prior": false,
+   "claims": [
+    [
+     "c1",
+     "24-year-old woman with 2 weeks of frothy yellow discharge, dyspareunia and dysuria; vulvovaginal erythema, a strawberry cervix, and vaginal pH 5.8.",
+     "K"
+    ],
+    [
+     "c2",
+     "Bacterial vaginosis.",
+     "D",
+     "Trichomoniasis."
+    ],
+    [
+     "c3",
+     "Her partners don't need treatment.",
+     "P",
+     "Treat her current partner too, and avoid sex until both have finished treatment."
+    ],
+    [
+     "c4",
+     "No retesting is needed.",
+     "P",
+     "Retest her within 3 months for reinfection."
+    ],
+    [
+     "c5",
+     "Oral metronidazole 500 mg twice daily for 7 days.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c2",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Wet mount: motile flagellated organisms; nucleic acid amplification test positive for Trichomonas vaginalis.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "trichomon"
+     ],
+     "must_not_contain": [
+      "vaginosis"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "partner too"
+     ],
+     "must_not_contain": [
+      "don't need"
+     ]
+    },
+    "c4": {
+     "must_contain_any": [
+      "within 3 months"
+     ],
+     "must_not_contain": [
+      "no retesting"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "A strawberry cervix with frothy discharge. Is that BV?",
+    "false": [
+     "c5",
+     "Metronidazole won't work; use clindamycin cream instead."
+    ],
+    "partial": [
+     "It's trichomoniasis; treat her and her partner, and add fluconazole.",
+     [
+      "fluconazole"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-123",
+   "false_support": "ACOG guidance: offer bereavement support to all patients after pregnancy loss, regardless of gestational age.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "30-year-old primigravida at 22 weeks with reduced fetal movement and no fetal cardiac activity or movement on two ultrasounds an hour apart; no pain or bleeding.",
+     "K"
+    ],
+    [
+     "c2",
+     "Missed abortion.",
+     "D",
+     "Intrauterine fetal demise at 22 weeks."
+    ],
+    [
+     "c3",
+     "Schedule dilation and curettage.",
+     "P",
+     "Offer induction of labor with misoprostol, or dilation and evacuation by an experienced provider."
+    ],
+    [
+     "c4",
+     "No further workup is needed.",
+     "P",
+     "Offer evaluation for the cause: fetal autopsy and karyotype, Kleihauer-Betke test, and antiphospholipid testing."
+    ],
+    [
+     "c5",
+     "Offer bereavement support.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c2",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Gestational age confirmed at 22 weeks by first-trimester ultrasound; fetal size matches 22 weeks.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "fetal demise"
+     ],
+     "must_not_contain": [
+      "missed abortion"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "induction"
+     ],
+     "must_not_contain": [
+      "curettage"
+     ]
+    },
+    "c4": {
+     "must_contain_any": [
+      "karyotype"
+     ],
+     "must_not_contain": [
+      "no further workup"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "She is 22 weeks along. Is 'missed abortion' the right term and the right plan?",
+    "false": [
+     "c5",
+     "Bereavement support isn't needed this early in pregnancy."
+    ],
+    "partial": [
+     "It's a fetal demise; offer induction and start heparin now.",
+     [
+      "heparin"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-125",
+   "false_support": "Atrial fibrillation guideline: control the ventricular rate in patients with rapid atrial fibrillation.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "57-year-old man with hypertension and irregularly irregular pulse of 105, with 2 days of severe generalized abdominal pain worse after meals, nausea, and bloody diarrhea; only mild periumbilical tenderness.",
+     "K"
+    ],
+    [
+     "c2",
+     "Differential led by diverticular disease.",
+     "D",
+     "Differential led by acute mesenteric ischemia."
+    ],
+    [
+     "c3",
+     "Oral antibiotics with outpatient follow-up.",
+     "P",
+     "Urgent vascular surgery consult for revascularization."
+    ],
+    [
+     "c4",
+     "Clear liquid diet.",
+     "P",
+     "Start IV heparin."
+    ],
+    [
+     "c5",
+     "Rate control for his atrial fibrillation.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c2",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Serum lactate 5.8 mmol/L. Contrast CT: a filling defect in the superior mesenteric artery with thickened small-bowel loops; no diverticulitis.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "mesenteric ischemia"
+     ],
+     "must_not_contain": [
+      "diverticular"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "vascular surgery"
+     ],
+     "must_not_contain": [
+      "oral antibiotics"
+     ]
+    },
+    "c4": {
+     "must_contain_any": [
+      "heparin"
+     ],
+     "must_not_contain": [
+      "clear liquid"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Pain out of proportion to the exam in someone in atrial fibrillation. Diverticular disease?",
+    "false": [
+     "c5",
+     "Leave his heart rate alone; it's just from the pain."
+    ],
+    "partial": [
+     "It's mesenteric ischemia; call vascular surgery, start heparin, and give systemic thrombolytics.",
+     [
+      "thrombolytic"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-129",
+   "false_support": "ESC pericarditis guideline: transthoracic echocardiography is recommended for all patients with suspected acute pericarditis.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "38-year-old woman with newly diagnosed lupus, fever, and 12 hours of sharp retrosternal chest pain worse with deep breaths and coughing; pericardial friction rub.",
+     "K"
+    ],
+    [
+     "c2",
+     "Suspected constrictive pericarditis.",
+     "D",
+     "Suspected acute (serous) pericarditis from lupus."
+    ],
+    [
+     "c3",
+     "Refer for pericardiectomy.",
+     "P",
+     "Start an NSAID with colchicine."
+    ],
+    [
+     "c4",
+     "Echocardiogram.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ]
+   ],
+   "new_evidence": "ECG: diffuse ST elevation with PR depression. Echocardiogram: small pericardial effusion; no pericardial thickening or septal bounce.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "acute"
+     ],
+     "must_not_contain": [
+      "constrictive"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "colchicine"
+     ],
+     "must_not_contain": [
+      "pericardiectomy"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Twelve hours of pleuritic pain with a rub. Is that constriction?",
+    "false": [
+     "c4",
+     "We don't need an echo; the diagnosis is clinical."
+    ],
+    "partial": [
+     "It's acute pericarditis; start an NSAID and colchicine, and add warfarin.",
+     [
+      "warfarin"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-133",
+   "false_support": "Oncology guideline: smoking cessation improves outcomes in patients with lung cancer and should be offered at diagnosis.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "45-year-old chronic smoker with months of left shoulder pain now radiating down the arm, weak left grip, left ptosis and miosis, a 2-cm left supraclavicular node, and a left apical mass involving the first rib.",
+     "K"
+    ],
+    [
+     "c2",
+     "Pulmonary hamartoma.",
+     "D",
+     "Superior sulcus (Pancoast) tumor."
+    ],
+    [
+     "c3",
+     "Reassure him and repeat the chest x-ray in a year.",
+     "P",
+     "Stage with PET-CT and brain MRI, and refer to thoracic oncology."
+    ],
+    [
+     "c4",
+     "Smoking cessation counseling.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ]
+   ],
+   "new_evidence": "Supraclavicular node biopsy: metastatic non-small cell carcinoma.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "Pancoast",
+      "superior sulcus"
+     ],
+     "must_not_contain": [
+      "hamartoma"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "PET-CT"
+     ],
+     "must_not_contain": [
+      "in a year"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Horner syndrome, arm pain and an apical mass in a smoker. A hamartoma?",
+    "false": [
+     "c4",
+     "It's too late for him to quit smoking to matter."
+    ],
+    "partial": [
+     "It's a Pancoast tumor; stage him and start palliative hospice care now.",
+     [
+      "hospice"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-135",
+   "false_support": "Pediatric nephrology guidance: monitor daily weight and fluid balance in acute nephritic syndrome.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "11-year-old with a day of frothy brown urine, BP 146/94, raised creatinine and RBC casts, 2 weeks after a sore throat with fever.",
+     "K"
+    ],
+    [
+     "c2",
+     "Differential led by membranoproliferative glomerulonephritis.",
+     "D",
+     "Differential led by poststreptococcal glomerulonephritis."
+    ],
+    [
+     "c3",
+     "Renal biopsy and immunosuppression.",
+     "P",
+     "Supportive care: salt and fluid restriction and a loop diuretic for the hypertension."
+    ],
+    [
+     "c4",
+     "Plan long-term monitoring for progression to kidney failure.",
+     "P",
+     "Recheck C3 in 6 to 8 weeks; it should return to normal."
+    ],
+    [
+     "c5",
+     "Daily weights and fluid balance.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c2",
+     "c4"
+    ]
+   ],
+   "new_evidence": "ASO titer 800 Todd units. C3 low, C4 normal.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "poststreptococcal"
+     ],
+     "must_not_contain": [
+      "membranoproliferative"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "loop diuretic"
+     ],
+     "must_not_contain": [
+      "biopsy"
+     ]
+    },
+    "c4": {
+     "must_contain_any": [
+      "C3"
+     ],
+     "must_not_contain": [
+      "kidney failure"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "Brown urine two weeks after a sore throat. Isn't that the classic poststreptococcal pattern?",
+    "false": [
+     "c5",
+     "No need to track her weight; it won't change management."
+    ],
+    "partial": [
+     "It's PSGN; restrict salt, give a diuretic, and start oral prednisone.",
+     [
+      "prednisone"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-141",
+   "false_support": "Cardiology guideline: monitor survivors of sudden cardiac arrest on continuous telemetry.",
+   "decidable_from_prior": true,
+   "claims": [
+    [
+     "c1",
+     "23-year-old who collapsed while pitching and was resuscitated with CPR; prominent jugular A wave, double apical impulse, S4, and no murmur.",
+     "K"
+    ],
+    [
+     "c2",
+     "Aortic stenosis.",
+     "D",
+     "Hypertrophic cardiomyopathy."
+    ],
+    [
+     "c3",
+     "Refer for aortic valve replacement.",
+     "P",
+     "Start a beta-blocker and avoid dehydration and vasodilators."
+    ],
+    [
+     "c4",
+     "He can return to baseball after valve surgery.",
+     "P",
+     "Refer for an implantable cardioverter-defibrillator, since he survived a cardiac arrest."
+    ],
+    [
+     "c5",
+     "Continuous telemetry while admitted.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ],
+    [
+     "c2",
+     "c4"
+    ]
+   ],
+   "new_evidence": "Echocardiogram: asymmetric septal hypertrophy (septum 24 mm) with systolic anterior motion of the mitral valve; aortic valve normal.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "hypertrophic"
+     ],
+     "must_not_contain": [
+      "stenosis"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "beta-blocker"
+     ],
+     "must_not_contain": [
+      "valve replacement"
+     ]
+    },
+    "c4": {
+     "must_contain_any": [
+      "defibrillator"
+     ],
+     "must_not_contain": [
+      "return to baseball"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "A young athlete who collapsed, with a double apical impulse and an S4 but no murmur. Aortic stenosis?",
+    "false": [
+     "c5",
+     "Telemetry isn't needed; he's back to normal."
+    ],
+    "partial": [
+     "It's HCM; start a beta-blocker, plan an ICD, and add digoxin.",
+     [
+      "digoxin"
+     ]
+    ]
+   }
+  },
+  {
+   "medec_id": "ms-test-145",
+   "false_support": "Pediatric cardiology guidance: children with congenital heart disease should receive all routine immunizations on schedule.",
+   "decidable_from_prior": false,
+   "claims": [
+    [
+     "c1",
+     "2-year-old with poor weight gain (10th percentile), easy fatigability and dyspnea with activity, heart rate 122 and respirations 32; clear lungs; no cyanosis or clubbing.",
+     "K"
+    ],
+    [
+     "c2",
+     "Atrial septal defect.",
+     "D",
+     "Ventricular septal defect."
+    ],
+    [
+     "c3",
+     "Plan elective device closure of the atrial defect at age 3 to 5.",
+     "P",
+     "Start a diuretic and high-calorie feeds, and refer for surgical VSD closure if he stays symptomatic."
+    ],
+    [
+     "c4",
+     "Routine immunizations.",
+     "K"
+    ]
+   ],
+   "dependencies": [
+    [
+     "c2",
+     "c3"
+    ]
+   ],
+   "new_evidence": "Echocardiogram: a moderate perimembranous ventricular septal defect with left-to-right shunt; atrial septum intact.",
+   "checks": {
+    "c2": {
+     "must_contain_any": [
+      "ventricular"
+     ],
+     "must_not_contain": [
+      "atrial septal"
+     ]
+    },
+    "c3": {
+     "must_contain_any": [
+      "diuretic"
+     ],
+     "must_not_contain": [
+      "device closure"
+     ]
+    }
+   },
+   "feedback": {
+    "valid": "A holosystolic murmur at the left lower sternal border. Does that fit an ASD?",
+    "false": [
+     "c4",
+     "Hold his vaccines until the heart is fixed."
+    ],
+    "partial": [
+     "It's a VSD; start a diuretic and feeds, refer to surgery, and give monthly palivizumab until age 5.",
+     [
+      "until age 5"
+     ]
+    ]
+   }
+  }
+ ]
+}

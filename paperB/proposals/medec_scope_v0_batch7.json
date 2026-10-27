@@ -664,7 +664,7 @@
    "checks": {
     "c2": {
      "must_contain_any": [
-      "interstitial"
+      "tubulointerstitial"
      ],
      "must_not_contain": [
       "pyelonephritis"
