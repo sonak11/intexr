@@ -23,6 +23,14 @@ PLAN = {"valid": 4, "false": 4, "partial": 3, "authority": 4, "ambiguous": 2, "o
         "conflicting": 2}
 
 
+def blind(view):
+    """Drop source identifiers (e.g. 'MEDEC ms-val-514') from provenance, so annotators can't look cases up."""
+    import re
+    for e in view["prior_evidence"] + view["new_evidence"]:
+        e["provenance"] = re.sub(r"\s*\(?MEDEC[^)]*\)?", "", e.get("provenance", "")).strip() or "note"
+    return view
+
+
 def sample(exs, seed):
     rng = random.Random(seed)
     by_var = defaultdict(list)
@@ -148,7 +156,7 @@ def main():
     exs = sample(data.load(a.data), a.seed)
     # neutral ids: real ids name the feedback condition (e.g. "-false"), which would unblind the annotator
     key = {f"item-{i + 1:02d}": ex["id"] for i, ex in enumerate(exs)}
-    items = [dict(data.model_view(ex, "B"), id=iid, domain="clinical") for iid, ex in zip(key, exs)]
+    items = [dict(blind(data.model_view(ex, "B")), id=iid, domain="clinical") for iid, ex in zip(key, exs)]
     blob = json.dumps(items, ensure_ascii=False).replace("</", "<\\/")
     os.makedirs(os.path.dirname(a.out) or ".", exist_ok=True)
     with open(a.out, "w") as f:
