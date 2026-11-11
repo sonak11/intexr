@@ -1,6 +1,10 @@
 # IntExR — Session Handoff (written 22 Oct 2026; updated 23 Oct 2026)
 
-## UPDATE 27 Oct (Difei's feedback). Read this first.
+## UPDATE 11 Nov (thasos runs). Read this first.
+- thasos works with **vLLM 0.8.5.post1 + transformers 4.51.3** in `~/vllm-env` (driver 560 = CUDA 12.6 rules out newer vLLM; Turing needs `VLLM_USE_V1=0`). Model cache: `HF_HOME=/tmp/ss4910_hf` (local disk).
+- **Judge:** the Gemini free tier allows 500 judge calls/day (shared across machines), and each model needs ~360 on dev and ~2,400 on test. So the scale study uses one local judge, `JUDGE_LOCAL=Qwen/Qwen3-32B-AWQ` (GPUs 6-7), for every model. The Groq/Gemini models are run from thasos too so they share it. The two earlier runs are re-scored with `WHERE=rejudge` (`scripts/rejudge.py` keeps the Gemini labels under `prev_judge` and prints agreement, a robustness number). Calibrate this judge with `annotation/actions_sheet.csv`; after re-judging run `label_actions.py rehide`.
+
+## UPDATE 27 Oct (Difei's feedback).
 Difei asked for three things: (1) decide human review per model vs. per tier; (2) a dataset on the same scale as similar ones; (3) as many models as possible, at least small and large GPT, Claude and Qwen. Done:
 - **Dataset: MedScope v0.3 = 154 cases, 941 examples, 4,525 claims** (20 dev / 134 test; batches 5–10 add 107 MEDEC cases, all test). The 293 v0.2 examples are byte-identical, so every dev result and cache stays valid. Scale is comparable to RevPropBench (150 items) and meets the 110–170-case sample-size target. Review packet for the new cases: `annotation/review_packet_v03_new.pdf`. Authoring helper: `scripts/proposal_helper.py`.
 - **Models by tier:** `configs/model_tiers.tsv` (3–4B, 7–8B, 14B, 20–32B, 70B+, closed). Runner: `WHERE=groq|gemini|thasos|credits bash scripts/run_tiers.sh`. The scale table is the last section of `results/RESULTS_medscope.md`.

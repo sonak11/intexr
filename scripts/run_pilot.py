@@ -101,7 +101,7 @@ def main():
                 except RuntimeError as e:  # an API error (judge or model): stop instead of writing bad scores
                     sys.exit(f"\nAPI error at {spec}, condition {cond}, example {k + 1}/{len(exs)} "
                              f"(model {model}, judge {args.judge}):\n{e}")
-                p["condition"], p["model"] = cond, model
+                p["condition"], p["model"], p["judge"] = cond, model, args.judge
                 preds.append(p)
                 rows.append(metrics.per_example(ex, p))
             tag = f"{name}{'@' + model.replace(':', '_').replace('/', '_') if model else ''}_{cond}"

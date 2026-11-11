@@ -48,7 +48,7 @@ def sample(args):
     for pat in args.preds:
         for f in glob.glob(pat):
             # preds_<system>@<model tag>_<condition>.jsonl
-            stem = os.path.basename(f)[len("preds_"):].rsplit("_", 1)[0]
+            stem, cond = os.path.basename(f)[len("preds_"):-len(".jsonl")].rsplit("_", 1)
             model = stem.split("@", 1)[1] if "@" in stem else ""
             with open(f) as fh:
                 for line in fh:
@@ -61,7 +61,7 @@ def sample(args):
                     sysname = f"{p['system']}@{model}" if model else p["system"]
                     for c in ex["claims"]:
                         lab = ex["gold"]["claims"][c["id"]]["label"]
-                        pool[(sysname, lab)].append({"key": f"{sysname}|{p['id']}|{c['id']}", "example_id": p["id"],
+                        pool[(sysname, lab)].append({"key": f"{sysname}|{cond}|{p['id']}|{c['id']}", "example_id": p["id"],
                                           "claim_id": c["id"], "claim": c["text"], "revised_response": p["revised_response"],
                                           "human_action": "", "note": "", "judge_action": p["claims"][c["id"]]["status"],
                                           "gold_label": lab, "system": sysname})
@@ -141,6 +141,29 @@ def score(args):
     print("\nagreement by system: " + ", ".join(f"{s}={sum(v) / len(v):.2f} (n={len(v)})" for s, v in by_sys.items()))
 
 
+def rehide(args):
+    """After re-judging (scripts/rejudge.py), refresh the hidden judge labels for the same sampled pairs."""
+    hidden = json.load(open(args.sheet + ".hidden.json"))
+    current = {}
+    for pat in args.preds:
+        for f in glob.glob(pat):
+            stem, cond = os.path.basename(f)[len("preds_"):-len(".jsonl")].rsplit("_", 1)
+            with open(f) as fh:
+                for line in fh:
+                    p = json.loads(line)
+                    for cid, v in p.get("claims", {}).items():
+                        current[f"{stem}|{cond}|{p['id']}|{cid}"] = v["status"]
+    missing = [k for k in hidden if k not in current]
+    if missing:
+        sys.exit(f"{len(missing)} sampled pairs not found in --preds, e.g. {missing[:3]}")
+    changed = sum(hidden[k]["judge_action"] != current[k] for k in hidden)
+    for k in hidden:
+        hidden[k]["judge_action"] = current[k]
+    with open(args.sheet + ".hidden.json", "w") as f:
+        json.dump(hidden, f, indent=1)
+    print(f"refreshed {len(hidden)} hidden judge labels ({changed} changed); your human labels are untouched")
+
+
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -155,8 +178,11 @@ def main():
     for name in ("label", "score"):
         p = sub.add_parser(name)
         p.add_argument("sheet")
+    r = sub.add_parser("rehide", help="refresh hidden judge labels after re-judging")
+    r.add_argument("sheet")
+    r.add_argument("--preds", nargs="+", required=True)
     a = ap.parse_args()
-    {"sample": sample, "label": label, "score": score}[a.cmd](a)
+    {"sample": sample, "label": label, "score": score, "rehide": rehide}[a.cmd](a)
 
 
 if __name__ == "__main__":

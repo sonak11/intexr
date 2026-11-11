@@ -6,6 +6,11 @@
 #   WHERE=gemini bash scripts/run_tiers.sh
 #   WHERE=thasos bash scripts/run_tiers.sh        # on thasos: starts vLLM for each model, runs it, stops it
 #   WHERE=credits bash scripts/run_tiers.sh       # Claude / closed GPT, once API credits exist (SPLIT=test only)
+#   WHERE=rejudge bash scripts/run_tiers.sh       # re-score finished runs with the local judge (no model calls)
+#
+# Judge: the Gemini free tier allows only 500 judge calls/day, so on thasos use one fixed local judge for every model:
+#   JUDGE_LOCAL=Qwen/Qwen3-32B-AWQ  serves it on GPUs 6-7 (JUDGE_GPUS) and works with any WHERE (groq/gemini models
+#   are then called over the API from thasos and judged locally). Use the same JUDGE_LOCAL for every run.
 #
 # Optional: ONLY="Qwen3-8B gpt-oss-20b" (substring filter on spec), SPLIT (default dev), SYSTEMS, CONDITIONS,
 #           JUDGE (default gemini:gemini-3.5-flash-lite; on thasos you can set JUDGE_LOCAL=Qwen/Qwen3-32B-AWQ to serve a
@@ -14,7 +19,7 @@
 # Results land in results/medscope_<provider>_<model>/ and the scale table in results/RESULTS_medscope.md.
 set -euo pipefail
 cd "$(dirname "$0")/.."
-: "${WHERE:?set WHERE=groq|gemini|thasos|credits}"
+: "${WHERE:?set WHERE=groq|gemini|thasos|credits|rejudge}"
 export JUDGE="${JUDGE:-gemini:gemini-3.5-flash-lite}" SPLIT="${SPLIT:-dev}" FREE="${FREE:-1}"
 PORT=8000
 LOG=""
@@ -41,19 +46,26 @@ pick_gpus() {  # pick_gpus <n>: the n GPUs with the most free memory (or $GPUS i
   nvidia-smi --query-gpu=index,memory.free --format=csv,noheader,nounits | sort -t, -k2 -nr | head -n "$1" \
     | cut -d, -f1 | tr -d ' ' | paste -sd, -
 }
-if [ "$WHERE" = thasos ]; then
+if [ "$WHERE" = thasos ] || [ -n "${JUDGE_LOCAL:-}" ]; then
   command -v vllm >/dev/null || { echo "vllm is not installed here. Install it first:
   python3 -m venv ~/vllm-env && source ~/vllm-env/bin/activate && pip install vllm
 then re-run this command (with the venv activated)."; exit 1; }
   nvidia-smi --query-gpu=index,memory.used,memory.total --format=csv
 fi
 JPID=""
-if [ "$WHERE" = thasos ] && [ -n "${JUDGE_LOCAL:-}" ]; then
+if [ -n "${JUDGE_LOCAL:-}" ]; then
   serve "$JUDGE_LOCAL" 2 8001 "${JUDGE_GPUS:-6,7}"; JPID=$SPID; wait_up 8001 "$JPID" || exit 1
   export JUDGE="vllm2:$JUDGE_LOCAL" VLLM2_BASE_URL="http://localhost:8001/v1"
   export INTEXR_EXTRA_BODY_VLLM2='{"chat_template_kwargs": {"enable_thinking": false}}'
 fi
 trap '[ -n "$JPID" ] && kill $JPID 2>/dev/null || true' EXIT
+if [ "$WHERE" = rejudge ]; then
+  : "${JUDGE_LOCAL:?set JUDGE_LOCAL (the judge every other run used)}"
+  python3 scripts/rejudge.py --data paperB/data/medec_scope_v0.json --judge "$JUDGE" results/medscope_*
+  python3 scripts/summarize_results.py --data paperB/data/medec_scope_v0.json --runs results/medscope_* \
+    --tiers configs/model_tiers.tsv --out results/RESULTS_medscope.md --tex paper1/tables >/dev/null
+  echo "Re-judged; scale table in results/RESULTS_medscope.md"; exit 0
+fi
 grep -v '^#' configs/model_tiers.tsv | tail -n +2 | while IFS=$'\t' read -r spec family params tier where tp review extra maxtok notes; do
   [ "$where" = "$WHERE" ] || continue
   if [ -n "${ONLY:-}" ]; then hit=0; for o in $ONLY; do [[ "$spec" == *"$o"* ]] && hit=1; done; [ $hit = 1 ] || continue; fi
