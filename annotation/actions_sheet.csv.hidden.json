@@ -1,0 +1,557 @@
+{
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-289-false|c4": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-32-false|c5": {
+  "judge_action": "keep",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-185-valid|c4": {
+  "judge_action": "keep",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-test-97-authority|c2": {
+  "judge_action": "revised",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-test-236-valid|c3": {
+  "judge_action": "removed",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-303-false|c3": {
+  "judge_action": "keep",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-480-authority|c2": {
+  "judge_action": "revised",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-32-authority|c1": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-565-false|c2": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-12-valid|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-24-false|c3": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-24-valid|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-24-authority|c1": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-12-authority|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-514-false|c5": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-303-valid|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-480-authority|c4": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-565-authority|c5": {
+  "judge_action": "removed",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-289-false|c3": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-514-authority|c4": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-565-valid|c3": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-185-authority|c3": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-12-authority|c4": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-test-236-valid|c3": {
+  "judge_action": "removed",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-test-236-authority|c3": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-32-false|c3": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-480-false|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-514-authority|c3": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-24-authority|c5": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-60-false|c4": {
+  "judge_action": "removed",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-12-valid|c4": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-185-false|c4": {
+  "judge_action": "keep",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-test-115-valid|c3": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-24-authority|c1": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-50-valid|c1": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-test-75-authority|c3": {
+  "judge_action": "keep",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-197-valid|c5": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-test-75-false|c3": {
+  "judge_action": "keep",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-60-false|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-test-115-authority|c1": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-30-valid|c3": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-32-valid|c4": {
+  "judge_action": "keep",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-333-valid|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-565-valid|c4": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-289-authority|c1": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-test-75-authority|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-333-valid|c3": {
+  "judge_action": "keep",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-test-236-authority|c2": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-24-valid|c3": {
+  "judge_action": "removed",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-480-false|c3": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-197-authority|c3": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-480-authority|c4": {
+  "judge_action": "revised",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-185-valid|c3": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-test-115-authority|c2": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-30-valid|c4": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-30-false|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-289-false|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-test-236-false|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-test-115-false|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-289-authority|c2": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-480-valid|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-50-valid|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-197-valid|c3": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-test-236-authority|c4": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-24-valid|c4": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-289-valid|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-185-valid|c3": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-test-97-false|c4": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-32-authority|c3": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-303-false|c5": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-514-valid|c1": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-514-false|c3": {
+  "judge_action": "keep",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-test-97-authority|c2": {
+  "judge_action": "revised",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-565-false|c6": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-32-valid|c3": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-289-valid|c3": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-50-authority|c2": {
+  "judge_action": "revised",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-32-authority|c5": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-test-97-authority|c5": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-303-authority|c3": {
+  "judge_action": "removed",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-303-false|c5": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-333-authority|c3": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-60-authority|c3": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-60-authority|c4": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-50-authority|c3": {
+  "judge_action": "revised",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-565-authority|c1": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-197-authority|c3": {
+  "judge_action": "revised",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-24-false|c3": {
+  "judge_action": "keep",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-30-authority|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-test-115-valid|c4": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-485-false|c1": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-333-false|c4": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-485-false|c3": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-12-authority|c4": {
+  "judge_action": "keep",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-32-valid|c3": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-289-authority|c2": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-test-115-authority|c2": {
+  "judge_action": "revised",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-12-false|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-520-authority|c2": {
+  "judge_action": "revised",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-565-authority|c4": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-50-false|c4": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-32-false|c2": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-50-valid|c3": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-303-false|c2": {
+  "judge_action": "removed",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-60-valid|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_qwen_qwen3.8-27b|mscope-ms-val-24-authority|c2": {
+  "judge_action": "revised",
+  "gold_label": "D",
+  "system": "evidence_prompt@groq_qwen_qwen3.8-27b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-test-236-authority|c3": {
+  "judge_action": "keep",
+  "gold_label": "U",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-30-false|c3": {
+  "judge_action": "revised",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-565-false|c1": {
+  "judge_action": "keep",
+  "gold_label": "K",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-303-false|c3": {
+  "judge_action": "removed",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ },
+ "evidence_prompt@groq_openai_gpt-oss-120b|mscope-ms-val-565-valid|c5": {
+  "judge_action": "removed",
+  "gold_label": "P",
+  "system": "evidence_prompt@groq_openai_gpt-oss-120b"
+ }
+}
