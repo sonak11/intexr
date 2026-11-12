@@ -90,9 +90,12 @@ def scope_first(ex, client, judge=None, condition="B", **_):
         if not isinstance(out, dict):
             raise ValueError("output is not a JSON object")
     except ValueError as e:
-        return {"id": ex["id"], "system": "scope_first", "structured": True, "parse_error": str(e), "raw": raw,
-                "revised_response": ex["original_response"], "verdict": None,
-                "claims": {c["id"]: {"label": "K", "status": "keep"} for c in ex["claims"]}}
+        keep = {c["id"]: {"label": "K", "status": "keep"} for c in ex["claims"]}
+        pred = {"id": ex["id"], "system": "scope_first", "structured": True, "parse_error": str(e), "raw": raw,
+                "revised_response": ex["original_response"], "verdict": None, "claims": keep}
+        if judge is not None:  # the text is the unchanged original, so the judged view is all keep (no call needed)
+            pred["judged_claims"] = {cid: {"status": "keep"} for cid in keep}
+        return pred
     by_id = {c.get("id"): c for c in out.get("claims", [])}
     claims = {}
     for c in ex["claims"]:

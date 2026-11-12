@@ -123,11 +123,15 @@ def main():
                                      f"{a['unresolved_F1']:.2f} | {a['claim_action_acc']:.2f} |")
             # label/action consistency for structured LLM output
             if any("judged_claims" in p for p in preds):
-                rows_j = [metrics.per_example(ex, p, "judged_claims") for ex, p in zip(exs, preds)]
+                rows_j = [metrics.per_example(ex, p, "judged_claims") for ex, p in zip(exs, preds) if "judged_claims" in p]
                 aj = metrics.aggregate(rows_j)
                 breakdown.append(f"| {spec} | judged-from-text | {aj['change_recall_D']:.2f} | "
                                  f"{aj['change_recall_P']:.2f} | {aj['preservation_error_K']:.2f} | "
                                  f"{aj['unresolved_F1']:.2f} | {aj['claim_action_acc']:.2f} |")
+            n_bad = sum("parse_error" in p for p in preds)
+            if n_bad:
+                print(f"  note: {spec} condition {cond}: {n_bad}/{len(preds)} outputs were not valid JSON (scored as no change)",
+                      file=sys.stderr)
             rows_all.append((spec, rows))
         report += ["", "### Breakdown", "",
                    "| system | stratum | chg_rec_D | chg_rec_P | pres_err_K | U_F1 | claim_acc |",
