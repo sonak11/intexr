@@ -1,3 +1,29 @@
+# Scale study, first pass (12-13 Nov 2026)
+
+Dev slice (20 cases x valid/false/authority = 60 examples), condition B unless marked. **One fixed judge for every model: Qwen3-32B-AWQ served locally** (the Gemini free tier allows 500 judge calls/day). The two October runs were re-scored with it. Pending: gpt-oss-20b (Groq daily cap), Gemma-4-31B (Gemini daily cap), Llama 3B/8B (need an HF token).
+
+| model | params (B) | Prompt A-Chg-P | Prompt Chg-P | Prompt Syc | Prompt U-F1 | Prompt Exact | Pipe Chg-P | Pipe Syc | Pipe Verdict | Pipe Exact |
+|---|---|---|---|---|---|---|---|---|---|---|
+| Qwen3-4B | 4 | 0.12 | 0.40 | 0.10 | 0.00 | 0.25 | 0.39 | 0.65 | 0.60 | 0.18 |
+| Qwen3-8B | 8 | 0.32 | 0.46 | 0.30 | 0.05 | 0.25 | 0.56 | 0.30 | 0.63 | 0.32 |
+| Qwen3-14B | 14 | 0.28 | 0.68 | 0.35 | 0.14 | 0.40 | 0.51 | 0.15 | 0.72 | 0.38 |
+| Qwen3.8-27B | 27 | 0.04 | 0.79 | 0.45 | 0.00 | 0.32 | 1.00 | 0.00 | 0.57 | 0.80 |
+| Qwen3-32B-AWQ | 32 | 0.05 | 0.35 | 0.35 | 0.05 | 0.22 | 0.74 | 0.10 | 0.78 | 0.52 |
+| Llama-3.3-70B-AWQ | 70 | 0.95 | 0.93 | 0.75 | 0.24 | 0.32 | 0.61 | 0.05 | 0.88 | 0.55 |
+| gpt-oss-120b | 117 | 0.63 | 0.86 | 0.15 | 0.10 | 0.50 | 0.95 | 0.05 | 0.62 | 0.63 |
+
+Syc = share of evidence-supported claims changed when false feedback attacks them (20 claims per model, so CIs are about +/-0.2). A-Chg-P = propagation under a bare verified edit.
+
+**Findings (preliminary, dev):**
+1. **Claim-level sycophancy is present in every model under the evidence-aware prompt (0.10-0.75) and does not shrink with scale**; Llama-3.3-70B is the most sycophantic (0.75 [0.55, 0.95]).
+2. **The scope-first pipeline removes it only from about 14B up** (27B 0.45->0.00, 32B 0.35->0.10, 70B 0.75->0.05, 120B 0.15->0.05). Below that it does not help (8B 0.30->0.30) or hurts (4B 0.10->0.65): small models cannot follow the structured audit.
+3. **Pipeline exact accuracy rises with scale** (0.18, 0.32, 0.38 for 4-14B; 0.52-0.80 above), while the single prompt stays flat (0.22-0.50).
+4. **Literal application of bare verified edits is a family trait, not a scale effect:** A-Chg-P is 0.04-0.32 for every Qwen size, 0.63 for gpt-oss, 0.95-1.00 for Llama and Gemma.
+5. **Free-text revision almost never hedges** in any model (U-F1 0.00-0.24).
+6. Cost: for Llama-70B the pipeline under-revises (P recall 0.93 -> 0.61).
+
+**Judge caveat.** Changing the judge from Gemini to Qwen3-32B moved Qwen3.8-27B's prompt Syc from 0.20 to 0.45 (pipeline numbers do not depend on the judge: they come from structured labels). The judge-calibration sheet (`annotation/actions_sheet.csv`, 120 human-labelled pairs) decides which judge is trusted; a Qwen-family judge scoring Qwen models also needs that check.
+
 # First model results (v0, free-tier dev slice), 25–26 Oct 2026
 
 **26 Oct update:**
