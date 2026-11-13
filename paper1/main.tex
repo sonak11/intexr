@@ -42,7 +42,7 @@ We introduce \textbf{IntExR-Scope}, a claim-level revision task in which feedbac
 Given an original response, prior evidence, feedback of unknown validity, and new evidence, a system must label every claim as a direct update, a propagated update, unresolved (to be hedged, not deleted), or keep, judge the feedback, and write a minimal revision.
 We release a validated benchmark built from clinical notes with expert-injected errors (\ms{}: 154 source cases, 941 examples, 4{,}525 claims across eight feedback conditions, with dependency chains up to depth two) together with converted non-medical sets, an evaluation harness with case-level uncertainty, and a \emph{scope-first} method that delegates evidence alignment and wording to an LLM but assigns labels and preserves untouched claims deterministically.
 Our central experiment compares the same claims under a verified edit and under unverified feedback plus evidence, isolating the cost of verification on scope and propagation.
-\todo{one sentence of headline findings once runs are in.}
+In a pilot across seven open models from 4B to 120B parameters, every model changes evidence-supported claims under false feedback (10--75\%), with no decrease with scale; the scope-first pipeline removes this sycophancy for models of about 27B and larger (to 0--10\%) but not for small models, and whether a model propagates a bare verified edit depends on its family rather than its size.
 \end{abstract}
 
 %=====================================================================
@@ -276,11 +276,34 @@ Qwen3.8-27B & Evidence-aware prompt & 0.98 & 0.74 & 0.20 & 0.05 & --- & 0.45 \\
 
 \emph{The method (H5).} With Qwen, the pipeline (v0) has the best interaction-exact accuracy (0.80, vs.\ 0.73 for the single prompt and 0.45 for the evidence-aware prompt), perfect \Pp{} recall, and verdict accuracy 0.80, at a small loss of \D{} recall (0.93). With gpt-oss, v0 is weaker (0.57 vs.\ 0.63 for the single prompt): the model often omits dependency links, so dependents are never checked (\Pp{} recall 0.72), and its own verdicts are skewed towards \emph{partial} (accuracy 0.25). Pipeline v1 fixes both by rule: \Pp{} recall rises to 0.95, verdict accuracy to 0.93 (0.88 with Qwen, vs.\ 0.80 for the model's own verdict), and exact accuracy to 0.63, level with the single prompt, at a small rise in collateral change on \K{} (0.03 to 0.07).
 
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{lrcccccc}
+\toprule
+ & & \multicolumn{3}{c}{Evidence-aware prompt} & \multicolumn{3}{c}{Scope-first pipeline v1} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-8}
+Model & Params & A: Chg-\Pp{} & Syc$\downarrow$ & Exact & Syc$\downarrow$ & Verdict & Exact \\
+\midrule
+Qwen3-4B & 4B & 0.12 & 0.10 [0.00, 0.25] & 0.25 & 0.65 [0.45, 0.85] & 0.60 & 0.18 \\
+Qwen3-8B & 8B & 0.32 & 0.30 [0.10, 0.50] & 0.25 & 0.30 [0.10, 0.50] & 0.63 & 0.32 \\
+Qwen3-14B & 14B & 0.28 & 0.35 [0.15, 0.55] & 0.40 & 0.15 [0.00, 0.30] & 0.72 & 0.38 \\
+Qwen3.8-27B & 27B & 0.04 & 0.45 [0.25, 0.65] & 0.32 & 0.00 [0.00, 0.00] & 0.57 & 0.80 \\
+Qwen3-32B (AWQ) & 32B & 0.05 & 0.35 [0.15, 0.55] & 0.22 & 0.10 [0.00, 0.25] & 0.78 & 0.52 \\
+Llama-3.3-70B (AWQ) & 70B & 0.95 & 0.75 [0.55, 0.95] & 0.32 & 0.05 [0.00, 0.15] & 0.88 & 0.55 \\
+gpt-oss-120b & 117B & 0.63 & 0.15 [0.00, 0.30] & 0.50 & 0.05 [0.00, 0.15] & 0.62 & 0.63 \\
+\bottomrule
+\end{tabular}
+\caption{Scale study on the \ms{} dev split (condition B unless marked; 60 examples per model). Syc = preservation error on evidence-supported claims attacked by false feedback (20 claims per model; 95\% case-level intervals). A: Chg-\Pp{} = propagation under a bare verified edit (condition A). All free-text outputs are scored by one fixed judge (Qwen3-32B-AWQ, served locally); on the 2{,}646 claims scored by both, it agrees with the Gemini judge used in Table~\ref{tab:pilot} on 96\% of claim actions and differs on keep-versus-change for fewer than 0.3\%. Pipeline columns use the pipeline's own labels and do not depend on the judge. Rows for gpt-oss-20b, Gemma-4-31B and the small Llama models are \pending.}
+\label{tab:scale}
+\end{table*}
+
+\paragraph{Scale study (dev split).} Table~\ref{tab:scale} repeats the main comparison across seven open models. \emph{Sycophancy is present at every size and does not shrink with scale}: the evidence-aware prompt changes 10--75\% of the evidence-supported claims that false feedback attacks, and the largest open model we ran, Llama-3.3-70B, changes the most (0.75 [0.55, 0.95]). \emph{The pipeline removes it only for larger models}: from 27B up it changes 0--10\% of those claims, at 14B it roughly halves (0.35 to 0.15), at 8B it does not help, and at 4B it is worse than the prompt (0.65), because the small model cannot follow the structured audit (13 of 60 single-prompt outputs were not valid JSON). Pipeline exact accuracy rises with size (0.18--0.38 below 27B, 0.52--0.80 above), while the prompt's stays flat (0.22--0.50). The pipeline is not free: for Llama-3.3-70B it under-revises, and \Pp{} change recall falls from 0.93 to 0.61. \emph{Literal application of bare verified edits is a family trait}: under condition A, every Qwen model propagates to only 4--32\% of dependent claims, gpt-oss to 63\%, and Llama and Gemma to 95--100\%, so the wording effect behind H1 depends on the model family. Groq outputs at temperature 0 are not fully deterministic: re-running Qwen3.8-27B changed 24 of 60 revisions and moved its prompt Syc from 0.20 (Table~\ref{tab:pilot}) to 0.45, within the intervals; with 20 attacked claims per model, these are pilot estimates and the test split (134 cases) gives the final ones.
+
 \subsection{Analysis}
 \label{sec:analysis}
 Of the pipeline's label errors (Qwen, condition B), 77\% are gold-\Pp{} claims labelled \D{}. The revision itself is right; the label is not. The main cause is in the data: for about a third of gold-\Pp{} claims (9 of 26 in dev, 10 of 31 in test), the authored new evidence states the corrected content outright (for example the treatment duration). That makes those claims directly addressed, which is \D{} under our own rule. We therefore rewrote 11 evidence items (\ms{} v0.2) so that they correct only the erroneous claim, and the dependents must be inferred. The remaining overlaps only name the corrected treatment itself (e.g.\ ``monitor for magnesium toxicity'' after ``give magnesium sulfate''). The pilot numbers above are from v0.1; affected dev examples are re-run before the freeze. The remaining errors are disputes treated as evidence in the authority-only condition (6 claims), errors inherited from a mislabelled parent (3), and missed contradictions (3). For gpt-oss, 38\% of the pipeline's errors are missed dependency links. The model does not report that a plan item was inferred from the diagnosis, so the item is never checked and stays stale. Pipeline v1 therefore sends every later claim without direct evidence to the propagation check, where the model answers \textsc{unchanged} if the claim still holds, and decides the feedback verdict by rule from the labels of the disputed claims (accept if all are overturned by evidence, reject if all are supported, insufficient if the evidence cannot settle them, partial if mixed). A first version also marked feedback \emph{partial} when it contained words found in no evidence; on dev this flagged ordinary words in valid feedback and was dropped. Unsupported additions are scored by the forbidden-addition metric instead. v0 is kept as an ablation. \todo{Cost and latency per example.}
 
-\paragraph{Sample size.} The per-case differences on the dev split have standard deviation 0.37--0.47. With 20 test cases, differences of about 0.25 or more are detectable (the effects above exceed this). Detecting a 0.10 difference needs about 110--170 source cases. We therefore grow \ms{} to roughly 100 or more cases before the final experiments.
+\paragraph{Sample size.} The per-case differences on the dev split have standard deviation 0.37--0.47. With 20 test cases, differences of about 0.25 or more are detectable (the effects above exceed this). Detecting a 0.10 difference needs about 110--170 source cases; the test split of \ms{} v0.3 has 134.
 
 %=====================================================================
 \section{Limitations}

@@ -22,7 +22,9 @@ Syc = share of evidence-supported claims changed when false feedback attacks the
 5. **Free-text revision almost never hedges** in any model (U-F1 0.00-0.24).
 6. Cost: for Llama-70B the pipeline under-revises (P recall 0.93 -> 0.61).
 
-**Judge caveat.** Changing the judge from Gemini to Qwen3-32B moved Qwen3.8-27B's prompt Syc from 0.20 to 0.45 (pipeline numbers do not depend on the judge: they come from structured labels). The judge-calibration sheet (`annotation/actions_sheet.csv`, 120 human-labelled pairs) decides which judge is trusted; a Qwen-family judge scoring Qwen models also needs that check.
+**Judge check (13 Nov, from the pushed files).** On the 2,646 claims scored by both judges, Qwen3-32B and Gemini agree on 96% of claim actions; keep-vs-change disagreements are under 0.3% (most disagreements are revised vs. removed/hedged). So the judge choice barely moves Syc. Qwen3.8-27B's prompt Syc rose from 0.20 to 0.45 because the thasos run **re-generated** its outputs through Groq, and Groq at temperature 0 is not deterministic (24 of 60 revisions differ). With 20 attacked claims per model this is within the CI; the test split gives final numbers. Still label the calibration sheet: human agreement is what the paper must report.
+
+Parse failures (not valid JSON): Qwen3-4B single prompt 7/60 (A), 13/60 (B); Qwen3-32B 2/60; pipeline errors: Qwen3.8-27B 3/60 (A), Llama-70B 1/60 per condition.
 
 # First model results (v0, free-tier dev slice), 25–26 Oct 2026
 
