@@ -21,6 +21,10 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 : "${WHERE:?set WHERE=groq|gemini|thasos|credits|rejudge}"
+# On a machine with vLLM (thasos), default to the scale study's local judge so no run is scored by a different one.
+if [ -z "${JUDGE:-}" ] && [ -z "${JUDGE_LOCAL:-}" ] && command -v vllm >/dev/null; then
+  export JUDGE_LOCAL=Qwen/Qwen3-32B-AWQ; echo "judge: local $JUDGE_LOCAL (set JUDGE=... to override)"
+fi
 export JUDGE="${JUDGE:-gemini:gemini-3.5-flash-lite}" SPLIT="${SPLIT:-dev}" FREE="${FREE:-1}"
 PORT=8000
 LOG=""
