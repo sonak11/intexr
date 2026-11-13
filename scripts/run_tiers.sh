@@ -15,6 +15,7 @@
 # Optional: ONLY="Qwen3-8B gpt-oss-20b" (substring filter on spec), SPLIT (default dev), SYSTEMS, CONDITIONS,
 #           JUDGE (default gemini:gemini-3.5-flash-lite; on thasos you can set JUDGE_LOCAL=Qwen/Qwen3-32B-AWQ to serve a
 #           fixed local judge on port 8001, GPUs 6-7, so the Gemini judge quota is not the bottleneck).
+#           MAXLEN=16384 (vLLM context window; prompt + 4,000 output tokens must fit),
 #           GPUS="2,3" (on thasos: which GPUs to use; default = the ones with the most free memory).
 # Results land in results/medscope_<provider>_<model>/ and the scale table in results/RESULTS_medscope.md.
 set -euo pipefail
@@ -26,9 +27,15 @@ LOG=""
 serve() {  # serve <hf model> <tp> <port> <gpus>; sets SPID and LOG
   mkdir -p results; LOG="results/vllm_$(echo "$1" | tr '/' '_').log"
   echo "starting vLLM for $1 on GPU(s) $4 (log: $LOG)"
-  CUDA_VISIBLE_DEVICES="$4" nohup vllm serve "$1" --dtype half --tensor-parallel-size "$2" --port "$3" \
-    --max-model-len 8192 --gpu-memory-utilization 0.85 > "$LOG" 2>&1 &
+  # setsid: the server and its tensor-parallel workers share one process group, so stop() frees every GPU
+  CUDA_VISIBLE_DEVICES="$4" setsid nohup vllm serve "$1" --dtype half --tensor-parallel-size "$2" --port "$3" \
+    --max-model-len "${MAXLEN:-16384}" --gpu-memory-utilization 0.85 > "$LOG" 2>&1 &
   SPID=$!
+}
+stop() {  # stop <pid>: kill the server's whole process group, then wait until its GPU memory is released
+  kill -- -"$1" 2>/dev/null || kill "$1" 2>/dev/null || true
+  for _ in $(seq 1 30); do kill -0 "$1" 2>/dev/null || break; sleep 2; done
+  kill -9 -- -"$1" 2>/dev/null || true; sleep 5
 }
 wait_up() {  # wait_up <port> <pid>: stop at once if the server dies; print progress while it loads
   for i in $(seq 1 180); do
@@ -58,7 +65,7 @@ if [ -n "${JUDGE_LOCAL:-}" ]; then
   export JUDGE="vllm2:$JUDGE_LOCAL" VLLM2_BASE_URL="http://localhost:8001/v1"
   export INTEXR_EXTRA_BODY_VLLM2='{"chat_template_kwargs": {"enable_thinking": false}}'
 fi
-trap '[ -n "$JPID" ] && kill $JPID 2>/dev/null || true' EXIT
+trap '[ -n "$JPID" ] && stop "$JPID"' EXIT
 if [ "$WHERE" = rejudge ]; then
   : "${JUDGE_LOCAL:?set JUDGE_LOCAL (the judge every other run used)}"
   python3 scripts/rejudge.py --data paperB/data/medec_scope_v0.json --judge "$JUDGE" results/medscope_*
@@ -78,11 +85,11 @@ grep -v '^#' configs/model_tiers.tsv | tail -n +2 | while IFS=$'\t' read -r spec
     groq) export INTEXR_RPM="${INTEXR_RPM:-4}" ;;
     thasos) export INTEXR_RPM=0
             serve "$model" "$tp" $PORT "$(pick_gpus "$tp")"; pid=$SPID
-            if ! wait_up $PORT "$pid"; then kill "$pid" 2>/dev/null || true; echo "!! skipping $spec"; continue; fi
+            if ! wait_up $PORT "$pid"; then stop "$pid"; echo "!! skipping $spec"; continue; fi
             export VLLM_BASE_URL="http://localhost:$PORT/v1" ;;
   esac
   MODEL="$spec" bash scripts/run_v0.sh < /dev/null || echo "!! $spec stopped (daily cap or error); re-run later to resume"
-  if [ "$where" = thasos ]; then kill "$pid" 2>/dev/null || true; sleep 15; fi
+  if [ "$where" = thasos ]; then stop "$pid"; fi
 done
 python3 scripts/summarize_results.py --data paperB/data/medec_scope_v0.json --runs results/medscope_* \
   --tiers configs/model_tiers.tsv --out results/RESULTS_medscope.md --tex paper1/tables >/dev/null
