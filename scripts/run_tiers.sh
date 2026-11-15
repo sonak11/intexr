@@ -41,9 +41,16 @@ stop() {  # stop <pid>: kill the server's whole process group, then wait until i
   for _ in $(seq 1 30); do kill -0 "$1" 2>/dev/null || break; sleep 2; done
   kill -9 -- -"$1" 2>/dev/null || true; sleep 5
 }
-wait_up() {  # wait_up <port> <pid>: stop at once if the server dies; print progress while it loads
+free_port() {  # free_port <port>: stop any of our servers still holding the port (a previous model that did not exit)
+  local p; p=$(pgrep -u "$(id -u)" -f "vllm serve .*--port $1( |$)" || true)
+  if [ -n "$p" ]; then echo "  port $1 still in use by an old vLLM server; stopping it"
+    for q in $p; do kill -- -"$(ps -o pgid= -p "$q" | tr -d ' ')" 2>/dev/null || kill "$q" 2>/dev/null || true; done
+    sleep 15; pkill -9 -u "$(id -u)" -f "vllm serve .*--port $1( |$)" 2>/dev/null || true; sleep 5
+  fi
+}
+wait_up() {  # wait_up <port> <pid> <model>: up only when THIS model is served; stop at once if the server dies
   for i in $(seq 1 180); do
-    curl -sf "http://localhost:$1/v1/models" >/dev/null && { echo "vLLM is up on port $1"; return 0; }
+    curl -sf "http://localhost:$1/v1/models" 2>/dev/null | grep -qF "\"$3\"" && { echo "vLLM is up on port $1 ($3)"; return 0; }
     if ! kill -0 "$2" 2>/dev/null; then
       echo "!! vLLM exited before it came up. Last lines of $LOG:" >&2; tail -25 "$LOG" >&2; return 1
     fi
@@ -65,7 +72,7 @@ then re-run this command (with the venv activated)."; exit 1; }
 fi
 JPID=""
 if [ -n "${JUDGE_LOCAL:-}" ]; then
-  serve "$JUDGE_LOCAL" 2 8001 "${JUDGE_GPUS:-6,7}"; JPID=$SPID; wait_up 8001 "$JPID" || exit 1
+  free_port 8001; serve "$JUDGE_LOCAL" 2 8001 "${JUDGE_GPUS:-6,7}"; JPID=$SPID; wait_up 8001 "$JPID" "$JUDGE_LOCAL" || exit 1
   export JUDGE="vllm2:$JUDGE_LOCAL" VLLM2_BASE_URL="http://localhost:8001/v1"
   export INTEXR_EXTRA_BODY_VLLM2='{"chat_template_kwargs": {"enable_thinking": false}}'
 fi
@@ -88,8 +95,8 @@ grep -v '^#' configs/model_tiers.tsv | tail -n +2 | while IFS=$'\t' read -r spec
   case $where in
     groq) export INTEXR_RPM="${INTEXR_RPM:-4}" ;;
     thasos) export INTEXR_RPM=0
-            serve "$model" "$tp" $PORT "$(pick_gpus "$tp")"; pid=$SPID
-            if ! wait_up $PORT "$pid"; then stop "$pid"; echo "!! skipping $spec"; continue; fi
+            free_port $PORT; serve "$model" "$tp" $PORT "$(pick_gpus "$tp")"; pid=$SPID
+            if ! wait_up $PORT "$pid" "$model"; then stop "$pid"; echo "!! skipping $spec"; continue; fi
             export VLLM_BASE_URL="http://localhost:$PORT/v1" ;;
   esac
   MODEL="$spec" bash scripts/run_v0.sh < /dev/null || echo "!! $spec stopped (daily cap or error); re-run later to resume"
