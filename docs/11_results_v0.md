@@ -1,3 +1,36 @@
+# All baselines, 3 models (17 Nov 2026)
+
+Dev slice, condition B; columns: Chg-D, Chg-P, Syc (PresErr-K+), PresErr-K, U-F1, Verdict, Exact; then condition A Syc/Exact and the paired B-A change in Syc [95% CI]. Local judge (Qwen3-32B-AWQ).
+
+```
+## vllm_Qwen_Qwen3-8B
+dialogue         0.98 0.91 0.60 0.32 0.10 -- 0.25 | A syc 0.40 exact 0.27 | B-A syc +0.20 [+0.00,+0.45]
+always_rewrite   0.98 0.95 0.50 0.33 0.10 -- 0.30 | A syc 0.20 exact 0.22 | B-A syc +0.30 [+0.05,+0.55]
+evidence_prompt  0.68 0.46 0.30 0.04 0.05 -- 0.25 | A syc 0.05 exact 0.15 | B-A syc +0.25 [+0.05,+0.45]
+evidence_gate    0.55 0.19 0.05 0.04 0.47 0.48 0.12 | A syc 0.30 exact 0.02 | B-A syc -0.25 [-0.45,-0.05]
+verify_revise    0.93 0.77 0.70 0.17 0.00 -- 0.37 | A syc 0.00 exact 0.57 | B-A syc +0.70 [+0.50,+0.90]
+scope_first      0.84 0.58 0.80 0.16 0.18 0.10 0.22 | A syc 0.00 exact 0.25 | B-A syc +0.80 [+0.60,+0.95]
+scope_pipeline   0.80 0.56 0.30 0.10 0.68 0.63 0.32 | A syc 0.00 exact 0.37 | B-A syc +0.30 [+0.10,+0.50]
+## vllm_Qwen_Qwen3-32B-AWQ
+dialogue         1.00 0.89 0.50 0.24 0.00 -- 0.33 | A syc 0.25 exact 0.28 | B-A syc +0.25 [-0.05,+0.55]
+always_rewrite   0.95 0.89 0.60 0.38 0.05 -- 0.20 | A syc 0.25 exact 0.27 | B-A syc +0.35 [+0.10,+0.60]
+evidence_prompt  0.70 0.35 0.35 0.05 0.05 -- 0.22 | A syc 0.00 exact 0.05 | B-A syc +0.35 [+0.15,+0.55]
+evidence_gate    0.66 0.25 0.00 0.03 0.46 0.50 0.17 | A syc 0.00 exact 0.03 | B-A syc +0.00 [+0.00,+0.00]
+verify_revise    0.98 0.91 0.55 0.13 0.00 -- 0.40 | A syc 0.05 exact 0.60 | B-A syc +0.50 [+0.30,+0.70]
+scope_first      0.86 0.82 0.65 0.09 0.26 0.33 0.43 | A syc 0.10 exact 0.32 | B-A syc +0.55 [+0.35,+0.75]
+scope_pipeline   0.89 0.74 0.10 0.03 0.62 0.78 0.52 | A syc 0.00 exact 0.43 | B-A syc +0.10 [+0.00,+0.25]
+## vllm_casperhansen_llama-3.3-70b-instruct-awq
+dialogue         1.00 1.00 0.50 0.37 0.10 -- 0.22 | A syc 0.40 exact 0.25 | B-A syc +0.10 [-0.20,+0.40]
+always_rewrite   0.98 0.84 0.60 0.31 0.05 -- 0.23 | A syc 0.20 exact 0.32 | B-A syc +0.40 [+0.15,+0.65]
+evidence_prompt  0.95 0.93 0.75 0.17 0.24 -- 0.32 | A syc 0.25 exact 0.50 | B-A syc +0.50 [+0.30,+0.75]
+evidence_gate    0.75 0.32 0.00 0.03 0.48 0.52 0.18 | A syc 0.00 exact 0.13 | B-A syc +0.00 [+0.00,+0.00]
+verify_revise    0.95 0.88 0.65 0.28 0.20 -- 0.25 | A syc 0.10 exact 0.45 | B-A syc +0.55 [+0.30,+0.80]
+scope_first      0.82 0.75 0.55 0.08 0.45 0.00 0.43 | A syc 0.05 exact 0.42 | B-A syc +0.50 [+0.30,+0.70]
+scope_pipeline   0.75 0.61 0.05 0.05 0.85 0.88 0.55 | A syc 0.00 exact 0.55 | B-A syc +0.05 [+0.00,+0.15]
+```
+
+**Headline:** verify-then-revise, the strongest correction baseline, is near-perfect on a verified edit (Syc 0.00-0.10, exact 0.45-0.60) but changes 55-70% of evidence-supported claims under unverified feedback (paired +0.50 to +0.70). The scope-first pipeline keeps Syc at 0.05-0.10 for 32B and 70B with the best exact (0.52-0.55); at 8B it does not beat the baselines (Syc 0.30).
+
 # Scale study, first pass (12-13 Nov 2026)
 
 Dev slice (20 cases x valid/false/authority = 60 examples), condition B unless marked. **One fixed judge for every model: Qwen3-32B-AWQ served locally** (the Gemini free tier allows 500 judge calls/day). The two October runs were re-scored with it. Pending: gpt-oss-20b (Groq daily cap), Gemma-4-31B (Gemini daily cap), Llama 3B/8B (need an HF token).

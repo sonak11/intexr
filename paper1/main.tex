@@ -42,7 +42,7 @@ We introduce \textbf{IntExR-Scope}, a claim-level revision task in which feedbac
 Given an original response, prior evidence, feedback of unknown validity, and new evidence, a system must label every claim as a direct update, a propagated update, unresolved (to be hedged, not deleted), or keep, judge the feedback, and write a minimal revision.
 We release a validated benchmark built from clinical notes with expert-injected errors (\ms{}: 154 source cases, 941 examples, 4{,}525 claims across eight feedback conditions, with dependency chains up to depth two) together with converted non-medical sets, an evaluation harness with case-level uncertainty, and a \emph{scope-first} method that delegates evidence alignment and wording to an LLM but assigns labels and preserves untouched claims deterministically.
 Our central experiment compares the same claims under a verified edit and under unverified feedback plus evidence, isolating the cost of verification on scope and propagation.
-In a pilot across seven open models from 4B to 120B parameters, every model changes evidence-supported claims under false feedback (10--75\%), with no decrease with scale; the scope-first pipeline removes this sycophancy for models of about 27B and larger (to 0--10\%) but not for small models, and whether a model propagates a bare verified edit depends on its family rather than its size.
+In a pilot across seven open models from 4B to 120B parameters, the strongest existing correction method (verify-then-revise) is near-perfect on a verified edit but changes 55--70\% of evidence-supported claims when the same correction arrives as unverified feedback; every model changes evidence-supported claims under false feedback (10--75\%), with no decrease with scale; the scope-first pipeline removes this sycophancy for models of about 27B and larger (to 0--10\%) but not for small models, and whether a model propagates a bare verified edit depends on its family rather than its size.
 \end{abstract}
 
 %=====================================================================
@@ -67,7 +67,7 @@ The principle we build on is simple: \textbf{feedback is a hypothesis; evidence 
   \item \textbf{Task.} IntExR-Scope (\S\ref{sec:task}): a claim-level revision task with four labels (\D{}irect, \Pp{}ropagated, \U{}nresolved, \K{}eep), a precedence rule that makes the labels decidable, an unresolved label that itself propagates, and four input conditions that separate the cost of verifying feedback from the cost of propagating it.
   \item \textbf{Benchmark.} \ms{} (\S\ref{sec:data}), built on real clinical vignettes with expert-injected errors \citep{benabacha2025medec}: each source case yields up to eight feedback conditions (valid, false, partial, authority-only, vague, outdated, superseding, conflicting evidence) over identical claims, so that feedback validity is varied while the response is held fixed. We also convert three public datasets into the same format.
   \item \textbf{Method.} A scope-first pipeline (\S\ref{sec:method}) in which an LLM aligns claims to evidence and words the revisions, while label assignment, preservation of kept claims, and a feedback-leak check are deterministic. With perfect alignment it reproduces every gold label in \ms{}, which makes the label rules executable.
-  \item \textbf{Evaluation.} An open, dependency-free harness with change recall split by direct and propagated claims and by dependency depth, preservation error on evidence-supported claims, unresolved-claim F1, and case-level bootstrap intervals; and a study of \todo{N} systems across \todo{M} open and API models under all four conditions (\S\ref{sec:results}).
+  \item \textbf{Evaluation.} An open, dependency-free harness with change recall split by direct and propagated claims and by dependency depth, preservation error on evidence-supported claims, unresolved-claim F1, and case-level bootstrap intervals; and a study of 7 revision systems and 3 trivial baselines across up to 9 open models under all four conditions (\S\ref{sec:results}).
 \end{enumerate}
 
 %=====================================================================
@@ -225,18 +225,9 @@ System (condition B) & Chg-\D{}$\uparrow$ & Chg-\Pp{}$\uparrow$ & PresErr-\K{}$\
 Oracle & 1.00 & 1.00 & 0.00 & 0.00 & 1.00 & 1.00 & 1.00 & 1.00 \\
 No revision & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.32 & 1.00 & 0.00 \\
 Always accept (lexical) & 0.40 & 0.17 & 0.23 & 0.72 & 0.00 & 0.22 & --- & 0.05 \\
-\midrule
-Dialogue & \pending & \pending & \pending & \pending & \pending & --- & \pending & \pending \\
-Always rewrite & \pending & \pending & \pending & \pending & \pending & --- & \pending & \pending \\
-Evidence-aware prompt & \pending & \pending & \pending & \pending & \pending & --- & \pending & \pending \\
-Evidence gate (NLI) & \pending & 0.00$^{*}$ & \pending & \pending & \pending & \pending & 1.00$^{*}$ & \pending \\
-Scope-first (1 prompt) & \pending & \pending & \pending & \pending & \pending & \pending & \pending & \pending \\
-Scope-first pipeline & \pending & \pending & \pending & \pending & \pending & \pending & \pending & \pending \\
-\quad no-prop & \pending & \pending & \pending & \pending & \pending & \pending & \pending & \pending \\
-\quad no-check & \pending & \pending & \pending & \pending & \pending & \pending & \pending & \pending \\
 \bottomrule
 \end{tabular}}
-\caption{Offline baselines on \ms{} v0.1 (all 248 examples of the first 40 cases; final numbers will be recomputed on the frozen v1). 95\% case-level bootstrap intervals are in the appendix. $^{*}$By construction: the gate never propagates and never writes new content. ``---'': not applicable (free-text systems give no verdict; the lexical baseline writes no text). Model rows will be filled from \texttt{tables/main\_medec\_scope\_v0.tex}.}
+\caption{Offline baselines on \ms{} v0.1 (all 248 examples of the first 40 cases; final numbers will be recomputed on the frozen v1). 95\% case-level bootstrap intervals are in the appendix. ``---'': not applicable (the lexical baseline writes no text). Model-based systems are in Table~\ref{tab:systems}.}
 \label{tab:main}
 \end{table*}
 
@@ -298,6 +289,44 @@ gpt-oss-120b & 117B & 0.63 & 0.15 [0.00, 0.30] & 0.50 & 0.05 [0.00, 0.15] & 0.62
 \end{table*}
 
 \paragraph{Scale study (dev split).} Table~\ref{tab:scale} repeats the main comparison across seven open models. \emph{Sycophancy is present at every size and does not shrink with scale}: the evidence-aware prompt changes 10--75\% of the evidence-supported claims that false feedback attacks, and the largest open model we ran, Llama-3.3-70B, changes the most (0.75 [0.55, 0.95]). \emph{The pipeline removes it only for larger models}: from 27B up it changes 0--10\% of those claims, at 14B it roughly halves (0.35 to 0.15), at 8B it does not help, and at 4B it is worse than the prompt (0.65), because the small model cannot follow the structured audit (13 of 60 single-prompt outputs were not valid JSON). Pipeline exact accuracy rises with size (0.18--0.38 below 27B, 0.52--0.80 above), while the prompt's stays flat (0.22--0.50). The pipeline is not free: for Llama-3.3-70B it under-revises, and \Pp{} change recall falls from 0.93 to 0.61. \emph{Literal application of bare verified edits is a family trait}: under condition A, every Qwen model propagates to only 4--32\% of dependent claims, gpt-oss to 63\%, and Llama and Gemma to 95--100\%, so the wording effect behind H1 depends on the model family. Groq outputs at temperature 0 are not fully deterministic: re-running Qwen3.8-27B changed 24 of 60 revisions and moved its prompt Syc from 0.20 (Table~\ref{tab:pilot}) to 0.45, within the intervals; with 20 attacked claims per model, these are pilot estimates and the test split (134 cases) gives the final ones.
+
+\begin{table*}[t]
+\centering\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llcccccccc}
+\toprule
+Model & System (condition B) & Chg-\D{}$\uparrow$ & Chg-\Pp{}$\uparrow$ & Syc$\downarrow$ & PresErr-\K{}$\downarrow$ & \U-F1$\uparrow$ & Verdict$\uparrow$ & Exact$\uparrow$ & Syc: B$-$A \\
+\midrule
+Qwen3-8B & Dialogue & 0.98 & 0.91 & 0.60 & 0.32 & 0.10 & --- & 0.25 & +0.20 [+0.00, +0.45] \\
+ & Always rewrite & 0.98 & 0.95 & 0.50 & 0.33 & 0.10 & --- & 0.30 & +0.30 [+0.05, +0.55] \\
+ & Evidence-aware prompt & 0.68 & 0.46 & 0.30 & 0.04 & 0.05 & --- & 0.25 & +0.25 [+0.05, +0.45] \\
+ & Evidence gate (NLI) & 0.55 & 0.19 & 0.05 & 0.04 & 0.47 & 0.48 & 0.12 & -0.25 [-0.45, -0.05] \\
+ & Verify-then-revise & 0.93 & 0.77 & 0.70 & 0.17 & 0.00 & --- & 0.37 & +0.70 [+0.50, +0.90] \\
+ & Scope-first (1 prompt) & 0.84 & 0.58 & 0.80 & 0.16 & 0.18 & 0.10 & 0.22 & +0.80 [+0.60, +0.95] \\
+ & \textbf{Scope-first pipeline v1} & 0.80 & 0.56 & 0.30 & 0.10 & 0.68 & 0.63 & 0.32 & +0.30 [+0.10, +0.50] \\
+\midrule
+Qwen3-32B & Dialogue & 1.00 & 0.89 & 0.50 & 0.24 & 0.00 & --- & 0.33 & +0.25 [-0.05, +0.55] \\
+ & Always rewrite & 0.95 & 0.89 & 0.60 & 0.38 & 0.05 & --- & 0.20 & +0.35 [+0.10, +0.60] \\
+ & Evidence-aware prompt & 0.70 & 0.35 & 0.35 & 0.05 & 0.05 & --- & 0.22 & +0.35 [+0.15, +0.55] \\
+ & Evidence gate (NLI) & 0.66 & 0.25 & 0.00 & 0.03 & 0.46 & 0.50 & 0.17 & +0.00 [+0.00, +0.00] \\
+ & Verify-then-revise & 0.98 & 0.91 & 0.55 & 0.13 & 0.00 & --- & 0.40 & +0.50 [+0.30, +0.70] \\
+ & Scope-first (1 prompt) & 0.86 & 0.82 & 0.65 & 0.09 & 0.26 & 0.33 & 0.43 & +0.55 [+0.35, +0.75] \\
+ & \textbf{Scope-first pipeline v1} & 0.89 & 0.74 & 0.10 & 0.03 & 0.62 & 0.78 & 0.52 & +0.10 [+0.00, +0.25] \\
+\midrule
+Llama-3.3-70B & Dialogue & 1.00 & 1.00 & 0.50 & 0.37 & 0.10 & --- & 0.22 & +0.10 [-0.20, +0.40] \\
+ & Always rewrite & 0.98 & 0.84 & 0.60 & 0.31 & 0.05 & --- & 0.23 & +0.40 [+0.15, +0.65] \\
+ & Evidence-aware prompt & 0.95 & 0.93 & 0.75 & 0.17 & 0.24 & --- & 0.32 & +0.50 [+0.30, +0.75] \\
+ & Evidence gate (NLI) & 0.75 & 0.32 & 0.00 & 0.03 & 0.48 & 0.52 & 0.18 & +0.00 [+0.00, +0.00] \\
+ & Verify-then-revise & 0.95 & 0.88 & 0.65 & 0.28 & 0.20 & --- & 0.25 & +0.55 [+0.30, +0.80] \\
+ & Scope-first (1 prompt) & 0.82 & 0.75 & 0.55 & 0.08 & 0.45 & 0.00 & 0.43 & +0.50 [+0.30, +0.70] \\
+ & \textbf{Scope-first pipeline v1} & 0.75 & 0.61 & 0.05 & 0.05 & 0.85 & 0.88 & 0.55 & +0.05 [+0.00, +0.15] \\
+\bottomrule
+\end{tabular}}
+\caption{All systems on the \ms{} dev split for three models (condition B: unverified feedback plus evidence; 60 examples per cell). Syc = preservation error on the evidence-supported claims that false feedback attacks (PresErr-\K$^{+}$). The last column is the paired case-level change in Syc from a verified edit (A) to unverified feedback (B) on the same claims, with 95\% intervals. Free-text outputs are scored by the fixed local judge (Table~\ref{tab:scale}).}
+\label{tab:systems}
+\end{table*}
+
+\paragraph{All baselines (dev split).} Table~\ref{tab:systems} compares every system for three models. \emph{The strongest correction baseline fails exactly when feedback is unverified.} Verify-then-revise is the best system under a verified edit (exact 0.45--0.60, Syc 0.00--0.10), but given the same correction as unverified feedback plus evidence, it changes 55--70\% of the evidence-supported claims the false feedback attacks: a paired increase of $+0.50$ to $+0.70$ on the same claims. Dialogue and always-rewrite are equally deferential (Syc 0.50--0.60) and also change 24--38\% of all claims that should stay. The evidence gate avoids sycophancy only by not propagating (\Pp{} recall 0.19--0.32). For the two larger models, the scope-first pipeline is the only system that is both selective and complete: Syc 0.05--0.10 (a paired increase of at most $+0.10$), the best exact accuracy (0.52--0.55) and the best hedging (\U-F1 0.62--0.85). At 8B it does not reach this: its Syc (0.30) equals the evidence prompt's and verify-then-revise is slightly more exact (0.37 vs.\ 0.32), consistent with the scale study.
 
 \subsection{Analysis}
 \label{sec:analysis}
