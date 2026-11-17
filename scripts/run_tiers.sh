@@ -95,8 +95,17 @@ grep -v '^#' configs/model_tiers.tsv | tail -n +2 | while IFS=$'\t' read -r spec
   case $where in
     groq) export INTEXR_RPM="${INTEXR_RPM:-4}" ;;
     thasos) export INTEXR_RPM=0
-            free_port $PORT; serve "$model" "$tp" $PORT "$(pick_gpus "$tp")"; pid=$SPID
-            if ! wait_up $PORT "$pid" "$model"; then stop "$pid"; echo "!! skipping $spec"; continue; fi
+            gpus=$(pick_gpus "$tp"); free_port $PORT; serve "$model" "$tp" $PORT "$gpus"; pid=$SPID
+            if ! wait_up $PORT "$pid" "$model"; then
+              stop "$pid"
+              # context window too big for this GPU's memory: retry with the largest window vLLM says fits
+              fit=$(grep -o "can be stored in KV cache ([0-9]*)" "$LOG" | grep -o "[0-9]*" | tail -1)
+              if [ -n "$fit" ] && [ "$fit" -ge 8192 ]; then
+                fit=$(( fit / 1024 * 1024 )); echo "  retrying with a ${fit}-token context window"
+                free_port $PORT; MAXLEN=$fit serve "$model" "$tp" $PORT "$gpus"; pid=$SPID
+                wait_up $PORT "$pid" "$model" || { stop "$pid"; echo "!! skipping $spec"; continue; }
+              else echo "!! skipping $spec"; continue; fi
+            fi
             export VLLM_BASE_URL="http://localhost:$PORT/v1" ;;
   esac
   MODEL="$spec" bash scripts/run_v0.sh < /dev/null || echo "!! $spec stopped (daily cap or error); re-run later to resume"
