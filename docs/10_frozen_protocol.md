@@ -12,7 +12,7 @@ Everything here is decided *before* test-set results are seen. Items marked **TB
   - 24 stratified MedScope examples (`annotation/medscope_annotate.html`), labelled by the first author and an independent annotator;
   - report Cohen's κ on D/P/K/U, dependency-set agreement, and verdict κ.
   - **Target κ ≥ 0.70.** If it falls below, revise the guide and re-label a fresh sample.
-  - **TBD:** κ values, guide changes.
+  - **Result (18 Nov):** second annotator (Difei Gu, PhD mentor) vs. the gold labels on all 24 items: label agreement 0.91, **Cohen's κ = 0.87** (113 claims; target ≥ 0.70 met); feedback-verdict κ = 0.94 (n = 24); exact dependency-set agreement 0.60. 9 of the 10 label disagreements are gold-P claims labelled D (a plan item that changes because its diagnosis changed, read as directly addressed), the same D/P boundary the dev error audit found; 1 is a superseding-case K labelled D. Guide change for v1: one sentence and an example on why a plan item that follows from a corrected diagnosis is P even when the evidence names the new diagnosis. Files: `annotation/returned/annotator_DG.*`.
 - Clinical review:
   - a clinically trained reviewer checks every authored item (new evidence, false_support, target texts, forbidden additions);
   - cases judged wrong are **fixed or dropped before the freeze**; no test result may be looked at when deciding.

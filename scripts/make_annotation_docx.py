@@ -96,22 +96,33 @@ def make(args):
 
 
 def to_csv(args):
+    """Works whether Word kept the claims table and the verdict/notes table separate or merged them into one."""
     d = Document(args.docx)
     rows = [["example_id", "domain", "claim_id", "claim_text", "label", "depends_on", "feedback_verdict", "notes"]]
-    tables = d.tables
-    for t, t2 in zip(tables[0::2], tables[1::2]):
-        iid = t.cell(0, 0).text.strip()
-        verdict = t2.cell(0, 1).text.strip().lower()
-        notes = t2.cell(1, 1).text.strip()
-        for j, row in enumerate(t.rows[1:]):
-            cid, text, lab, deps = (c.text.strip() for c in row.cells)
+    items, cur = [], None
+    for t in d.tables:
+        for row in t.rows:
+            cells = [c.text.strip() for c in row.cells]
+            if re.fullmatch(r"item-\d+", cells[0]):
+                cur = {"id": cells[0], "claims": [], "verdict": "", "notes": ""}
+                items.append(cur)
+            elif cur is None:
+                continue
+            elif re.fullmatch(r"c\d+", cells[0].lower()):
+                cur["claims"].append(cells[:4])
+            elif cells[0].lower().startswith("feedback verdict"):
+                cur["verdict"] = cells[-1].lower()
+            elif cells[0].lower().startswith("notes"):
+                cur["notes"] = cells[-1] if cells[-1] != cells[0] else ""
+    for it in items:
+        for j, (cid, text, lab, deps) in enumerate(it["claims"]):
             deps = ";".join(sorted(re.findall(r"c\d+", deps.lower())))
-            rows.append([iid, "clinical", cid, text, lab.upper()[:1], deps, verdict if j == 0 else "-", notes if j == 0 else ""])
+            rows.append([it["id"], "clinical", cid.lower(), text, lab.upper()[:1], deps,
+                         it["verdict"] if j == 0 else "-", it["notes"] if j == 0 else ""])
     out = os.path.splitext(args.docx)[0] + ".csv"
     with open(out, "w", newline="") as f:
         csv.writer(f).writerows(rows)
-    print(f"wrote {out}: {len(rows) - 1} claims")
-
+    print(f"wrote {out}: {len(rows) - 1} claims from {len(items)} items")
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
