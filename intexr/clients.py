@@ -45,7 +45,12 @@ class QuotaExhausted(RuntimeError):
 
 def _post(url, headers, body, retries=6):
     data = json.dumps(body).encode()
-    for attempt in range(retries):
+    # Overload errors (500/502/503/529, e.g. Gemini "high demand") are retried for up to
+    # INTEXR_RETRY_MINUTES (default 30) before giving up; every call is cached, so a re-run resumes.
+    patience = float(os.environ.get("INTEXR_RETRY_MINUTES", "30")) * 60
+    waited, busy = 0.0, 0
+    attempt = 0
+    while attempt < retries:
         req = urllib.request.Request(url, data=data, headers=headers, method="POST")
         try:
             with urllib.request.urlopen(req, timeout=300) as r:
@@ -62,14 +67,21 @@ def _post(url, headers, body, retries=6):
                 print(f"  [rate limit] {url.split('/')[2]}: waiting {wait:.0f}s, then retrying "
                       f"({attempt + 1}/{retries - 1}). {text[:160]}", file=sys.stderr, flush=True)
                 time.sleep(wait)
+                attempt += 1
                 continue
-            if e.code in (500, 502, 503, 529) and attempt < retries - 1:
-                time.sleep(2 ** attempt * 5)
+            if e.code in (500, 502, 503, 529) and waited < patience:
+                wait = min(120.0, 5.0 * 2 ** busy, patience - waited)
+                busy += 1
+                waited += wait
+                print(f"  [busy] {url.split('/')[2]} HTTP {e.code}: waiting {wait:.0f}s, then retrying "
+                      f"({waited / 60:.1f} of {patience / 60:.0f} min used)", file=sys.stderr, flush=True)
+                time.sleep(wait)
                 continue
             raise RuntimeError(f"{url} -> HTTP {e.code}: {msg!r}")
         except urllib.error.URLError as e:
             if attempt < retries - 1:
                 time.sleep(5)
+                attempt += 1
                 continue
             raise RuntimeError(f"{url}: cannot connect ({e.reason}). Is the server running?")
 
