@@ -35,6 +35,23 @@ Effect on the data: 23 examples of these 5 cases changed (15 of the 60 dev-slice
 (case 1, superseding: c4). The dataset validator and the pipeline unit tests pass. Dev runs must be repeated for the
 changed examples before the freeze (everything else comes from the cache); the test split is untouched.
 
+### Rules applied to all 154 cases (authors, 23 Nov)
+
+The reviewer's comments were turned into six authoring rules (`docs/04_annotation_guide.md`, "Clinical authoring
+rules"). What applying them to every case found:
+
+| Rule | How it was checked | Result |
+|---|---|---|
+| 3 Later events update everything they affect | all 9 superseding cases read in full | 1 case changed (ms-val-514, from the review); the other 8 events affect only the item already changed |
+| 4 Clinical order | automated scan for bedside checks listed after treatment, plus the reviewed case | 1 case changed (ms-val-520, from the review); no other ordering problems found |
+| 6 Professional feedback | scan of all valid / false / partial / later-event feedback for dismissive phrasing | 1 instance (ms-val-30, fixed from the review); question-style feedback ("Are you sure this is a PE?") is kept on purpose |
+| 2 Specific follow-up | scan of all original and target plan items for monitoring without timing (27 items) | most are the deliberately wrong original text or already timed; 2 corrected texts lack an interval (ms-test-169 c4, ms-test-45 c4); flagged for a clinician, no interval invented |
+| 1 Decisive evidence | cannot be checked automatically: whether a finding settles a diagnosis is clinical judgment | not applied by the authors; needs a clinician (case 2 is the reviewed example) |
+| 5 Precise findings | requires reading each case clinically | not applied by the authors beyond the 5 reviewed cases |
+
+So the rules that concern structure were applied to every case; the two that concern clinical content (1, 5)
+were not, and the paper says so.
+
 ### Still to review
 The remaining 149 cases are outside OB/GYN. They need reviewers for internal medicine, infectious disease, neurology,
 pediatrics, emergency medicine and others (`annotation/review_packet_all.pdf`, `annotation/review_packet_v03_new.pdf`).

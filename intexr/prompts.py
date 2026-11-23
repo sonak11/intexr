@@ -1,5 +1,7 @@
 """Prompt templates for the pilot systems and the claim-alignment judge."""
+import ast
 import json
+import re
 
 
 def _evidence_block(items):
@@ -140,9 +142,36 @@ def judge_messages(ex, revised_response):
 
 
 def parse_json(text):
-    """Extract the first JSON object from model text."""
+    """Extract the first JSON object from model text.
+
+    Strict parse first (outermost braces), so every output that parsed before parses identically. Only if that
+    fails: take the first complete object and ignore what follows it ("Extra data"), then repair common
+    near-JSON (trailing commas, single quotes, Python True/False/None). Added 23 Nov 2026 after the dev error
+    analysis: Gemma often appends a second object or text after the JSON, and the stage was then skipped."""
     s = text.strip()
     if s.startswith("```"):
         s = s.split("\n", 1)[1].rsplit("```", 1)[0]
     i, j = s.find("{"), s.rfind("}")
-    return json.loads(s[i:j + 1])
+    try:
+        return json.loads(s[i:j + 1])
+    except ValueError as first_error:
+        if i < 0:
+            raise
+        try:
+            obj, _ = json.JSONDecoder().raw_decode(s[i:])
+            return obj
+        except ValueError:
+            pass
+        body = re.sub(r",\s*([}\]])", r"\1", s[i:j + 1])
+        try:
+            return json.loads(body)
+        except ValueError:
+            pass
+        try:
+            obj = ast.literal_eval(re.sub(r"\btrue\b", "True", re.sub(r"\bfalse\b", "False",
+                                                                         re.sub(r"\bnull\b", "None", body))))
+            if isinstance(obj, dict):
+                return obj
+        except (ValueError, SyntaxError):
+            pass
+        raise first_error

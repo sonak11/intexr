@@ -1,5 +1,14 @@
 # IntExR — Session Handoff (written 22 Oct 2026; updated 23 Oct 2026)
 
+
+## UPDATE 23 Nov (end of semester). Read this first.
+- **Results:** 9 open models on dev, all systems on 3 models, scale table and paper updated. Dashboard and Word tables: `scripts/export_results.py`. Semester report: `docs/12_semester_report.md/.docx`.
+- **Clinical review:** Dr. Pradhan reviewed the 5 OB/GYN dev cases (`docs/13_clinical_review.md`); her fixes are applied, 2 questions are open with her. Her comments became 6 authoring rules (`docs/04`, end); the 4 structural ones were applied to all 154 cases (no further changes needed). No other reviewers are lined up, so the paper presents MedScope as clinically realistic text with expert-written errors, not a clinically validated resource.
+- **Robustness:** `scripts/robustness.py` -> `docs/14_robustness.md`: results hold without the reviewed or questioned cases.
+- **Parser:** `prompts.parse_json` now recovers near-JSON after a strict parse fails (Gemma). Outputs that parsed before are unchanged.
+- **Owner's next steps on thasos:** (1) re-run dev so the 15 changed examples and the parser fix are picked up (mostly cache): `WHERE=thasos`, then `WHERE=groq`, then `WHERE=gemini` with `bash scripts/run_tiers.sh`; for the 3 baseline models add `SYSTEMS="dialogue always_rewrite evidence_prompt evidence_gate verify_revise scope_first scope_pipeline" ONLY="Qwen3-8B Qwen3-32B-AWQ llama-3.3-70b"`. (2) non-medical replication: `bash scripts/run_external.sh` (fetches and converts ~100 items each of EditPropBench and VitaminC, runs 3 models; ~1 day). (3) label `annotation/actions_sheet.csv` (judge calibration).
+- **Then (Claude):** refresh tables (export_results.py, robustness.py, external_summary.py), fill the `\pending` replication paragraph and Gemma note in the paper, freeze the protocol, tag `protocol-v1`.
+
 ## UPDATE 11 Nov (thasos runs). Read this first.
 - thasos works with **vLLM 0.8.5.post1 + transformers 4.51.3** in `~/vllm-env` (driver 560 = CUDA 12.6 rules out newer vLLM; Turing needs `VLLM_USE_V1=0`). Model cache: `HF_HOME=/tmp/ss4910_hf` (local disk).
 - **Judge:** the Gemini free tier allows 500 judge calls/day (shared across machines), and each model needs ~360 on dev and ~2,400 on test. So the scale study uses one local judge, `JUDGE_LOCAL=Qwen/Qwen3-32B-AWQ` (GPUs 6-7), for every model. The Groq/Gemini models are run from thasos too so they share it. The two earlier runs are re-scored with `WHERE=rejudge` (`scripts/rejudge.py` keeps the Gemini labels under `prev_judge` and prints agreement, a robustness number). Calibrate this judge with `annotation/actions_sheet.csv`; after re-judging run `label_actions.py rehide`.

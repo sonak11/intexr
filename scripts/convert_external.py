@@ -267,6 +267,7 @@ if __name__ == "__main__":
     ap.add_argument("name", choices=list(CONVERTERS))
     ap.add_argument("--n", type=int, default=40)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--suffix", default="", help="output external/<name>_intexr<suffix>.json, e.g. _v1 (keeps the v0 sample)")
     a = ap.parse_args()
     exs = CONVERTERS[a.name](a.n, random.Random(a.seed))
     bad = {ex["id"]: data.validate(ex) for ex in exs}
@@ -274,9 +275,9 @@ if __name__ == "__main__":
     if bad:
         print("VALIDATION PROBLEMS:", json.dumps(bad, indent=1)[:2000])
     os.makedirs(OUT, exist_ok=True)
-    path = os.path.join(OUT, f"{a.name}_intexr.json")
+    path = os.path.join(OUT, f"{a.name}_intexr{a.suffix}.json")
     with open(path, "w") as f:
-        json.dump({"version": f"{a.name}_intexr_v0", "source_license": exs[0]["source"]["license"] if exs else None,
+        json.dump({"version": f"{a.name}_intexr{a.suffix or '_v0'}", "source_license": exs[0]["source"]["license"] if exs else None,
                    "examples": exs}, f, indent=2, ensure_ascii=False)
     print(f"wrote {len(exs)} -> {path}")
     print(json.dumps(data.summarize(exs)))

@@ -5,7 +5,8 @@
 #   MODEL=gemini:<id>  JUDGE=groq:<id>   bash scripts/run_v0.sh        # free tiers (public data only)
 #   MODEL=vllm:Qwen/Qwen3-8B JUDGE=vllm:Qwen/Qwen3-8B VLLM_BASE_URL=http://localhost:8001/v1 bash scripts/run_v0.sh
 #
-# Optional: SMOKE=1 (2 examples, condition B only), TAG=<name for the results dir>, STAGES="medscope pilot epb",
+# Optional: SMOKE=1 (2 examples, condition B only), TAG=<name for the results dir>, STAGES="medscope pilot epb vitc",
+#           EPB_DATA / VITC_DATA (non-medical sets; default the v0 samples), EXT_TAG (suffix for their results dirs),
 #           SYSTEMS="evidence_prompt scope_pipeline" (subset), LIMIT=<n> (first n MedScope core examples).
 # FREE=1    preset for free API tiers (Groq: ~200K tokens/day per model): the three systems the main claims need
 #           (evidence_prompt, scope_first, scope_pipeline), MedScope only, the 20 dev cases x valid/false/authority
@@ -43,12 +44,16 @@ for s in $STAGES; do
     pilot)    f=pilot/data/pilot_v1.json; [ -f $f ] || f=pilot/data/pilot_v0.json
               python3 scripts/run_pilot.py --data $f --systems $OFF $SYS --judge "$JUDGE" \
                 --conditions A B C D --out "results/pilot_$TAG" ;;
-    epb)      python3 scripts/run_pilot.py --data external/editpropbench_intexr.json \
-                --systems $OFF $SYS --judge "$JUDGE" --conditions A B --out "results/epb_$TAG" ;;
+    epb)      python3 scripts/run_pilot.py --data "${EPB_DATA:-external/editpropbench_intexr.json}" \
+                --systems $OFF $SYS --judge "$JUDGE" --conditions A B --out "results/epb${EXT_TAG:-}_$TAG" ;;
+    vitc)     python3 scripts/run_pilot.py --data "${VITC_DATA:-external/vitaminc_intexr.json}" \
+                --systems $OFF $SYS --judge "$JUDGE" --conditions A B --out "results/vitc${EXT_TAG:-}_$TAG" ;;
   esac
 done
 python3 scripts/summarize_results.py --data paperB/data/medec_scope_v0.json --runs results/medscope_* \
   --out results/RESULTS_medscope.md --tex paper1/tables >/dev/null
-python3 scripts/summarize_results.py --data external/editpropbench_intexr.json --runs results/epb_* \
-  --out results/RESULTS_epb.md --tex paper1/tables >/dev/null || true
+python3 scripts/summarize_results.py --data "${EPB_DATA:-external/editpropbench_intexr.json}" --runs results/epb${EXT_TAG:-}_* \
+  --out results/RESULTS_epb${EXT_TAG:-}.md --tex paper1/tables >/dev/null 2>&1 || true
+python3 scripts/summarize_results.py --data "${VITC_DATA:-external/vitaminc_intexr.json}" --runs results/vitc${EXT_TAG:-}_* \
+  --out results/RESULTS_vitc${EXT_TAG:-}.md --tex paper1/tables >/dev/null 2>&1 || true
 echo "Wrote results/RESULTS_medscope.md, results/RESULTS_epb.md and paper1/tables/main_*.tex"

@@ -48,3 +48,20 @@ Once per example, fill in `feedback_verdict`. Write anything you found hard in `
 
 ## Timing
 Aim for about 4 minutes per example. Record your total time; we need it to budget scaling.
+
+## Clinical authoring rules (v1, from clinical review round 1, 23 Nov 2026)
+
+Derived from Dr. Pradhan's review of 5 OB/GYN cases (`docs/13_clinical_review.md`) and applied by the authors to
+every case. They govern how authored text is written; they do not replace a clinician's check of the medicine.
+
+1. **Decisive evidence.** The new evidence must contain the objective result that settles the error (with timing
+   where it is a repeat test), not only a consultant's conclusion.
+2. **Specific follow-up.** Monitoring and follow-up items say what is repeated and when.
+3. **Later events update everything they affect.** A superseding event changes every plan item it makes wrong,
+   not only one (e.g. after delivery, IV antihypertensives give way to "treat elevated blood pressure as needed").
+4. **Clinical order.** Plan items follow the order of care: history, bedside examination, laboratory and imaging,
+   treatment, monitoring (e.g. visual fields are checked before labs and MRI).
+5. **Precise findings.** Findings are stated as charted and not overstated ("mildly elevated bile acids";
+   "upper abdominal pain", not a term the patient would not use).
+6. **Professional feedback.** Feedback may be indirect or phrased as a question, as clinicians often do, but is
+   never dismissive ("the clinical presentation and evidence do not support HELLP", not "I don't buy HELLP").
