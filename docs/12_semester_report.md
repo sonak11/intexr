@@ -114,7 +114,16 @@ Four separate causes:
 6. **Test run:** 402 examples per condition (134 cases × valid / false / authority-only), conditions A, B and E.
     - Primary models run on thasos: Qwen3-4B, 8B, 14B, 32B and Llama-70B.
     - The API models (gpt-oss-20b/120b, Qwen3.8-27B, Gemma) are secondary, because the free tiers allow only about one model every 3–4 weeks.
-7. **Cost table:** measured tokens and seconds per example come from `scripts/cost_per_example.py`, run on thasos.
+7. **Cost (measured, condition B, models on thasos).**
+
+    | System | Model calls | Tokens per example | Seconds per example |
+    |---|---|---|---|
+    | Evidence-aware prompt | 1 | about 600 | 3–7 |
+    | Single-prompt scope-first | 1 | about 1,300 | 14–18 |
+    | Verify-then-revise | 2 | about 1,800 | 19–23 |
+    | Scope-first pipeline | 2.0–2.1 | about 1,900 | 13–19 |
+
+    The pipeline costs about three times the plain prompt and about the same as verify-then-revise, and is faster than verify-then-revise on the same GPU because it rewrites only the claims that change. Scoring a free-text output adds one judge call of about 450 tokens.
 
 # 6. Questions for Prof. Metaxas
 
