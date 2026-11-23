@@ -33,14 +33,16 @@ scope_pipeline   0.75 0.61 0.05 0.05 0.85 0.88 0.55 | A syc 0.00 exact 0.55 | B-
 
 # Scale study, first pass (12-13 Nov 2026)
 
-Dev slice (20 cases x valid/false/authority = 60 examples), condition B unless marked. **One fixed judge for every model: Qwen3-32B-AWQ served locally** (the Gemini free tier allows 500 judge calls/day). The two October runs were re-scored with it. Pending: gpt-oss-20b (Groq daily cap), Gemma-4-31B (Gemini daily cap), Llama 3B/8B (need an HF token).
+Dev slice (20 cases x valid/false/authority = 60 examples), condition B unless marked. **One fixed judge for every model: Qwen3-32B-AWQ served locally** (the Gemini free tier allows 500 judge calls/day). The two October runs were re-scored with it. gpt-oss-20b and Gemma-4-31B added 23 Nov. Pending: Llama 3B/8B (need an HF token).
 
 | model | params (B) | Prompt A-Chg-P | Prompt Chg-P | Prompt Syc | Prompt U-F1 | Prompt Exact | Pipe Chg-P | Pipe Syc | Pipe Verdict | Pipe Exact |
 |---|---|---|---|---|---|---|---|---|---|---|
 | Qwen3-4B | 4 | 0.12 | 0.40 | 0.10 | 0.00 | 0.25 | 0.39 | 0.65 | 0.60 | 0.18 |
 | Qwen3-8B | 8 | 0.32 | 0.46 | 0.30 | 0.05 | 0.25 | 0.56 | 0.30 | 0.63 | 0.32 |
 | Qwen3-14B | 14 | 0.28 | 0.68 | 0.35 | 0.14 | 0.40 | 0.51 | 0.15 | 0.72 | 0.38 |
+| gpt-oss-20b | 21 | 0.68 | 0.89 | 0.50 | 0.05 | 0.18 | 0.74 | 0.10 | 0.67 | 0.37 |
 | Qwen3.8-27B | 27 | 0.04 | 0.79 | 0.45 | 0.00 | 0.32 | 1.00 | 0.00 | 0.57 | 0.80 |
+| Gemma-4-31B | 31 | 1.00 | 1.00 | 0.15 | 0.05 | 0.68 | 0.88 | 0.00 | 0.83 | 0.65 |
 | Qwen3-32B-AWQ | 32 | 0.05 | 0.35 | 0.35 | 0.05 | 0.22 | 0.74 | 0.10 | 0.78 | 0.52 |
 | Llama-3.3-70B-AWQ | 70 | 0.95 | 0.93 | 0.75 | 0.24 | 0.32 | 0.61 | 0.05 | 0.88 | 0.55 |
 | gpt-oss-120b | 117 | 0.63 | 0.86 | 0.15 | 0.10 | 0.50 | 0.95 | 0.05 | 0.62 | 0.63 |
@@ -49,9 +51,9 @@ Syc = share of evidence-supported claims changed when false feedback attacks the
 
 **Findings (preliminary, dev):**
 1. **Claim-level sycophancy is present in every model under the evidence-aware prompt (0.10-0.75) and does not shrink with scale**; Llama-3.3-70B is the most sycophantic (0.75 [0.55, 0.95]).
-2. **The scope-first pipeline removes it only from about 14B up** (27B 0.45->0.00, 32B 0.35->0.10, 70B 0.75->0.05, 120B 0.15->0.05). Below that it does not help (8B 0.30->0.30) or hurts (4B 0.10->0.65): small models cannot follow the structured audit.
-3. **Pipeline exact accuracy rises with scale** (0.18, 0.32, 0.38 for 4-14B; 0.52-0.80 above), while the single prompt stays flat (0.22-0.50).
-4. **Literal application of bare verified edits is a family trait, not a scale effect:** A-Chg-P is 0.04-0.32 for every Qwen size, 0.63 for gpt-oss, 0.95-1.00 for Llama and Gemma.
+2. **The scope-first pipeline removes it from 27B up** (27B 0.45->0.00, Gemma-31B 0.15->0.00, 32B 0.35->0.10, 70B 0.75->0.05, 120B 0.15->0.05) and cuts it at 14-21B (14B 0.35->0.15, gpt-oss-20b 0.50->0.10). Below that it does not help (8B 0.30->0.30) or hurts (4B 0.10->0.65): small models cannot follow the structured audit.
+3. **Pipeline exact accuracy rises with scale** (0.18-0.38 below 27B; 0.52-0.80 from 27B up), while the single prompt does not track size (0.18-0.68).
+4. **Literal application of bare verified edits is a family trait, not a scale effect:** A-Chg-P is 0.04-0.32 for every Qwen size, 0.63-0.68 for gpt-oss, 0.95-1.00 for Llama and Gemma.
 5. **Free-text revision almost never hedges** in any model (U-F1 0.00-0.24).
 6. Cost: for Llama-70B the pipeline under-revises (P recall 0.93 -> 0.61).
 
