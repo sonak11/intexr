@@ -31,16 +31,21 @@ Everything here is decided *before* test-set results are seen. Items marked **TB
   - Built by `scripts/convert_external.py` with fixed seeds.
 
 ## 4. Systems and settings
-- Systems: no revision, always accept (lexical), always rewrite, dialogue, evidence-aware prompt, verify-then-revise (strong baseline), evidence gate (NLI), single-prompt scope-first, scope-first pipeline (+ no-prop, no-check ablations). Prompts are reproduced verbatim in the paper appendix (`scripts/make_paper_appendix.py`).
+- Systems: no revision, always accept (lexical), always rewrite, dialogue, evidence-aware prompt, verify-then-revise (strong baseline), evidence gate (the same LLM used as a three-way NLI scorer, one call per example; a DeBERTa NLI classifier is supported by the code but not used), single-prompt scope-first, scope-first pipeline (+ no-prop, no-check ablations). Prompts are reproduced verbatim in the paper appendix (`scripts/make_paper_appendix.py`).
 - Models: one or two per size tier, from `configs/model_tiers.tsv` (Difei, 27 Oct: "one for each model tier"; "large and small GPT, Claude, Qwen"). Temperature 0. All responses are cached and released.
   - 3–4B: Qwen3-4B, Llama-3.2-3B · 7–8B: Qwen3-8B, Llama-3.1-8B · 14B: Qwen3-14B (GPU server, vLLM).
   - 20–32B: gpt-oss-20b, Qwen3.8-27B (Groq free tier), Gemma-4-31B (Gemini free tier), Qwen3-32B-AWQ (GPU server).
   - 70B+: Llama-3.3-70B-AWQ (GPU server), gpt-oss-120b (Groq free tier).
   - Closed: Claude (small + large) and closed GPT (small + large), **only if** research credits are granted; test split only.
   - Run with `scripts/run_tiers.sh`; the scale table is the "By model scale" section of `results/RESULTS_medscope.md`.
+  - **Dev status (23 Nov):** done for all nine open models above except Llama-3.2-3B and Llama-3.1-8B (gated on Hugging Face; optional, since 4B–117B is covered). The all-systems comparison (dialogue, always rewrite, evidence gate, verify-then-revise) was run on Qwen3-8B, Qwen3-32B-AWQ and Llama-3.3-70B-AWQ.
+- **Test run plan (decided before the freeze).** The test slice is the 134 test cases × valid / false / authority-only = 402 examples (1,926 claims) per condition, about 7× dev.
+  - **Primary models** (results the hypotheses are tested on): the GPU-server models, which have no rate limit: Qwen3-4B, Qwen3-8B, Qwen3-14B, Qwen3-32B-AWQ, Llama-3.3-70B-AWQ. Conditions A, B and E; all systems on Qwen3-8B, Qwen3-32B-AWQ and Llama-3.3-70B-AWQ, the three core systems (evidence-aware prompt, single-prompt scope-first, pipeline) on the others.
+  - **Secondary models** (reported if they finish, never used to choose anything): gpt-oss-20b, gpt-oss-120b, Qwen3.8-27B (Groq) and Gemma-4-31B (Gemini). At the free-tier caps seen on dev (about 120 calls a day for gpt-oss-120b; repeated 503 errors on Gemini), one model needs roughly 3–4 weeks for the core systems on test, so they run in parallel and are reported as they complete.
+  - Each primary model × system × condition is run once; no reruns except to complete examples that failed with an API error (identical prompts, served from the cache).
 - Human review is done per tier, not per model: the model marked `review=1` in each tier (5 open tiers + closed) supplies the judge-calibration and error-audit samples (`label_actions.py sample --reps-only`).
-- Judge: gemini-3.5-flash-lite, fixed, with the prompt in the appendix.
-  - Calibration: 100 stratified (claim, revision) pairs labelled by the first author (`scripts/label_actions.py`).
+- Judge: **Qwen3-32B-AWQ, served locally with vLLM (GPUs 6–7 on thasos, thinking off), fixed for every model and both splits**, with the prompt in the appendix. It replaced gemini-3.5-flash-lite (used for the first two pilot runs) because the Gemini free tier allows only 500 judge calls a day. The two earlier runs were re-scored with it (`scripts/rejudge.py`); on the 2,646 claims scored by both, the judges agree on 0.96 of claim actions and differ on keep vs. change for under 0.3%.
+  - Calibration: 120 (claim, revision) pairs, stratified over the review=1 models, systems and gold labels, labelled by the first author blind to the judge (`annotation/actions_sheet.csv`, `scripts/label_actions.py`).
   - **Target κ ≥ 0.75.** If it falls below, switch the judge and re-judge from the cache.
   - **TBD:** κ, confusion matrix.
 
@@ -55,6 +60,7 @@ Pre-registered in the paper (§5): H1 cost of verification, H2 propagation harde
 | H4 | U-F1; share of U-feedback claims flipped | authority-only condition | descriptive, with CI |
 | H5 | preservation error K, forbidden additions, change recall D | pipeline vs. evidence-aware prompt and vs. verify-then-revise | paired case-level bootstrap |
 
+- Condition E (verified edit + "also update what depends on it") is the wording control for H1. On dev, the A/B gap in P recall came from the wording of bare verified edits (E − A = +0.72; B ≈ E), so H1 is reported as both B − A and B − E; with wording controlled, the effect of unverified feedback is tested on preservation error K⁺ (B − E).
 - Intervals: 95% percentile bootstrap, 2,000 resamples of source cases (`intexr/metrics.py`).
 - Five hypotheses → we report all of them and correct with Holm's method across the five primary comparisons.
 - Null results are reported as null.
