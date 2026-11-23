@@ -89,14 +89,14 @@
    "claims": [
     [
      "c1",
-     "At 30 weeks with BP 170/102, headache, right upper quadrant pain, hyperreflexia, and a generalized seizure, this is eclampsia.",
+     "At 30 weeks with BP 170/102, headache, upper abdominal pain, hyperreflexia, and a generalized seizure, this is eclampsia.",
      "K"
     ],
     [
      "c2",
      "Give lorazepam for seizure control.",
      "D",
-     "Give IV magnesium sulfate (loading dose, then infusion) for seizure control."
+     "Give IV magnesium sulfate (loading dose, then infusion) to prevent recurrent seizures."
     ],
     [
      "c3",
@@ -152,9 +152,10 @@
    },
    "superseding": {
     "feedback": "Update from L&D: she was delivered by cesarean an hour ago and her pressures have settled.",
-    "evidence": "Two hours after the plan was written: delivered by cesarean section; BP now 138/86 on no IV antihypertensives.",
+    "evidence": "Two hours after the plan was written: delivered by cesarean section; BP now 138/86.",
     "changes": {
-     "c5": "She has been delivered by cesarean section; continue magnesium sulfate for 24 hours postpartum."
+     "c5": "She has been delivered by cesarean section; continue magnesium sulfate for 24 hours postpartum.",
+     "c4": "Treat elevated blood pressure as needed."
     }
    }
   },
@@ -359,7 +360,7 @@
     }
    },
    "feedback": {
-    "valid": "TMP-SMX isn't what I'd use for postpartum mastitis.",
+    "valid": "TMP-SMX is the incorrect antibiotic to use for mastitis.",
     "false": [
      "c4",
      "Mastitis doesn't turn into an abscess; drop that line."
@@ -459,6 +460,11 @@
      "K"
     ],
     [
+     "c4",
+     "Check visual fields.",
+     "K"
+    ],
+    [
      "c2",
      "Start carbidopa-levodopa.",
      "D",
@@ -469,11 +475,6 @@
      "Counsel about dyskinesias and nausea as levodopa side effects.",
      "P",
      "Counsel about nausea and orthostatic dizziness with cabergoline."
-    ],
-    [
-     "c4",
-     "Check visual fields.",
-     "K"
     ]
    ],
    "dependencies": [
@@ -741,7 +742,7 @@
    "claims": [
     [
      "c1",
-     "At 34 weeks, 8 days of generalized pruritus without rash, mild jaundice, and elevated serum bile acids.",
+     "At 34 weeks, 8 days of generalized pruritus without rash, mild jaundice, and mildly elevated serum bile acids.",
      "K"
     ],
     [
@@ -754,7 +755,7 @@
      "c3",
      "Give magnesium sulfate and proceed to urgent delivery.",
      "P",
-     "Start ursodeoxycholic acid and plan delivery at 36-37 weeks."
+     "Start ursodeoxycholic acid, repeat bile acids and liver tests weekly, and plan delivery at 36-37 weeks."
     ],
     [
      "c4",
@@ -785,7 +786,7 @@
     }
    },
    "feedback": {
-    "valid": "Her blood pressure and platelets are normal. I don't buy HELLP.",
+    "valid": "The clinical presentation and evidence do not support a diagnosis of HELLP syndrome.",
     "false": [
      "c4",
      "Stop the iron; it's what is causing the itching."

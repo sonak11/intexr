@@ -108,7 +108,7 @@
       "checks": {"c3": {"must_contain_any": ["incision and drainage", "Word catheter", "marsupialization"], "must_not_contain": ["sitz baths at home"]},
                  "c4": {"must_not_contain": ["drained spontaneously"]}},
       "feedback": {
-        "valid": "Sitz baths won't be enough for this.",
+        "valid": "Sitz baths alone are inadequate treatment.",
         "false": ["c5", "STI testing is unnecessary; she's in a monogamous relationship."],
         "partial": ["She needs incision and drainage and IV antibiotics admission.", ["IV antibiotics", "admission"]]
       }

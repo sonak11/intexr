@@ -16,7 +16,8 @@ Everything here is decided *before* test-set results are seen. Items marked **TB
 - Clinical review:
   - a clinically trained reviewer checks every authored item (new evidence, false_support, target texts, forbidden additions);
   - cases judged wrong are **fixed or dropped before the freeze**; no test result may be looked at when deciding.
-  - **TBD:** reviewer, number of cases changed or dropped.
+  - **Round 1 (23 Nov):** Dr. Pradhan (MD, OB/GYN) reviewed the 5 OB/GYN dev cases: 5 of 5 corrections confirmed; wording fixes in all 5, one plan reordered, one later-event change extended; 2 cases (ms-val-30 evidence, ms-val-333 flow) await her clarification. Log: `docs/13_clinical_review.md`.
+  - **TBD:** reviewers for the other 149 cases; final number of cases changed or dropped.
 
 ## 3. Data and splits
 - MedScope v1 = the cases that pass review, built by `scripts/build_medec_scope.py`. Current: v0.3 (154 cases, 941 examples, 4,525 claims; 20 dev / 134 test; the 47 v0.2 cases are unchanged); evidence items decide the erroneous claim only, so propagated claims must be inferred (rule added after the dev pilot). The source is MEDEC (CC BY 4.0); authored text is released under the same licence.
